@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
+// Importing lazy function also Suspense component.
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// Importing createBrowserRouter function and RouterProvider component;
 
 const IndexPage = lazy(() => import("./index/index"));
 
@@ -15,3 +17,4 @@ function Routing() {
 }
 
 export default Routing;
+// Exporting Routing component.
