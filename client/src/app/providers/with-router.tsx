@@ -1,14 +1,8 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
-
-// TODO Add beautiful spinner.
 
 // eslint-disable-next-line react/display-name
 const withRouter = (component: () => React.ReactNode) => () =>
-	(
-		<BrowserRouter>
-			<Suspense fallback={<span>Loading...</span>}>{component()}</Suspense>
-		</BrowserRouter>
-	);
+	<BrowserRouter>{component()}</BrowserRouter>;
 
 export { withRouter };
