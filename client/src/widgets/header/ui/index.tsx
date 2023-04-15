@@ -1,25 +1,27 @@
-import React from "react";
+import { FunctionComponent, SVGProps } from "react";
 
 import { NavLink, Link } from "react-router-dom";
 
-import SearchIcon from "./assets/search.svg";
-import CartIcon from "./assets/cart.svg";
-import AuthIcon from "./assets/auth.svg";
-import Logo from "./assets/logo.svg";
+import Burger from "./burger";
 
-type MainNavigation = Array<{
+import { ReactComponent as SearchIcon } from "./assets/search.svg";
+import { ReactComponent as CartIcon } from "./assets/cart.svg";
+import { ReactComponent as AuthIcon } from "./assets/auth.svg";
+import { ReactComponent as Logo } from "./assets/logo.svg";
+
+type Navigation = Array<{
 	label: string;
 	url: string;
 }>;
 
 type Actions = Array<{
 	label: string;
-	icon: string;
+	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
 	url: string;
 }>;
 
 // TODO FIX links when will be creating corresponding pages.
-const mainNavigation: MainNavigation = [
+const navigation: Navigation = [
 	{
 		label: "Каталог",
 		url: "#",
@@ -38,23 +40,38 @@ const mainNavigation: MainNavigation = [
 const actions: Actions = [
 	{
 		label: "Поиск",
-		icon: SearchIcon,
+		Icon: SearchIcon,
 		url: "#",
 	},
 	{
 		label: "Корзина",
-		icon: CartIcon,
+		Icon: CartIcon,
 		url: "#",
 	},
 	{
 		label: "Аутентификация",
-		icon: AuthIcon,
+		Icon: AuthIcon,
 		url: "#",
 	},
 ];
 
 const Header = () => {
-	return <header></header>;
+	return (
+		<header className="sm:bg-slate-100 md:bg-slate-800 lg:bg-red-600">
+			<div className="container">
+				<Burger />
+				<Link to="/">
+					<Logo />
+				</Link>
+				{actions.map(({ label, Icon, url }) => (
+					<NavLink key={label} to={url}>
+						<Icon />
+						<span className="sr-only">{label}</span>
+					</NavLink>
+				))}
+			</div>
+		</header>
+	);
 };
 
 export default Header;
