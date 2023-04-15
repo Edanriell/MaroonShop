@@ -10,6 +10,7 @@ module.exports = {
 		// Custom breakpoints, taken directly from design.
 		container: {
 			center: true,
+			// Without this option set to true, our container will be not centered.
 			padding: {
 				sm: "1.5rem",
 				md: "4.5rem",

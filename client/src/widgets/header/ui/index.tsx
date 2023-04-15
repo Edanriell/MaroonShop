@@ -58,7 +58,7 @@ const actions: Actions = [
 const Header = () => {
 	return (
 		<header className="sm:bg-slate-100 md:bg-slate-800 lg:bg-red-600">
-			<div className="container">
+			<div className="container bg-red-900">
 				<Burger />
 				<Link to="/">
 					<Logo />
