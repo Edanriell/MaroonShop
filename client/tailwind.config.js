@@ -22,6 +22,29 @@ module.exports = {
 			},
 		},
 		// Custom padding for container, values taken directly from design.
+		fontSize: {
+			"lg-16px": [
+				"1.6rem",
+				{
+					lineHeight: "2.4rem",
+				},
+			],
+		},
+		// Custom font sizes, taken directly from design.
+		fontWeight: {
+			thin: "100",
+			extralight: "200",
+			light: "300",
+			normal: "400",
+			medium: "500",
+			semibold: "600",
+			bold: "700",
+			extrabold: "800",
+			black: "900",
+		},
+		fontFamily: {
+			mPlus: ["MPLUS1p"],
+		},
 		extend: {
 			colors: {
 				"blue-zodiac": "#122947",

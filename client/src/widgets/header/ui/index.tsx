@@ -9,6 +9,8 @@ import { NavLink, Link } from "react-router-dom";
 import classNames from "classnames";
 // Importing classNames for conditional classes.
 
+import { useScreenSize } from "shared/lib/hooks";
+
 import Burger from "./burger";
 // Importing BurgerMenu component.
 
@@ -23,10 +25,10 @@ type Props = {
 };
 // Header component props types.
 
-// type MainNavigation = Array<{
-// 	label: string;
-// 	url: string;
-// }>;
+type MainNavigation = Array<{
+	label: string;
+	url: string;
+}>;
 // MainNavigation type.
 
 type UserActions = Array<{
@@ -39,20 +41,20 @@ type UserActions = Array<{
 // UserActions type.
 
 // TODO FIX links when will be creating corresponding pages.
-// const mainNavigation: MainNavigation = [
-// 	{
-// 		label: "Каталог",
-// 		url: "#",
-// 	},
-// 	{
-// 		label: "О нас",
-// 		url: "#",
-// 	},
-// 	{
-// 		label: "Контакты",
-// 		url: "#",
-// 	},
-// ];
+const mainNavigation: MainNavigation = [
+	{
+		label: "Каталог",
+		url: "#",
+	},
+	{
+		label: "О нас",
+		url: "#",
+	},
+	{
+		label: "Контакты",
+		url: "#",
+	},
+];
 // mainNavigation contains an array of objects. We will use objects to generate correct NavLinks.
 
 // TODO FIX links when will be creating corresponding pages.
@@ -75,6 +77,9 @@ const userActions: UserActions = [
 // userActions contains an array of objects. Those objects will help us to create a bunch of Links.
 
 const Header = ({ headerUnderline = false }: Props) => {
+	const { width } = useScreenSize();
+	// Using custom hook useScreenSize. We get the current window inner width from it.
+
 	const headerClasses = classNames(
 		headerUnderline ? "bg-transparent border-b-[0.1rem] border-gainsboro" : "bg-transparent",
 	);
@@ -82,15 +87,33 @@ const Header = ({ headerUnderline = false }: Props) => {
 
 	return (
 		<header className={headerClasses}>
-			<div className="container flex items-center justify-start bg-transparent my-[3rem]">
-				<Burger />
+			<div className="container flex items-center justify-start bg-transparent my-[3rem] md:my-[4rem]">
+				{width < 1366 && <Burger />}
 				<Link
 					to="/"
-					className="w-[8.5rem] h-[1.3rem] ml-[8.1rem] mr-auto md:w-[13.1rem] md:h-[2.1rem] md:ml-[25rem]"
+					className={`
+						w-[8.5rem] h-[1.3rem] ml-[8.1rem] mr-auto 
+						md:w-[13.1rem] md:h-[2.1rem] md:ml-[25rem] 
+						lg:ml-[0px]
+					`}
 				>
 					<Logo className="text-blue-zodiac" />
 					<span className="sr-only">Логотип сайта Maroon</span>
 				</Link>
+				{width >= 1366 && (
+					<ul className="flex items-center justify-start gap-x-[3.5rem] mr-[5.1rem]">
+						{mainNavigation.map(({ label, url }) => (
+							<li key={label}>
+								<Link
+									to={url}
+									className="font-normal text-lg-16px font-mPlus text-blue-zodiac"
+								>
+									{label}
+								</Link>
+							</li>
+						))}
+					</ul>
+				)}
 				<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem]">
 					{userActions.map(({ label, Icon, iconWidth, iconHeight, url }) => (
 						<li key={label}>
