@@ -6,6 +6,9 @@ import { NavLink } from "react-router-dom";
 // Main difference between NavLink and Link components lays in classes, when we use NavLink component we can highlight
 // page that we are at the moment.
 
+import { v4 as uuidv4 } from "uuid";
+// Importing unique id generator for keys.
+
 import { ReactComponent as CartIcon } from "../assets/cart.svg";
 import { ReactComponent as AuthIcon } from "../assets/auth.svg";
 // Importing bunch of SVG's. If we import them straight without ReactComponent we will get "links"
@@ -17,6 +20,7 @@ type UserActions = Array<{
 	iconWidth: string;
 	iconHeight: string;
 	url: string;
+	key: string;
 }>;
 // UserActions type.
 
@@ -28,6 +32,7 @@ const userActions: UserActions = [
 		iconWidth: "w-[1.3rem] md:w-[1.6rem]",
 		iconHeight: "h-[1.6rem] md:h-[2.1rem]",
 		url: "/",
+		key: uuidv4(),
 	},
 	{
 		label: "Корзина",
@@ -35,15 +40,16 @@ const userActions: UserActions = [
 		iconWidth: "w-[1.4rem] md:w-[1.8rem]",
 		iconHeight: "h-[1.6rem] md:h-[2.1rem]",
 		url: "/",
+		key: uuidv4(),
 	},
 ];
 // userActions contains an array of objects. Those objects will help us to create a bunch of Links.
 
 function Toolbar() {
 	return (
-		<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem]">
-			{userActions.map(({ label, Icon, iconWidth, iconHeight, url }) => (
-				<li key={label}>
+		<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem] relative z-10">
+			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
+				<li key={key}>
 					<NavLink to={url}>
 						<Icon className={iconWidth + " " + iconHeight + " text-blue-zodiac"} />
 						<span className="sr-only">{label}</span>

@@ -46,7 +46,7 @@ const Header = ({ headerUnderline = false }: Props) => {
 					className={`
 						w-[8.5rem] h-[1.3rem] ml-[8.1rem] mr-auto 
 						md:w-[13.1rem] md:h-[2.1rem] md:ml-[25rem] 
-						lg:ml-[0px]
+						lg:ml-[0px] relative z-10
 					`}
 				>
 					<Logo className="text-blue-zodiac" />
