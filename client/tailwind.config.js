@@ -29,6 +29,18 @@ module.exports = {
 					lineHeight: "2.4rem",
 				},
 			],
+			"sm-28px": [
+				"2.8rem",
+				{
+					lineHeight: "3.6rem",
+				},
+			],
+			"md-32px": [
+				"3.2rem",
+				{
+					lineHeight: "4rem",
+				},
+			],
 		},
 		// Custom font sizes, taken directly from design.
 		fontWeight: {
@@ -44,11 +56,16 @@ module.exports = {
 		},
 		fontFamily: {
 			mPlus: ["MPLUS1p"],
+			raleway: ["Raleway"],
 		},
 		extend: {
 			colors: {
 				"blue-zodiac": "#122947",
 				"gainsboro": "#DBDCE0",
+				"desert-storm": "#F8F8F6",
+			},
+			boxShadow: {
+				burgerMenu: "0px 4px 30px rgba(214, 214, 214, 0.19)",
 			},
 		},
 	},

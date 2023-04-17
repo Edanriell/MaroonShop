@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 // Main difference between NavLink and Link components lays in classes, when we use NavLink component we can highlight
 // page that we are at the moment.
 
-import classNames from "classnames";
-// Importing classNames for conditional classes.
-
 import { useScreenSize } from "shared/lib/hooks";
 // Importing custom hook, which helps us with conditional component rendering
 // based on window inner width.
@@ -30,16 +27,9 @@ const Header = ({ headerUnderline = false }: Props) => {
 	const { width } = useScreenSize();
 	// Using custom hook useScreenSize. We get the current window inner width from it.
 
-	const headerClasses = classNames(
-		headerUnderline
-			? `bg-transparent border-b-[0.1rem] border-gainsboro relative`
-			: `bg-transparent relative`,
-	);
-	// Depending on headerUnderline props we will show or hide the underline.
-
 	return (
-		<header className={headerClasses}>
-			<div className="container flex items-center justify-start bg-transparent my-[3rem] md:my-[4rem]">
+		<header className="relative bg-transparent">
+			<div className="container flex items-center justify-start bg-transparent py-[3rem] md:py-[4rem]">
 				{width < 1366 && <Burger />}
 				<Link
 					to="/"
@@ -55,6 +45,9 @@ const Header = ({ headerUnderline = false }: Props) => {
 				{width >= 1366 && <PrimaryNavigation />}
 				<Toolbar />
 			</div>
+			{headerUnderline && (
+				<div className="border-b-[0.1rem] border-gainsboro relative z-10"></div>
+			)}
 		</header>
 	);
 };

@@ -57,7 +57,7 @@ const burgerNavigation: BurgerNavigation = [
 
 const socialLinks: SocialLinks = [
 	{
-		label: "Facebook",
+		label: "Наша страничка в Facebook",
 		Icon: Facebook,
 		iconWidth: "w-[1.1rem]",
 		iconHeight: "h-[1.8rem]",
@@ -65,7 +65,7 @@ const socialLinks: SocialLinks = [
 		key: uuidv4(),
 	},
 	{
-		label: "Instagram",
+		label: "Наша страничка в Instagram",
 		Icon: Instagram,
 		iconWidth: "w-[2rem]",
 		iconHeight: "h-[2rem]",
@@ -73,7 +73,7 @@ const socialLinks: SocialLinks = [
 		key: uuidv4(),
 	},
 	{
-		label: "Twitter",
+		label: "Наша страничка в Twitter",
 		Icon: Twitter,
 		iconWidth: "w-[2rem]",
 		iconHeight: "h-[1.7rem]",
@@ -104,35 +104,37 @@ function Burger() {
 				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
 			</div>
 			{isDisplayed && (
-				<div className="absolute top-0 left-0 w-full bg-slate-200">
-					<nav aria-label="burger menu navigation">
-						<ul className="flex flex-col">
-							{burgerNavigation.map(({ label, url, key }) => (
+				<div className="absolute top-0 left-0 w-full bg-desert-storm shadow-burgerMenu">
+					<div className="container pt-[11.6rem] pb-[5rem] md:pt-[15.1rem]">
+						<nav aria-label="burger menu navigation">
+							<ul className="flex flex-col gap-y-[3.5rem] md:gap-y-[4rem]">
+								{burgerNavigation.map(({ label, url, key }) => (
+									<li key={key}>
+										<Link
+											to={url}
+											className="font-medium text-sm-28px font-raleway text-blue-zodiac md:text-md-32px"
+										>
+											{label}
+										</Link>
+									</li>
+								))}
+							</ul>
+						</nav>
+						<ul className="flex items-center justify-start mt-[5rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[6rem]">
+							{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
 								<li key={key}>
-									<Link
-										to={url}
-										className="font-normal text-lg-16px font-mPlus text-blue-zodiac"
-									>
-										{label}
+									<Link to={url}>
+										<Icon
+											className={
+												iconWidth + " " + iconHeight + " text-blue-zodiac"
+											}
+										/>
+										<span className="sr-only">{label}</span>
 									</Link>
 								</li>
 							))}
 						</ul>
-					</nav>
-					<ul className="flex items-center justify-start">
-						{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
-							<li key={key}>
-								<Link to={url}>
-									<Icon
-										className={
-											iconWidth + " " + iconHeight + " text-blue-zodiac"
-										}
-									/>
-									<span className="sr-only">{label}</span>
-								</Link>
-							</li>
-						))}
-					</ul>
+					</div>
 				</div>
 			)}
 		</div>
