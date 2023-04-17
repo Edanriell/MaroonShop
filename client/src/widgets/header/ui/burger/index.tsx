@@ -85,7 +85,6 @@ const socialLinks: SocialLinks = [
 	},
 ];
 
-
 // TODO Remove all shit code, decompose burger menu to other components BurgerMenuContent and so on
 function Burger() {
 	const [isDisplayed, setIsDisplayed] = useState<IsDisplayed>(false);
@@ -94,56 +93,40 @@ function Burger() {
 	const [ctx] = useState(gsap.context(() => {}, animation));
 
 	useLayoutEffect(() => {
-		// Refs allow you to access DOM nodes
-		console.log(animation); // { current: div.box }
+		gsap.fromTo(
+			animation.current,
+			{ opacity: 0, translateY: -80 },
+			{
+				opacity: 1,
+				translateY: 0,
+				duration: 0.25,
+			},
+		);
+
 		ctx.add("remove", () => {
 			gsap.fromTo(
 				animation.current,
-				{ translateY: -80, opacity: 0 },
+				{ opacity: 1, translateY: 0 },
 				{
-					translateY: 0,
-					opacity: 1,
-					duration: 0.3,
-					// onComplete: () => setIsDisplayed(false),
+					opacity: 0,
+					translateY: -80,
+					duration: 0.25,
+					onComplete: () => {
+						setIsDisplayed(false);
+					},
 				},
 			);
 		});
-		// then we can animate them like so...
-		// ctx.add(() => {
-		// 	gsap.fromTo(
-		// 		animation.current,
-		// 		{ translateY: -80, opacity: 0 },
-		// 		{ translateY: 0, opacity: 1, duration: 0.3 },
-		// 	);
-		// });
-		return () => {
-			// gsap.fromTo(
-			// 	animation.current,
-			// 	{ translateY: 0, opacity: 1 },
-			// 	{ translateY: -80, opacity: 0, duration: 0.3 },
-			// );
-			ctx.revert();
-		};
 
-		// gsap.fromTo(
-		// 	animation.current,
-		// 	{ translateY: -80, opacity: 0 },
-		// 	{ translateY: 0, opacity: 1, duration: 0.3 },
-		// );
-
-		// return () => {
-		// 	gsap.fromTo(
-		// 		animation.current,
-		// 		{ translateY: 0, opacity: 1 },
-		// 		{ translateY: -80, opacity: 0, duration: 0.3 },
-		// 	);
-		// };
+		return () => ctx.revert();
 	});
 
-	function testAnimation() {}
-
 	function handleDisplayClick() {
-		setIsDisplayed(!isDisplayed);
+		if (!isDisplayed) {
+			setIsDisplayed(true);
+		} else {
+			ctx.remove();
+		}
 	}
 
 	return (
@@ -160,7 +143,7 @@ function Burger() {
 				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
 				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
 			</div>
-			{isDisplayed && (
+			{isDisplayed ? (
 				<div
 					ref={animation}
 					className="absolute top-0 left-0 w-full bg-desert-storm shadow-burgerMenu"
@@ -196,7 +179,7 @@ function Burger() {
 						</ul>
 					</div>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }
