@@ -1,4 +1,4 @@
-import { useState, FunctionComponent, SVGProps } from "react";
+import { useState, useRef, useLayoutEffect, FunctionComponent, SVGProps } from "react";
 // Importing useState hook. Importing necessary types for SocialLinks type.
 
 import { Link } from "react-router-dom";
@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 // Importing unique id generator for keys.
+
+import { gsap } from "gsap";
+// Animation library.
 
 import { ReactComponent as Bar } from "./assets/bar.svg";
 //Importing Bar svg.
@@ -82,8 +85,62 @@ const socialLinks: SocialLinks = [
 	},
 ];
 
+
+// TODO Remove all shit code, decompose burger menu to other components BurgerMenuContent and so on
 function Burger() {
 	const [isDisplayed, setIsDisplayed] = useState<IsDisplayed>(false);
+
+	const animation = useRef(null);
+	const [ctx] = useState(gsap.context(() => {}, animation));
+
+	useLayoutEffect(() => {
+		// Refs allow you to access DOM nodes
+		console.log(animation); // { current: div.box }
+		ctx.add("remove", () => {
+			gsap.fromTo(
+				animation.current,
+				{ translateY: -80, opacity: 0 },
+				{
+					translateY: 0,
+					opacity: 1,
+					duration: 0.3,
+					// onComplete: () => setIsDisplayed(false),
+				},
+			);
+		});
+		// then we can animate them like so...
+		// ctx.add(() => {
+		// 	gsap.fromTo(
+		// 		animation.current,
+		// 		{ translateY: -80, opacity: 0 },
+		// 		{ translateY: 0, opacity: 1, duration: 0.3 },
+		// 	);
+		// });
+		return () => {
+			// gsap.fromTo(
+			// 	animation.current,
+			// 	{ translateY: 0, opacity: 1 },
+			// 	{ translateY: -80, opacity: 0, duration: 0.3 },
+			// );
+			ctx.revert();
+		};
+
+		// gsap.fromTo(
+		// 	animation.current,
+		// 	{ translateY: -80, opacity: 0 },
+		// 	{ translateY: 0, opacity: 1, duration: 0.3 },
+		// );
+
+		// return () => {
+		// 	gsap.fromTo(
+		// 		animation.current,
+		// 		{ translateY: 0, opacity: 1 },
+		// 		{ translateY: -80, opacity: 0, duration: 0.3 },
+		// 	);
+		// };
+	});
+
+	function testAnimation() {}
 
 	function handleDisplayClick() {
 		setIsDisplayed(!isDisplayed);
@@ -104,7 +161,10 @@ function Burger() {
 				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
 			</div>
 			{isDisplayed && (
-				<div className="absolute top-0 left-0 w-full bg-desert-storm shadow-burgerMenu">
+				<div
+					ref={animation}
+					className="absolute top-0 left-0 w-full bg-desert-storm shadow-burgerMenu"
+				>
 					<div className="container pt-[11.6rem] pb-[5rem] md:pt-[15.1rem]">
 						<nav aria-label="burger menu navigation">
 							<ul className="flex flex-col gap-y-[3.5rem] md:gap-y-[4rem]">
