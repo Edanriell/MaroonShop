@@ -1,11 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-// Importing tailwind specific styles.
 
 @import "./sanitize.scss";
-// Also importing sanitize.scss which provides us consistent,
-// cross-browser default styling of HTML elements alongside useful defaults.
-// As alternative to Sanitize.css we can use Normalize.css or Reset.css.
 @import "./fonts.scss";
-// Importing fonts.

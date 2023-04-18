@@ -1,29 +1,25 @@
 import { useState, useRef, useLayoutEffect } from "react";
-// Importing useState hook. Importing necessary types for SocialLinks type.
-
 import { gsap } from "gsap";
-// Importing animation library.
 
-import BurgerMenu from "../burgerMenu";
-// Importing BurgerMenu component;
+import BurgerMenu from "./ui/burgerMenu";
 
 import { ReactComponent as Bar } from "./assets/bar.svg";
-//Importing Bar svg.
 
 type IsDisplayed = boolean;
-// Type for our isDisplayed state.
 
 function Burger() {
+	const burgerMenuRef = useRef(null);
+	const firstBurgerBarRef = useRef(null);
+	const secondBurgerBarRef = useRef(null);
+	const thirdBurgerBarRef = useRef(null);
+
 	const [isDisplayed, setIsDisplayed] = useState<IsDisplayed>(false);
-
-	const animation = useRef(null);
-
-	const [ctx] = useState(gsap.context(() => {}, animation));
+	const [burgerMenuCtx] = useState(gsap.context(() => {}, burgerMenuRef));
 
 	useLayoutEffect(() => {
-		if (animation.current) {
+		if (burgerMenuRef.current) {
 			gsap.fromTo(
-				animation.current,
+				burgerMenuRef.current,
 				{
 					opacity: 0,
 					translateY: -80,
@@ -37,9 +33,9 @@ function Burger() {
 			);
 		}
 
-		ctx.add("remove", () => {
+		burgerMenuCtx.add("remove", () => {
 			gsap.fromTo(
-				animation.current,
+				burgerMenuRef.current,
 				{ opacity: 1, translateY: 0 },
 				{
 					opacity: 0,
@@ -52,15 +48,28 @@ function Burger() {
 				},
 			);
 		});
-
-		return () => ctx.revert();
+		return () => burgerMenuCtx.revert();
 	}, [isDisplayed]);
+
+	// TODO PUT TO MODEL ?
+	function transformBurger() {
+		gsap.fromTo(
+			firstBurgerBarRef.current,
+			{ opacity: 1 },
+			{
+				opacity: 0,
+				duration: 0.25,
+				ease: "power2.out",
+			},
+		);
+	}
 
 	function handleDisplayClick() {
 		if (!isDisplayed) {
 			setIsDisplayed(true);
+			transformBurger();
 		} else {
-			ctx.remove();
+			burgerMenuCtx.remove();
 		}
 	}
 
@@ -74,13 +83,22 @@ function Burger() {
 				`}
 				onClick={handleDisplayClick}
 			>
-				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
-				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
-				<Bar className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]" />
+				<Bar
+					ref={firstBurgerBarRef}
+					className="dras w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]"
+				/>
+				<Bar
+					ref={secondBurgerBarRef}
+					className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]"
+				/>
+				<Bar
+					ref={thirdBurgerBarRef}
+					className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]"
+				/>
 			</div>
 			{isDisplayed && (
 				<div
-					ref={animation}
+					ref={burgerMenuRef}
 					className="absolute top-0 left-0 w-full bg-desert-storm shadow-burgerMenu box"
 				>
 					<BurgerMenu />

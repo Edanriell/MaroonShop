@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-type MainNavigation = Array<{
+type Navigation = Array<{
 	label: string;
 	url: string;
 	key: string;
 }>;
 
 // TODO FIX links when will be creating corresponding pages.
-const mainNavigation: MainNavigation = [
+const burgerNavigation: Navigation = [
 	{
 		label: "Каталог",
 		url: "/",
@@ -26,15 +26,15 @@ const mainNavigation: MainNavigation = [
 	},
 ];
 
-function PrimaryNavigation() {
+function BurgerNavigation() {
 	return (
-		<nav aria-label="primary navigation">
-			<ul className="flex items-center justify-start gap-x-[3.5rem] mr-[5.1rem]">
-				{mainNavigation.map(({ label, url, key }) => (
+		<nav aria-label="burger menu navigation">
+			<ul className="flex flex-col gap-y-[3.5rem] md:gap-y-[4rem]">
+				{burgerNavigation.map(({ label, url, key }) => (
 					<li key={key}>
 						<Link
 							to={url}
-							className="font-normal text-lg-16px font-mPlus text-blue-zodiac"
+							className="font-medium text-sm-28px font-raleway text-blue-zodiac md:text-md-32px"
 						>
 							{label}
 						</Link>
@@ -45,4 +45,4 @@ function PrimaryNavigation() {
 	);
 }
 
-export default PrimaryNavigation;
+export default BurgerNavigation;
