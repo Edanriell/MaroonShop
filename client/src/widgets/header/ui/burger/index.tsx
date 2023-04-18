@@ -12,8 +12,10 @@ function Burger() {
 	const firstBurgerBarRef = useRef(null);
 	const secondBurgerBarRef = useRef(null);
 	const thirdBurgerBarRef = useRef(null);
+	const fourthBurgerBarRef = useRef(null);
 
 	const [isDisplayed, setIsDisplayed] = useState<IsDisplayed>(false);
+	const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 	const [burgerMenuCtx] = useState(gsap.context(() => {}, burgerMenuRef));
 
 	useLayoutEffect(() => {
@@ -52,35 +54,130 @@ function Burger() {
 	}, [isDisplayed]);
 
 	// TODO PUT TO MODEL ?
-	function transformBurger() {
-		gsap.fromTo(
-			firstBurgerBarRef.current,
-			{ opacity: 1 },
-			{
-				opacity: 0,
-				duration: 0.25,
-				ease: "power2.out",
-			},
-		);
+	function transformBurger(text: string) {
+		if (text === "show") {
+			gsap.fromTo(
+				firstBurgerBarRef.current,
+				{ translateX: 0, opacity: 1 },
+				{
+					translateX: 25,
+					opacity: 0,
+					duration: 0.25,
+					ease: "power2.out",
+					onStart: () => {
+						setIsTransitioning(true);
+					},
+				},
+			);
+			gsap.fromTo(
+				thirdBurgerBarRef.current,
+				{ translateX: 0, opacity: 1 },
+				{
+					translateX: -25,
+					opacity: 0,
+					duration: 0.25,
+					ease: "power2.out",
+				},
+			);
+
+			gsap.fromTo(
+				secondBurgerBarRef.current,
+				{ translateY: 0, rotate: 0 },
+				{
+					delay: 0.25,
+					translateY: 0,
+					rotate: 45,
+					duration: 0.25,
+					ease: "power2.out",
+					onComplete: () => {
+						setIsTransitioning(false);
+					},
+				},
+			);
+			gsap.fromTo(
+				fourthBurgerBarRef.current,
+				{ rotate: 0, display: "none" },
+				{
+					display: "block",
+					delay: 0.25,
+					rotate: -45,
+					duration: 0.25,
+					ease: "power2.out",
+				},
+			);
+		} else if (text === "hide") {
+			gsap.fromTo(
+				secondBurgerBarRef.current,
+				{ translateY: 0, rotate: 45 },
+				{
+					translateY: 0,
+					rotate: 0,
+					duration: 0.25,
+					ease: "power2.out",
+					onStart: () => {
+						setIsTransitioning(true);
+					},
+				},
+			);
+			gsap.fromTo(
+				fourthBurgerBarRef.current,
+				{ rotate: -45, display: "block" },
+				{
+					display: "none",
+					rotate: 0,
+					duration: 0.25,
+					ease: "power2.out",
+				},
+			);
+
+			gsap.fromTo(
+				firstBurgerBarRef.current,
+				{ translateX: 25, opacity: 0 },
+				{
+					delay: 0.25,
+					translateX: 0,
+					opacity: 1,
+					duration: 0.25,
+					ease: "power2.out",
+					onComplete: () => {
+						setIsTransitioning(false);
+					},
+				},
+			);
+			gsap.fromTo(
+				thirdBurgerBarRef.current,
+				{ translateX: -25, opacity: 0 },
+				{
+					delay: 0.25,
+					translateX: 0,
+					opacity: 1,
+					duration: 0.25,
+					ease: "power2.out",
+				},
+			);
+		}
 	}
 
 	function handleDisplayClick() {
 		if (!isDisplayed) {
 			setIsDisplayed(true);
-			transformBurger();
+			transformBurger("show");
 		} else {
 			burgerMenuCtx.remove();
+			transformBurger("hide");
 		}
 	}
 
 	return (
 		<div>
-			<div
+			<button
 				aria-label="burger menu"
 				className={`
 					flex flex-col items-center justify-center 
 					cursor-pointer gap-y-[0.3rem] md:gap-y-[0.4rem] relative z-10
 				`}
+				type="button"
+				disabled={isTransitioning}
 				onClick={handleDisplayClick}
 			>
 				<Bar
@@ -95,7 +192,11 @@ function Burger() {
 					ref={thirdBurgerBarRef}
 					className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem]"
 				/>
-			</div>
+				<Bar
+					ref={fourthBurgerBarRef}
+					className="w-[2.2rem] h-[0.2rem] text-blue-zodiac md:w-[2.4rem] md:h-[0.3rem] absolute top-50 left-0 hidden"
+				/>
+			</button>
 			{isDisplayed && (
 				<div
 					ref={burgerMenuRef}
