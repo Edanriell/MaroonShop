@@ -1,11 +1,17 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
+import { transformBurger } from "./model";
+
 import BurgerMenu from "./ui/burgerMenu";
 
 import { ReactComponent as Bar } from "./assets/bar.svg";
 
 type IsDisplayed = boolean;
+
+type IsTransitioning = boolean;
+
+// TODO Think about decomposition and model ! And architecture.
 
 function Burger() {
 	const burgerMenuRef = useRef(null);
@@ -15,7 +21,7 @@ function Burger() {
 	const fourthBurgerBarRef = useRef(null);
 
 	const [isDisplayed, setIsDisplayed] = useState<IsDisplayed>(false);
-	const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+	const [isTransitioning, setIsTransitioning] = useState<IsTransitioning>(false);
 	const [burgerMenuCtx] = useState(gsap.context(() => {}, burgerMenuRef));
 
 	useLayoutEffect(() => {
@@ -53,118 +59,29 @@ function Burger() {
 		return () => burgerMenuCtx.revert();
 	}, [isDisplayed]);
 
-	// TODO PUT TO MODEL ?
-	function transformBurger(text: string) {
-		if (text === "show") {
-			gsap.fromTo(
-				firstBurgerBarRef.current,
-				{ translateX: 0, opacity: 1 },
-				{
-					translateX: 25,
-					opacity: 0,
-					duration: 0.25,
-					ease: "power2.out",
-					onStart: () => {
-						setIsTransitioning(true);
-					},
-				},
-			);
-			gsap.fromTo(
-				thirdBurgerBarRef.current,
-				{ translateX: 0, opacity: 1 },
-				{
-					translateX: -25,
-					opacity: 0,
-					duration: 0.25,
-					ease: "power2.out",
-				},
-			);
-
-			gsap.fromTo(
-				secondBurgerBarRef.current,
-				{ translateY: 0, rotate: 0 },
-				{
-					delay: 0.25,
-					translateY: 0,
-					rotate: 45,
-					duration: 0.25,
-					ease: "power2.out",
-					onComplete: () => {
-						setIsTransitioning(false);
-					},
-				},
-			);
-			gsap.fromTo(
-				fourthBurgerBarRef.current,
-				{ rotate: 0, display: "none" },
-				{
-					display: "block",
-					delay: 0.25,
-					rotate: -45,
-					duration: 0.25,
-					ease: "power2.out",
-				},
-			);
-		} else if (text === "hide") {
-			gsap.fromTo(
-				secondBurgerBarRef.current,
-				{ translateY: 0, rotate: 45 },
-				{
-					translateY: 0,
-					rotate: 0,
-					duration: 0.25,
-					ease: "power2.out",
-					onStart: () => {
-						setIsTransitioning(true);
-					},
-				},
-			);
-			gsap.fromTo(
-				fourthBurgerBarRef.current,
-				{ rotate: -45, display: "block" },
-				{
-					display: "none",
-					rotate: 0,
-					duration: 0.25,
-					ease: "power2.out",
-				},
-			);
-
-			gsap.fromTo(
-				firstBurgerBarRef.current,
-				{ translateX: 25, opacity: 0 },
-				{
-					delay: 0.25,
-					translateX: 0,
-					opacity: 1,
-					duration: 0.25,
-					ease: "power2.out",
-					onComplete: () => {
-						setIsTransitioning(false);
-					},
-				},
-			);
-			gsap.fromTo(
-				thirdBurgerBarRef.current,
-				{ translateX: -25, opacity: 0 },
-				{
-					delay: 0.25,
-					translateX: 0,
-					opacity: 1,
-					duration: 0.25,
-					ease: "power2.out",
-				},
-			);
-		}
-	}
-
 	function handleDisplayClick() {
 		if (!isDisplayed) {
 			setIsDisplayed(true);
-			transformBurger("show");
+			// transformBurger("show");
+			transformBurger({
+				firstBurgerBarRef,
+				secondBurgerBarRef,
+				thirdBurgerBarRef,
+				fourthBurgerBarRef,
+				transformationType: "Cross",
+				onTransition: setIsTransitioning,
+			});
 		} else {
 			burgerMenuCtx.remove();
-			transformBurger("hide");
+			// transformBurger("hide");
+			transformBurger({
+				firstBurgerBarRef,
+				secondBurgerBarRef,
+				thirdBurgerBarRef,
+				fourthBurgerBarRef,
+				transformationType: "Burger",
+				onTransition: setIsTransitioning,
+			});
 		}
 	}
 
