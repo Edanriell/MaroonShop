@@ -34,7 +34,10 @@ function BurgerNavigation() {
 					<li key={key}>
 						<Link
 							to={url}
-							className="font-medium text-sm-28px font-raleway text-blue-zodiac md:text-md-32px"
+							className={`
+							font-medium text-sm-28px font-raleway text-blue-zodiac md:text-md-32px
+							hover:opacity-50 duration-500 ease-out
+							`}
 						>
 							{label}
 						</Link>

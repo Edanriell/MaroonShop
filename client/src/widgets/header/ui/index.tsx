@@ -27,7 +27,7 @@ const Header = ({ headerUnderline = false }: Props) => {
 						lg:ml-[0px] relative z-10
 					`}
 				>
-					<Logo className="text-blue-zodiac" />
+					<Logo className="duration-500 ease-out text-blue-zodiac hover:opacity-50" />
 					<span className="sr-only">Логотип сайта Maroon</span>
 				</Link>
 				{width >= 1366 && <PrimaryNavigation />}

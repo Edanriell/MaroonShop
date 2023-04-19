@@ -1,5 +1,5 @@
 import { FunctionComponent, SVGProps } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as CartIcon } from "../assets/cart.svg";
@@ -39,10 +39,18 @@ function Toolbar() {
 		<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem] relative z-10">
 			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
 				<li key={key}>
-					<NavLink to={url}>
-						<Icon className={iconWidth + " " + iconHeight + " text-blue-zodiac"} />
+					<Link to={url}>
+						<Icon
+							className={
+								iconWidth +
+								" " +
+								iconHeight +
+								" text-blue-zodiac" +
+								" hover:opacity-50 duration-500 ease-out hover:scale-125"
+							}
+						/>
 						<span className="sr-only">{label}</span>
-					</NavLink>
+					</Link>
 				</li>
 			))}
 		</ul>

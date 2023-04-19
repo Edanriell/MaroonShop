@@ -49,7 +49,15 @@ function BurgerSocialLinks() {
 			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
 				<li key={key}>
 					<Link to={url}>
-						<Icon className={iconWidth + " " + iconHeight + " text-blue-zodiac"} />
+						<Icon
+							className={
+								iconWidth +
+								" " +
+								iconHeight +
+								" text-blue-zodiac" +
+								" duration-500 ease-out hover:opacity-50 hover:scale-125"
+							}
+						/>
 						<span className="sr-only">{label}</span>
 					</Link>
 				</li>
