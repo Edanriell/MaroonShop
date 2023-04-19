@@ -1,4 +1,5 @@
 import { FunctionComponent, SVGProps } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Facebook } from "./assets/facebook.svg";
@@ -8,8 +9,7 @@ import { ReactComponent as Twitter } from "./assets/twitter.svg";
 type SocialLinks = Array<{
 	label: string;
 	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
-	iconWidth: string;
-	iconHeight: string;
+	iconClasses: "";
 	url: string;
 	key: string;
 }>;
@@ -19,50 +19,39 @@ const socialLinks: SocialLinks = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
-		iconWidth: "w-[1.1rem]",
-		iconHeight: "h-[1.8rem]",
+		iconClasses: "",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Instagram",
 		Icon: Instagram,
-		iconWidth: "w-[2rem]",
-		iconHeight: "h-[2rem]",
+		iconClasses: "",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Twitter",
 		Icon: Twitter,
-		iconWidth: "w-[2rem]",
-		iconHeight: "h-[1.7rem]",
+		iconClasses: "",
 		url: "/",
 		key: uuidv4(),
 	},
 ];
 
-function BurgerSocialLinks() {
+const FooterSocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start mt-[5rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[6rem]">
-			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
+		<ul className="flex items-center justify-start">
+			{socialLinks.map(({ label, Icon, iconClasses, url, key }) => (
 				<li key={key}>
 					<a href={url}>
-						<Icon
-							className={
-								iconWidth +
-								" " +
-								iconHeight +
-								" text-blue-zodiac" +
-								" duration-500 ease-out hover:opacity-50 hover:scale-125"
-							}
-						/>
+						<Icon className={iconClasses} />
 						<span className="sr-only">{label}</span>
 					</a>
 				</li>
 			))}
 		</ul>
 	);
-}
+};
 
-export default BurgerSocialLinks;
+export default FooterSocialLinks;
