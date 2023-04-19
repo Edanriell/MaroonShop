@@ -13,25 +13,29 @@ type SecondaryNavigationElements = Array<{
 const secondaryNavigation: SecondaryNavigationElements = [
 	{
 		label: "Каталог",
-		classes: "",
+		classes:
+			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "О нас",
-		classes: "",
+		classes:
+			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Магазины",
-		classes: "",
+		classes:
+			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Контакты",
-		classes: "",
+		classes:
+			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
 		url: "/",
 		key: uuidv4(),
 	},
@@ -40,7 +44,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 const SecondaryNavigation = () => {
 	return (
 		<nav aria-label="secondary navigation">
-			<ul>
+			<ul className="grid grid-cols-2 gap-x-[3rem] gap-y-[2.5rem] mb-[3rem]">
 				{secondaryNavigation.map(({ label, classes, url, key }) => (
 					<li key={key}>
 						<Link to={url} className={classes}>

@@ -9,7 +9,7 @@ import { ReactComponent as Twitter } from "./assets/twitter.svg";
 type SocialLinks = Array<{
 	label: string;
 	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
-	iconClasses: "";
+	iconClasses: string;
 	url: string;
 	key: string;
 }>;
@@ -19,21 +19,21 @@ const socialLinks: SocialLinks = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
-		iconClasses: "",
+		iconClasses: "w-[1.1rem] h-[1.8rem] text-blue-zodiac-950",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Instagram",
 		Icon: Instagram,
-		iconClasses: "",
+		iconClasses: "w-[2rem] h-[2rem] text-blue-zodiac-950",
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Twitter",
 		Icon: Twitter,
-		iconClasses: "",
+		iconClasses: "w-[2rem] h-[1.7rem] text-blue-zodiac-950",
 		url: "/",
 		key: uuidv4(),
 	},
@@ -41,7 +41,7 @@ const socialLinks: SocialLinks = [
 
 const FooterSocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start">
+		<ul className="flex items-center justify-start gap-x-[3rem]">
 			{socialLinks.map(({ label, Icon, iconClasses, url, key }) => (
 				<li key={key}>
 					<a href={url}>
