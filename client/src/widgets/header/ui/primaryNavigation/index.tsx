@@ -35,8 +35,8 @@ function PrimaryNavigation() {
 						<NavLink
 							to={url}
 							className={`
-							font-normal text-lg-16px font-mPlus text-blue-zodiac
-							duration-500 ease-out hover:opacity-50
+								font-normal text-lg-16px font-mPlus text-blue-zodiac-950
+								duration-500 ease-out basic-hover-animation
 							`}
 						>
 							{label}

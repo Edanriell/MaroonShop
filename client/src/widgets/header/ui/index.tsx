@@ -17,7 +17,7 @@ const Header = ({ headerUnderline = false }: Props) => {
 	const { width } = useScreenSize();
 
 	return (
-		<header className="relative bg-transparent">
+		<header className="relative z-10 bg-transparent">
 			<div className="container flex items-center justify-start bg-transparent py-[3rem] md:py-[4rem]">
 				{width < 1366 && <Burger />}
 				<Link
@@ -28,14 +28,14 @@ const Header = ({ headerUnderline = false }: Props) => {
 						lg:ml-[0px] relative z-10
 					`}
 				>
-					<Logo className="duration-500 ease-out text-blue-zodiac hover:opacity-50" />
+					<Logo className="duration-500 ease-out text-blue-zodiac-950 hover:text-blue-zodiac-800" />
 					<span className="sr-only">Логотип сайта Maroon</span>
 				</Link>
 				{width >= 1366 && <PrimaryNavigation />}
 				<Toolbar />
 			</div>
 			{headerUnderline && (
-				<div className="border-b-[0.1rem] border-gainsboro relative z-10"></div>
+				<div className="border-b-[0.1rem] border-iron-200 relative z-10"></div>
 			)}
 		</header>
 	);

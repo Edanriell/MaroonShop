@@ -45,8 +45,8 @@ function Toolbar() {
 								iconWidth +
 								" " +
 								iconHeight +
-								" text-blue-zodiac" +
-								" hover:opacity-50 duration-500 ease-out hover:scale-125"
+								" text-blue-zodiac-950" +
+								" hover:text-blue-zodiac-800 duration-500 ease-out hover:scale-125"
 							}
 						/>
 						<span className="sr-only">{label}</span>

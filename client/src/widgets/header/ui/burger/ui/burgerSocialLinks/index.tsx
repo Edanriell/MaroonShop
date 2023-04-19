@@ -53,8 +53,8 @@ function BurgerSocialLinks() {
 								iconWidth +
 								" " +
 								iconHeight +
-								" text-blue-zodiac" +
-								" duration-500 ease-out hover:opacity-50 hover:scale-125"
+								" text-blue-zodiac-950" +
+								" duration-500 ease-out hover:text-blue-zodiac-800 hover:scale-125"
 							}
 						/>
 						<span className="sr-only">{label}</span>
