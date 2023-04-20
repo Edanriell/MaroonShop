@@ -36,7 +36,7 @@ function BurgerNavigation() {
 							to={url}
 							className={`
 								font-medium text-sm-28px font-raleway text-blue-zodiac-950 md:text-md-32px
-								duration-500 ease-out basic-hover-animation
+								duration-500 ease-out basic-hover-underline-animation
 							`}
 						>
 							{label}

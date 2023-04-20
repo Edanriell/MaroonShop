@@ -36,10 +36,10 @@ function PrimaryNavigation() {
 							to={url}
 							className={`
 								font-normal text-lg-16px font-mPlus text-blue-zodiac-950
-								duration-500 ease-out basic-hover-animation
+								duration-500 ease-out basic-hover-underline-animation
 							`}
 						>
-							{label}
+							<span>{label}</span>
 						</NavLink>
 					</li>
 				))}

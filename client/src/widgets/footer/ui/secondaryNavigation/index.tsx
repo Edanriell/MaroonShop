@@ -13,29 +13,37 @@ type SecondaryNavigationElements = Array<{
 const secondaryNavigation: SecondaryNavigationElements = [
 	{
 		label: "Каталог",
-		classes:
-			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
+		classes: `
+			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
+			duration-500 ease-out basic-hover-underline-animation
+		`,
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "О нас",
-		classes:
-			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
+		classes: `
+			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
+			duration-500 ease-out basic-hover-underline-animation
+		`,
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Магазины",
-		classes:
-			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
+		classes: `
+			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
+			duration-500 ease-out basic-hover-underline-animation
+		`,
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Контакты",
-		classes:
-			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 duration-500 ease-out basic-hover-animation",
+		classes: `
+			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
+			duration-500 ease-out basic-hover-underline-animation
+		`,
 		url: "/",
 		key: uuidv4(),
 	},
@@ -48,7 +56,7 @@ const SecondaryNavigation = () => {
 				{secondaryNavigation.map(({ label, classes, url, key }) => (
 					<li key={key}>
 						<Link to={url} className={classes}>
-							{label}
+							<span>{label}</span>
 						</Link>
 					</li>
 				))}

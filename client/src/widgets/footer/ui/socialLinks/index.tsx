@@ -19,21 +19,30 @@ const socialLinks: SocialLinks = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
-		iconClasses: "w-[1.1rem] h-[1.8rem] text-blue-zodiac-950",
+		iconClasses: `
+			w-[1.1rem] h-[1.8rem] text-blue-zodiac-950 duration-500 
+			ease-out hover:text-blue-zodiac-800 hover:scale-125
+		`,
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Instagram",
 		Icon: Instagram,
-		iconClasses: "w-[2rem] h-[2rem] text-blue-zodiac-950",
+		iconClasses: `
+			w-[2rem] h-[2rem] text-blue-zodiac-950 duration-500 
+			ease-out hover:text-blue-zodiac-800 hover:scale-125
+		`,
 		url: "/",
 		key: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Twitter",
 		Icon: Twitter,
-		iconClasses: "w-[2rem] h-[1.7rem] text-blue-zodiac-950",
+		iconClasses: `
+			w-[2rem] h-[1.7rem] text-blue-zodiac-950 duration-500 
+			ease-out hover:text-blue-zodiac-800 hover:scale-125
+		`,
 		url: "/",
 		key: uuidv4(),
 	},

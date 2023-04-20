@@ -19,3 +19,31 @@
 		color: #174475;
 	}
 }
+
+.basic-hover-underline-animation {
+	position: relative;
+	display: inline-block;
+	padding: 2px 0;
+
+	&::after {
+		position: absolute;
+		content: "";
+		top: 100%;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: #174475;
+		transform: scaleX(0);
+		transform-origin: right;
+		transition: transform 0.5s;
+	}
+
+	&:hover {
+		color: #174475;
+	}
+
+	&:hover::after {
+		transform: scaleX(1);
+		transform-origin: left;
+	}
+}

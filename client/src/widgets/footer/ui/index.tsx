@@ -6,7 +6,6 @@ import SocialLinks from "./socialLinks";
 import { ReactComponent as Logotype } from "./assets/logotype.svg";
 import { ReactComponent as Copyright } from "./assets/copyright.svg";
 
-// TODO Decompose copyright change hover effects also think about decomposition
 const Footer = () => {
 	return (
 		<footer className="bg-pampas-50 pt-[5rem] pb-[2.5rem]">
@@ -34,7 +33,12 @@ const Footer = () => {
 					</small>
 				</p>
 				<Link to="/">
-					<small className="font-normal font-mPlus text-sm-12px text-dusty-gray-500">
+					<small
+						className={`
+						font-normal duration-500 ease-out font-mPlus 
+						text-sm-12px text-dusty-gray-500 hover:text-dusty-gray-800
+					`}
+					>
 						Политика конфиденциальности
 					</small>
 				</Link>
