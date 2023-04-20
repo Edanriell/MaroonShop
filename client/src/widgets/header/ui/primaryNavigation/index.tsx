@@ -39,7 +39,7 @@ function PrimaryNavigation() {
 								duration-500 ease-out basic-hover-underline-animation
 							`}
 						>
-							<span>{label}</span>
+							{label}
 						</NavLink>
 					</li>
 				))}
