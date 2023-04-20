@@ -16,6 +16,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 		classes: `
 			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
 			duration-500 ease-out basic-hover-underline-animation
+			md:text-md-16px
 		`,
 		url: "/",
 		key: uuidv4(),
@@ -25,6 +26,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 		classes: `
 			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
 			duration-500 ease-out basic-hover-underline-animation
+			md:text-md-16px
 		`,
 		url: "/",
 		key: uuidv4(),
@@ -34,6 +36,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 		classes: `
 			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
 			duration-500 ease-out basic-hover-underline-animation
+			md:text-md-16px
 		`,
 		url: "/",
 		key: uuidv4(),
@@ -43,6 +46,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 		classes: `
 			font-mPlus text-sm-14px font-normal text-blue-zodiac-950 
 			duration-500 ease-out basic-hover-underline-animation
+			md:text-md-16px
 		`,
 		url: "/",
 		key: uuidv4(),
@@ -52,7 +56,12 @@ const secondaryNavigation: SecondaryNavigationElements = [
 const SecondaryNavigation = () => {
 	return (
 		<nav aria-label="secondary navigation">
-			<ul className="grid grid-cols-2 gap-x-[3rem] gap-y-[2.5rem] mb-[3rem]">
+			<ul
+				className={`
+				grid grid-cols-2 gap-x-[3rem] gap-y-[2.5rem] mb-[3rem] 
+				md:flex md:mb-[0rem] md:gap-x-[2.5rem] md:gap-y-[0rem]
+				lg:ml-[7rem] lg:gap-x-[4rem]`}
+			>
 				{secondaryNavigation.map(({ label, classes, url, key }) => (
 					<li key={key}>
 						<Link to={url} className={classes}>

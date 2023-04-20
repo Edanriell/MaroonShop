@@ -50,7 +50,7 @@ const socialLinks: SocialLinks = [
 
 const FooterSocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start gap-x-[3rem]">
+		<ul className="flex items-center justify-start gap-x-[3rem] lg:ml-auto">
 			{socialLinks.map(({ label, Icon, iconClasses, url, key }) => (
 				<li key={key}>
 					<a href={url}>
