@@ -4,7 +4,7 @@ import Hero from "./hero";
 
 const SectionWrapper = ({ children }) => <section>{children}</section>;
 
-// TODO Write missing types, fix sectionWrapper component, think about decomposition in WIDGETS! 
+// TODO Write missing types, fix sectionWrapper component, think about decomposition in WIDGETS!!
 const sections = [
 	{
 		id: uuidv4(),
