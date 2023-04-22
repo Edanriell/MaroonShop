@@ -1,11 +1,21 @@
+import { FC, ReactNode } from "react";
+
 import { v4 as uuidv4 } from "uuid";
 
 import Hero from "./hero";
 
-const SectionWrapper = ({ children }) => <section>{children}</section>;
+type TSections = Array<{
+	id: string;
+	classes: string;
+	Section: ReactNode | null | (() => null);
+	title: string;
+	titleSrOnly: boolean;
+}>;
 
-// TODO Write missing types, fix sectionWrapper component, think about decomposition in WIDGETS!!
-const sections = [
+const SectionWrapper: FC<{ children: ReactNode }> = ({ children }) => <section>{children}</section>;
+
+// TODO Write missing types, fix sectionWrapper component, think about decomposition in WIDGETS!!!!
+const sections: TSections = [
 	{
 		id: uuidv4(),
 		classes: "",
@@ -16,13 +26,13 @@ const sections = [
 ];
 
 const Sections = () => (
-	<div className="flex flex-col">
-		{sections.map(({id, classes, Section, title, titleSrOnly}) => (
+	<main className="flex flex-col">
+		{sections.map(({ id, classes, Section, title, titleSrOnly }) => (
 			<SectionWrapper key={id}>
-                <Section className={classes} sectionTitle={title} sectionTitleSrOnly={titleSrOnly} />
-			<SectionWrapper />
+				<Section />
+			</SectionWrapper>
 		))}
-	</div>
+	</main>
 );
 
 export default Sections;

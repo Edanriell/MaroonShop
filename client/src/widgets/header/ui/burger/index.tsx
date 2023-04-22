@@ -1,5 +1,13 @@
-import { useState, useRef, useLayoutEffect } from "react";
-
+import {
+	useState,
+	useRef,
+	useLayoutEffect,
+	FunctionComponent,
+	SVGProps,
+	MutableRefObject,
+	FC,
+	ReactNode,
+} from "react";
 import { gsap } from "gsap";
 
 import {
@@ -15,6 +23,12 @@ import { ReactComponent as Bar } from "./assets/bar.svg";
 
 type IsDisplayed = boolean;
 type IsTransitioning = boolean;
+type BurgerBars = Array<{
+	Bar: FunctionComponent<SVGProps<SVGSVGElement>>;
+	classes: string;
+	ref: MutableRefObject<null>;
+	id: string;
+}>;
 
 function Burger() {
 	const burgerMenuRef = useRef(null);
@@ -61,36 +75,45 @@ function Burger() {
 		}
 	}
 
-	const burgerBars = [
+	const burgerBars: BurgerBars = [
 		{
 			Bar,
 			classes:
 				"dras w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] duration-500 ease-out",
 			ref: firstBurgerBarRef,
-			key: "firstBurgerBar",
+			id: "firstBurgerBar",
 		},
 		{
 			Bar,
 			classes:
 				"w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] duration-500 ease-out",
 			ref: secondBurgerBarRef,
-			key: "secondBurgerBar",
+			id: "secondBurgerBar",
 		},
 		{
 			Bar,
 			classes:
 				"w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] duration-500 ease-out",
 			ref: thirdBurgerBarRef,
-			key: "thirdBurgerBar",
+			id: "thirdBurgerBar",
 		},
 		{
 			Bar,
 			classes:
 				"w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] absolute top-50 left-0 hidden duration-500 ease-out",
 			ref: fourthBurgerBarRef,
-			key: "fourthBurgerBar",
+			id: "fourthBurgerBar",
 		},
 	];
+
+	const BurgerMenuWrapper: FC<{ children: ReactNode }> = ({ children }) => (
+		<div
+			ref={burgerMenuRef}
+			className="absolute top-0 left-0 w-full bg-desert-storm-50 shadow-burgerMenu box -z-10"
+		>
+			{children}
+		</div>
+	);
 
 	return (
 		<div>
@@ -105,20 +128,19 @@ function Burger() {
 				disabled={isTransitioning}
 				onClick={handleBurgerClick}
 			>
-				{burgerBars.map(({ Bar, classes, ref, key }) => (
-					<Bar key={key} className={classes} ref={ref} />
+				{burgerBars.map(({ Bar, classes, ref, id }) => (
+					<Bar key={id} className={classes} ref={ref} />
 				))}
 			</button>
 			{isDisplayed && (
-				<div
-					ref={burgerMenuRef}
-					className="absolute top-0 left-0 w-full bg-desert-storm-50 shadow-burgerMenu box -z-10"
-				>
+				<BurgerMenuWrapper>
 					<BurgerMenu />
-				</div>
+				</BurgerMenuWrapper>
 			)}
 		</div>
 	);
 }
 
 export default Burger;
+
+// TODO TEST THIS CODE ALSO ADD EVERYWHERE MISSING TYPES AND INSTEAD OF KEYS MAKE ALL ID
