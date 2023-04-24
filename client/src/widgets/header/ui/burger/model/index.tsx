@@ -1,5 +1,4 @@
 import { MutableRefObject, Dispatch, SetStateAction } from "react";
-
 import { gsap } from "gsap";
 
 type BurgerTransformParameters = {
@@ -30,6 +29,7 @@ export const transformBurgerToCross = ({
 			},
 		},
 	);
+
 	gsap.fromTo(
 		thirdBurgerBarRef.current,
 		{ translateX: 0, opacity: 1 },
@@ -40,6 +40,7 @@ export const transformBurgerToCross = ({
 			ease: "power2.out",
 		},
 	);
+
 	gsap.fromTo(
 		secondBurgerBarRef.current,
 		{ translateY: 0, rotate: 0 },
@@ -54,6 +55,7 @@ export const transformBurgerToCross = ({
 			},
 		},
 	);
+
 	gsap.fromTo(
 		fourthBurgerBarRef.current,
 		{ rotate: 0, display: "none" },
@@ -87,6 +89,7 @@ export const transformCrossToBurger = ({
 			},
 		},
 	);
+
 	gsap.fromTo(
 		fourthBurgerBarRef.current,
 		{ rotate: -45, display: "block" },
@@ -97,6 +100,7 @@ export const transformCrossToBurger = ({
 			ease: "power2.out",
 		},
 	);
+
 	gsap.fromTo(
 		firstBurgerBarRef.current,
 		{ translateX: 25, opacity: 0 },
@@ -111,6 +115,7 @@ export const transformCrossToBurger = ({
 			},
 		},
 	);
+
 	gsap.fromTo(
 		thirdBurgerBarRef.current,
 		{ translateX: -25, opacity: 0 },
@@ -124,7 +129,7 @@ export const transformCrossToBurger = ({
 	);
 };
 
-export const displayBurgerMenuContent = (burgerMenuRef: MutableRefObject<null>) => {
+export const displayBurgerMenu = (burgerMenuRef: MutableRefObject<null>) => {
 	gsap.fromTo(
 		burgerMenuRef.current,
 		{
@@ -140,7 +145,7 @@ export const displayBurgerMenuContent = (burgerMenuRef: MutableRefObject<null>) 
 	);
 };
 
-export const hideBurgerMenuContent = (
+export const hideBurgerMenu = (
 	burgerMenuRef: MutableRefObject<null>,
 	setIsDisplayed: Dispatch<SetStateAction<boolean>>,
 ) => {

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { ReactComponent as CopyrightIcon } from "./assets/copyright.svg";
 
-const Copyright = () => {
+function Copyright() {
 	return (
 		<div className="container pt-[2.5rem] md:flex md:justify-between md:pt-[2rem]">
 			<p className="flex items-center justify-start mb-[2rem] md:mb-[0rem]">
@@ -26,6 +26,6 @@ const Copyright = () => {
 			</Link>
 		</div>
 	);
-};
+}
 
 export default Copyright;

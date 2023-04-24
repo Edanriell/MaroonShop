@@ -13,11 +13,11 @@ import { gsap } from "gsap";
 import {
 	transformBurgerToCross,
 	transformCrossToBurger,
-	displayBurgerMenuContent,
-	hideBurgerMenuContent,
+	displayBurgerMenu,
+	hideBurgerMenu,
 } from "./model";
 
-import BurgerMenu from "./ui/burgerMenu";
+import { BurgerMenu } from "./ui";
 
 import { ReactComponent as Bar } from "./assets/bar.svg";
 
@@ -43,11 +43,11 @@ function Burger() {
 
 	useLayoutEffect(() => {
 		if (burgerMenuRef.current) {
-			displayBurgerMenuContent(burgerMenuRef);
+			displayBurgerMenu(burgerMenuRef);
 		}
 
 		burgerMenuCtx.add("remove", () => {
-			hideBurgerMenuContent(burgerMenuRef, setIsDisplayed);
+			hideBurgerMenu(burgerMenuRef, setIsDisplayed);
 		});
 
 		return () => burgerMenuCtx.revert();
@@ -142,5 +142,3 @@ function Burger() {
 }
 
 export default Burger;
-
-// TODO TEST THIS CODE ALSO ADD EVERYWHERE MISSING TYPES AND INSTEAD OF KEYS MAKE ALL ID !!!!

@@ -11,7 +11,7 @@ type UserActions = Array<{
 	iconWidth: string;
 	iconHeight: string;
 	url: string;
-	key: string;
+	id: string;
 }>;
 
 // TODO FIX links when will be creating corresponding pages.
@@ -22,7 +22,7 @@ const userActions: UserActions = [
 		iconWidth: "w-[1.3rem] md:w-[1.6rem]",
 		iconHeight: "h-[1.6rem] md:h-[2.1rem]",
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Корзина",
@@ -30,15 +30,15 @@ const userActions: UserActions = [
 		iconWidth: "w-[1.4rem] md:w-[1.8rem]",
 		iconHeight: "h-[1.6rem] md:h-[2.1rem]",
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 ];
 
 function Toolbar() {
 	return (
 		<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem] relative z-10">
-			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
-				<li key={key}>
+			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
+				<li key={id}>
 					<Link to={url}>
 						<Icon
 							className={

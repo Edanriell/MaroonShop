@@ -11,7 +11,7 @@ type SocialLinks = Array<{
 	iconWidth: string;
 	iconHeight: string;
 	url: string;
-	key: string;
+	id: string;
 }>;
 
 // TODO FIX links when will be creating corresponding pages.
@@ -22,7 +22,7 @@ const socialLinks: SocialLinks = [
 		iconWidth: "w-[1.1rem]",
 		iconHeight: "h-[1.8rem]",
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Instagram",
@@ -30,7 +30,7 @@ const socialLinks: SocialLinks = [
 		iconWidth: "w-[2rem]",
 		iconHeight: "h-[2rem]",
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Twitter",
@@ -38,15 +38,15 @@ const socialLinks: SocialLinks = [
 		iconWidth: "w-[2rem]",
 		iconHeight: "h-[1.7rem]",
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 ];
 
 function BurgerSocialLinks() {
 	return (
 		<ul className="flex items-center justify-start mt-[5rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[6rem]">
-			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, key }) => (
-				<li key={key}>
+			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
+				<li key={id}>
 					<a href={url}>
 						<Icon
 							className={

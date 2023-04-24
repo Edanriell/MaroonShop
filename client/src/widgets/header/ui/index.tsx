@@ -12,7 +12,7 @@ type Props = {
 	headerUnderline?: boolean;
 };
 
-// TODO MAKE HEADER STICKY ! And also must change color to #FFF
+// TODO MAKE HEADER STICKY ! Also header must change color to #FFF.
 const Header = ({ headerUnderline = false }: Props) => {
 	const { width } = useScreenSize();
 

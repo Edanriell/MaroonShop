@@ -1,21 +1,20 @@
 import { FunctionComponent, SVGProps } from "react";
-
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Facebook } from "./assets/facebook.svg";
 import { ReactComponent as Instagram } from "./assets/instagram.svg";
 import { ReactComponent as Twitter } from "./assets/twitter.svg";
 
-type SocialLinks = Array<{
+type FooterSocialLinks = Array<{
 	label: string;
 	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
 	iconClasses: string;
 	url: string;
-	key: string;
+	id: string;
 }>;
 
 // TODO FIX links when will be creating corresponding pages.
-const socialLinks: SocialLinks = [
+const socialLinks: FooterSocialLinks = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
@@ -24,7 +23,7 @@ const socialLinks: SocialLinks = [
 			ease-out hover:text-blue-zodiac-800 hover:scale-125
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Instagram",
@@ -34,7 +33,7 @@ const socialLinks: SocialLinks = [
 			ease-out hover:text-blue-zodiac-800 hover:scale-125
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Twitter",
@@ -44,15 +43,15 @@ const socialLinks: SocialLinks = [
 			ease-out hover:text-blue-zodiac-800 hover:scale-125
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 ];
 
-const FooterSocialLinks = () => {
+function SocialLinks() {
 	return (
 		<ul className="flex items-center justify-start gap-x-[3rem] lg:ml-auto">
-			{socialLinks.map(({ label, Icon, iconClasses, url, key }) => (
-				<li key={key}>
+			{socialLinks.map(({ label, Icon, iconClasses, url, id }) => (
+				<li key={id}>
 					<a href={url}>
 						<Icon className={iconClasses} />
 						<span className="sr-only">{label}</span>
@@ -61,6 +60,6 @@ const FooterSocialLinks = () => {
 			))}
 		</ul>
 	);
-};
+}
 
-export default FooterSocialLinks;
+export default SocialLinks;

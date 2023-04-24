@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-
 import { v4 as uuidv4 } from "uuid";
 
-type SecondaryNavigationElements = Array<{
+type FooterSecondaryNavigation = Array<{
 	label: string;
 	classes: string;
 	url: string;
-	key: string;
+	id: string;
 }>;
 
 // TODO Change urls when all necessary pages are created.
-const secondaryNavigation: SecondaryNavigationElements = [
+const secondaryNavigation: FooterSecondaryNavigation = [
 	{
 		label: "Каталог",
 		classes: `
@@ -19,7 +18,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 			md:text-md-16px
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "О нас",
@@ -29,7 +28,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 			md:text-md-16px
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Магазины",
@@ -39,7 +38,7 @@ const secondaryNavigation: SecondaryNavigationElements = [
 			md:text-md-16px
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 	{
 		label: "Контакты",
@@ -49,11 +48,11 @@ const secondaryNavigation: SecondaryNavigationElements = [
 			md:text-md-16px
 		`,
 		url: "/",
-		key: uuidv4(),
+		id: uuidv4(),
 	},
 ];
 
-const SecondaryNavigation = () => {
+function SecondaryNavigation() {
 	return (
 		<nav aria-label="secondary navigation">
 			<ul
@@ -62,8 +61,8 @@ const SecondaryNavigation = () => {
 				md:flex md:mb-[0rem] md:gap-x-[2.5rem] md:gap-y-[0rem]
 				lg:ml-[7rem] lg:gap-x-[4rem]`}
 			>
-				{secondaryNavigation.map(({ label, classes, url, key }) => (
-					<li key={key}>
+				{secondaryNavigation.map(({ label, classes, url, id }) => (
+					<li key={id}>
 						<Link to={url} className={classes}>
 							<span>{label}</span>
 						</Link>
@@ -72,6 +71,6 @@ const SecondaryNavigation = () => {
 			</ul>
 		</nav>
 	);
-};
+}
 
 export default SecondaryNavigation;
