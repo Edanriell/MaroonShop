@@ -21,10 +21,10 @@ module.exports = {
 			},
 		},
 		fontSize: {
-			"lg-16px": [
-				"1.6rem",
+			"sm-12px": [
+				"1.2rem",
 				{
-					lineHeight: "2.4rem",
+					lineHeight: "1.8rem",
 				},
 			],
 			"sm-14px": [
@@ -33,16 +33,22 @@ module.exports = {
 					lineHeight: "2.1rem",
 				},
 			],
-			"sm-12px": [
-				"1.2rem",
+			"sm-16px": [
+				"1.6rem",
 				{
-					lineHeight: "1.8rem",
+					lineHeight: "2.2rem",
 				},
 			],
 			"sm-28px": [
 				"2.8rem",
 				{
 					lineHeight: "3.6rem",
+				},
+			],
+			"sm-42px": [
+				"4.2rem",
+				{
+					lineHeight: "4.9rem",
 				},
 			],
 			"md-16px": [
@@ -55,6 +61,12 @@ module.exports = {
 				"3.2rem",
 				{
 					lineHeight: "4rem",
+				},
+			],
+			"lg-16px": [
+				"1.6rem",
+				{
+					lineHeight: "2.4rem",
 				},
 			],
 		},

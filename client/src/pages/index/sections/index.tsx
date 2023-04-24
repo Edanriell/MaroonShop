@@ -5,23 +5,26 @@ import HeroSection from "./hero";
 
 type IndexPageSections = Array<{
 	id: string;
-	sectionClasses?: string;
-	sectionWrapperClasses?: string;
-	title?: string;
 	Section: any;
+	title?: string;
 	srOnlyTitle?: string;
 }>;
+
+type SectionWrapperProps = {
+	srTitle?: string;
+	title?: string;
+	children: ReactNode;
+};
 
 const sections: IndexPageSections = [
 	{
 		id: uuidv4(),
-		sectionClasses: "",
 		Section: HeroSection,
-		srOnlyTitle: "",
+		title: "MAROON",
 	},
 ];
 
-const SectionWrapper: FC<{ srTitle?: string; children: ReactNode }> = ({ children, srTitle }) => (
+const SectionWrapper: FC<SectionWrapperProps> = ({ children, srTitle }) => (
 	<section>
 		{srTitle && <h2 className="sr-only">{srTitle}</h2>}
 		{children}
@@ -31,12 +34,12 @@ const SectionWrapper: FC<{ srTitle?: string; children: ReactNode }> = ({ childre
 const Sections = () => (
 	<main className="flex flex-col">
 		<h1 className="sr-only">Главная страница интернет-магазина Maroon</h1>
-		{sections.map(({ id, sectionClasses, Section, srOnlyTitle }) => (
+		{sections.map(({ id, Section, srOnlyTitle, title }) => (
 			<SectionWrapper key={id} srTitle={srOnlyTitle}>
-				<Section classes={sectionClasses} />
+				<Section title={title} />
 			</SectionWrapper>
 		))}
 	</main>
 );
 
-export default Sections;
+export { Sections };

@@ -5,8 +5,6 @@ import {
 	FunctionComponent,
 	SVGProps,
 	MutableRefObject,
-	FC,
-	ReactNode,
 } from "react";
 import { gsap } from "gsap";
 
@@ -106,15 +104,6 @@ function Burger() {
 		},
 	];
 
-	const BurgerMenuWrapper: FC<{ children: ReactNode }> = ({ children }) => (
-		<div
-			ref={burgerMenuRef}
-			className="absolute top-0 left-0 w-full bg-desert-storm-50 shadow-burgerMenu box -z-10"
-		>
-			{children}
-		</div>
-	);
-
 	return (
 		<div>
 			<button
@@ -133,9 +122,12 @@ function Burger() {
 				))}
 			</button>
 			{isDisplayed && (
-				<BurgerMenuWrapper>
+				<div
+					ref={burgerMenuRef}
+					className="absolute top-0 left-0 w-full bg-desert-storm-50 shadow-burgerMenu box -z-10"
+				>
 					<BurgerMenu />
-				</BurgerMenuWrapper>
+				</div>
 			)}
 		</div>
 	);
