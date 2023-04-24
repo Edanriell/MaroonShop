@@ -1,34 +1,39 @@
 import { FC, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import Hero from "./hero";
+import HeroSection from "./hero";
 
-type TSections = Array<{
+type IndexPageSections = Array<{
 	id: string;
-	classes: string;
-	Section: ReactNode | null | (() => null);
-	title: string;
-	titleSrOnly: boolean;
+	sectionClasses?: string;
+	sectionWrapperClasses?: string;
+	title?: string;
+	Section: any;
+	srOnlyTitle?: string;
 }>;
 
-const SectionWrapper: FC<{ children: ReactNode }> = ({ children }) => <section>{children}</section>;
-
-// TODO Write missing types, fix sectionWrapper component, think about decomposition in WIDGETS!!!!
-const sections: TSections = [
+const sections: IndexPageSections = [
 	{
 		id: uuidv4(),
-		classes: "",
-		Section: Hero,
-		title: "",
-		titleSrOnly: true,
+		sectionClasses: "",
+		Section: HeroSection,
+		srOnlyTitle: "",
 	},
 ];
 
+const SectionWrapper: FC<{ srTitle?: string; children: ReactNode }> = ({ children, srTitle }) => (
+	<section>
+		{srTitle && <h2 className="sr-only">{srTitle}</h2>}
+		{children}
+	</section>
+);
+
 const Sections = () => (
 	<main className="flex flex-col">
-		{sections.map(({ id, classes, Section, title, titleSrOnly }) => (
-			<SectionWrapper key={id}>
-				<Section />
+		<h1 className="sr-only">Главная страница интернет-магазина Maroon</h1>
+		{sections.map(({ id, sectionClasses, Section, srOnlyTitle }) => (
+			<SectionWrapper key={id} srTitle={srOnlyTitle}>
+				<Section classes={sectionClasses} />
 			</SectionWrapper>
 		))}
 	</main>

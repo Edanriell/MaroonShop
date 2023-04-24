@@ -1,5 +1,9 @@
-const Hero = () => {
-	return null;
+type Props = {
+	classes: string;
 };
 
-export default Hero;
+function HeroSection({ classes }: Props) {
+	return <div className={classes}>Component</div>;
+}
+
+export default HeroSection;
