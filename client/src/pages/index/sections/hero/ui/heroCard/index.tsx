@@ -16,7 +16,7 @@ function HeroCard({ classes, image, link, label }: Props) {
 				<img
 					src={image}
 					alt={label}
-					className="w-[13rem] h-[17rem] object-cover md:w-[24.5rem] md:h-[32.2rem]"
+					className="w-[13rem] h-[17rem] object-cover md:w-[24.5rem] md:h-[32.2rem] lg:w-[33rem] lg:h-[42.2rem]"
 				/>
 			</div>
 			<div className="flex items-center justify-between">

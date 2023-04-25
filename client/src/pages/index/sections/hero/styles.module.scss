@@ -23,3 +23,12 @@
 		}
 	}
 }
+
+@media only screen and (min-width: 1366px) {
+	.heroBackgroundImage {
+		&::before {
+			top: -10.8rem;
+			height: calc(100% + 10.8rem);
+		}
+	}
+}

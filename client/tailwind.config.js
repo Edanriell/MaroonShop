@@ -99,6 +99,12 @@ module.exports = {
 					lineHeight: "2.4rem",
 				},
 			],
+			"lg-58px": [
+				"5.8rem",
+				{
+					lineHeight: "6.8rem",
+				},
+			],
 		},
 		fontWeight: {
 			thin: "100",
@@ -223,9 +229,10 @@ module.exports = {
 				},
 			},
 			gridTemplateColumns: {
-				2: "repeat(2, 7rem)",
-				two: "repeat(2, minmax(0, 1fr))",
-				five: "20.1rem, 4.4rem, 18.7rem, 4.4rem, 20.1rem",
+				"2": "repeat(2, 7rem)",
+				"hero-two": "repeat(2, minmax(0, 1fr))",
+				"hero-three": "33rem, 27.4rem, 33rem",
+				"hero-five": "20.1rem, 4.4rem, 18.7rem, 4.4rem, 20.1rem",
 			},
 			gridTemplateRows: {
 				"2-auto": "repeat(2, auto)",
