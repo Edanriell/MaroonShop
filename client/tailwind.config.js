@@ -27,10 +27,22 @@ module.exports = {
 					lineHeight: "1.8rem",
 				},
 			],
+			"sm-12px-lh-17px": [
+				"1.2rem",
+				{
+					lineHeight: "1.7rem",
+				},
+			],
 			"sm-14px": [
 				"1.4rem",
 				{
 					lineHeight: "2.1rem",
+				},
+			],
+			"sm-14px-lh-20px": [
+				"1.4rem",
+				{
+					lineHeight: "2rem",
 				},
 			],
 			"sm-16px": [
@@ -57,10 +69,28 @@ module.exports = {
 					lineHeight: "2.4rem",
 				},
 			],
+			"md-16px-lh-22px": [
+				"1.6rem",
+				{
+					lineHeight: "2.2rem",
+				},
+			],
+			"md-18px": [
+				"1.8rem",
+				{
+					lineHeight: "2.6rem",
+				},
+			],
 			"md-32px": [
 				"3.2rem",
 				{
 					lineHeight: "4rem",
+				},
+			],
+			"md-54px": [
+				"5.4rem",
+				{
+					lineHeight: "6.3rem",
 				},
 			],
 			"lg-16px": [
@@ -178,9 +208,27 @@ module.exports = {
 					900: "#4e4e4e",
 					950: "#282828",
 				},
+				"bombay": {
+					50: "#f6f7f8",
+					100: "#ebecee",
+					200: "#dbdee2",
+					300: "#c2c9ce",
+					400: "#b3bac1",
+					500: "#8e97a3",
+					600: "#7d8593",
+					700: "#707785",
+					800: "#5f636e",
+					900: "#4e525a",
+					950: "#323439",
+				},
 			},
 			gridTemplateColumns: {
 				2: "repeat(2, 7rem)",
+				two: "repeat(2, minmax(0, 1fr))",
+			},
+			gridTemplateRows: {
+				"2-auto": "repeat(2, auto)",
+				"3-auto": "repeat(3, auto)",
 			},
 			boxShadow: {
 				burgerMenu: "0px 4px 30px rgba(214, 214, 214, 0.19)",
