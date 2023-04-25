@@ -14,3 +14,9 @@ body {
 button {
 	cursor: pointer !important;
 }
+
+.test3 {
+	display: block;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+}
