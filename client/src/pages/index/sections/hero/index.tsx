@@ -17,8 +17,8 @@ type Props = {
 function HeroSection({ title }: Props) {
 	return (
 		<div className={styles.heroBackgroundImage + " pt-[3rem] pb-[6rem] md:pb-[7rem]"}>
-			<div className="container grid grid-rows-2-auto grid-cols-two gap-x-[3rem] gap-y-[3.5rem]">
-				<div className="flex flex-col items-center row-start-1 col-span-full">
+			<div className="container grid grid-rows-2-auto grid-cols-two gap-x-[3rem] gap-y-[3.5rem] md:gap-x-[0rem] md:gap-y-[0rem] md:grid-cols-five">
+				<div className="flex flex-col items-center row-start-1 col-span-full md:col-start-2 md:col-end-5 md:mt-[2.8rem] pointer-events-none z-10">
 					<h2 className="font-medium text-blue-zodiac-950 font-raleway text-sm-42px mb-[2rem] md:text-md-54px md:mb-[3rem]">
 						{title}
 					</h2>
@@ -27,8 +27,18 @@ function HeroSection({ title }: Props) {
 					</p>
 					<Button type="button" text="Подробнее" link="/" />
 				</div>
-				<HeroCard classes="row-start-2" image={imgCard1Lg} link="/" label="Уход для лица" />
-				<HeroCard classes="row-start-2" image={imgCard2Lg} link="/" label="Уход для тела" />
+				<HeroCard
+					classes="row-start-2 md:row-span-full md:col-start-1 md:col-end-3"
+					image={imgCard1Lg}
+					link="/"
+					label="Уход для лица"
+				/>
+				<HeroCard
+					classes="row-start-2 md:row-span-full md:col-start-4 md:col-end-6"
+					image={imgCard2Lg}
+					link="/"
+					label="Уход для тела"
+				/>
 			</div>
 		</div>
 	);

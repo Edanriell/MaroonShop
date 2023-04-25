@@ -225,6 +225,7 @@ module.exports = {
 			gridTemplateColumns: {
 				2: "repeat(2, 7rem)",
 				two: "repeat(2, minmax(0, 1fr))",
+				five: "20.1rem, 4.4rem, 18.7rem, 4.4rem, 20.1rem",
 			},
 			gridTemplateRows: {
 				"2-auto": "repeat(2, auto)",

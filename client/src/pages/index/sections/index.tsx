@@ -25,7 +25,7 @@ const sections: IndexPageSections = [
 ];
 
 const SectionWrapper: FC<SectionWrapperProps> = ({ children, srTitle }) => (
-	<section>
+	<section className="relative z-[1]">
 		{srTitle && <h2 className="sr-only">{srTitle}</h2>}
 		{children}
 	</section>

@@ -14,6 +14,7 @@ const buttonClasses = `
 	text-sm-14px-lh-20px border-bombay-400 border-solid 
 	border-[0.1rem] rounded-[0.2rem] pt-[1.3rem] pl-[2.8rem] pb-[1.3rem] pr-[2.8rem]
 	md:text-md-16px-lh-22px pl-[2.7rem] pr-[2.7rem]
+	pointer-events-auto
 `;
 
 function Button({ type, text, link, linkExternal }: Props) {
