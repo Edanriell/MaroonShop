@@ -1,6 +1,6 @@
 import { useRef } from "react";
-
 import { Link } from "react-router-dom";
+import { gsap } from "gsap";
 
 import { ReactComponent as Arrow } from "./assets/arrow.svg";
 
@@ -14,38 +14,55 @@ type Props = {
 // TODO FIX PARALLAX EFFECT !
 
 function HeroCard({ classes, image, link, label }: Props) {
-	const SPEED = 0.05;
-
 	const ref1 = useRef(null);
+	const ref2 = useRef(null);
 
-	function test1(e: any) {
-		console.log(ref1.current);
-		const a =  - (e.nativeEvent.offsetY - e.currentTarget.offsetHeight / 2) * SPEED;
-		const b = (e.nativeEvent.offsetX - e.currentTarget.offsetWidth / 2) * SPEED;
+	function handleCardMouseMove(e: any) {
+		const verticalCoordinates =
+			-(e.nativeEvent.offsetY - e.currentTarget.offsetHeight / 2) * 0.05;
+		const horizontalCoordinates =
+			(e.nativeEvent.offsetX - e.currentTarget.offsetWidth / 2) * 0.05;
 
-		console.log(e.nativeEvent.offsetY);
-		console.log(e.nativeEvent.offsetX);
+		gsap.to(ref1.current, {
+			rotateX: verticalCoordinates,
+			rotateY: horizontalCoordinates,
+			duration: 0.5,
+			ease: "power2.out",
+		});
 
-		console.log(e.currentTarget.offsetHeight);
-		console.log(e.currentTarget.offsetWidth);
-
-		(ref1.current as unknown as HTMLElement).setAttribute('style', `transform: rotateX(${a}deg) rotateY(${b}deg)`);
+		gsap.to(ref2.current, {
+			translateX: -horizontalCoordinates * 32,
+			translateY: verticalCoordinates * 24,
+			duration: 0.5,
+			ease: "power2.out",
+		});
 	}
 
-	function test2(e: any) {
-		console.log(2);
-		const box = e.currentTarget;
-		(ref1.current as unknown as HTMLElement).removeAttribute("style");
+	function handleCardMouseOut() {
+		gsap.to(ref1.current, {
+			rotateX: 0,
+			rotateY: 0,
+			duration: 0.5,
+			ease: "power2.out",
+		});
+
+		gsap.to(ref2.current, {
+			translateX: 0,
+			translateY: 0,
+			duration: 0.5,
+			ease: "power2.out",
+		});
 	}
 
 	return (
 		<Link
 			className={classes + " test3"}
 			to={link}
-			onMouseMove={(e) => test1(e)}
-			onMouseOut={(e) => test2(e)}
+			onMouseMove={(e) => handleCardMouseMove(e)}
+			onMouseOut={() => handleCardMouseOut()}
 		>
-			<div className="test4" ref={ref1}>
+			<div ref={ref1}>
+				<div className="card-highlight" ref={ref2}></div>
 				<div className="mb-[1rem] md:mb-[1.5rem]">
 					<img
 						src={image}
