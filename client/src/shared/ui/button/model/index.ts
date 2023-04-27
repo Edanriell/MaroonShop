@@ -23,7 +23,7 @@ function mouseEnterHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Param
 	gsap.fromTo(
 		buttonRef.current,
 		{ borderColor: "#b3bac1" },
-		{ borderColor: "white", duration: 0.4, ease: "power2.out" },
+		{ borderColor: "#ebecee", duration: 0.4, ease: "power2.out" },
 	);
 }
 
@@ -42,7 +42,7 @@ function mouseLeaveHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Param
 
 	gsap.fromTo(
 		buttonRef.current,
-		{ borderColor: "white" },
+		{ borderColor: "#ebecee" },
 		{ borderColor: "#b3bac1", duration: 0.4, ease: "power2.out" },
 	);
 }

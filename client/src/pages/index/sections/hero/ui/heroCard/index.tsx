@@ -1,6 +1,9 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { gsap } from "gsap";
+
+import { mouseMoveEffect, mouseOutEffect } from "./model";
+
+import styles from "./styles.module.scss";
 
 import { ReactComponent as Arrow } from "./assets/arrow.svg";
 
@@ -11,58 +14,34 @@ type Props = {
 	label: string;
 };
 
-// TODO FIX PARALLAX EFFECT !
-
 function HeroCard({ classes, image, link, label }: Props) {
-	const ref1 = useRef(null);
-	const ref2 = useRef(null);
+	const cardContentRef = useRef(null);
+	const cardHighlightRef = useRef(null);
 
-	function handleCardMouseMove(e: any) {
-		const verticalCoordinates =
-			-(e.nativeEvent.offsetY - e.currentTarget.offsetHeight / 2) * 0.05;
-		const horizontalCoordinates =
-			(e.nativeEvent.offsetX - e.currentTarget.offsetWidth / 2) * 0.05;
-
-		gsap.to(ref1.current, {
-			rotateX: verticalCoordinates,
-			rotateY: horizontalCoordinates,
-			duration: 0.5,
-			ease: "power2.out",
-		});
-
-		gsap.to(ref2.current, {
-			translateX: -horizontalCoordinates * 32,
-			translateY: verticalCoordinates * 24,
-			duration: 0.5,
-			ease: "power2.out",
+	function handleCardMouseMove(event: any) {
+		mouseMoveEffect({
+			event,
+			cardContentRef,
+			cardHighlightRef,
 		});
 	}
 
 	function handleCardMouseOut() {
-		gsap.to(ref1.current, {
-			rotateX: 0,
-			rotateY: 0,
-			duration: 0.5,
-			ease: "power2.out",
-		});
-
-		gsap.to(ref2.current, {
-			translateX: 0,
-			translateY: 0,
-			duration: 0.5,
-			ease: "power2.out",
+		mouseOutEffect({
+			cardContentRef,
+			cardHighlightRef,
 		});
 	}
 
 	return (
 		<Link
-			className={classes + " test3"}
 			to={link}
-			onMouseMove={(e) => handleCardMouseMove(e)}
-			onMouseOut={() => handleCardMouseOut()}
+			onMouseMove={(event) => handleCardMouseMove(event)}
+			onMouseOut={handleCardMouseOut}
+			className={classes + " " + styles.card3d}
 		>
-			<div ref={ref1}>
-				<div className="card-highlight" ref={ref2}></div>
+			<div ref={cardContentRef}>
+				<div className={styles.cardHighlight} ref={cardHighlightRef}></div>
 				<div className="mb-[1rem] md:mb-[1.5rem]">
 					<img
 						src={image}

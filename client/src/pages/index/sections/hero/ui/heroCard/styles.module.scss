@@ -1,0 +1,25 @@
+.card3d {
+	display: block;
+	perspective: 600px;
+	transform-style: preserve-3d;
+	will-change: transform;
+	position: relative;
+}
+
+.cardHighlight {
+	width: 400px;
+	height: 300px;
+	opacity: 0.1;
+	filter: blur(50px);
+	background-color: white;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	top: 50%;
+	bottom: auto;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	right: auto;
+	z-index: 20;
+	pointer-events: none;
+}

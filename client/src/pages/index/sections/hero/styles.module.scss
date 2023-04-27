@@ -7,8 +7,10 @@
 		position: absolute;
 		top: -7.6rem;
 		left: 0;
-		// background-image: url("./assets/background-image-lg.png");
-		background-color: red;
+		// background-color: red;
+		background-image: url("./assets/background-image-lg.png");
+		background-repeat: no-repeat;
+		background-size: cover;
 		width: 100%;
 		height: calc(100% + 7.6rem);
 		z-index: -10;
