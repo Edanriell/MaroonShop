@@ -3,15 +3,33 @@ import { HeroCard } from "./ui";
 
 import styles from "./styles.module.scss";
 
-// import imgCard1Sm from "./assets/card-image1-sm.jpg";
-// import imgCard2Sm from "./assets/card-image2-sm.jpg";
-// import imgCard1Md from "./assets/card-image1-md.jpg";
-// import imgCard2Md from "./assets/card-image2-md.jpg";
+import imgCard1Sm from "./assets/card-image1-sm.jpg";
+import imgCard2Sm from "./assets/card-image2-sm.jpg";
+import imgCard1Md from "./assets/card-image1-md.jpg";
+import imgCard2Md from "./assets/card-image2-md.jpg";
 import imgCard1Lg from "./assets/card-image1-lg.jpg";
 import imgCard2Lg from "./assets/card-image2-lg.jpg";
 
 type Props = {
 	title: string;
+};
+
+type CardImages = {
+	imgLg: string;
+	imgMd: string;
+	imgSm: string;
+};
+
+const cardImages1: CardImages = {
+	imgLg: imgCard1Lg,
+	imgMd: imgCard1Md,
+	imgSm: imgCard1Sm,
+};
+
+const cardImages2: CardImages = {
+	imgLg: imgCard2Lg,
+	imgMd: imgCard2Md,
+	imgSm: imgCard2Sm,
 };
 
 function HeroSection({ title }: Props) {
@@ -29,13 +47,13 @@ function HeroSection({ title }: Props) {
 				</div>
 				<HeroCard
 					classes="row-start-2 md:row-span-full md:col-start-1 md:col-end-3 lg:col-end-2"
-					image={imgCard1Lg}
+					images={cardImages1}
 					link="/"
 					label="Уход для лица"
 				/>
 				<HeroCard
 					classes="row-start-2 md:row-span-full md:col-start-4 md:col-end-6 lg:col-start-3 lg:col-end-4"
-					image={imgCard2Lg}
+					images={cardImages2}
 					link="/"
 					label="Уход для тела"
 				/>

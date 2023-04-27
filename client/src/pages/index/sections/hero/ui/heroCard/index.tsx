@@ -9,12 +9,16 @@ import { ReactComponent as Arrow } from "./assets/arrow.svg";
 
 type Props = {
 	classes: string;
-	image: string;
+	images: {
+		imgLg: string;
+		imgMd: string;
+		imgSm: string;
+	};
 	link: string;
 	label: string;
 };
 
-function HeroCard({ classes, image, link, label }: Props) {
+function HeroCard({ classes, images, link, label }: Props) {
 	const cardContentRef = useRef(null);
 	const cardHighlightRef = useRef(null);
 
@@ -42,13 +46,16 @@ function HeroCard({ classes, image, link, label }: Props) {
 		>
 			<div ref={cardContentRef}>
 				<div className={styles.cardHighlight} ref={cardHighlightRef}></div>
-				<div className="mb-[1rem] md:mb-[1.5rem]">
+				<picture className="mb-[1rem] md:mb-[1.5rem]">
+					<source media="(min-width:1366px)" srcSet={images.imgLg} />
+					<source media="(min-width:768px)" srcSet={images.imgMd} />
+					<source media="(min-width:320px)" srcSet={images.imgSm} />
 					<img
-						src={image}
+						src={images.imgLg}
 						alt={label}
-						className="w-[13rem] h-[17rem] object-cover md:w-[24.5rem] md:h-[32.2rem] lg:w-[33rem] lg:h-[42.2rem]"
+						className="w-[13rem] h-[17rem] md:w-[24.5rem] md:h-[32.2rem] lg:w-[33rem] lg:h-[42.2rem]"
 					/>
-				</div>
+				</picture>
 				<div className="flex items-center justify-between">
 					<span className="font-medium text-blue-zodiac-950 font-mPlus text-sm-12px-lh-17px md:text-md-16px-lh-22px">
 						{label}
