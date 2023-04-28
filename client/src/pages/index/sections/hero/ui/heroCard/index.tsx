@@ -1,9 +1,6 @@
-import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-import { mouseMoveEffect, mouseOutEffect } from "./model";
-
-import styles from "./styles.module.scss";
+import { Card3d } from "shared/ui";
 
 import { ReactComponent as Arrow } from "./assets/arrow.svg";
 
@@ -19,33 +16,9 @@ type Props = {
 };
 
 function HeroCard({ classes, images, link, label }: Props) {
-	const cardContentRef = useRef(null);
-	const cardHighlightRef = useRef(null);
-
-	function handleCardMouseMove(event: any) {
-		mouseMoveEffect({
-			event,
-			cardContentRef,
-			cardHighlightRef,
-		});
-	}
-
-	function handleCardMouseOut() {
-		mouseOutEffect({
-			cardContentRef,
-			cardHighlightRef,
-		});
-	}
-
 	return (
-		<Link
-			to={link}
-			onMouseMove={(event) => handleCardMouseMove(event)}
-			onMouseOut={handleCardMouseOut}
-			className={classes + " " + styles.card3d}
-		>
-			<div ref={cardContentRef}>
-				<div className={styles.cardHighlight} ref={cardHighlightRef}></div>
+		<Card3d>
+			<Link to={link} className={classes}>
 				<picture className="mb-[1rem] md:mb-[1.5rem] block">
 					<source media="(min-width:1366px)" srcSet={images.imgLg} />
 					<source media="(min-width:768px)" srcSet={images.imgMd} />
@@ -62,8 +35,8 @@ function HeroCard({ classes, images, link, label }: Props) {
 					</span>
 					<Arrow className="w-[2.3rem] h-[1rem] text-blue-zodiac-950 md:w-[2.6rem] md:h-[1.2rem]" />
 				</div>
-			</div>
-		</Link>
+			</Link>
+		</Card3d>
 	);
 }
 

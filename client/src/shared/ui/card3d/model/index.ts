@@ -25,12 +25,14 @@ function mouseMoveEffect({ event, cardContentRef, cardHighlightRef }: MouseMoveE
 		ease: "power2.out",
 	});
 
-	gsap.to(cardHighlightRef.current, {
-		translateX: -horizontalCoordinates * 32,
-		translateY: verticalCoordinates * 24,
-		duration: 0.5,
-		ease: "power2.out",
-	});
+	if (cardHighlightRef.current) {
+		gsap.to(cardHighlightRef.current, {
+			translateX: -horizontalCoordinates * 32,
+			translateY: verticalCoordinates * 24,
+			duration: 0.5,
+			ease: "power2.out",
+		});
+	}
 }
 
 function mouseOutEffect({ cardContentRef, cardHighlightRef }: MouseOutEffectParameters) {
@@ -41,12 +43,14 @@ function mouseOutEffect({ cardContentRef, cardHighlightRef }: MouseOutEffectPara
 		ease: "power2.out",
 	});
 
-	gsap.to(cardHighlightRef.current, {
-		translateX: 0,
-		translateY: 0,
-		duration: 0.5,
-		ease: "power2.out",
-	});
+	if (cardHighlightRef.current) {
+		gsap.to(cardHighlightRef.current, {
+			translateX: 0,
+			translateY: 0,
+			duration: 0.5,
+			ease: "power2.out",
+		});
+	}
 }
 
 export { mouseMoveEffect, mouseOutEffect };
