@@ -46,7 +46,7 @@ function HeroCard({ classes, images, link, label }: Props) {
 		>
 			<div ref={cardContentRef}>
 				<div className={styles.cardHighlight} ref={cardHighlightRef}></div>
-				<picture className="mb-[1rem] md:mb-[1.5rem]">
+				<picture className="mb-[1rem] md:mb-[1.5rem] block">
 					<source media="(min-width:1366px)" srcSet={images.imgLg} />
 					<source media="(min-width:768px)" srcSet={images.imgMd} />
 					<source media="(min-width:320px)" srcSet={images.imgSm} />
