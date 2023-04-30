@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { productsModel } from "entities/product";
+import { productModel } from "entities/model";
 
 export const store = configureStore({
 	reducer: {
-		products: productsModel.reducer,
+		products: productModel.reducer,
 	},
 });
