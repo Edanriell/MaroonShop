@@ -8,6 +8,7 @@ type Parameters = {
 };
 
 function mouseEnterHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) {
+	console.log("runs2")
 	gsap.fromTo(
 		buttonBoxRef.current,
 		{ translateY: "100%" },
@@ -28,6 +29,7 @@ function mouseEnterHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Param
 }
 
 function mouseLeaveHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) {
+	console.log("runs1")
 	gsap.fromTo(
 		buttonBoxRef.current,
 		{ translateY: "0%" },

@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const helmet = require("helmet");
@@ -11,6 +12,7 @@ const bestsellersRouter = require("./routes/bestsellers");
 const app = express();
 
 app.use(helmet());
+app.use(cors({origin: 'http://localhost:3001'}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

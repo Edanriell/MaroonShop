@@ -19,7 +19,7 @@ const buttonClasses = `
 	text-sm-14px-lh-20px border-bombay-400 border-solid 
 	border-[0.1rem] rounded-[0.2rem] pt-[1.3rem] pl-[2.8rem] pb-[1.3rem] pr-[2.8rem]
 	md:text-md-16px-lh-22px pl-[2.7rem] pr-[2.7rem]
-	pointer-events-auto relative overflow-hidden
+	pointer-events-auto relative overflow-hidden inline-block
 `;
 
 function Button({ type, text, link, linkExternal }: Props) {
@@ -45,6 +45,58 @@ function Button({ type, text, link, linkExternal }: Props) {
 
 	if (type === "button") {
 		return (
+			<div className="relative z-10">
+				<button
+					className={buttonClasses}
+					onMouseEnter={handleButtonMouseEnter}
+					onMouseLeave={handleButtonMouseLeave}
+					ref={buttonRef}
+				>
+					<div className={styles.buttonBox} ref={buttonBoxRef}></div>
+					<span className="relative z-10 block" ref={buttonTextRef}>
+						{text}
+					</span>
+				</button>
+			</div>
+		);
+	} else if (type === "link" && link) {
+		return (
+			<div className="relative z-10">
+				<Link
+					to={link}
+					className={buttonClasses}
+					onMouseEnter={handleButtonMouseEnter}
+					onMouseLeave={handleButtonMouseLeave}
+					ref={buttonRef}
+				>
+					<div className={styles.buttonBox} ref={buttonBoxRef}></div>
+					<span className="relative z-10 block" ref={buttonTextRef}>
+						{text}
+					</span>
+				</Link>
+			</div>
+		);
+	} else if (type === "link" && linkExternal) {
+		return (
+			<div className="relative z-10">
+				<Link
+					to={{ pathname: linkExternal }}
+					target="_blank"
+					className={buttonClasses}
+					onMouseEnter={handleButtonMouseEnter}
+					onMouseLeave={handleButtonMouseLeave}
+					ref={buttonRef}
+				>
+					<div className={styles.buttonBox} ref={buttonBoxRef}></div>
+					<span className="relative z-10 block" ref={buttonTextRef}>
+						{text}
+					</span>
+				</Link>
+			</div>
+		);
+	}
+	return (
+		<div className="relative z-10">
 			<button
 				className={buttonClasses}
 				onMouseEnter={handleButtonMouseEnter}
@@ -56,51 +108,7 @@ function Button({ type, text, link, linkExternal }: Props) {
 					{text}
 				</span>
 			</button>
-		);
-	} else if (type === "link" && link) {
-		return (
-			<Link
-				to={link}
-				className={buttonClasses}
-				onMouseEnter={handleButtonMouseEnter}
-				onMouseLeave={handleButtonMouseLeave}
-				ref={buttonRef}
-			>
-				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-				<span className="relative z-10 block" ref={buttonTextRef}>
-					{text}
-				</span>
-			</Link>
-		);
-	} else if (type === "link" && linkExternal) {
-		return (
-			<Link
-				to={{ pathname: linkExternal }}
-				target="_blank"
-				className={buttonClasses}
-				onMouseEnter={handleButtonMouseEnter}
-				onMouseLeave={handleButtonMouseLeave}
-				ref={buttonRef}
-			>
-				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-				<span className="relative z-10 block" ref={buttonTextRef}>
-					{text}
-				</span>
-			</Link>
-		);
-	}
-	return (
-		<button
-			className={buttonClasses}
-			onMouseEnter={handleButtonMouseEnter}
-			onMouseLeave={handleButtonMouseLeave}
-			ref={buttonRef}
-		>
-			<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-			<span className="relative z-10 block" ref={buttonTextRef}>
-				{text}
-			</span>
-		</button>
+		</div>
 	);
 }
 
