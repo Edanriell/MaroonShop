@@ -7,7 +7,7 @@ const helmet = require("helmet");
 
 const port = 4020;
 
-const bestsellersRouter = require("./routes/bestsellers");
+const productsRouter = require("./routes/products");
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/images', express.static(__dirname + '/public/productsImages'));
 
-app.use("/bestsellers", bestsellersRouter);
+app.use("/products", productsRouter);
 
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);

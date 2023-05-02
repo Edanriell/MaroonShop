@@ -2,7 +2,7 @@ import type { AxiosPromise } from "axios";
 import { apiInstance } from "./base";
 import type { Product } from "./model";
 
-const BASE_URL = "/bestsellers";
+const BASE_URL = "/products";
 
 export const getProductsList = (params?: GetProductsListParams): AxiosPromise<Product[]> => {
 	return apiInstance.get(BASE_URL, { params });
@@ -27,4 +27,6 @@ export type GetProductsListParams = {
 		sm: string;
 	};
 	price?: number;
+	views?: number;
+	sells?: number;
 };

@@ -15,4 +15,6 @@ export type Product = {
 		sm: string;
 	};
 	price: number;
+	views?: number;
+	sells?: number;
 };

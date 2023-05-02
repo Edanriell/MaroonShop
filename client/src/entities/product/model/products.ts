@@ -24,6 +24,8 @@ export type QueryConfig = {
 		sm: string;
 	};
 	price?: number;
+	views?: number;
+	sells?: number;
 };
 
 type NormalizedProducts = Record<number, Product>;

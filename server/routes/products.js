@@ -25,6 +25,8 @@ router.get("/", (req, res) => {
 				sm: "/images/1/sm/productImage.jpg",
 			},
 			price: 890,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 2,
@@ -47,6 +49,8 @@ router.get("/", (req, res) => {
 				sm: "/images/2/sm/productImage.jpg",
 			},
 			price: 490,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 3,
@@ -69,6 +73,8 @@ router.get("/", (req, res) => {
 				sm: "/images/3/sm/productImage.jpg",
 			},
 			price: 600,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 4,
@@ -91,6 +97,8 @@ router.get("/", (req, res) => {
 				sm: "/images/4/sm/productImage.jpg",
 			},
 			price: 720,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 5,
@@ -113,6 +121,8 @@ router.get("/", (req, res) => {
 				sm: "/images/1/sm/productImage.jpg",
 			},
 			price: 890,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 6,
@@ -135,6 +145,8 @@ router.get("/", (req, res) => {
 				sm: "/images/2/sm/productImage.jpg",
 			},
 			price: 490,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 7,
@@ -157,6 +169,8 @@ router.get("/", (req, res) => {
 				sm: "/images/3/sm/productImage.jpg",
 			},
 			price: 600,
+			views: 0,
+			sells: 100,
 		},
 		{
 			id: 8,
@@ -179,6 +193,8 @@ router.get("/", (req, res) => {
 				sm: "/images/4/sm/productImage.jpg",
 			},
 			price: 720,
+			views: 0,
+			sells: 100,
 		},
 	]);
 });
