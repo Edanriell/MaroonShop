@@ -14,7 +14,7 @@ export type GetProductsParams = {
 	usage: string;
 	type: {
 		main: string;
-		secondary: Array<string>;
+		secondary: string;
 		skin: Array<string>;
 	};
 	image: {

@@ -20,7 +20,7 @@ export type QueryConfig = {
 	id?: number;
 	type?: {
 		main: string;
-		secondary: Array<string>;
+		secondary: string;
 		skin: Array<string>;
 	};
 	views?: number;
