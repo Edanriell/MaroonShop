@@ -4,44 +4,39 @@ import { useIsFetching, useQuery } from "react-query";
 import { schema, normalize } from "normalizr";
 import type { AxiosResponse } from "axios";
 
-import { Product, productApi } from "shared/api";
+import { Product, productsApi } from "shared/api";
 
-// TODO Think about QueryConfig
+type NormalizedProducts = Record<number, Product>;
+
+export type RootState = {
+	products: {
+		data: NormalizedProducts;
+		queryConfig?: QueryConfig | undefined;
+	};
+};
+
+// TODO Rethink QueryConfig type
 export type QueryConfig = {
 	id?: number;
-	name?: string;
-	description?: Array<String>;
-	components?: string;
-	usage?: string;
 	type?: {
-		main?: string;
-		secondary?: Array<string>;
-		skin?: Array<string>;
+		main: string;
+		secondary: Array<string>;
+		skin: Array<string>;
 	};
-	image?: {
-		lg: string;
-		md: string;
-		sm: string;
-	};
-	price?: number;
 	views?: number;
 	sells?: number;
 };
 
-type NormalizedProducts = Record<number, Product>;
+const PRODUCT_LIST_QUERY_KEY = "products";
 
 export const productSchema = new schema.Entity<Product>("products");
 
 export const normalizeProduct = (data: Product) =>
 	normalize<Product, { products: NormalizedProducts }>(data, productSchema);
-console.log(normalizeProduct);
-export const normalizeProducts = (data: Product[]) => {
-	console.log(data);
-	console.log(productSchema);
-	return normalize<Product, { products: NormalizedProducts }>(data, [productSchema]);
-}
-	
-console.log(normalizeProducts);
+
+export const normalizeProducts = (data: Product[]) =>
+	normalize<Product, { products: NormalizedProducts }>(data, [productSchema]);
+
 export const initialState: {
 	data: NormalizedProducts;
 	queryConfig?: QueryConfig;
@@ -54,7 +49,7 @@ export const productModel = createSlice({
 	name: "products",
 	initialState,
 	reducers: {
-		setTasksList: (state, { payload }: PayloadAction<Product[]>) => {
+		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
 			state.data = normalizeProducts(payload).entities.products;
 		},
 		setQueryConfig: (state, { payload }: PayloadAction<QueryConfig>) => {
@@ -63,25 +58,32 @@ export const productModel = createSlice({
 	},
 });
 
-const PRODUCT_LIST_QUERY_KEY = "products";
-
-export const getProductsListAsync =
-	(params?: productApi.products.GetProductsListParams) => (dispatch: Dispatch) =>
+export const getProductsAsync =
+	(params?: productsApi.products.GetProductsParams) => (dispatch: Dispatch) =>
 		useQuery<AxiosResponse<Product[]>>(
 			PRODUCT_LIST_QUERY_KEY,
-			() => productApi.products.getProductsList(params),
+			() => productsApi.products.getProducts(params),
 			{
-				onSuccess: ({ data }) => dispatch(productModel.actions.setTasksList(data)),
+				onSuccess: ({ data }) => dispatch(productModel.actions.setProducts(data)),
 				refetchOnWindowFocus: false,
 			},
 		);
 
-export const isProductListLoading = (): boolean => useIsFetching([PRODUCT_LIST_QUERY_KEY]) > 0;
+export const getBestsellers = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data,
+			(products: RootState["products"]["data"]) =>
+				Object.values(products).filter((product) => product.sells >= 100),
+		),
+	);
+
+export const isProductsLoading = (): boolean => useIsFetching([PRODUCT_LIST_QUERY_KEY]) > 0;
 
 export const isProductsEmpty = (): boolean =>
 	useSelector(
 		createSelector(
-			(state: any) => state.products.data,
+			(state: RootState) => state.products.data,
 			(products) => Object.keys(products).length === 0,
 		),
 	);

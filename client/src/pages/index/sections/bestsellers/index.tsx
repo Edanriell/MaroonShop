@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 import { productModel } from "entities/product";
 
@@ -11,15 +9,14 @@ type Props = {
 };
 
 function Bestsellers({ title }: Props) {
-	const products = useSelector((state) => (state as any).products);
-
-	useEffect(() => {
-		console.log(products);
-	});
 	const dispatch = useDispatch();
-	const { isFetching } = productModel.getProductsListAsync()(dispatch);
+
+	const { isFetching } = productModel.getProductsAsync()(dispatch);
+	const bestSellers = productModel.getBestsellers();
 	const isEmpty = productModel.isProductsEmpty();
+
 	if (isFetching) return <div>Loading...</div>;
+
 	if (isEmpty) return <div>Products not found</div>;
 
 	return (
