@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 
+import { ProductCard } from "entities/product/ui";
 import { productModel } from "entities/product";
 
 import { Button } from "shared/ui";
@@ -29,7 +30,7 @@ function Bestsellers({ title }: Props) {
 					Легендарные продукты, завоевавшие любовь наших клиентов
 				</p>
 			</header>
-			{/* <ProductCard/> */}
+			<ProductCard data={bestSellers} simplified />
 			<Button type="link" text="Смотреть все" link="/" />
 		</div>
 	);

@@ -6,10 +6,11 @@ import styles from "./styles.module.scss";
 
 type Props = {
 	children: ReactNode;
+	classes: string;
 	highlight?: boolean;
 };
 
-function Card3d({ children, highlight = true }: Props) {
+function Card3d({ children, classes, highlight = true }: Props) {
 	const cardHighlightRef = useRef(null);
 	const cardContentRef = useRef(null);
 
@@ -32,7 +33,7 @@ function Card3d({ children, highlight = true }: Props) {
 		<div
 			onMouseMove={(event) => handleCardMouseMove(event)}
 			onMouseOut={handleCardMouseOut}
-			className={styles.card3d}
+			className={styles.card3d + " " + classes}
 		>
 			<div ref={cardContentRef}>
 				{highlight && <div className={styles.cardHighlight} ref={cardHighlightRef}></div>}

@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import HeroSection from "./hero";
-import Bestsellers from "./bestsellers";
+import BestsellersSection from "./bestsellers";
 
 type IndexPageSections = Array<{
 	id: string;
@@ -27,9 +27,9 @@ const sections: IndexPageSections = [
 	},
 	{
 		id: uuidv4(),
-		Section: Bestsellers,
+		Section: BestsellersSection,
 		title: "Бестселлеры",
-		classes: "bg-desert-storm-50"
+		classes: "bg-desert-storm-50",
 	},
 ];
 

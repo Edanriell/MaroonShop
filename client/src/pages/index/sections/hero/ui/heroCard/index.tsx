@@ -17,8 +17,8 @@ type Props = {
 
 function HeroCard({ classes, images, link, label }: Props) {
 	return (
-		<Card3d>
-			<Link to={link} className={classes}>
+		<Card3d classes={classes}>
+			<Link to={link}>
 				<picture className="mb-[1rem] md:mb-[1.5rem] block">
 					<source media="(min-width:1366px)" srcSet={images.imgLg} />
 					<source media="(min-width:768px)" srcSet={images.imgMd} />
