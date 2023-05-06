@@ -33,6 +33,12 @@ module.exports = {
 					lineHeight: "1.7rem",
 				},
 			],
+			"sm-13px": [
+				"1.3rem",
+				{
+					lineHeight: "1.9rem",
+				},
+			],
 			"sm-14px": [
 				"1.4rem",
 				{
@@ -49,6 +55,12 @@ module.exports = {
 				"1.6rem",
 				{
 					lineHeight: "2.2rem",
+				},
+			],
+			"sm-16px-lh-23px": [
+				"1.6rem",
+				{
+					lineHeight: "2.3rem",
 				},
 			],
 			"sm-28px": [
@@ -226,6 +238,19 @@ module.exports = {
 					800: "#5f636e",
 					900: "#4e525a",
 					950: "#323439",
+				},
+				"manatee": {
+					50: "#f7f7f7",
+					100: "#ececed",
+					200: "#dddee0",
+					300: "#c6c8ca",
+					400: "#aaaeb0",
+					500: "#9a9da0",
+					600: "#85888b",
+					700: "#777a7e",
+					800: "#646669",
+					900: "#525356",
+					950: "#343537",
 				},
 			},
 			gridTemplateColumns: {
