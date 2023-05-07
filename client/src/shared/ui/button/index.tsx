@@ -22,7 +22,7 @@ const buttonClasses = `
 	pointer-events-auto relative overflow-hidden inline-block
 `;
 
-function Button({ type, text, link, linkExternal }: Props) {
+const Button = ({ type, text, link, linkExternal }: Props) => {
 	const buttonBoxRef = useRef(null);
 	const buttonTextRef = useRef(null);
 	const buttonRef = useRef(null);
@@ -110,6 +110,6 @@ function Button({ type, text, link, linkExternal }: Props) {
 			</button>
 		</div>
 	);
-}
+};
 
 export default Button;

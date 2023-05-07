@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useScreenSize } from "shared/lib/hooks";
 
 import Burger from "./burger";
-import PrimaryNavigation from "./primaryNavigation";
+import PrimaryNavigation from "./primary-navigation";
 import Toolbar from "./toolbar";
 
 import { ReactComponent as Logo } from "./assets/logo.svg";

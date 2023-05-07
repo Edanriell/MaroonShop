@@ -32,7 +32,7 @@ const cardImages2: CardImages = {
 	imgSm: imgCard2Sm,
 };
 
-function HeroSection({ title }: Props) {
+const HeroSection = ({ title }: Props) => {
 	return (
 		<div className={styles.heroBackgroundImage + " pt-[3rem] pb-[6rem] md:pb-[7rem]"}>
 			<div className="container grid grid-rows-2-auto grid-cols-hero-two gap-x-[3rem] gap-y-[3.5rem] md:gap-x-[0rem] md:gap-y-[0rem] md:grid-cols-hero-five lg:grid-cols-hero-three lg:gap-x-[4.8rem] lg:justify-center">
@@ -60,6 +60,6 @@ function HeroSection({ title }: Props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default HeroSection;

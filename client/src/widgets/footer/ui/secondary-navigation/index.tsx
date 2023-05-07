@@ -52,7 +52,7 @@ const secondaryNavigation: FooterSecondaryNavigation = [
 	},
 ];
 
-function SecondaryNavigation() {
+const SecondaryNavigation = () => {
 	return (
 		<nav aria-label="secondary navigation">
 			<ul
@@ -71,6 +71,6 @@ function SecondaryNavigation() {
 			</ul>
 		</nav>
 	);
-}
+};
 
 export default SecondaryNavigation;

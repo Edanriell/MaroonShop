@@ -7,7 +7,7 @@ type Parameters = {
 	buttonRef: MutableRefObject<null>;
 };
 
-function mouseEnterHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) {
+export const mouseEnterHoverEffect = ({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) => {
 	gsap.fromTo(
 		buttonBoxRef.current,
 		{ translateY: "100%" },
@@ -25,9 +25,9 @@ function mouseEnterHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Param
 		{ borderColor: "#b3bac1" },
 		{ borderColor: "#ebecee", duration: 0.4, ease: "power2.out" },
 	);
-}
+};
 
-function mouseLeaveHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) {
+export const mouseLeaveHoverEffect = ({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) => {
 	gsap.fromTo(
 		buttonBoxRef.current,
 		{ translateY: "0%" },
@@ -45,6 +45,4 @@ function mouseLeaveHoverEffect({ buttonBoxRef, buttonTextRef, buttonRef }: Param
 		{ borderColor: "#ebecee" },
 		{ borderColor: "#b3bac1", duration: 0.4, ease: "power2.out" },
 	);
-}
-
-export { mouseEnterHoverEffect, mouseLeaveHoverEffect };
+};

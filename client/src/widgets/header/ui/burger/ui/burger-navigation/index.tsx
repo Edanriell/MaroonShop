@@ -26,7 +26,7 @@ const burgerNavigation: Navigation = [
 	},
 ];
 
-function BurgerNavigation() {
+const BurgerNavigation = () => {
 	return (
 		<nav aria-label="burger menu navigation">
 			<ul className="flex flex-col gap-y-[3.5rem] md:gap-y-[4rem]">
@@ -46,6 +46,6 @@ function BurgerNavigation() {
 			</ul>
 		</nav>
 	);
-}
+};
 
 export default BurgerNavigation;

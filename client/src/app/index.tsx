@@ -10,5 +10,3 @@ const App = () => (
 );
 
 export default withProviders(App);
-
-// export default App;

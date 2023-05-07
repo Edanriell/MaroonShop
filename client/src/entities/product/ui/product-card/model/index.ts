@@ -17,8 +17,6 @@ export const getProductType = ({ mainType, secondaryType }: getProductTypeProps)
 			return "тоник для лица";
 		} else if (secondaryType === "powder") {
 			return "минеральная пудра";
-		} else {
-			return "продукт для лица";
 		}
 	} else if (mainType === "body") {
 		if (secondaryType === "cream") {
@@ -33,8 +31,6 @@ export const getProductType = ({ mainType, secondaryType }: getProductTypeProps)
 			return "бомбочка для ванны";
 		} else if (secondaryType === "bath salt") {
 			return "соль для ванны";
-		} else {
-			return "продукт для тела";
 		}
 	} else {
 		return "неизвестный тип продукта";

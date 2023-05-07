@@ -5,64 +5,61 @@ import { ReactComponent as Facebook } from "./assets/facebook.svg";
 import { ReactComponent as Instagram } from "./assets/instagram.svg";
 import { ReactComponent as Twitter } from "./assets/twitter.svg";
 
-type SocialLinks = Array<{
+type FooterSocialLinks = Array<{
 	label: string;
 	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
-	iconWidth: string;
-	iconHeight: string;
+	iconClasses: string;
 	url: string;
 	id: string;
 }>;
 
 // TODO FIX links when will be creating corresponding pages.
-const socialLinks: SocialLinks = [
+const socialLinks: FooterSocialLinks = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
-		iconWidth: "w-[1.1rem]",
-		iconHeight: "h-[1.8rem]",
+		iconClasses: `
+			w-[1.1rem] h-[1.8rem] text-blue-zodiac-950 duration-500 
+			ease-out hover:text-blue-zodiac-800 hover:scale-125
+		`,
 		url: "/",
 		id: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Instagram",
 		Icon: Instagram,
-		iconWidth: "w-[2rem]",
-		iconHeight: "h-[2rem]",
+		iconClasses: `
+			w-[2rem] h-[2rem] text-blue-zodiac-950 duration-500 
+			ease-out hover:text-blue-zodiac-800 hover:scale-125
+		`,
 		url: "/",
 		id: uuidv4(),
 	},
 	{
 		label: "Наша страничка в Twitter",
 		Icon: Twitter,
-		iconWidth: "w-[2rem]",
-		iconHeight: "h-[1.7rem]",
+		iconClasses: `
+			w-[2rem] h-[1.7rem] text-blue-zodiac-950 duration-500 
+			ease-out hover:text-blue-zodiac-800 hover:scale-125
+		`,
 		url: "/",
 		id: uuidv4(),
 	},
 ];
 
-function BurgerSocialLinks() {
+const SocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start mt-[5rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[6rem]">
-			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
+		<ul className="flex items-center justify-start gap-x-[3rem] lg:ml-auto">
+			{socialLinks.map(({ label, Icon, iconClasses, url, id }) => (
 				<li key={id}>
 					<a href={url}>
-						<Icon
-							className={
-								iconWidth +
-								" " +
-								iconHeight +
-								" text-blue-zodiac-950" +
-								" duration-500 ease-out hover:text-blue-zodiac-800 hover:scale-125"
-							}
-						/>
+						<Icon className={iconClasses} />
 						<span className="sr-only">{label}</span>
 					</a>
 				</li>
 			))}
 		</ul>
 	);
-}
+};
 
-export default BurgerSocialLinks;
+export default SocialLinks;

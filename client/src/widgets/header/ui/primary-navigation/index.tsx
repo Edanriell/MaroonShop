@@ -26,7 +26,7 @@ const mainNavigation: MainNavigation = [
 	},
 ];
 
-function PrimaryNavigation() {
+const PrimaryNavigation = () => {
 	return (
 		<nav aria-label="primary navigation">
 			<ul className="flex items-center justify-start gap-x-[3.5rem] mr-[5.1rem]">
@@ -46,6 +46,6 @@ function PrimaryNavigation() {
 			</ul>
 		</nav>
 	);
-}
+};
 
 export default PrimaryNavigation;

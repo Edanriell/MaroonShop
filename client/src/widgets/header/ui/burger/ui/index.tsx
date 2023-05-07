@@ -1,1 +1,1 @@
-export { default as BurgerMenu } from "./burgerMenu";
+export { default as BurgerMenu } from "./burger-menu";

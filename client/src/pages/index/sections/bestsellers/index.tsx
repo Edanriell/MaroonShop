@@ -9,7 +9,7 @@ type Props = {
 	title: string;
 };
 
-function Bestsellers({ title }: Props) {
+const Bestsellers = ({ title }: Props) => {
 	const dispatch = useDispatch();
 
 	const { isFetching } = productModel.getProductsAsync()(dispatch);
@@ -36,6 +36,6 @@ function Bestsellers({ title }: Props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Bestsellers;

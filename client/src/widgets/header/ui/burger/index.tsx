@@ -28,7 +28,7 @@ type BurgerBars = Array<{
 	id: string;
 }>;
 
-function Burger() {
+const Burger = () => {
 	const burgerMenuRef = useRef(null);
 	const firstBurgerBarRef = useRef(null);
 	const secondBurgerBarRef = useRef(null);
@@ -131,6 +131,6 @@ function Burger() {
 			)}
 		</div>
 	);
-}
+};
 
 export default Burger;

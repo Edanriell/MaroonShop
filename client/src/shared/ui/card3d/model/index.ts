@@ -12,7 +12,11 @@ type MouseOutEffectParameters = {
 	cardHighlightRef: MutableRefObject<null>;
 };
 
-function mouseMoveEffect({ event, cardContentRef, cardHighlightRef }: MouseMoveEffectParameters) {
+export const mouseMoveEffect = ({
+	event,
+	cardContentRef,
+	cardHighlightRef,
+}: MouseMoveEffectParameters) => {
 	const verticalCoordinates =
 		-(event.nativeEvent.offsetY - event.currentTarget.offsetHeight / 2) * 0.05;
 	const horizontalCoordinates =
@@ -33,9 +37,9 @@ function mouseMoveEffect({ event, cardContentRef, cardHighlightRef }: MouseMoveE
 			ease: "power2.out",
 		});
 	}
-}
+};
 
-function mouseOutEffect({ cardContentRef, cardHighlightRef }: MouseOutEffectParameters) {
+export const mouseOutEffect = ({ cardContentRef, cardHighlightRef }: MouseOutEffectParameters) => {
 	gsap.to(cardContentRef.current, {
 		rotateX: 0,
 		rotateY: 0,
@@ -51,6 +55,4 @@ function mouseOutEffect({ cardContentRef, cardHighlightRef }: MouseOutEffectPara
 			ease: "power2.out",
 		});
 	}
-}
-
-export { mouseMoveEffect, mouseOutEffect };
+};

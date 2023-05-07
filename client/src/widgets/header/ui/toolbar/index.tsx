@@ -34,7 +34,7 @@ const userActions: UserActions = [
 	},
 ];
 
-function Toolbar() {
+const Toolbar = () => {
 	return (
 		<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem] relative z-10">
 			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
@@ -55,6 +55,6 @@ function Toolbar() {
 			))}
 		</ul>
 	);
-}
+};
 
 export default Toolbar;

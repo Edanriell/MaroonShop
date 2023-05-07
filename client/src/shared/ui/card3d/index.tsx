@@ -10,7 +10,7 @@ type Props = {
 	highlight?: boolean;
 };
 
-function Card3d({ children, classes, highlight = true }: Props) {
+const Card3d = ({ children, classes, highlight = true }: Props) => {
 	const cardHighlightRef = useRef(null);
 	const cardContentRef = useRef(null);
 
@@ -41,6 +41,6 @@ function Card3d({ children, classes, highlight = true }: Props) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Card3d;

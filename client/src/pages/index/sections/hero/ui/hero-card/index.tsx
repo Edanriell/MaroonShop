@@ -15,7 +15,7 @@ type Props = {
 	label: string;
 };
 
-function HeroCard({ classes, images, link, label }: Props) {
+const HeroCard = ({ classes, images, link, label }: Props) => {
 	return (
 		<Card3d classes={classes}>
 			<Link to={link}>
@@ -38,6 +38,6 @@ function HeroCard({ classes, images, link, label }: Props) {
 			</Link>
 		</Card3d>
 	);
-}
+};
 
 export default HeroCard;

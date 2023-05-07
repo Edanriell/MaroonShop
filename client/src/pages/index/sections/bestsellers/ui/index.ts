@@ -1,1 +1,1 @@
-export { default as BestsellersSlider } from "./bestsellersSlider";
+export { default as BestsellersSlider } from "./bestsellers-slider";

@@ -5,7 +5,7 @@ type ScreenSize = {
 	height: number;
 };
 
-function useScreenSize() {
+export const useScreenSize = () => {
 	const [screenSize, setScreenSize] = useState<ScreenSize>({
 		width: 0,
 		height: 0,
@@ -27,6 +27,4 @@ function useScreenSize() {
 	}
 
 	return screenSize;
-}
-
-export { useScreenSize };
+};

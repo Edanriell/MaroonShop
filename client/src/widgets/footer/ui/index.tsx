@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import SecondaryNavigation from "./secondaryNavigation";
-import SocialLinks from "./socialLinks";
+import SecondaryNavigation from "./secondary-navigation";
+import SocialLinks from "./social-links";
 import Copyright from "./copyright";
 
 import { ReactComponent as Logotype } from "./assets/logotype.svg";
