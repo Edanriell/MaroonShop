@@ -1,2 +1,2 @@
-export * as productsApi from "./products";
-export * from "./model";
+export * as productsApi from "./fixtures/products";
+export * from "./models";

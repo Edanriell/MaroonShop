@@ -1,12 +1,9 @@
-import { register } from "swiper/element/bundle";
 import { useDispatch } from "react-redux";
 
-import { ProductCard } from "entities/product/ui";
 import { productModel } from "entities/product";
 
 import { Button } from "shared/ui";
-
-register();
+import { BestsellersSlider } from "./ui";
 
 type Props = {
 	title: string;
@@ -33,9 +30,7 @@ function Bestsellers({ title }: Props) {
 					Легендарные продукты, завоевавшие любовь наших клиентов
 				</p>
 			</header>
-			{/* <swiper-container> */}
-				<ProductCard data={bestSellers} simplified />
-			{/* </swiper-container> */}
+			<BestsellersSlider bestSellers={bestSellers} />
 			<div className="mt-[4rem] text-center">
 				<Button type="link" text="Смотреть все" link="/" />
 			</div>
