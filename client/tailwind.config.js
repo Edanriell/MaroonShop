@@ -258,10 +258,12 @@ module.exports = {
 				"hero-two": "repeat(2, minmax(0, 1fr))",
 				"hero-three": "33rem, 27.4rem, 33rem",
 				"hero-five": "20.1rem, 4.4rem, 18.7rem, 4.4rem, 20.1rem",
+				"bestsellers-two": "21.4rem auto",
 			},
 			gridTemplateRows: {
 				"2-auto": "repeat(2, auto)",
 				"3-auto": "repeat(3, auto)",
+				"5-auto": "repeat(5, auto)",
 			},
 			boxShadow: {
 				burgerMenu: "0px 4px 30px rgba(214, 214, 214, 0.19)",

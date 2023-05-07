@@ -21,8 +21,8 @@ const Bestsellers = ({ title }: Props) => {
 	if (isEmpty) return <div>Products not found</div>;
 
 	return (
-		<div className="container pt-[8rem] pb-[8rem] relative">
-			<header className="flex flex-col gap-x-[2.5rem] mb-[5rem] items-center">
+		<div className="container pt-[8rem] pb-[8rem] relative md:grid md:grid-rows-5-auto md:grid-cols-bestsellers-two md:gap-x-[4rem] md:pl-[4.5rem] md:pr-[0rem] md:mr-[auto] md:ml-[auto]">
+			<header className="flex flex-col gap-x-[2.5rem] mb-[5rem] items-center md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3">
 				<h2 className="font-medium font-raleway text-sm-28px text-blue-zodiac-950">
 					{title}
 				</h2>
@@ -30,8 +30,10 @@ const Bestsellers = ({ title }: Props) => {
 					Легендарные продукты, завоевавшие любовь наших клиентов
 				</p>
 			</header>
-			<BestsellersSlider bestSellers={bestSellers} />
-			<div className="mt-[4rem] text-center">
+			<div className="md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
+				<BestsellersSlider classes="" bestSellers={bestSellers} />
+			</div>
+			<div className="mt-[4rem] text-center md:col-start-1 md:col-end-2 md:row-start-3 md:row-end-4">
 				<Button type="link" text="Смотреть все" link="/" />
 			</div>
 		</div>
