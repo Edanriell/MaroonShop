@@ -12,7 +12,7 @@ type Props = {
 export const ProductCard = ({ data, simplified = false }: Props) => {
 	if (simplified) {
 		return (
-			<article className="grid gird-rows-2-auto w-[22rem] m-auto">
+			<article className="grid gird-rows-2-auto w-[22rem] m-auto md:w-[23rem]">
 				<picture className="col-start-1 col-end-2 row-start-1 row-end-3">
 					<source
 						media="(min-width:1366px)"
@@ -29,7 +29,7 @@ export const ProductCard = ({ data, simplified = false }: Props) => {
 					<img
 						src={`http://localhost:4020${data.image.lg}`}
 						alt={data.name}
-						className="w-[100%] h-[29.7rem] object-cover"
+						className="w-[100%] h-[29.7rem] object-cover md:h-[31.2rem]"
 					/>
 				</picture>
 				<div className="flex flex-col items-center col-start-1 col-end-2 row-start-2 row-end-3">
