@@ -4,27 +4,29 @@ import styles from "./styles.module.scss";
 
 type Props = {
 	text: string;
-	buttonClasses: string;
+	commonButtonClasses: string;
 	handleButtonMouseEnter: () => void;
 	handleButtonMouseLeave: () => void;
 	buttonRef: MutableRefObject<null>;
 	buttonBoxRef: MutableRefObject<null>;
 	buttonTextRef: MutableRefObject<null>;
+	classes: string;
 };
 
 const Button = ({
 	text,
-	buttonClasses,
+	commonButtonClasses,
 	handleButtonMouseEnter,
 	handleButtonMouseLeave,
 	buttonRef,
 	buttonBoxRef,
 	buttonTextRef,
+	classes,
 }: Props) => {
 	return (
 		<div className="relative z-10">
 			<button
-				className={buttonClasses}
+				className={commonButtonClasses + " " + classes}
 				onMouseEnter={handleButtonMouseEnter}
 				onMouseLeave={handleButtonMouseLeave}
 				ref={buttonRef}

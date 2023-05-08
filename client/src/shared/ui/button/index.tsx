@@ -11,6 +11,7 @@ type Props = {
 	type?: ButtonType;
 	linkInternal?: string;
 	linkExternal?: string;
+	classes?: string;
 };
 
 const commonButtonClasses = `
@@ -21,7 +22,7 @@ const commonButtonClasses = `
 	pointer-events-auto relative overflow-hidden inline-block
 `;
 
-const Button = ({ type, text, linkInternal, linkExternal }: Props) => {
+const Button = ({ type, text, linkInternal, linkExternal, classes = "" }: Props) => {
 	const buttonBoxRef = useRef(null);
 	const buttonTextRef = useRef(null);
 	const buttonRef = useRef(null);
@@ -46,13 +47,14 @@ const Button = ({ type, text, linkInternal, linkExternal }: Props) => {
 		return (
 			<StyledLinkInternal
 				text={text}
-				buttonClasses={commonButtonClasses}
+				commonButtonClasses={commonButtonClasses}
 				handleButtonMouseEnter={handleButtonMouseEnter}
 				handleButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
 				buttonBoxRef={buttonBoxRef}
 				buttonTextRef={buttonTextRef}
 				linkInternal={linkInternal}
+				classes={classes}
 			/>
 		);
 	}
@@ -61,13 +63,14 @@ const Button = ({ type, text, linkInternal, linkExternal }: Props) => {
 		return (
 			<StyledLinkExternal
 				text={text}
-				buttonClasses={commonButtonClasses}
+				commonButtonClasses={commonButtonClasses}
 				handleButtonMouseEnter={handleButtonMouseEnter}
 				handleButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
 				buttonBoxRef={buttonBoxRef}
 				buttonTextRef={buttonTextRef}
 				linkExternal={linkExternal}
+				classes={classes}
 			/>
 		);
 	}
@@ -75,12 +78,13 @@ const Button = ({ type, text, linkInternal, linkExternal }: Props) => {
 	return (
 		<StyledButton
 			text={text}
-			buttonClasses={commonButtonClasses}
+			commonButtonClasses={commonButtonClasses}
 			handleButtonMouseEnter={handleButtonMouseEnter}
 			handleButtonMouseLeave={handleButtonMouseLeave}
 			buttonRef={buttonRef}
 			buttonBoxRef={buttonBoxRef}
 			buttonTextRef={buttonTextRef}
+			classes={classes}
 		/>
 	);
 };
