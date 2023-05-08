@@ -2,8 +2,8 @@ import { FunctionComponent, SVGProps } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import { ReactComponent as CartIcon } from "../assets/cart.svg";
-import { ReactComponent as AuthIcon } from "../assets/auth.svg";
+import { ReactComponent as CartIcon } from "./assets/cart.svg";
+import { ReactComponent as AuthIcon } from "./assets/auth.svg";
 
 type UserActions = Array<{
 	label: string;

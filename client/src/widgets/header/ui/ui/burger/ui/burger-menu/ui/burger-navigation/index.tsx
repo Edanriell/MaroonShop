@@ -29,7 +29,7 @@ const burgerNavigation: Navigation = [
 const BurgerNavigation = () => {
 	return (
 		<nav aria-label="burger menu navigation">
-			<ul className="flex flex-col gap-y-[3.5rem] md:gap-y-[4rem]">
+			<ul className="flex flex-col gap-y-[1.9rem] md:gap-y-[2.2rem]">
 				{burgerNavigation.map(({ label, url, id }) => (
 					<li key={id}>
 						<Link

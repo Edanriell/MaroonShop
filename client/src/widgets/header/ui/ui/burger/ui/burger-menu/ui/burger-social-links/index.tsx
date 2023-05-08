@@ -44,7 +44,7 @@ const socialLinks: SocialLinks = [
 
 const BurgerSocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start mt-[5rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[6rem]">
+		<ul className="flex items-center justify-start mt-[4.2rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[5.1rem]">
 			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
 				<li key={id}>
 					<a href={url}>

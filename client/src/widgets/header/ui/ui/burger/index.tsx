@@ -1,11 +1,4 @@
-import {
-	useState,
-	useRef,
-	useLayoutEffect,
-	FunctionComponent,
-	SVGProps,
-	MutableRefObject,
-} from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
 import {
@@ -15,18 +8,10 @@ import {
 	hideBurgerMenu,
 } from "./model";
 
-import { BurgerMenu } from "./ui";
-
-import { ReactComponent as Bar } from "./assets/bar.svg";
+import { BurgerMenu, BurgerIcon } from "./ui";
 
 type IsDisplayed = boolean;
 type IsTransitioning = boolean;
-type BurgerBars = Array<{
-	Bar: FunctionComponent<SVGProps<SVGSVGElement>>;
-	classes: string;
-	ref: MutableRefObject<null>;
-	id: string;
-}>;
 
 const Burger = () => {
 	const burgerMenuRef = useRef(null);
@@ -73,37 +58,6 @@ const Burger = () => {
 		}
 	}
 
-	const burgerBars: BurgerBars = [
-		{
-			Bar,
-			classes:
-				"dras w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] duration-500 ease-out",
-			ref: firstBurgerBarRef,
-			id: "firstBurgerBar",
-		},
-		{
-			Bar,
-			classes:
-				"w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] duration-500 ease-out",
-			ref: secondBurgerBarRef,
-			id: "secondBurgerBar",
-		},
-		{
-			Bar,
-			classes:
-				"w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] duration-500 ease-out",
-			ref: thirdBurgerBarRef,
-			id: "thirdBurgerBar",
-		},
-		{
-			Bar,
-			classes:
-				"w-[2.2rem] h-[0.2rem] text-blue-zodiac-950 md:w-[2.4rem] md:h-[0.3rem] absolute top-50 left-0 hidden duration-500 ease-out",
-			ref: fourthBurgerBarRef,
-			id: "fourthBurgerBar",
-		},
-	];
-
 	return (
 		<div>
 			<button
@@ -117,9 +71,12 @@ const Burger = () => {
 				disabled={isTransitioning}
 				onClick={handleBurgerClick}
 			>
-				{burgerBars.map(({ Bar, classes, ref, id }) => (
-					<Bar key={id} className={classes} ref={ref} />
-				))}
+				<BurgerIcon
+					firstBurgerBarRef={firstBurgerBarRef}
+					secondBurgerBarRef={secondBurgerBarRef}
+					thirdBurgerBarRef={thirdBurgerBarRef}
+					fourthBurgerBarRef={fourthBurgerBarRef}
+				/>
 			</button>
 			{isDisplayed && (
 				<div
