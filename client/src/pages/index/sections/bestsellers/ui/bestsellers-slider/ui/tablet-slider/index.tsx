@@ -31,6 +31,8 @@ const TabletSlider = ({ bestSellers, classes }: Props) => {
                         margin: 0;
                         display: inline-block;
                         position: absolute;
+						transition: all 0.5s;
+						transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
                     }
 
                     .swiper-button-prev {
@@ -40,8 +42,16 @@ const TabletSlider = ({ bestSellers, classes }: Props) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        left: 340px;
+                        left: 44.27vw;
                         z-index: 100;
+                    }
+
+					.swiper-button-prev:hover {
+                        transform: translateY(-100%) scale(1.1);
+                    }
+
+					.swiper-button-prev:active {
+                        transform: translateY(-100%) translateX(-4px) scale(1.1);
                     }
 
                     .swiper-button-next {
@@ -51,8 +61,16 @@ const TabletSlider = ({ bestSellers, classes }: Props) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        left: 398px;
+                        left: 51.82vw;
                         z-index: 100;
+                    }
+
+					.swiper-button-next:hover {
+                        transform: translateY(-100%) scale(1.1);
+                    }
+
+					.swiper-button-next:active {
+                        transform: translateY(-100%) translateX(4px) scale(1.1);
                     }
                     
                     .swiper-button-next::after,
