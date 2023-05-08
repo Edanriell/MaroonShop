@@ -46,7 +46,7 @@ export const ProductCard = ({ data, simplified = false }: Props) => {
 						className={
 							styles.underline +
 							" " +
-							"font-normal font-mPlus text-sm-13px text-blue-zodiac-950 mb-[2rem] hover:text-blue-zodiac-800 hover:after:bg-blue-zodiac-800 duration-500 ease-out after:duration-500 after:ease-out"
+							"font-normal font-mPlus text-sm-13px text-blue-zodiac-950 mb-[2rem] hover:text-blue-zodiac-800 hover:after:bg-blue-zodiac-800 duration-500 ease-out after:duration-500 after:ease-out md:mb-[2.5rem]"
 						}
 						to={`/${data.id}`}
 					>

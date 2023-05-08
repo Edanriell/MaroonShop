@@ -5,3 +5,5 @@ const queryClient = new QueryClient();
 
 export const withQuery = (component: () => ReactNode) => () =>
 	<QueryClientProvider client={queryClient}>{component()}</QueryClientProvider>;
+
+withQuery.displayName = "ReactQueryProvider";
