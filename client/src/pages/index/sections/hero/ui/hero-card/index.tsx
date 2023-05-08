@@ -19,7 +19,7 @@ const HeroCard = ({ classes, images, link, label }: Props) => {
 	return (
 		<Card3d classes={classes}>
 			<Link to={link}>
-				<picture className="mb-[1rem] md:mb-[1.5rem] block">
+				<picture className="mb-[0.6rem] md:mb-[0.9rem] block">
 					<source media="(min-width:1366px)" srcSet={images.imgLg} />
 					<source media="(min-width:768px)" srcSet={images.imgMd} />
 					<source media="(min-width:320px)" srcSet={images.imgSm} />

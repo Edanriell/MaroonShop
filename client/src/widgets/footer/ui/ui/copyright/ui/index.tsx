@@ -4,8 +4,8 @@ import { ReactComponent as CopyrightIcon } from "./assets/copyright.svg";
 
 const Copyright = () => {
 	return (
-		<div className="container pt-[2.5rem] md:flex md:justify-between md:pt-[2rem]">
-			<p className="flex items-center justify-start mb-[2rem] md:mb-[0rem]">
+		<div className="container pt-[2.3rem] md:flex md:justify-between md:pt-[1.7rem]">
+			<p className="flex items-center justify-start mb-[1.4rem] md:mb-[0rem]">
 				<small className="font-normal font-mPlus text-sm-12px text-dusty-gray-500">
 					Maroon
 				</small>

@@ -49,7 +49,7 @@ const socialLinks: FooterSocialLinks = [
 
 const SocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start gap-x-[3rem] lg:ml-auto">
+		<ul className="flex items-center justify-start gap-x-[3rem] lg:ml-auto md:gap-x-[2.5rem] lg:gap-x-[3rem]">
 			{socialLinks.map(({ label, Icon, iconClasses, url, id }) => (
 				<li key={id}>
 					<a href={url}>

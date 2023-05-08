@@ -57,7 +57,7 @@ const SecondaryNavigation = () => {
 		<nav aria-label="secondary navigation">
 			<ul
 				className={`
-				grid grid-cols-2 gap-x-[3rem] gap-y-[2.5rem] mb-[3rem] 
+				grid grid-cols-2 gap-x-[3rem] gap-y-[1.5rem] mb-[2.5rem] 
 				md:flex md:mb-[0rem] md:gap-x-[2.5rem] md:gap-y-[0rem]
 				lg:ml-[7rem] lg:gap-x-[4rem]`}
 			>

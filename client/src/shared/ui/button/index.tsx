@@ -1,28 +1,27 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+
+import { StyledButton, StyledLinkInternal, StyledLinkExternal } from "./ui";
 
 import { mouseEnterHoverEffect, mouseLeaveHoverEffect } from "./model";
 
-import styles from "./styles.module.scss";
-
-type ButtonType = "button" | "link";
+type ButtonType = "button" | "link-internal" | "link-external";
 
 type Props = {
 	text: string;
 	type?: ButtonType;
-	link?: string;
+	linkInternal?: string;
 	linkExternal?: string;
 };
 
-const buttonClasses = `
+const commonButtonClasses = `
 	font-medium bg-transparent text-blue-zodiac-950 font-mPlus 
 	text-sm-14px-lh-20px border-bombay-400 border-solid 
-	border-[0.1rem] rounded-[0.2rem] pt-[1.3rem] pl-[2.8rem] pb-[1.3rem] pr-[2.8rem]
-	md:text-md-16px-lh-22px pl-[2.7rem] pr-[2.7rem]
+	border-[0.1rem] rounded-[0.2rem] pt-[1rem] pl-[2.8rem] pb-[1rem] pr-[2.8rem]
+	md:text-md-16px-lh-22px md:pl-[2.7rem] md:pr-[2.7rem] md:pt-[0.9rem] md:pb-[0.9rem]
 	pointer-events-auto relative overflow-hidden inline-block
 `;
 
-const Button = ({ type, text, link, linkExternal }: Props) => {
+const Button = ({ type, text, linkInternal, linkExternal }: Props) => {
 	const buttonBoxRef = useRef(null);
 	const buttonTextRef = useRef(null);
 	const buttonRef = useRef(null);
@@ -43,72 +42,46 @@ const Button = ({ type, text, link, linkExternal }: Props) => {
 		});
 	}
 
-	if (type === "button") {
+	if (type === "link-internal" && linkInternal) {
 		return (
-			<div className="relative z-10">
-				<button
-					className={buttonClasses}
-					onMouseEnter={handleButtonMouseEnter}
-					onMouseLeave={handleButtonMouseLeave}
-					ref={buttonRef}
-				>
-					<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-					<span className="relative z-10 block" ref={buttonTextRef}>
-						{text}
-					</span>
-				</button>
-			</div>
-		);
-	} else if (type === "link" && link) {
-		return (
-			<div className="relative z-10">
-				<Link
-					to={link}
-					className={buttonClasses}
-					onMouseEnter={handleButtonMouseEnter}
-					onMouseLeave={handleButtonMouseLeave}
-					ref={buttonRef}
-				>
-					<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-					<span className="relative z-10 block" ref={buttonTextRef}>
-						{text}
-					</span>
-				</Link>
-			</div>
-		);
-	} else if (type === "link" && linkExternal) {
-		return (
-			<div className="relative z-10">
-				<Link
-					to={{ pathname: linkExternal }}
-					target="_blank"
-					className={buttonClasses}
-					onMouseEnter={handleButtonMouseEnter}
-					onMouseLeave={handleButtonMouseLeave}
-					ref={buttonRef}
-				>
-					<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-					<span className="relative z-10 block" ref={buttonTextRef}>
-						{text}
-					</span>
-				</Link>
-			</div>
+			<StyledLinkInternal
+				text={text}
+				buttonClasses={commonButtonClasses}
+				handleButtonMouseEnter={handleButtonMouseEnter}
+				handleButtonMouseLeave={handleButtonMouseLeave}
+				buttonRef={buttonRef}
+				buttonBoxRef={buttonBoxRef}
+				buttonTextRef={buttonTextRef}
+				linkInternal={linkInternal}
+			/>
 		);
 	}
+
+	if (type === "link-external" && linkExternal) {
+		return (
+			<StyledLinkExternal
+				text={text}
+				buttonClasses={commonButtonClasses}
+				handleButtonMouseEnter={handleButtonMouseEnter}
+				handleButtonMouseLeave={handleButtonMouseLeave}
+				buttonRef={buttonRef}
+				buttonBoxRef={buttonBoxRef}
+				buttonTextRef={buttonTextRef}
+				linkExternal={linkExternal}
+			/>
+		);
+	}
+
 	return (
-		<div className="relative z-10">
-			<button
-				className={buttonClasses}
-				onMouseEnter={handleButtonMouseEnter}
-				onMouseLeave={handleButtonMouseLeave}
-				ref={buttonRef}
-			>
-				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-				<span className="relative z-10 block" ref={buttonTextRef}>
-					{text}
-				</span>
-			</button>
-		</div>
+		<StyledButton
+			text={text}
+			buttonClasses={commonButtonClasses}
+			handleButtonMouseEnter={handleButtonMouseEnter}
+			handleButtonMouseLeave={handleButtonMouseLeave}
+			buttonRef={buttonRef}
+			buttonBoxRef={buttonBoxRef}
+			buttonTextRef={buttonTextRef}
+		/>
 	);
 };
 

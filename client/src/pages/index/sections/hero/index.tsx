@@ -34,16 +34,20 @@ const cardImages2: CardImages = {
 
 const HeroSection = ({ title }: Props) => {
 	return (
-		<div className={styles.heroBackgroundImage + " pt-[3rem] pb-[6rem] md:pb-[7rem]"}>
+		<div
+			className={
+				styles.heroBackgroundImage + " pt-[2.1rem] pb-[6rem] md:pt-[3rem] md:pb-[7rem]"
+			}
+		>
 			<div className="container grid grid-rows-2-auto grid-cols-hero-two gap-x-[3rem] gap-y-[3.5rem] md:gap-x-[0rem] md:gap-y-[0rem] md:grid-cols-hero-five lg:grid-cols-hero-three lg:gap-x-[4.8rem] lg:justify-center">
-				<div className="flex flex-col items-center row-start-1 col-span-full md:col-start-2 md:col-end-5 md:mt-[2.8rem] pointer-events-none z-10 lg:col-start-2 lg:col-end-3 lg:mt-[6.1rem]">
-					<h2 className="font-medium text-blue-zodiac-950 font-raleway text-sm-42px mb-[2rem] md:text-md-54px md:mb-[3rem] lg:text-lg-58px">
+				<div className="flex flex-col items-center row-start-1 col-span-full md:col-start-2 md:col-end-5 md:mt-[1.6rem] pointer-events-none z-10 lg:col-start-2 lg:col-end-3 lg:mt-[4.7rem]">
+					<h2 className="font-medium text-blue-zodiac-950 font-raleway text-sm-42px mb-[0.5rem] md:text-md-54px md:mb-[1.05rem] lg:text-lg-58px lg:mb-[0.95rem]">
 						{title}
 					</h2>
-					<p className="font-normal text-center text-blue-zodiac-950 font-mPlus text-sm-16px mb-[3rem] md:text-md-18px md:mb-[4rem]">
+					<p className="font-normal text-center text-blue-zodiac-950 font-mPlus text-sm-16px mb-[2.45rem] md:text-md-18px md:mb-[3.35rem]">
 						Натуральная косметика <br /> для бережного ухода за кожей
 					</p>
-					<Button type="button" text="Подробнее" link="/" />
+					<Button type="link-internal" text="Подробнее" linkInternal="/" />
 				</div>
 				<HeroCard
 					classes="row-start-2 md:row-span-full md:col-start-1 md:col-end-3 lg:col-end-2"
