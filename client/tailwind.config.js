@@ -123,6 +123,12 @@ module.exports = {
 					lineHeight: "2.4rem",
 				},
 			],
+			"lg-32px": [
+				"3.2rem",
+				{
+					lineHeight: "4.2rem",
+				},
+			],
 			"lg-58px": [
 				"5.8rem",
 				{
@@ -279,6 +285,7 @@ module.exports = {
 				"2-auto": "repeat(2, auto)",
 				"3-auto": "repeat(3, auto)",
 				"5-auto": "repeat(5, auto)",
+				"individual-care-three-sm": "38.2rem 6rem 19.2rem",
 			},
 			boxShadow: {
 				burgerMenu: "0px 4px 30px rgba(214, 214, 214, 0.19)",

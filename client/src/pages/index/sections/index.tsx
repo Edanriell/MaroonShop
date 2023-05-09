@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import Hero from "./hero";
 import Bestsellers from "./bestsellers";
 import NewCollection from "./new-collection";
+import IndividualCare from "./individual-care";
 
 type IndexPageSections = Array<{
 	id: string;
@@ -36,6 +37,12 @@ const sections: IndexPageSections = [
 		id: uuidv4(),
 		Section: NewCollection,
 		srOnlyTitle: "Новинки",
+	},
+	{
+		id: uuidv4(),
+		Section: IndividualCare,
+		title: "Индивидуальный уход",
+		classes: "bg-desert-storm-50",
 	},
 ];
 
