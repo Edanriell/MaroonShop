@@ -15,7 +15,7 @@ type Props = {
 	classes: string;
 };
 
-const TabletSlider = ({ bestSellers, classes }: Props) => {
+const UniversalSlider = ({ bestSellers, classes }: Props) => {
 	const sliderRef = useRef(null);
 
 	useEffect(() => {
@@ -77,6 +77,16 @@ const TabletSlider = ({ bestSellers, classes }: Props) => {
                     .swiper-button-prev::after {
                         content: "";
                     }
+
+					@media only screen and (min-width: 1366px) {
+						.swiper-button-prev {
+							left: 57.54vw;
+						}
+
+						.swiper-button-next {
+							left: 61.78vw;
+						}
+					}
                 `,
 			],
 		};
@@ -118,4 +128,4 @@ const TabletSlider = ({ bestSellers, classes }: Props) => {
 	);
 };
 
-export default TabletSlider;
+export default UniversalSlider;

@@ -1,6 +1,6 @@
 import { useScreenSize } from "shared/lib/hooks";
 
-import { MobileSlider, TabletSlider, DesktopSlider } from "./ui";
+import { MobileSlider, UniversalSlider } from "./ui";
 
 declare global {
 	namespace JSX {
@@ -19,10 +19,7 @@ type Props = {
 const BestsellersSlider = ({ bestSellers, classes }: Props) => {
 	const { width } = useScreenSize();
 
-	if (width >= 768 && width < 1366)
-		return <TabletSlider bestSellers={bestSellers} classes={classes} />;
-
-	if (width >= 1366) return <DesktopSlider bestSellers={bestSellers} classes={classes} />;
+	if (width >= 768) return <UniversalSlider bestSellers={bestSellers} classes={classes} />;
 
 	return <MobileSlider bestSellers={bestSellers} classes={classes} />;
 };

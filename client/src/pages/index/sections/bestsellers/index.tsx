@@ -9,6 +9,7 @@ type Props = {
 	title: string;
 };
 
+// TODO Create cool slider and Products not found !
 const Bestsellers = ({ title }: Props) => {
 	const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ const Bestsellers = ({ title }: Props) => {
 	if (isEmpty) return <div>Products not found</div>;
 
 	return (
-		<div className="container pt-[7.2rem] pb-[8rem] relative md:grid md:grid-rows-5-auto md:grid-cols-bestsellers-two md:gap-x-[4rem] md:pl-[4.5rem] md:pr-[0rem] md:mr-[auto] md:ml-[auto] md:pt-[12rem] md:pb-[12rem] lg:pt-[14rem] lg:pb-[14rem] lg:gap-x-[8.6rem]">
+		<div className="container pt-[7.2rem] pb-[8rem] relative md:grid md:grid-rows-5-auto md:grid-cols-bestsellers-two md:gap-x-[4rem] md:pl-[4.5rem] md:pr-[0rem] md:mr-[auto] md:ml-[auto] md:pt-[12rem] md:pb-[12rem] lg:pt-[14rem] lg:pb-[14rem] lg:gap-x-[8.6rem] lg:pl-[9.8rem] xl:pl-[12rem] 2xl:pl-[14rem]">
 			<header className="flex flex-col gap-y-[1.15rem] mb-[4.45rem] items-center md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-3 md:gap-y-[1.4rem] md:mb-0 md:items-start md:mt-[4.6rem] lg:gap-y-[1.3rem] lg:mt-[4.65rem]">
 				<h2 className="font-medium font-raleway text-sm-28px text-blue-zodiac-950 md:text-md-32px-lh-42px">
 					{title}

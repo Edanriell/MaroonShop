@@ -7,7 +7,7 @@
 		position: absolute;
 		top: -7.6rem;
 		left: 0;
-		background: url("./assets/background-image-sm.png") no-repeat 0 0 / cover #ffffff;
+		background: url("./assets/background-image-sm.png") no-repeat 0 0 / cover #f8f8f6;
 		width: 100%;
 		height: calc(100% + 7.6rem);
 		z-index: -10;
@@ -17,7 +17,7 @@
 @media only screen and (min-width: 768px) {
 	.heroBackgroundImage {
 		&::before {
-			background: url("./assets/background-image-md.png") no-repeat 0 0 / cover #ffffff;
+			background: url("./assets/background-image-md.png") no-repeat 0 0 / cover #f8f8f6;
 			top: -10.1rem;
 			height: calc(100% + 10.1rem);
 		}
@@ -27,7 +27,7 @@
 @media only screen and (min-width: 1366px) {
 	.heroBackgroundImage {
 		&::before {
-			background: url("./assets/background-image-lg.png") no-repeat 0 0 / cover #ffffff;
+			background: url("./assets/background-image-lg.png") no-repeat 0 0 / cover #f8f8f6;
 			top: -10.8rem;
 			height: calc(100% + 10.8rem);
 		}

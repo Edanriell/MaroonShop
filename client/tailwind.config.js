@@ -69,6 +69,12 @@ module.exports = {
 					lineHeight: "3.6rem",
 				},
 			],
+			"sm-28px-lh-35px": [
+				"2.8rem",
+				{
+					lineHeight: "3.5rem",
+				},
+			],
 			"sm-42px": [
 				"4.2rem",
 				{
@@ -265,6 +271,9 @@ module.exports = {
 				"hero-three": "33rem, 27.4rem, 33rem",
 				"hero-five": "20.1rem, 4.4rem, 18.7rem, 4.4rem, 20.1rem",
 				"bestsellers-two": "21.4rem auto",
+				"new-collection-three-sm": "1fr 25.3rem 1fr",
+				"new-collection-three-md": "1fr 28.4rem 2rem",
+				"new-collection-three-lg": "1fr 28.4rem 16rem",
 			},
 			gridTemplateRows: {
 				"2-auto": "repeat(2, auto)",

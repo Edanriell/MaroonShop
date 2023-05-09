@@ -1,8 +1,9 @@
 import { FC, ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import HeroSection from "./hero";
-import BestsellersSection from "./bestsellers";
+import Hero from "./hero";
+import Bestsellers from "./bestsellers";
+import NewCollection from "./new-collection";
 
 type IndexPageSections = Array<{
 	id: string;
@@ -22,14 +23,19 @@ type SectionWrapperProps = {
 const sections: IndexPageSections = [
 	{
 		id: uuidv4(),
-		Section: HeroSection,
+		Section: Hero,
 		title: "MAROON",
 	},
 	{
 		id: uuidv4(),
-		Section: BestsellersSection,
+		Section: Bestsellers,
 		title: "Бестселлеры",
 		classes: "bg-desert-storm-50",
+	},
+	{
+		id: uuidv4(),
+		Section: NewCollection,
+		srOnlyTitle: "Новинки",
 	},
 ];
 

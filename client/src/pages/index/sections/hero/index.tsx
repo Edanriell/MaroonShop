@@ -20,19 +20,19 @@ type CardImages = {
 	imgSm: string;
 };
 
-const cardImages1: CardImages = {
+const card1Images: CardImages = {
 	imgLg: imgCard1Lg,
 	imgMd: imgCard1Md,
 	imgSm: imgCard1Sm,
 };
 
-const cardImages2: CardImages = {
+const card2Images: CardImages = {
 	imgLg: imgCard2Lg,
 	imgMd: imgCard2Md,
 	imgSm: imgCard2Sm,
 };
 
-const HeroSection = ({ title }: Props) => {
+const Hero = ({ title }: Props) => {
 	return (
 		<div
 			className={
@@ -51,13 +51,13 @@ const HeroSection = ({ title }: Props) => {
 				</div>
 				<HeroCard
 					classes="row-start-2 md:row-span-full md:col-start-1 md:col-end-3 lg:col-end-2"
-					images={cardImages1}
+					images={card1Images}
 					link="/"
 					label="Уход для лица"
 				/>
 				<HeroCard
 					classes="row-start-2 md:row-span-full md:col-start-4 md:col-end-6 lg:col-start-3 lg:col-end-4"
-					images={cardImages2}
+					images={card2Images}
 					link="/"
 					label="Уход для тела"
 				/>
@@ -66,4 +66,4 @@ const HeroSection = ({ title }: Props) => {
 	);
 };
 
-export default HeroSection;
+export default Hero;
