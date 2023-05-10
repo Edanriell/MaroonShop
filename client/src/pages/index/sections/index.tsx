@@ -5,6 +5,7 @@ import Hero from "./hero";
 import Bestsellers from "./bestsellers";
 import NewCollection from "./new-collection";
 import IndividualCare from "./individual-care";
+import ShopHistory from "./shop-history";
 
 type IndexPageSections = Array<{
 	id: string;
@@ -43,6 +44,11 @@ const sections: IndexPageSections = [
 		Section: IndividualCare,
 		title: "Индивидуальный уход",
 		classes: "bg-desert-storm-50",
+	},
+	{
+		id: uuidv4(),
+		Section: ShopHistory,
+		srOnlyTitle: "История магазина",
 	},
 ];
 

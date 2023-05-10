@@ -36,7 +36,12 @@ const userActions: UserActions = [
 
 const Toolbar = () => {
 	return (
-		<ul className="flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem] relative z-10">
+		<ul
+			className={`
+				flex items-center justify-start 
+				gap-x-[2rem] md:gap-x-[3rem] relative z-10
+			`}
+		>
 			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
 				<li key={id}>
 					<Link to={url}>
@@ -49,7 +54,7 @@ const Toolbar = () => {
 								" hover:text-blue-zodiac-800 duration-500 ease-out hover:scale-125"
 							}
 						/>
-						<span className="sr-only">{label}</span>
+						<span className={`sr-only`}>{label}</span>
 					</Link>
 				</li>
 			))}

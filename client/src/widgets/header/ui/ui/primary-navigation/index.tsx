@@ -28,8 +28,8 @@ const mainNavigation: MainNavigation = [
 
 const PrimaryNavigation = () => {
 	return (
-		<nav aria-label="primary navigation">
-			<ul className="flex items-center justify-start gap-x-[3.5rem] mr-[5.1rem]">
+		<nav aria-label={`primary navigation`}>
+			<ul className={`flex items-center justify-start gap-x-[3.5rem] mr-[5.1rem]`}>
 				{mainNavigation.map(({ label, url, id }) => (
 					<li key={id}>
 						<NavLink

@@ -64,7 +64,8 @@ const Burger = () => {
 				aria-label="burger menu"
 				className={`
 					flex flex-col items-center justify-center 
-					cursor-pointer gap-y-[0.3rem] md:gap-y-[0.4rem] relative z-10
+					cursor-pointer gap-y-[0.3rem] relative z-10 mr-[2.5rem]
+					md:mr-[4rem] md:gap-y-[0.4rem]
 					burger-hover-effect
 				`}
 				type="button"
@@ -81,7 +82,11 @@ const Burger = () => {
 			{isDisplayed && (
 				<div
 					ref={burgerMenuRef}
-					className="absolute top-0 left-0 w-full bg-desert-storm-50 shadow-burgerMenu box -z-10"
+					className={`
+						absolute top-0 left-0 w-full 
+						bg-desert-storm-50 shadow-burgerMenu 
+						box -z-10
+					`}
 				>
 					<BurgerMenu />
 				</div>

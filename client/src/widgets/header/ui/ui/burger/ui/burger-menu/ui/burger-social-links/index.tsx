@@ -44,7 +44,12 @@ const socialLinks: SocialLinks = [
 
 const BurgerSocialLinks = () => {
 	return (
-		<ul className="flex items-center justify-start mt-[4.2rem] gap-x-[3rem] md:gap-x-[2.5rem] md:mt-[5.1rem]">
+		<ul
+			className={`
+				flex items-center justify-start mt-[4.2rem] gap-x-[3rem] 
+				md:gap-x-[2.5rem] md:mt-[5.1rem]
+			`}
+		>
 			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
 				<li key={id}>
 					<a href={url}>
@@ -57,7 +62,7 @@ const BurgerSocialLinks = () => {
 								" duration-500 ease-out hover:text-blue-zodiac-800 hover:scale-125"
 							}
 						/>
-						<span className="sr-only">{label}</span>
+						<span className={`sr-only`}>{label}</span>
 					</a>
 				</li>
 			))}

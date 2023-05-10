@@ -1,3 +1,3 @@
 export { default as Burger } from "./burger";
-export { PrimaryNavigation } from "./primary-navigation";
-export { Toolbar } from "./toolbar";
+export { default as PrimaryNavigation } from "./primary-navigation";
+export { default as Toolbar } from "./toolbar";
