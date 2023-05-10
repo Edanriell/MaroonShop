@@ -63,6 +63,12 @@ module.exports = {
 					lineHeight: "2.3rem",
 				},
 			],
+			"sm-22px": [
+				"2.2rem",
+				{
+					lineHeight: "2.8rem",
+				},
+			],
 			"sm-28px": [
 				"2.8rem",
 				{
@@ -99,6 +105,12 @@ module.exports = {
 					lineHeight: "2.6rem",
 				},
 			],
+			"md-31.7px": [
+				"3.17rem",
+				{
+					lineHeight: "4rem",
+				},
+			],
 			"md-32px": [
 				"3.2rem",
 				{
@@ -127,6 +139,12 @@ module.exports = {
 				"3.2rem",
 				{
 					lineHeight: "4.2rem",
+				},
+			],
+			"lg-32px-lh-40px": [
+				"3.2rem",
+				{
+					lineHeight: "4rem",
 				},
 			],
 			"lg-58px": [

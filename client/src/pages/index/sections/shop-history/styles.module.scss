@@ -1,0 +1,24 @@
+.shopHistoryBackgroundImage {
+	position: relative;
+	background: url("./assets/background-image-sm.jpg") no-repeat #f8f8f6;
+	background-size: cover;
+    background-position: center bottom;
+}
+
+@media only screen and (min-width: 768px) {
+	.shopHistoryBackgroundImage {
+		position: relative;
+		background: url("./assets/background-image-md.jpg") no-repeat #f8f8f6;
+		background-size: cover;
+        background-position: left center;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	.shopHistoryBackgroundImage {
+		position: relative;
+		background: url("./assets/background-image-lg.jpg") no-repeat #f8f8f6;
+		background-size: cover;
+        background-position: left center;
+	}
+}
