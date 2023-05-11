@@ -298,12 +298,18 @@ module.exports = {
 				"new-collection-three-sm": "1fr 25.3rem 1fr",
 				"new-collection-three-md": "1fr 28.4rem 2rem",
 				"new-collection-three-lg": "1fr 28.4rem 16rem",
+				"join-us-two-sm": "repeat(2, minmax(13.6rem, 45.31vw))",
+				"join-us-two-md": "repeat(2, 17.7rem)",
+				"join-us-two-lg": "repeat(3, 23.3rem)",
 			},
 			gridTemplateRows: {
 				"2-auto": "repeat(2, auto)",
 				"3-auto": "repeat(3, auto)",
 				"5-auto": "repeat(5, auto)",
 				"individual-care-three-sm": "38.2rem 6rem 19.2rem",
+				"join-us-two-sm": "repeat(2, minmax(13.6rem, 45.31vw))",
+				"join-us-two-md": "repeat(2, 17.7rem)",
+				"join-us-two-lg": "repeat(2, 23.3rem)",
 			},
 			boxShadow: {
 				burgerMenu: "0px 4px 30px rgba(214, 214, 214, 0.19)",

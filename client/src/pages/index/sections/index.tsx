@@ -6,6 +6,7 @@ import Bestsellers from "./bestsellers";
 import NewCollection from "./new-collection";
 import IndividualCare from "./individual-care";
 import ShopHistory from "./shop-history";
+import JoinUs from "./join-us";
 
 type IndexPageSections = Array<{
 	id: string;
@@ -49,6 +50,12 @@ const sections: IndexPageSections = [
 		id: uuidv4(),
 		Section: ShopHistory,
 		srOnlyTitle: "История магазина",
+	},
+	{
+		id: uuidv4(),
+		Section: JoinUs,
+		title: "Присоединяйтесь к нам",
+		classes: "bg-desert-storm-50",
 	},
 ];
 

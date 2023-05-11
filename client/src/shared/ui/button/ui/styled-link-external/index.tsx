@@ -1,7 +1,5 @@
 import { MutableRefObject } from "react";
 
-import { Link } from "react-router-dom";
-
 import styles from "./styles.module.scss";
 
 type Props = {
@@ -29,9 +27,10 @@ const LinkExternal = ({
 }: Props) => {
 	return (
 		<div className="relative z-10">
-			<Link
-				to={{ pathname: linkExternal }}
+			<a
+				href={`${linkExternal}`}
 				target="_blank"
+				rel="noreferrer"
 				className={commonButtonClasses + " " + classes}
 				onMouseEnter={handleButtonMouseEnter}
 				onMouseLeave={handleButtonMouseLeave}
@@ -41,7 +40,7 @@ const LinkExternal = ({
 				<span className="relative z-10 block" ref={buttonTextRef}>
 					{text}
 				</span>
-			</Link>
+			</a>
 		</div>
 	);
 };
