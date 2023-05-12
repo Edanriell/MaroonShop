@@ -7,6 +7,7 @@ import NewCollection from "./new-collection";
 import IndividualCare from "./individual-care";
 import ShopHistory from "./shop-history";
 import JoinUs from "./join-us";
+import Contacts from "./contacts";
 
 type IndexPageSections = Array<{
 	id: string;
@@ -55,6 +56,12 @@ const sections: IndexPageSections = [
 		id: uuidv4(),
 		Section: JoinUs,
 		title: "Присоединяйтесь к нам",
+		classes: "bg-desert-storm-50",
+	},
+	{
+		id: uuidv4(),
+		Section: Contacts,
+		title: "Контакты",
 		classes: "bg-desert-storm-50",
 	},
 ];
