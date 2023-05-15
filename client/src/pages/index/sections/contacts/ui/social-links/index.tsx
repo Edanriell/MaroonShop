@@ -2,7 +2,7 @@ import { ReactComponent as FacebookIcon } from "./assets/facebook-icon.svg";
 import { ReactComponent as InstagramIcon } from "./assets/instagram-icon.svg";
 import { ReactComponent as TwitterIcon } from "./assets/twitter-icon.svg";
 
-// TODO FIX ALL BUTTONS
+// TODO FIX ALL BUTTONS paddings
 const SocialLinks = () => {
 	return (
 		<ul className="flex flex-row">
