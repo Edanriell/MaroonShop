@@ -5,7 +5,7 @@ import mapLg from "./assets/map-lg.jpg";
 // TODO refactor to real map !
 const Map = () => {
 	return (
-		<picture className="col-start-1 col-end-2 row-start-1 row-end-3">
+		<picture className="md:ml-[-34.5rem] lg:ml-[-18.4rem]">
 			<source media="(min-width:1366px)" srcSet={mapLg} />
 			<source media="(min-width:768px)" srcSet={mapMd} />
 			<source media="(min-width:320px)" srcSet={mapSm} />
