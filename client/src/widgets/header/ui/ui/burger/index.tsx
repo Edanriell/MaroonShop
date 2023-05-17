@@ -7,11 +7,8 @@ import {
 	displayBurgerMenu,
 	hideBurgerMenu,
 } from "./model";
-
 import { BurgerMenu, BurgerIcon } from "./ui";
-
-type IsDisplayed = boolean;
-type IsTransitioning = boolean;
+import { IsDisplayed, IsTransitioning } from "./types";
 
 const Burger = () => {
 	const burgerMenuRef = useRef(null);
@@ -62,12 +59,12 @@ const Burger = () => {
 		<div>
 			<button
 				aria-label="burger menu"
-				className={`
-					flex flex-col items-center justify-center 
-					cursor-pointer gap-y-[0.3rem] relative z-10 mr-[2.5rem]
-					md:mr-[4rem] md:gap-y-[0.4rem]
-					burger-hover-effect
-				`}
+				className={
+					"flex flex-col items-center justify-center " +
+					"cursor-pointer gap-y-[0.3rem] relative z-10 mr-[2.5rem] " +
+					"md:mr-[4rem] md:gap-y-[0.4rem] " +
+					"burger-hover-effect"
+				}
 				type="button"
 				disabled={isTransitioning}
 				onClick={handleBurgerClick}
@@ -82,11 +79,11 @@ const Burger = () => {
 			{isDisplayed && (
 				<div
 					ref={burgerMenuRef}
-					className={`
-						absolute top-0 left-0 w-full 
-						bg-desert-storm-50 shadow-burgerMenu 
-						box -z-10
-					`}
+					className={
+						"absolute top-0 left-0 w-full " +
+						"bg-desert-storm-50 shadow-burgerMenu " +
+						"box -z-10"
+					}
 				>
 					<BurgerMenu />
 				</div>

@@ -1,21 +1,12 @@
-import { FunctionComponent, SVGProps } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Facebook } from "./assets/facebook.svg";
 import { ReactComponent as Instagram } from "./assets/instagram.svg";
 import { ReactComponent as Twitter } from "./assets/twitter.svg";
-
-type SocialLinks = Array<{
-	label: string;
-	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
-	iconWidth: string;
-	iconHeight: string;
-	url: string;
-	id: string;
-}>;
+import { SocialLink, SocialLinksProps } from "./types";
 
 // TODO FIX links when will be creating corresponding pages.
-const socialLinks: SocialLinks = [
+const socialLinks: Array<SocialLink> = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
@@ -42,14 +33,9 @@ const socialLinks: SocialLinks = [
 	},
 ];
 
-const BurgerSocialLinks = () => {
+const SocialLinks = ({ classes = "" }: SocialLinksProps) => {
 	return (
-		<ul
-			className={`
-				flex items-center justify-start mt-[4.2rem] gap-x-[3rem] 
-				md:gap-x-[2.5rem] md:mt-[5.1rem]
-			`}
-		>
+		<ul className={classes}>
 			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
 				<li key={id}>
 					<a href={url}>
@@ -58,11 +44,12 @@ const BurgerSocialLinks = () => {
 								iconWidth +
 								" " +
 								iconHeight +
-								" text-blue-zodiac-950" +
-								" duration-500 ease-out hover:text-blue-zodiac-800 hover:scale-125"
+								" " +
+								"text-blue-zodiac-950 " +
+								"duration-500 ease-out hover:text-blue-zodiac-800 hover:scale-125"
 							}
 						/>
-						<span className={`sr-only`}>{label}</span>
+						<span className={"sr-only"}>{label}</span>
 					</a>
 				</li>
 			))}
@@ -70,4 +57,4 @@ const BurgerSocialLinks = () => {
 	);
 };
 
-export default BurgerSocialLinks;
+export default SocialLinks;

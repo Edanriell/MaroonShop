@@ -1,18 +1,9 @@
-import { FunctionComponent, SVGProps } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as CartIcon } from "./assets/cart.svg";
 import { ReactComponent as AuthIcon } from "./assets/auth.svg";
-
-type UserActions = Array<{
-	label: string;
-	Icon: FunctionComponent<SVGProps<SVGSVGElement>>;
-	iconWidth: string;
-	iconHeight: string;
-	url: string;
-	id: string;
-}>;
+import { UserActions } from "./types";
 
 // TODO FIX links when will be creating corresponding pages.
 const userActions: UserActions = [
@@ -37,10 +28,7 @@ const userActions: UserActions = [
 const Toolbar = () => {
 	return (
 		<ul
-			className={`
-				flex items-center justify-start 
-				gap-x-[2rem] md:gap-x-[3rem] relative z-10
-			`}
+			className={"flex items-center justify-start gap-x-[2rem] md:gap-x-[3rem] relative z-10"}
 		>
 			{userActions.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
 				<li key={id}>
@@ -50,11 +38,12 @@ const Toolbar = () => {
 								iconWidth +
 								" " +
 								iconHeight +
-								" text-blue-zodiac-950" +
-								" hover:text-blue-zodiac-800 duration-500 ease-out hover:scale-125"
+								" " +
+								"text-blue-zodiac-950 " +
+								"hover:text-blue-zodiac-800 duration-500 ease-out hover:scale-125"
 							}
 						/>
-						<span className={`sr-only`}>{label}</span>
+						<span className={"sr-only"}>{label}</span>
 					</Link>
 				</li>
 			))}
