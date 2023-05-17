@@ -29,7 +29,7 @@ const Header = ({ headerUnderline = false }: HeaderProps) => {
 					"flex items-center justify-between bg-transparent " +
 					"py-[3rem] pl-[1.5rem] pr-[1.5rem] " +
 					"md:py-[4rem] md:pl-[4.5rem] md:pr-[4.5rem] " +
-					"lg:justify-end"
+					"lg:justify-end lg:pl-[9.8rem] lg:pr-[9.8rem]"
 				}
 			>
 				{width < 1366 && <Burger />}
