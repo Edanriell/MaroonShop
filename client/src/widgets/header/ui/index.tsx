@@ -19,7 +19,7 @@ const Header = ({ headerUnderline = false }: HeaderProps) => {
 	return (
 		<header
 			className={
-				"z-10 bg-transparent sticky top-0 " +
+				"z-20 bg-transparent sticky top-0 " +
 				"left-0 duration-500 ease-out " +
 				headerHighlightClass
 			}
