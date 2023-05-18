@@ -1,0 +1,11 @@
+.sliderContainer {
+	width: 220px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media only screen and (min-width: 520px) {
+	.sliderContainer {
+		width: 470px;
+	}
+}

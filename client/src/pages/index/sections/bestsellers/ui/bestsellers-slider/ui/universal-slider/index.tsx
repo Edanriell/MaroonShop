@@ -2,20 +2,18 @@ import { useEffect, useRef } from "react";
 import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
-
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
-
 import styles from "./styles.module.scss";
 
 register();
 
-type Props = {
+type UniversalSliderProps = {
 	bestSellers: Array<import("shared/api").Product>;
 	classes: string;
 };
 
-const UniversalSlider = ({ bestSellers, classes }: Props) => {
+const UniversalSlider = ({ bestSellers, classes }: UniversalSliderProps) => {
 	const sliderRef = useRef(null);
 
 	useEffect(() => {

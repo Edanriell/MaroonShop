@@ -5,27 +5,7 @@ import { schema, normalize } from "normalizr";
 import type { AxiosResponse } from "axios";
 
 import { Product, productsApi } from "shared/api";
-
-type NormalizedProducts = Record<number, Product>;
-
-export type RootState = {
-	products: {
-		data: NormalizedProducts;
-		queryConfig?: QueryConfig | undefined;
-	};
-};
-
-// TODO Rethink QueryConfig type
-export type QueryConfig = {
-	id?: number;
-	type?: {
-		main: string;
-		secondary: string;
-		skin: Array<string>;
-	};
-	views?: number;
-	sells?: number;
-};
+import { NormalizedProducts, QueryConfig, RootState } from "./types";
 
 const PRODUCT_LIST_QUERY_KEY = "products";
 
@@ -69,15 +49,6 @@ export const getProductsAsync =
 			},
 		);
 
-export const getBestsellers = () =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.data,
-			(products: RootState["products"]["data"]) =>
-				Object.values(products).filter((product) => product.sells >= 100),
-		),
-	);
-
 export const isProductsLoading = (): boolean => useIsFetching([PRODUCT_LIST_QUERY_KEY]) > 0;
 
 export const isProductsEmpty = (): boolean =>
@@ -85,6 +56,15 @@ export const isProductsEmpty = (): boolean =>
 		createSelector(
 			(state: RootState) => state.products.data,
 			(products) => Object.keys(products).length === 0,
+		),
+	);
+
+export const getBestsellers = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data,
+			(products: RootState["products"]["data"]) =>
+				Object.values(products).filter((product) => product.sells >= 100),
 		),
 	);
 
