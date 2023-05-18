@@ -9,7 +9,7 @@ const Copyright = () => {
 				"flex flex-row flex-wrap gap-y-[1.4rem] justify-between " +
 				"pt-[2.3rem] md:pt-[1.7rem] pl-[1.5rem] " +
 				"pr-[1.5rem] md:pl-[4.5rem] md:pr-[4.5rem] " +
-				"lg:max-w-[120rem] lg:pl-[1.5rem] lg:pr-[1.5rem] lg:ml-auto lg:mr-auto"
+				"lg:max-w-[120rem] lg:pl-[2.2rem] lg:pr-[2.2rem] lg:ml-auto lg:mr-auto"
 			}
 		>
 			<p className={"flex items-center justify-start md:mb-[0rem]"}>

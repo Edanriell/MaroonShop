@@ -12,7 +12,7 @@ const Footer = () => {
 					className={
 						"md:flex md:items-center md:justify-start " +
 						"pl-[1.5rem] pr-[1.5rem] md:pl-[4.5rem] md:pr-[4.5rem] " +
-						"lg:max-w-[120rem] lg:pl-[1.5rem] lg:pr-[1.5rem] lg:ml-auto lg:mr-auto"
+						"lg:max-w-[120rem] lg:pl-[2.2rem] lg:pr-[2.2rem] lg:ml-auto lg:mr-auto"
 					}
 				>
 					<Link to="/">
