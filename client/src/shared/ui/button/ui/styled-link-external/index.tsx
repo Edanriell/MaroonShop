@@ -1,18 +1,5 @@
-import { MutableRefObject } from "react";
-
+import { LinkExternalProps } from "./types";
 import styles from "./styles.module.scss";
-
-type Props = {
-	text: string;
-	commonButtonClasses: string;
-	handleButtonMouseEnter: () => void;
-	handleButtonMouseLeave: () => void;
-	buttonRef: MutableRefObject<null>;
-	buttonBoxRef: MutableRefObject<null>;
-	buttonTextRef: MutableRefObject<null>;
-	linkExternal: string;
-	classes: string;
-};
 
 const LinkExternal = ({
 	text,
@@ -24,9 +11,9 @@ const LinkExternal = ({
 	buttonTextRef,
 	linkExternal,
 	classes,
-}: Props) => {
+}: LinkExternalProps) => {
 	return (
-		<div className="relative z-10">
+		<div className={"relative z-10"}>
 			<a
 				href={`${linkExternal}`}
 				target="_blank"
@@ -37,7 +24,7 @@ const LinkExternal = ({
 				ref={buttonRef}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-				<span className="relative z-10 block" ref={buttonTextRef}>
+				<span className={"relative z-10 block"} ref={buttonTextRef}>
 					{text}
 				</span>
 			</a>

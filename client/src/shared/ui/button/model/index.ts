@@ -1,13 +1,12 @@
-import { MutableRefObject } from "react";
 import { gsap } from "gsap";
 
-type Parameters = {
-	buttonBoxRef: MutableRefObject<null>;
-	buttonTextRef: MutableRefObject<null>;
-	buttonRef: MutableRefObject<null>;
-};
+import { HoverEffectParameters } from "./types";
 
-export const mouseEnterHoverEffect = ({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) => {
+export const mouseEnterHoverEffect = ({
+	buttonBoxRef,
+	buttonTextRef,
+	buttonRef,
+}: HoverEffectParameters): void => {
 	gsap.fromTo(
 		buttonBoxRef.current,
 		{ translateY: "100%" },
@@ -27,7 +26,11 @@ export const mouseEnterHoverEffect = ({ buttonBoxRef, buttonTextRef, buttonRef }
 	);
 };
 
-export const mouseLeaveHoverEffect = ({ buttonBoxRef, buttonTextRef, buttonRef }: Parameters) => {
+export const mouseLeaveHoverEffect = ({
+	buttonBoxRef,
+	buttonTextRef,
+	buttonRef,
+}: HoverEffectParameters): void => {
 	gsap.fromTo(
 		buttonBoxRef.current,
 		{ translateY: "0%" },

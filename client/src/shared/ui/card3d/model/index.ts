@@ -1,22 +1,12 @@
-import { MutableRefObject } from "react";
 import { gsap } from "gsap";
 
-type MouseMoveEffectParameters = {
-	event: any;
-	cardContentRef: MutableRefObject<null>;
-	cardHighlightRef: MutableRefObject<null>;
-};
-
-type MouseOutEffectParameters = {
-	cardContentRef: MutableRefObject<null>;
-	cardHighlightRef: MutableRefObject<null>;
-};
+import { MouseMoveEffectParameters, MouseOutEffectParameters } from "./types";
 
 export const mouseMoveEffect = ({
 	event,
 	cardContentRef,
 	cardHighlightRef,
-}: MouseMoveEffectParameters) => {
+}: MouseMoveEffectParameters): void => {
 	const verticalCoordinates =
 		-(event.nativeEvent.offsetY - event.currentTarget.offsetHeight / 2) * 0.05;
 	const horizontalCoordinates =
@@ -39,7 +29,10 @@ export const mouseMoveEffect = ({
 	}
 };
 
-export const mouseOutEffect = ({ cardContentRef, cardHighlightRef }: MouseOutEffectParameters) => {
+export const mouseOutEffect = ({
+	cardContentRef,
+	cardHighlightRef,
+}: MouseOutEffectParameters): void => {
 	gsap.to(cardContentRef.current, {
 		rotateX: 0,
 		rotateY: 0,

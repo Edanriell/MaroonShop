@@ -1,17 +1,5 @@
-import { MutableRefObject } from "react";
-
+import { ButtonProps } from "./types";
 import styles from "./styles.module.scss";
-
-type Props = {
-	text: string;
-	commonButtonClasses: string;
-	handleButtonMouseEnter: () => void;
-	handleButtonMouseLeave: () => void;
-	buttonRef: MutableRefObject<null>;
-	buttonBoxRef: MutableRefObject<null>;
-	buttonTextRef: MutableRefObject<null>;
-	classes: string;
-};
 
 const Button = ({
 	text,
@@ -22,9 +10,9 @@ const Button = ({
 	buttonBoxRef,
 	buttonTextRef,
 	classes,
-}: Props) => {
+}: ButtonProps) => {
 	return (
-		<div className="relative z-10">
+		<div className={"relative z-10"}>
 			<button
 				className={commonButtonClasses + " " + classes}
 				onMouseEnter={handleButtonMouseEnter}
@@ -32,7 +20,7 @@ const Button = ({
 				ref={buttonRef}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
-				<span className="relative z-10 block" ref={buttonTextRef}>
+				<span className={"relative z-10 block"} ref={buttonTextRef}>
 					{text}
 				</span>
 			</button>

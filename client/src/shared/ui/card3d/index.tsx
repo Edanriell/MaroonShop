@@ -1,16 +1,10 @@
-import { useRef, ReactNode } from "react";
+import { useRef } from "react";
 
 import { mouseMoveEffect, mouseOutEffect } from "./model";
-
+import { Card3dProps } from "./types";
 import styles from "./styles.module.scss";
 
-type Props = {
-	children: ReactNode;
-	classes: string;
-	highlight?: boolean;
-};
-
-const Card3d = ({ children, classes, highlight = true }: Props) => {
+const Card3d = ({ children, classes, highlight = true }: Card3dProps) => {
 	const cardHighlightRef = useRef(null);
 	const cardContentRef = useRef(null);
 
