@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { SecondaryNavigation, SocialLinks, Copyright } from "./ui";
+import { SocialLinks } from "shared/ui";
+import { SecondaryNavigation, Copyright } from "./ui";
 import { ReactComponent as Logotype } from "./assets/logotype.svg";
 
 const Footer = () => {
@@ -9,8 +10,9 @@ const Footer = () => {
 			<div className={"pb-[5rem] border-b-[0.1rem] border-alto-300 md:pb-[6rem]"}>
 				<div
 					className={
-						"md:flex md:items-center md:justify-between lg:justify-start " +
-						"pl-[1.5rem] pr-[1.5rem] md:pl-[4.5rem] md:pr-[4.5rem] lg:pl-[9.8rem] lg:pr-[9.8rem]"
+						"md:flex md:items-center md:justify-start " +
+						"pl-[1.5rem] pr-[1.5rem] md:pl-[4.5rem] md:pr-[4.5rem] " +
+						"lg:max-w-[120rem] lg:pl-[1.5rem] lg:pr-[1.5rem] lg:ml-auto lg:mr-auto"
 					}
 				>
 					<Link to="/">
@@ -23,7 +25,12 @@ const Footer = () => {
 						/>
 					</Link>
 					<SecondaryNavigation />
-					<SocialLinks />
+					<SocialLinks
+						classes={
+							"flex items-center justify-start gap-x-[3rem] " +
+							"md:ml-auto md:gap-x-[2.5rem] lg:gap-x-[3rem]"
+						}
+					/>
 				</div>
 			</div>
 			<Copyright />

@@ -50,7 +50,7 @@ const SecondaryNavigation = () => {
 				className={
 					"flex flex-row flex-wrap mb-[2.5rem] gap-y-[1.5rem] gap-x-[1rem] " +
 					"md:flex-row md:mb-[0rem] md:gap-x-[2.5rem] md:gap-y-[0rem] " +
-					"lg:ml-[7rem] lg:gap-x-[4rem]"
+					"md:ml-[5rem] lg:ml-[7rem] lg:gap-x-[4rem]"
 				}
 			>
 				{secondaryNavigation.map(({ label, classes, url, id }) => (

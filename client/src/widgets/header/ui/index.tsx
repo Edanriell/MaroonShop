@@ -13,7 +13,7 @@ const Header = ({ headerUnderline = false }: HeaderProps) => {
 	const { scrollPosition } = useScrollPosition();
 
 	const headerHighlightClass = classNames({
-		"bg-white": scrollPosition > 0,
+		"bg-white shadow-header": scrollPosition > 0,
 	});
 
 	return (

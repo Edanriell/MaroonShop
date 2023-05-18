@@ -313,6 +313,7 @@ module.exports = {
 			},
 			boxShadow: {
 				burgerMenu: "0px 4px 30px rgba(214, 214, 214, 0.19)",
+				header: "0px 4px 30px rgba(214, 214, 214, 0.19)",
 			},
 		},
 	},
