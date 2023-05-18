@@ -1,9 +1,6 @@
-type getProductTypeProps = {
-	mainType: string;
-	secondaryType: string;
-};
+import { getProductTypeParameters } from "./types";
 
-export const getProductType = ({ mainType, secondaryType }: getProductTypeProps) => {
+export const getProductType = ({ mainType, secondaryType }: getProductTypeParameters): string => {
 	if (mainType === "face") {
 		if (secondaryType === "cream") {
 			return "крем для лица";
@@ -32,7 +29,7 @@ export const getProductType = ({ mainType, secondaryType }: getProductTypeProps)
 		} else if (secondaryType === "bath salt") {
 			return "соль для ванны";
 		}
-	} else {
-		return "неизвестный тип продукта";
 	}
+
+	return "неизвестный тип продукта";
 };
