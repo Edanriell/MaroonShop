@@ -10,9 +10,10 @@ const Button = ({
 	buttonBoxRef,
 	buttonTextRef,
 	classes,
+	click = () => {},
 }: ButtonProps) => {
 	return (
-		<div className={"relative z-10"}>
+		<div onClick={() => click()} className={"relative z-10"}>
 			<button
 				className={commonButtonClasses + " " + classes}
 				onMouseEnter={handleButtonMouseEnter}

@@ -1,5 +1,9 @@
-import { Button, Card3d } from "shared/ui";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+
+import { Button, Card3d, Modal } from "shared/ui";
 import { useScreenSize } from "shared/lib/hooks";
+import { ModalForm as ModalContent } from "./ui";
 import { IndividualCareProps, IndividualCareCard } from "./types";
 
 import IndividualCareCardSm from "./assets/card-sm.jpg";
@@ -13,7 +17,16 @@ const individualCareCard: IndividualCareCard = {
 };
 
 const IndividualCare = ({ title }: IndividualCareProps) => {
+	const [showModal, setShowModal] = useState<boolean>(false);
 	const { width } = useScreenSize();
+
+	function handleShowModal() {
+		setShowModal(true);
+	}
+
+	function handleCloseModal() {
+		setShowModal(false);
+	}
 
 	return (
 		<div
@@ -71,7 +84,18 @@ const IndividualCare = ({ title }: IndividualCareProps) => {
 						Заполните анкету, и мы подберем уход, подходящий именно вам, учитывая ваш
 						образ жизни, место жительства и другие факторы.
 					</p>
-					<Button text="Заполнить анкету" />
+					<Button click={handleShowModal} text="Заполнить анкету" />
+					{showModal &&
+						createPortal(
+							<Modal
+								title="Анкета"
+								description="Заполните анкету и получите бесплатную рекомендацию."
+								onClose={handleCloseModal}
+							>
+								<ModalContent />
+							</Modal>,
+							document.body,
+						)}
 				</div>
 				<Card3d classes={"sm:self-center md:self-auto mt-[-6rem] md:mt-[0rem]"}>
 					<picture className="">

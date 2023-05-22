@@ -6,4 +6,5 @@ export type ButtonProps = {
 	linkInternal?: string;
 	linkExternal?: string;
 	classes?: string;
+	click?: () => void;
 };

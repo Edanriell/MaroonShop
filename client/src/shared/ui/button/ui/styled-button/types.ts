@@ -9,4 +9,5 @@ export type ButtonProps = {
 	buttonBoxRef: MutableRefObject<null>;
 	buttonTextRef: MutableRefObject<null>;
 	classes: string;
+	click?: () => void;
 };
