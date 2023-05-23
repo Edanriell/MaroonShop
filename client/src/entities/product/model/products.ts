@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { createSelector, createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { useIsFetching, useQuery } from "react-query";

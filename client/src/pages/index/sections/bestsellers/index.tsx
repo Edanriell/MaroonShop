@@ -18,7 +18,7 @@ const Bestsellers = ({ title }: BestsellersProps) => {
 
 		if (isEmpty) return <div>Products not found</div>;
 
-		if (bestSellers.length == 0) return <div>Bestsellers not found</div>;
+		if (bestSellers.length === 0) return <div>Bestsellers not found</div>;
 
 		return <BestsellersSlider bestSellers={bestSellers} />;
 	};

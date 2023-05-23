@@ -54,7 +54,7 @@ const sections: IndexPageSections = [
 ];
 
 const SectionWrapper: FC<SectionWrapperProps> = ({ srTitle, children, classes }) => (
-	<section className={classes ?? " " + " relative z-[1]"}>
+	<section className={classes}>
 		{srTitle && <h2 className={"sr-only"}>{srTitle}</h2>}
 		{children}
 	</section>

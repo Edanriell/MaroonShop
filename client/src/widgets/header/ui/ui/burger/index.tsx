@@ -31,7 +31,7 @@ const Burger = () => {
 		});
 
 		return () => burgerMenuCtx.revert();
-	}, [isDisplayed]);
+	}, [isDisplayed, burgerMenuCtx]);
 
 	function handleBurgerClick() {
 		if (!isDisplayed) {

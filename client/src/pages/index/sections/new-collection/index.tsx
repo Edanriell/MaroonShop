@@ -25,7 +25,7 @@ const NewCollection = () => {
 				>
 					<b
 						className={
-							"font-medium font-raleway text-sm-28px-lh-35px text-zodiac-blue-950 " +
+							"font-medium font-raleway text-sm-28px-lh-35px text-blue-zodiac-950 " +
 							"mb-[1.15rem] text-center md:text-left md:text-md-32px md:mb-[1.4rem] " +
 							"col-start-2 col-end-3"
 						}
@@ -34,7 +34,7 @@ const NewCollection = () => {
 					</b>
 					<p
 						className={
-							"font-normal font-mPlus text-sm-16px text-zodiac-blue-950 " +
+							"font-normal font-mPlus text-sm-16px text-blue-zodiac-950 " +
 							"mb-[2.45rem] text-center md:text-left md:text-md-18px " +
 							"md:mb-[3.3rem] col-start-2 col-end-3"
 						}

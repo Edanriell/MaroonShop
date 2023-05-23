@@ -1,17 +1,21 @@
-import React from "react";
+import { MouseEvent } from "react";
 
 import { ModalProps } from "./types";
 import styles from "./styles.module.scss";
 
-const Modal = ({ title, description, children, onClose }: ModalProps) => {
-	function handleCloseModalUnderlay(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-		if (event.currentTarget === event.target) onClose();
+const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
+	function handleModalClose(event: MouseEvent) {
+		if (event.currentTarget === event.target) onModalClose();
 	}
 
 	return (
 		<div
-			onClick={(event) => handleCloseModalUnderlay(event)}
-			className="fixed top-0 left-0 z-40 w-full h-full bg-[rgba(0,0,0,0.6)] flex flex-row items-center justify-around"
+			onMouseDown={(event) => handleModalClose(event)}
+			className={
+				"fixed top-0 left-0 z-40 w-full h-full " +
+				"bg-[rgba(0,0,0,0.6)] flex flex-row items-center " +
+				"justify-around"
+			}
 		>
 			<dialog
 				className={
@@ -20,23 +24,47 @@ const Modal = ({ title, description, children, onClose }: ModalProps) => {
 					styles.modalShadow +
 					" " +
 					styles.dialogReset +
-					" flex flex-col gap-y-[2rem] z-[50] border-none rounded-[0.2rem] max-w-[60rem] w-[90%] mr-[1.5rem] ml-[1.5rem] pt-[4rem] pb-[4rem] pl-[3rem] pr-[3rem]"
+					" flex flex-col gap-y-[3rem] z-[50] border-none rounded-[0.2rem] " +
+					"max-w-[60rem] w-[90%] mr-[1.5rem] ml-[1.5rem] pt-[4rem] pb-[4rem] " +
+					"pl-[3rem] pr-[3rem] min-[500px]:gap-y-[4rem]"
 				}
 			>
-				<header className="flex flex-col items-center gap-y-[0.5rem]">
-					<h2 className="font-bold font-mPlus text-sm-28px">{title}</h2>
-					<p className="font-normal text-center font-raleway text-sm-14px">
+				<header className={"flex flex-col items-center gap-y-[0.5rem]"}>
+					<h2
+						className={
+							"font-bold font-mPlus text-sm-28px md:text-md-32px " +
+							"text-blue-zodiac-950"
+						}
+					>
+						{title}
+					</h2>
+					<p
+						className={
+							"font-normal text-center font-raleway text-sm-14px " +
+							"md:text-md-16px text-blue-zodiac-950"
+						}
+					>
 						{description}
 					</p>
 				</header>
-				<div className="">{children}</div>
-				<div className="flex flex-row items-center justify-end gap-x-[1rem]">
-					<button className="rounded-[0.2rem] bg-green-600 p-4" type="submit">
+				<div>{children}</div>
+				<div className={"flex flex-row items-center justify-end gap-x-[1rem]"}>
+					<button
+						className={
+							"rounded-[0.2rem] p-4 font-raleway text-blue-zodiac-950 " +
+							"text-sm-12px bg-athens-gray-50 hover:bg-athens-gray-100 " +
+							"font-medium duration-500 ease-out"
+						}
+						type="submit"
+					>
 						Отправить
 					</button>
 					<button
-						className="rounded-[0.2rem] bg-red-600 p-4"
-						onClick={() => onClose()}
+						className={
+							"p-4 font-raleway text-blue-zodiac-950 text-sm-12px " +
+							"rounded-[0.2rem] hover:bg-athens-gray-100 duration-500 ease-out"
+						}
+						onClick={() => onModalClose()}
 						type="button"
 					>
 						Закрыть окно

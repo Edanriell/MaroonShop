@@ -77,7 +77,7 @@ module.exports = {
 		"eqeqeq": 1,
 		"no-eq-null": 2,
 		"max-params": [1, 2],
-		"max-lines-per-function": [1, 48],
+		// "max-lines-per-function": [1, 48],
 		"arrow-parens": [2, "always"],
 		"unicorn/no-for-loop": 2,
 		"unicorn/no-abusive-eslint-disable": 2,

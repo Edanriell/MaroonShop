@@ -1,0 +1,18 @@
+.input-number {
+	transition: background-color 0.5s;
+	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+
+	&:hover,
+	&:focus {
+		appearance: none !important;
+		background-image: url("./assets/arrows-up-down.svg");
+		background-repeat: no-repeat;
+		background-size: 20px 16px;
+		background-position: calc(100% - 10px) center;
+		-moz-appearance: textfield;
+
+		&::-webkit-inner-spin-button {
+			appearance: none;
+		}
+	}
+}

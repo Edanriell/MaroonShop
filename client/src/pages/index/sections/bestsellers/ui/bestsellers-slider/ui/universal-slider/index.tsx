@@ -104,7 +104,7 @@ const UniversalSlider = ({ bestSellers, classes }: UniversalSliderProps) => {
 			navigation="true"
 			autoplay-delay="6000"
 			autoplay-pause-on-mouse-enter="true"
-			class={classes + " " + "relative pb-[3.7rem]"}
+			class={classes + " relative pb-[3.7rem]"}
 		>
 			{bestSellers.map((bestSeller, id) => (
 				<swiper-slide key={id}>

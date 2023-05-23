@@ -20,11 +20,11 @@ const IndividualCare = ({ title }: IndividualCareProps) => {
 	const [showModal, setShowModal] = useState<boolean>(false);
 	const { width } = useScreenSize();
 
-	function handleShowModal() {
+	function handleModalOpen() {
 		setShowModal(true);
 	}
 
-	function handleCloseModal() {
+	function handleModalClose() {
 		setShowModal(false);
 	}
 
@@ -84,13 +84,13 @@ const IndividualCare = ({ title }: IndividualCareProps) => {
 						Заполните анкету, и мы подберем уход, подходящий именно вам, учитывая ваш
 						образ жизни, место жительства и другие факторы.
 					</p>
-					<Button click={handleShowModal} text="Заполнить анкету" />
+					<Button click={handleModalOpen} text="Заполнить анкету" />
 					{showModal &&
 						createPortal(
 							<Modal
 								title="Анкета"
 								description="Заполните анкету и получите бесплатную рекомендацию."
-								onClose={handleCloseModal}
+								onModalClose={handleModalClose}
 							>
 								<ModalContent />
 							</Modal>,

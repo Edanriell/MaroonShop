@@ -2,8 +2,8 @@ import { Input, Select } from "shared/ui";
 
 const ModalForm = () => {
 	return (
-		<form className="flex flex-col gap-y-[1rem]" action="#" method="post">
-			<div className="flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row">
+		<form className={"flex flex-col gap-y-[1rem]"} action="#" method="post">
+			<div className={"flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row"}>
 				<Input
 					inputType="text"
 					inputId="name"
@@ -33,7 +33,7 @@ const ModalForm = () => {
 				labelContent="Возраст"
 				labelFor="age"
 			/>
-			<div className="flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row">
+			<div className={"flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row"}>
 				<Select
 					selectName="life-style"
 					selectId="life-style"
