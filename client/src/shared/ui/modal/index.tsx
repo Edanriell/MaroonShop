@@ -1,15 +1,55 @@
-import { MouseEvent } from "react";
+import { useLayoutEffect, useRef, useState, MouseEvent } from "react";
+import { gsap } from "gsap";
 
+import { displayModal, hideModal, displayBackdrop, hideBackdrop } from "./model";
 import { ModalProps } from "./types";
 import styles from "./styles.module.scss";
 
 const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
+	const backdropRef = useRef(null);
+	const modalRef = useRef(null);
+
+	const [backdropCtx] = useState(gsap.context(() => {}, backdropRef));
+	const [modalCtx] = useState(gsap.context(() => {}, modalRef));
+
+	useLayoutEffect(() => {
+		const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
+		document.body.style.overflowY = "hidden";
+		document.body.style.paddingRight = `${scrollbarWidth}px`;
+		return () => {
+			document.body.style.overflowY = "initial";
+			document.body.style.paddingRight = "0px";
+		};
+	});
+
+	useLayoutEffect(() => {
+		displayModal(modalRef);
+		displayBackdrop(backdropRef);
+
+		modalCtx.add("remove", () => {
+			hideModal(modalRef, onModalClose);
+		});
+
+		backdropCtx.add("remove", () => {
+			hideBackdrop(backdropRef);
+		});
+
+		return () => {
+			modalCtx.revert();
+			backdropCtx.revert();
+		};
+	});
+
 	function handleModalClose(event: MouseEvent) {
-		if (event.currentTarget === event.target) onModalClose();
+		if (event.currentTarget === event.target) {
+			backdropCtx.remove();
+			modalCtx.remove();
+		}
 	}
 
 	return (
 		<div
+			ref={backdropRef}
 			onMouseDown={(event) => handleModalClose(event)}
 			className={
 				"fixed top-0 left-0 z-40 w-full h-full " +
@@ -18,6 +58,7 @@ const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
 			}
 		>
 			<dialog
+				ref={modalRef}
 				className={
 					styles.visible +
 					" " +
@@ -64,7 +105,7 @@ const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
 							"p-4 font-raleway text-blue-zodiac-950 text-sm-12px " +
 							"rounded-[0.2rem] hover:bg-athens-gray-100 duration-500 ease-out"
 						}
-						onClick={() => onModalClose()}
+						onClick={(event) => handleModalClose(event)}
 						type="button"
 					>
 						Закрыть окно
