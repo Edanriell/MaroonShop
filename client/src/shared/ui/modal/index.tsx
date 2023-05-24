@@ -38,7 +38,8 @@ const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
 			modalCtx.revert();
 			backdropCtx.revert();
 		};
-	});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [backdropCtx, modalCtx]);
 
 	function handleModalClose(event: MouseEvent) {
 		if (event.currentTarget === event.target) {
