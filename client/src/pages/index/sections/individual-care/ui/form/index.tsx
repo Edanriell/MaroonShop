@@ -1,8 +1,18 @@
+import { FormEvent } from "react";
 import { Input, Select } from "shared/ui";
 
 const ModalForm = () => {
+	function handleFormSubmit(event: FormEvent) {
+		event.preventDefault();
+	}
+
 	return (
-		<form className={"flex flex-col gap-y-[1rem]"} action="#" method="post">
+		<form
+			onSubmit={handleFormSubmit}
+			className={"flex flex-col gap-y-[1rem]"}
+			action="#"
+			method="post"
+		>
 			<div className={"flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row"}>
 				<Input
 					inputType="text"
