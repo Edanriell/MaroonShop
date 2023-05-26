@@ -1,92 +1,97 @@
 export type FormState = {
-	readonly nameInput: {
-		value: null | string;
-		validLength: boolean;
-		validPattern: boolean;
-	};
-	readonly surnameInput: {
-		value: null | string;
-		validLength: boolean;
-		validPattern: boolean;
-	};
-	readonly emailInput: {
-		value: null | string;
-		validLength: boolean;
-		validPattern: boolean;
-	};
-	readonly ageInput: {
-		value: null | string;
-		validRange: boolean;
-	};
-	readonly lifeStyleSelect: {
-		value: null | string;
-		validOption: boolean;
-	};
-	readonly skinTypeSelect: {
-		value: null | string;
-		validOption: boolean;
-	};
-	readonly locationSelect: {
-		value: null | string;
-		validOption: boolean;
+	form: {
+		inputs: {
+			nameInput: {
+				value: null | string;
+				validLength: boolean;
+				validPattern: boolean;
+			};
+			surnameInput: {
+				value: null | string;
+				validLength: boolean;
+				validPattern: boolean;
+			};
+			emailInput: {
+				value: null | string;
+				validLength: boolean;
+				validPattern: boolean;
+			};
+			ageInput: {
+				value: null | string;
+				validRange: boolean;
+			};
+		};
+		selects: {
+			lifeStyleSelect: {
+				value: null | string;
+				validOption: boolean;
+			};
+			skinTypeSelect: {
+				value: null | string;
+				validOption: boolean;
+			};
+			locationSelect: {
+				value: null | string;
+				validOption: boolean;
+			};
+		};
 	};
 };
 
 export const CHANGEDNAME = "CHANGED_NAME";
-export const updatingNameInputAction = (value: string) =>
+export const changingNameAction = (value: string) =>
 	({
 		type: CHANGEDNAME,
 		value,
 	} as const);
 
 export const CHANGEDSURNAME = "CHANGED_SURNAME";
-export const updatingSurnameInputAction = (value: string) =>
+export const changingSurnameAction = (value: string) =>
 	({
 		type: CHANGEDSURNAME,
 		value,
 	} as const);
 
 export const CHANGEDEMAIL = "CHANGED_EMAIL";
-export const updatingEmailInputAction = (value: string) =>
+export const changingEmailAction = (value: string) =>
 	({
 		type: CHANGEDEMAIL,
 		value,
 	} as const);
 
 export const CHANGEDAGE = "CHANGED_AGE";
-export const updatingAgeInputAction = (value: string) =>
+export const changingAgeAction = (value: string) =>
 	({
 		type: CHANGEDAGE,
 		value,
 	} as const);
 
 export const SELECTEDLIFESTYLE = "SELECTED_LIFESTYLE";
-export const updatingLifestyleSelectAction = (value: string) =>
+export const selectingLifestyleAction = (value: string) =>
 	({
 		type: SELECTEDLIFESTYLE,
 		value,
 	} as const);
 
 export const SELECTEDSKINTYPE = "SELECTED_SKINTYPE";
-export const updatingSkintypeSelectAction = (value: string) =>
+export const selectingSkintypeAction = (value: string) =>
 	({
 		type: SELECTEDSKINTYPE,
 		value,
 	} as const);
 
-// selectingLocation
 export const SELECTEDLOCATION = "SELECTED_LOCATION";
-export const updatingLocationSelectAction = (value: string) =>
+export const selectingLocationAction = (value: string) =>
 	({
 		type: SELECTEDLOCATION,
 		value,
 	} as const);
 
 export type FormActions =
-	| ReturnType<typeof updatingNameInputAction>
-	| ReturnType<typeof updatingSurnameInputAction>
-	| ReturnType<typeof updatingEmailInputAction>
-	| ReturnType<typeof updatingAgeInputAction>
-	| ReturnType<typeof updatingLifestyleSelectAction>
-	| ReturnType<typeof updatingSkintypeSelectAction>
-	| ReturnType<typeof updatingLocationSelectAction>;
+	| ReturnType<typeof changingNameAction>
+	| ReturnType<typeof changingSurnameAction>
+	| ReturnType<typeof changingEmailAction>
+	| ReturnType<typeof changingAgeAction>
+	| ReturnType<typeof selectingLifestyleAction>
+	| ReturnType<typeof selectingSkintypeAction>
+	| ReturnType<typeof selectingLocationAction>;

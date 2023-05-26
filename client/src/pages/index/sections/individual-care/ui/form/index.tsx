@@ -1,7 +1,10 @@
-import { FormEvent } from "react";
+import { FormEvent, useReducer } from "react";
 import { Input, Select } from "shared/ui";
+import { reducer, initialFormState } from "./model";
 
 const ModalForm = () => {
+	const [state, dispatch] = useReducer(reducer, initialFormState);
+
 	function handleFormSubmit(event: FormEvent) {
 		event.preventDefault();
 	}
