@@ -1,7 +1,16 @@
 import { SelectProps } from "./types";
 import styles from "./styles.module.scss";
 
-const Select = ({ selectName, selectId, labelContent, labelFor, children }: SelectProps) => {
+const Select = ({
+	selectName,
+	selectId,
+	labelContent,
+	labelFor,
+	children,
+	...rest
+}: SelectProps) => {
+	const { selectValue, onSelectChange } = rest;
+
 	return (
 		<div className={"relative flex flex-col w-full"}>
 			<label
@@ -20,6 +29,8 @@ const Select = ({ selectName, selectId, labelContent, labelFor, children }: Sele
 				}
 				name={selectName}
 				id={selectId}
+				value={selectValue}
+				onChange={onSelectChange}
 			>
 				{children}
 			</select>

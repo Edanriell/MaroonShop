@@ -4,4 +4,5 @@ export type InputProps = {
 	inputName: string;
 	labelContent: string;
 	labelFor: string;
+	[x: string]: any;
 };

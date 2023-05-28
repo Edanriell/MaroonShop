@@ -2,7 +2,9 @@ import classNames from "classnames";
 import { InputProps } from "./types";
 import "./styles.scss";
 
-const Input = ({ inputType, inputId, inputName, labelContent, labelFor }: InputProps) => {
+const Input = ({ inputType, inputId, inputName, labelContent, labelFor, ...rest }: InputProps) => {
+	const { inputValue, onInputChange } = rest;
+
 	const inputClasses = classNames({
 		"input-number": inputType === "number",
 	});
@@ -26,6 +28,8 @@ const Input = ({ inputType, inputId, inputName, labelContent, labelFor }: InputP
 				type={inputType}
 				name={inputName}
 				id={inputId}
+				value={inputValue}
+				onChange={onInputChange}
 			/>
 		</div>
 	);
