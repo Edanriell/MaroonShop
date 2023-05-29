@@ -40,8 +40,24 @@ const ModalForm = () => {
 						dispatch(changingNameAction(event.target?.value))
 					}
 				/>
-				{!debouncedState.nameInput.validLength &&
-					createPortal(<Snackbar />, document.getElementById("snackbars") as Element)}
+				{debouncedState.nameInput.validLength === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Слишком короткое имя"}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
+				{debouncedState.nameInput.validPattern === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Имя может содержать только латиницу или кириллицу"}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
 				<Input
 					inputType="text"
 					inputId="surname"
@@ -53,6 +69,24 @@ const ModalForm = () => {
 						dispatch(changingSurnameAction(event.target?.value))
 					}
 				/>
+				{debouncedState.surnameInput.validLength === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Слишком короткая фамилия"}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
+				{debouncedState.surnameInput.validPattern === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Фамилия может содержать только латиницу или кириллицу"}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
 			</div>
 			<Input
 				inputType="email"
@@ -65,6 +99,24 @@ const ModalForm = () => {
 					dispatch(changingEmailAction(event.target?.value))
 				}
 			/>
+			{debouncedState.emailInput.validLength === false &&
+				createPortal(
+					<Snackbar
+						type={"error"}
+						message={"Слишком короткий адрес электронной почты"}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)}
+			{debouncedState.emailInput.validPattern === false &&
+				createPortal(
+					<Snackbar
+						type={"error"}
+						message={"Указан неверный адрес электронной почты"}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)}
 			<Input
 				inputType="number"
 				inputId="age"
@@ -76,6 +128,15 @@ const ModalForm = () => {
 					dispatch(changingAgeAction(event.target?.value))
 				}
 			/>
+			{debouncedState.ageInput.validRange === false &&
+				createPortal(
+					<Snackbar
+						type={"error"}
+						message={"Указан неверный возраст."}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)}
 			<div className={"flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row"}>
 				<Select
 					selectName="life-style"
@@ -92,6 +153,15 @@ const ModalForm = () => {
 					<option value="abstemious">Умеренный</option>
 					<option value="passive">Пассивный</option>
 				</Select>
+				{debouncedState.lifeStyleSelect.validOption === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Поле образа жизни не может быть пустым."}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
 				<Select
 					selectName="skin-type"
 					selectId="skin-type"
@@ -108,6 +178,15 @@ const ModalForm = () => {
 					<option value="oily">Жирная</option>
 					<option value="combined">Комбинированная</option>
 				</Select>
+				{debouncedState.skinTypeSelect.validOption === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Поле типа кожи не может быть пустым."}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
 				<Select
 					selectName="location"
 					selectId="location"
@@ -123,6 +202,15 @@ const ModalForm = () => {
 					<option value="suburb">Пригород</option>
 					<option value="village">Деревня</option>
 				</Select>
+				{debouncedState.locationSelect.validOption === false &&
+					createPortal(
+						<Snackbar
+							type={"error"}
+							message={"Поле место жительства не может быть пустым."}
+							autoCloseDuration={"4000"}
+						/>,
+						document.getElementById("snackbars-container") as Element,
+					)}
 			</div>
 		</form>
 	);

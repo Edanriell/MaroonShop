@@ -1,24 +1,123 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import classNames from "classnames";
 
-const Snackbar = () => {
-	const [displayed, setDisplayed] = useState(false);
+import { SnackbarProps } from "./types";
+import { ReactComponent as Xmark } from "./assets/xmark-solid.svg";
+import "./styles.scss";
+import { displaySnackbar, hideSnackbar } from "./model";
 
-	useEffect(() => {
+const Snackbar = ({ type, message, autoCloseDuration }: SnackbarProps) => {
+	const [displayed, setDisplayed] = useState<boolean>(false);
+	const snackbarRef = useRef(null);
+
+	const [snackbarCtx] = useState(gsap.context(() => {}, snackbarRef));
+
+	useLayoutEffect(() => {
 		setDisplayed(true);
 	}, []);
 
 	useEffect(() => {
-		// const timeout = setTimeout(() => {
-		// 	setDisplayed(false);
-		// }, 4000);
+		if (autoCloseDuration) {
+			const timeout = setTimeout(() => {
+				if (displayed) snackbarCtx.remove();
+			}, +autoCloseDuration);
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
+	});
 
-		// return () => {
-		// 	clearTimeout(timeout);
-		// };
+	useLayoutEffect(() => {
+		if (snackbarRef && displayed) displaySnackbar(snackbarRef);
+
+		snackbarCtx.add("remove", () => {
+			hideSnackbar(snackbarRef, () => setDisplayed(false));
+		});
+
+		return () => {
+			snackbarCtx.revert();
+		};
+	}, [displayed, snackbarCtx]);
+
+	function handleSnackbarClose() {
+		snackbarCtx.remove();
+	}
+
+	const snackbarClasses = classNames({
+		"bg-red-600": type === "error",
+		"bg-orange-600": type === "warning",
+		"bg-blue-600": type === "info",
+		"bg-green-600": type === "success",
+	});
+
+	const secondaryCircleClasses = classNames({
+		"text-red-600": type === "error",
+		"text-orange-600": type === "warning",
+		"text-blue-600": type === "info",
+		"text-green-600": type === "success",
 	});
 
 	if (displayed) {
-		return <div>Test</div>;
+		return (
+			<div
+				ref={snackbarRef}
+				className={
+					snackbarClasses +
+					" min-h-[6rem] min-w-[30rem] flex flex-row " +
+					"items-center p-[1rem] border-none " +
+					"rounded-[0.2rem] snackbar-shadow"
+				}
+			>
+				<p className={"font-medium text-white text-sm-14px font-mPlus"}>{message}</p>
+				<div className={"w-[3rem] h-[3rem] ml-auto relative"}>
+					{autoCloseDuration && (
+						<svg
+							className={"relative z-20 w-full h-full pointer-events-none"}
+							viewBox="-5 -5 110 110"
+						>
+							<path
+								className={secondaryCircleClasses + " w-full h-full"}
+								d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94"
+								stroke="currentColor"
+								strokeWidth="8"
+								fillOpacity="0"
+							></path>
+							<path
+								className={"w-full h-full text-white main-circle"}
+								d="M 50,50 m 0,-47 a 47,47 0 1 1 0,94 a 47,47 0 1 1 0,-94"
+								stroke="currentColor"
+								strokeWidth="9"
+								fillOpacity="0"
+								style={{
+									strokeDasharray: "296, 296",
+									animationDuration: autoCloseDuration + "ms",
+								}}
+							></path>
+						</svg>
+					)}
+					<button
+						className={
+							"w-[2.6rem] h-[2.6rem] absolute top-[50%] left-[50%] " +
+							"translate-x-[-50%] translate-y-[-50%] rounded-[50%] " +
+							"z-10 pointer-events-auto cursor-pointer hover:bg-[#00000033] " +
+							"duration-500 ease-out transition-colors"
+						}
+						type="button"
+						onClick={handleSnackbarClose}
+					>
+						<span className={"sr-only"}>Закрыть окно</span>
+						<Xmark
+							className={
+								"w-[1.8rem] h-[1.8rem] absolute top-[50%] " +
+								"left-[50%] translate-x-[-50%] translate-y-[-50%] " +
+								"pointer-events-none text-white"
+							}
+						/>
+					</button>
+				</div>
+			</div>
+		);
 	}
 
 	return null;

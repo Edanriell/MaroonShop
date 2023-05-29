@@ -11,34 +11,34 @@ import {
 export type FormState = {
 	nameInput: {
 		value: "" | string;
-		validLength: boolean;
-		validPattern: boolean;
+		validLength: null | boolean;
+		validPattern: null | boolean;
 	};
 	surnameInput: {
 		value: "" | string;
-		validLength: boolean;
-		validPattern: boolean;
+		validLength: null | boolean;
+		validPattern: null | boolean;
 	};
 	emailInput: {
 		value: "" | string;
-		validLength: boolean;
-		validPattern: boolean;
+		validLength: null | boolean;
+		validPattern: null | boolean;
 	};
 	ageInput: {
 		value: "" | string;
-		validRange: boolean;
+		validRange: null | boolean;
 	};
 	lifeStyleSelect: {
 		value: "" | string;
-		validOption: boolean;
+		validOption: null | boolean;
 	};
 	skinTypeSelect: {
 		value: "" | string;
-		validOption: boolean;
+		validOption: null | boolean;
 	};
 	locationSelect: {
 		value: "" | string;
-		validOption: boolean;
+		validOption: null | boolean;
 	};
 };
 

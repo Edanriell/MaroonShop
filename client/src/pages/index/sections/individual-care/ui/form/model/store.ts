@@ -13,34 +13,34 @@ import { checkInputLength, checkInputPattern, checkInputRange, checkSelectOption
 export const initialFormState: FormState = {
 	nameInput: {
 		value: "",
-		validLength: false,
-		validPattern: false,
+		validLength: null,
+		validPattern: null,
 	},
 	surnameInput: {
 		value: "",
-		validLength: false,
-		validPattern: false,
+		validLength: null,
+		validPattern: null,
 	},
 	emailInput: {
 		value: "",
-		validLength: false,
-		validPattern: false,
+		validLength: null,
+		validPattern: null,
 	},
 	ageInput: {
 		value: "",
-		validRange: false,
+		validRange: null,
 	},
 	lifeStyleSelect: {
 		value: "",
-		validOption: false,
+		validOption: null,
 	},
 	skinTypeSelect: {
 		value: "",
-		validOption: false,
+		validOption: null,
 	},
 	locationSelect: {
 		value: "",
-		validOption: false,
+		validOption: null,
 	},
 };
 

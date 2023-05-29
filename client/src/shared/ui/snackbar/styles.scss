@@ -1,0 +1,37 @@
+#snackbars-container {
+	position: fixed;
+	bottom: 4vw;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	row-gap: 1.5rem;
+	z-index: 999;
+}
+
+.snackbar-shadow {
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.main-circle {
+	stroke-dashoffset: 0;
+	animation: circle-animation linear reverse forwards;
+	pointer-events: none;
+}
+
+@keyframes circle-animation {
+	from {
+		stroke-dashoffset: -296;
+	}
+
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	#snackbars-container {
+		left: 4%;
+		transform: translateX(-4%);
+	}
+}

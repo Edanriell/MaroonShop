@@ -6,4 +6,4 @@ export const checkInputPattern = (value: string, pattern: RegExp): boolean => pa
 export const checkInputRange = (value: string, range: [number, number]): boolean =>
 	Number(value) >= range[0] && Number(value) <= range[1];
 
-export const checkSelectOption = (value: string): boolean => value !== " ";
+export const checkSelectOption = (value: string): boolean => value !== "";
