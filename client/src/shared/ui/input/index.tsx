@@ -2,7 +2,15 @@ import classNames from "classnames";
 import { InputProps } from "./types";
 import "./styles.scss";
 
-const Input = ({ inputType, inputId, inputName, labelContent, labelFor, ...rest }: InputProps) => {
+const Input = ({
+	inputType,
+	inputId,
+	inputName,
+	labelContent,
+	labelFor,
+	classes = "",
+	...rest
+}: InputProps) => {
 	const { inputValue, onInputChange } = rest;
 
 	const inputClasses = classNames({
@@ -19,7 +27,8 @@ const Input = ({ inputType, inputId, inputName, labelContent, labelFor, ...rest 
 			</label>
 			<input
 				className={
-					"rounded-[0.2rem] border-none font-semibold " +
+					classes +
+					" rounded-[0.2rem] border-none font-semibold " +
 					"pl-[1rem] pr-[1rem] pb-[1rem] pt-[2.4rem] font-raleway " +
 					"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
 					"hover:bg-athens-gray-100 focus:bg-athens-gray-100 text-blue-zodiac-950 " +

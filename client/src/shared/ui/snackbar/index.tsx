@@ -18,14 +18,14 @@ const Snackbar = ({ type, message, autoCloseDuration }: SnackbarProps) => {
 	}, []);
 
 	useEffect(() => {
-		if (autoCloseDuration) {
-			const timeout = setTimeout(() => {
-				if (displayed) snackbarCtx.remove();
-			}, +autoCloseDuration);
-			return () => {
-				clearTimeout(timeout);
-			};
-		}
+		// if (autoCloseDuration) {
+		// 	const timeout = setTimeout(() => {
+		// 		if (displayed) snackbarCtx.remove();
+		// 	}, +autoCloseDuration);
+		// 	return () => {
+		// 		clearTimeout(timeout);
+		// 	};
+		// }
 	});
 
 	useLayoutEffect(() => {
@@ -64,13 +64,15 @@ const Snackbar = ({ type, message, autoCloseDuration }: SnackbarProps) => {
 				ref={snackbarRef}
 				className={
 					snackbarClasses +
-					" min-h-[6rem] min-w-[30rem] flex flex-row " +
+					" min-h-[6rem] min-w-[30rem] max-w-[38rem] flex flex-row " +
 					"items-center p-[1rem] border-none " +
-					"rounded-[0.2rem] snackbar-shadow"
+					"rounded-[0.2rem] snackbar-shadow justify-between"
 				}
 			>
-				<p className={"font-medium text-white text-sm-14px font-mPlus"}>{message}</p>
-				<div className={"w-[3rem] h-[3rem] ml-auto relative"}>
+				<p className={"font-medium text-white text-sm-14px font-mPlus text-left"}>
+					{message}
+				</p>
+				<div className={"w-[3rem] h-[3rem] relative ml-[4rem] flex-shrink-0 flex-grow-0"}>
 					{autoCloseDuration && (
 						<svg
 							className={"relative z-20 w-full h-full pointer-events-none"}

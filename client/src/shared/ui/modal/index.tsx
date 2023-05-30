@@ -93,16 +93,6 @@ const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
 				<div className={"flex flex-row items-center justify-end gap-x-[1rem]"}>
 					<button
 						className={
-							"rounded-[0.2rem] p-4 font-raleway text-blue-zodiac-950 " +
-							"text-sm-12px bg-athens-gray-50 hover:bg-athens-gray-100 " +
-							"font-medium duration-500 ease-out"
-						}
-						type="submit"
-					>
-						Отправить
-					</button>
-					<button
-						className={
 							"p-4 font-raleway text-blue-zodiac-950 text-sm-12px " +
 							"rounded-[0.2rem] hover:bg-athens-gray-100 duration-500 ease-out"
 						}

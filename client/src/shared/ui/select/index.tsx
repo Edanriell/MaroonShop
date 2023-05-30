@@ -7,6 +7,7 @@ const Select = ({
 	labelContent,
 	labelFor,
 	children,
+	classes = "",
 	...rest
 }: SelectProps) => {
 	const { selectValue, onSelectChange } = rest;
@@ -21,6 +22,8 @@ const Select = ({
 			</label>
 			<select
 				className={
+					classes +
+					" " +
 					styles.select +
 					" rounded-[0.2rem] border-none font-semibold pl-[1rem] " +
 					"pr-[1rem] pb-[1rem] pt-[2.4rem] font-raleway bg-athens-gray-50 " +
