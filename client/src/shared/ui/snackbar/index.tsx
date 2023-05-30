@@ -18,14 +18,14 @@ const Snackbar = ({ type, message, autoCloseDuration }: SnackbarProps) => {
 	}, []);
 
 	useEffect(() => {
-		// if (autoCloseDuration) {
-		// 	const timeout = setTimeout(() => {
-		// 		if (displayed) snackbarCtx.remove();
-		// 	}, +autoCloseDuration);
-		// 	return () => {
-		// 		clearTimeout(timeout);
-		// 	};
-		// }
+		if (autoCloseDuration) {
+			const timeout = setTimeout(() => {
+				if (displayed) snackbarCtx.remove();
+			}, +autoCloseDuration);
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
 	});
 
 	useLayoutEffect(() => {

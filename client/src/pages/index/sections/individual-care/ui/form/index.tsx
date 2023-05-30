@@ -1,4 +1,4 @@
-import { FormEvent, ChangeEvent, useReducer } from "react";
+import { FormEvent, ChangeEvent, useReducer, useState } from "react";
 import { createPortal } from "react-dom";
 import classNames from "classnames";
 import axios from "axios";
@@ -19,6 +19,8 @@ import { isFormValid } from "./model";
 import "./styles.scss";
 
 const ModalForm = () => {
+	const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+	// const [isFormSuccessfullySubmitted, setIsFormSuccessfullySubmitted] = useState<boolean>(false);
 	const [state, dispatch] = useReducer(reducer, initialFormState);
 	const [debouncedState] = useDebounce(state, 2000);
 
@@ -27,43 +29,45 @@ const ModalForm = () => {
 
 		const form = event.target;
 		const formData = new FormData(form as HTMLFormElement);
-		// console.log(formData);
 		const formJson = Object.fromEntries(formData.entries());
-		// console.log(formJson);
-		// console.log("submitted");
 
-		axios
-			.post("http://localhost:4020/questionnaire", {
-				firstName: "Fred",
-				lastName: "Flintstone",
-			})
-			.then(function (response: any) {
-				console.log(response);
-			})
-			.catch(function (error: any) {
-				console.log(error);
-			});
+		const postData = async () => {
+			try {
+				setIsFormSubmitting(true);
+				const response = await axios.post("http://localhost:4020/questionnaire", formJson);
+				if (response) {
+					// setIsFormSuccessfullySubmitted(true);
+				}
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error("Error:", error);
+			} finally {
+				setIsFormSubmitting(false);
+			}
+		};
+
+		postData();
 	}
 
 	const nameInputClasses = classNames({
 		"bg-red-100":
-			state.nameInput.validLength === false && state.nameInput.validPattern === false,
+			state.nameInput.validLength === false || state.nameInput.validPattern === false,
 		"hover:bg-red-100":
-			state.nameInput.validLength === false && state.nameInput.validPattern === false,
+			state.nameInput.validLength === false || state.nameInput.validPattern === false,
 	});
 
 	const surnameInputClasses = classNames({
 		"bg-red-100":
-			state.surnameInput.validLength === false && state.surnameInput.validPattern === false,
+			state.surnameInput.validLength === false || state.surnameInput.validPattern === false,
 		"hover:bg-red-100":
-			state.surnameInput.validLength === false && state.surnameInput.validPattern === false,
+			state.surnameInput.validLength === false || state.surnameInput.validPattern === false,
 	});
 
 	const emailInputClasses = classNames({
 		"bg-red-100":
-			state.emailInput.validLength === false && state.emailInput.validPattern === false,
+			state.emailInput.validLength === false || state.emailInput.validPattern === false,
 		"hover:bg-red-100":
-			state.emailInput.validLength === false && state.emailInput.validPattern === false,
+			state.emailInput.validLength === false || state.emailInput.validPattern === false,
 	});
 
 	const ageInputClasses = classNames({
@@ -114,7 +118,7 @@ const ModalForm = () => {
 					createPortal(
 						<Snackbar
 							type={"error"}
-							message={"Слишком короткое имя"}
+							message={"Слишком короткое имя."}
 							autoCloseDuration={"4000"}
 						/>,
 						document.getElementById("snackbars-container") as Element,
@@ -123,7 +127,7 @@ const ModalForm = () => {
 					createPortal(
 						<Snackbar
 							type={"error"}
-							message={"Имя может содержать только латиницу или кириллицу"}
+							message={"Имя может содержать только латиницу или кириллицу."}
 							autoCloseDuration={"4000"}
 						/>,
 						document.getElementById("snackbars-container") as Element,
@@ -144,7 +148,7 @@ const ModalForm = () => {
 					createPortal(
 						<Snackbar
 							type={"error"}
-							message={"Слишком короткая фамилия"}
+							message={"Слишком короткая фамилия."}
 							autoCloseDuration={"4000"}
 						/>,
 						document.getElementById("snackbars-container") as Element,
@@ -153,7 +157,7 @@ const ModalForm = () => {
 					createPortal(
 						<Snackbar
 							type={"error"}
-							message={"Фамилия может содержать только латиницу или кириллицу"}
+							message={"Фамилия может содержать только латиницу или кириллицу."}
 							autoCloseDuration={"4000"}
 						/>,
 						document.getElementById("snackbars-container") as Element,
@@ -175,7 +179,7 @@ const ModalForm = () => {
 				createPortal(
 					<Snackbar
 						type={"error"}
-						message={"Слишком короткий адрес электронной почты"}
+						message={"Слишком короткий адрес электронной почты."}
 						autoCloseDuration={"4000"}
 					/>,
 					document.getElementById("snackbars-container") as Element,
@@ -184,7 +188,7 @@ const ModalForm = () => {
 				createPortal(
 					<Snackbar
 						type={"error"}
-						message={"Указан неверный адрес электронной почты"}
+						message={"Указан неверный адрес электронной почты."}
 						autoCloseDuration={"4000"}
 					/>,
 					document.getElementById("snackbars-container") as Element,
@@ -288,6 +292,15 @@ const ModalForm = () => {
 						document.getElementById("snackbars-container") as Element,
 					)}
 			</div>
+			{/* {isFormSuccessfullySubmitted &&
+				createPortal(
+					<Snackbar
+						type={"success"}
+						message={"Форма успешно отправлена."}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)} */}
 			<button
 				className={
 					submitButtonClasses +
@@ -299,7 +312,7 @@ const ModalForm = () => {
 				type="submit"
 				disabled={!isFormValid(state)}
 			>
-				Отправить
+				{isFormSubmitting ? "Отправляем данные" : "Отправить"}
 			</button>
 		</form>
 	);

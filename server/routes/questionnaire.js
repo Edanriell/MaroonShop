@@ -1,4 +1,5 @@
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
 const { dirname } = require("path");
 const fs = require("fs");
 
@@ -27,7 +28,10 @@ router.post("/", (req, res) => {
 			}
 		}
 
-		oldQuestionnaireData.push(newQuestionnaireData);
+		oldQuestionnaireData.push({
+			id: uuidv4(),
+			...newQuestionnaireData,
+		});
 
 		fs.writeFile(questionnaireDataFilePath, JSON.stringify(oldQuestionnaireData), (err) => {
 			if (err) {
@@ -36,7 +40,7 @@ router.post("/", (req, res) => {
 			}
 
 			console.log("New questionnaire data appended successfully");
-			res.send("New questionnaire data appended successfully");
+			res.send(oldQuestionnaireData);
 		});
 	});
 });

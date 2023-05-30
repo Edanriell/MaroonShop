@@ -1,9 +1,9 @@
 const express = require("express");
-const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const helmet = require("helmet");
+const path = require("path");
 
 const port = 4020;
 
@@ -12,6 +12,7 @@ const questionnaireRouter = require("./routes/questionnaire");
 
 const app = express();
 
+// Middleware setup
 app.use(
 	helmet({
 		crossOriginResourcePolicy: false,
@@ -23,7 +24,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/images", express.static(__dirname + "/public/products-images"));
+// Static files
+app.use("/images", express.static(path.join(__dirname, "public", "products-images")));
+
+// Routes
 app.use("/products", productsRouter);
 app.use("/questionnaire", questionnaireRouter);
 
