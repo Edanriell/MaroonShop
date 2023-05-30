@@ -5,12 +5,24 @@ const fs = require("fs");
 const router = express.Router();
 
 const appDir = dirname(require.main.path);
+const productsDataFilePath = `${appDir}/data/products.json`;
 
 router.get("/", (req, res) => {
-	const data = fs.readFileSync(`${appDir}/data/products.json`, {
-		encoding: "utf8",
+	fs.readFile(productsDataFilePath, "utf8", (err, products) => {
+		if (err) {
+			console.error("Error reading file:", err);
+			res.status(500).send("Error reading file");
+			return;
+		}
+
+		try {
+			const productsData = JSON.parse(products);
+			res.send(productsData);
+		} catch (err) {
+			console.error("Error parsing JSON:", err);
+			res.status(500).send("Error parsing JSON");
+		}
 	});
-	res.send(JSON.parse(data));
 });
 
 module.exports = router;

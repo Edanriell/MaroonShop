@@ -1,6 +1,7 @@
 import { FormEvent, ChangeEvent, useReducer } from "react";
 import { createPortal } from "react-dom";
 import classNames from "classnames";
+import axios from "axios";
 
 import { Input, Select, Snackbar } from "shared/ui";
 import { useDebounce } from "shared/lib/hooks";
@@ -23,7 +24,25 @@ const ModalForm = () => {
 
 	function handleFormSubmit(event: FormEvent) {
 		event.preventDefault();
-		console.log("submitted");
+
+		const form = event.target;
+		const formData = new FormData(form as HTMLFormElement);
+		// console.log(formData);
+		const formJson = Object.fromEntries(formData.entries());
+		// console.log(formJson);
+		// console.log("submitted");
+
+		axios
+			.post("http://localhost:4020/questionnaire", {
+				firstName: "Fred",
+				lastName: "Flintstone",
+			})
+			.then(function (response: any) {
+				console.log(response);
+			})
+			.catch(function (error: any) {
+				console.log(error);
+			});
 	}
 
 	const nameInputClasses = classNames({

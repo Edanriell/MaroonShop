@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const port = 4020;
 
 const productsRouter = require("./routes/products");
+const questionnaireRouter = require("./routes/questionnaire");
 
 const app = express();
 
@@ -21,9 +22,10 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/images", express.static(__dirname + "/public/products-images"));
 
+app.use("/images", express.static(__dirname + "/public/products-images"));
 app.use("/products", productsRouter);
+app.use("/questionnaire", questionnaireRouter);
 
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
