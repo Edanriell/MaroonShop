@@ -1,10 +1,11 @@
 import { FormEvent, ChangeEvent, useReducer, useState } from "react";
 import { createPortal } from "react-dom";
 import classNames from "classnames";
-import axios from "axios";
 
+import { QuestionnaireItem, questionnaireApi } from "shared/api";
 import { Input, Select, Snackbar } from "shared/ui";
 import { useDebounce } from "shared/lib/hooks";
+import { SubmitButton } from "./ui";
 import { reducer, initialFormState } from "./model/store";
 import {
 	changingNameAction,
@@ -18,9 +19,11 @@ import {
 import { isFormValid } from "./model";
 import "./styles.scss";
 
-const ModalForm = () => {
+const QuestionnaireForm = () => {
 	const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-	// const [isFormSuccessfullySubmitted, setIsFormSuccessfullySubmitted] = useState<boolean>(false);
+	const [isFormSuccessfullySubmitted, setIsFormSuccessfullySubmitted] = useState<boolean | null>(
+		null,
+	);
 	const [state, dispatch] = useReducer(reducer, initialFormState);
 	const [debouncedState] = useDebounce(state, 2000);
 
@@ -29,20 +32,28 @@ const ModalForm = () => {
 
 		const form = event.target;
 		const formData = new FormData(form as HTMLFormElement);
-		const formJson = Object.fromEntries(formData.entries());
+		const formJson = Object.fromEntries(formData.entries()) as QuestionnaireItem;
 
 		const postData = async () => {
 			try {
 				setIsFormSubmitting(true);
-				const response = await axios.post("http://localhost:4020/questionnaire", formJson);
-				if (response) {
-					// setIsFormSuccessfullySubmitted(true);
+
+				const response = await questionnaireApi.questionnaire.postQuestionnaireItem(
+					formJson,
+				);
+
+				if (response && response instanceof Object) {
+					setIsFormSuccessfullySubmitted(true);
 				}
 			} catch (error) {
+				setIsFormSuccessfullySubmitted(false);
 				// eslint-disable-next-line no-console
 				console.error("Error:", error);
 			} finally {
 				setIsFormSubmitting(false);
+				setTimeout(() => {
+					setIsFormSuccessfullySubmitted(null);
+				}, 4500);
 			}
 		};
 
@@ -88,10 +99,6 @@ const ModalForm = () => {
 	const locationSelectClasses = classNames({
 		"bg-red-100": state.locationSelect.validOption === false,
 		"hover:bg-red-100": state.locationSelect.validOption === false,
-	});
-
-	const submitButtonClasses = classNames({
-		"button-disabled": !isFormValid(state),
 	});
 
 	return (
@@ -292,30 +299,31 @@ const ModalForm = () => {
 						document.getElementById("snackbars-container") as Element,
 					)}
 			</div>
-			{/* {isFormSuccessfullySubmitted &&
+			<SubmitButton
+				isFormValid={() => isFormValid(state)}
+				isFormSubmitting={isFormSubmitting}
+				isFormSuccessfullySubmitted={isFormSuccessfullySubmitted}
+			/>
+			{isFormSuccessfullySubmitted &&
 				createPortal(
 					<Snackbar
 						type={"success"}
-						message={"Форма успешно отправлена."}
+						message={"Данные успешно отправлены."}
 						autoCloseDuration={"4000"}
 					/>,
 					document.getElementById("snackbars-container") as Element,
-				)} */}
-			<button
-				className={
-					submitButtonClasses +
-					" rounded-[0.2rem] p-4 font-raleway text-blue-zodiac-950 " +
-					"text-sm-12px bg-athens-gray-50 hover:bg-athens-gray-100 " +
-					"font-medium duration-500 ease-out flex-shrink-0 flex-grow-0 " +
-					"h-[5.5rem]"
-				}
-				type="submit"
-				disabled={!isFormValid(state)}
-			>
-				{isFormSubmitting ? "Отправляем данные" : "Отправить"}
-			</button>
+				)}
+			{isFormSuccessfullySubmitted === false &&
+				createPortal(
+					<Snackbar
+						type={"error"}
+						message={"Ну удалось отправить данные на сервер. Повторите попытку позже."}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)}
 		</form>
 	);
 };
 
-export default ModalForm;
+export default QuestionnaireForm;

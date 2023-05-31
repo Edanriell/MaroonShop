@@ -1,1 +1,1 @@
-export { default as ModalForm } from "./form";
+export { default as QuestionnaireForm } from "./form";

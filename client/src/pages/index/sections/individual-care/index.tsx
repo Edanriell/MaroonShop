@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 
 import { Button, Card3d, Modal } from "shared/ui";
 import { useScreenSize } from "shared/lib/hooks";
-import { ModalForm as ModalContent } from "./ui";
+import { QuestionnaireForm as ModalContent } from "./ui";
 import { IndividualCareProps, IndividualCareCard } from "./types";
 
 import IndividualCareCardSm from "./assets/card-sm.jpg";
