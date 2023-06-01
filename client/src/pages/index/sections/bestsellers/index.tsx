@@ -2,26 +2,15 @@ import { useDispatch } from "react-redux";
 
 import { productModel } from "entities/product";
 import { Button } from "shared/ui";
-import { BestsellersSlider } from "./ui";
+import { SliderWrapper } from "./ui";
 import { BestsellersProps } from "./types";
 
-// TODO Add spinner and Products not found !
 const Bestsellers = ({ title }: BestsellersProps) => {
 	const dispatch = useDispatch();
 
 	const { isFetching } = productModel.getProductsAsync()(dispatch);
 	const bestSellers = productModel.getBestsellers();
 	const isEmpty = productModel.isProductsEmpty();
-
-	const SliderWrapper = () => {
-		if (isFetching) return <div>Loading...</div>;
-
-		if (isEmpty) return <div>Products not found</div>;
-
-		if (bestSellers.length === 0) return <div>Bestsellers not found</div>;
-
-		return <BestsellersSlider bestSellers={bestSellers} />;
-	};
 
 	return (
 		<div
@@ -57,8 +46,12 @@ const Bestsellers = ({ title }: BestsellersProps) => {
 					Легендарные продукты, завоевавшие любовь наших клиентов
 				</p>
 			</header>
-			<div className={"md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-6"}>
-				<SliderWrapper />
+			<div className={"md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-6 relative"}>
+				<SliderWrapper
+					isFetching={isFetching}
+					isEmpty={isEmpty}
+					bestSellers={bestSellers}
+				/>
 			</div>
 			<div
 				className={

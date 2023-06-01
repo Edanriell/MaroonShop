@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
+import QuestionnaireForm from "features/questionnaire-form";
 import { Button, Card3d, Modal } from "shared/ui";
 import { useScreenSize } from "shared/lib/hooks";
-import { QuestionnaireForm as ModalContent } from "./ui";
 import { IndividualCareProps, IndividualCareCard } from "./types";
 
 import IndividualCareCardSm from "./assets/card-sm.jpg";
@@ -92,7 +92,7 @@ const IndividualCare = ({ title }: IndividualCareProps) => {
 								description="Заполните анкету и получите бесплатную рекомендацию."
 								onModalClose={handleModalClose}
 							>
-								<ModalContent />
+								<QuestionnaireForm />
 							</Modal>,
 							document.body,
 						)}

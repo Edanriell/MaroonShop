@@ -1,1 +1,1 @@
-export { default as BestsellersSlider } from "./bestsellers-slider";
+export { default as SliderWrapper } from "./slider-wrapper";
