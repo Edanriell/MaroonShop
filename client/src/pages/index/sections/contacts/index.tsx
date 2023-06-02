@@ -1,5 +1,5 @@
+import Map from "features/map";
 import { SocialLinks } from "shared/ui";
-import { Map } from "./ui";
 import { ContactsProps } from "./types";
 
 const Contacts = ({ title }: ContactsProps) => {
