@@ -1,32 +1,79 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-// import mapSm from "./assets/map-sm.jpg";
-// import mapMd from "./assets/map-md.jpg";
-// import mapLg from "./assets/map-lg.jpg";
+import { ReactComponent as MapMarker } from "./assets/map-marker.svg";
+import mapSm from "./assets/map-sm.jpg";
+import mapMd from "./assets/map-md.jpg";
+import mapLg from "./assets/map-lg.jpg";
 
 const Map = () => {
-	mapboxgl.accessToken =
-		"";
-
-	const [mapLoading, setMapLoading] = useState(true);
-	const [reload, setReload] = useState();
 	const mapContainer = useRef(null);
+
+	const mapApiKey = process.env.REACT_APP_MAP_API_KEY ?? "";
+
+	mapboxgl.accessToken = mapApiKey;
 
 	useEffect(() => {
 		if (!mapContainer.current) return;
-		new mapboxgl.Map({
-			container: mapContainer.current,
-			style: "mapbox://styles/mapbox/satellite-streets-v12",
-			center: [12.567898, 55.67583],
-			zoom: 9,
-		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (mapApiKey !== "") {
+			new mapboxgl.Map({
+				container: mapContainer.current,
+				style: "mapbox://styles/mapbox/satellite-streets-v12",
+				center: [12.567898, 55.67583],
+				zoom: 9,
+			});
+		}
+	}, [mapApiKey]);
 
-	if (mapLoading) {
-		return <div>Loading...</div>;
+	if (mapApiKey === "") {
+		return (
+			<div className={"md:ml-[-34.5rem] lg:ml-[-9.2rem] relative"}>
+				<div className={"relative blur-sm"}>
+					<picture className={"md:ml-[-34.5rem] lg:ml-[-9.2rem] block"}>
+						<source media="(min-width:1366px)" srcSet={mapLg} />
+						<source media="(min-width:768px)" srcSet={mapMd} />
+						<source media="(min-width:320px)" srcSet={mapSm} />
+						<img
+							src={mapLg}
+							alt="map"
+							className={
+								"object-cover w-full h-[28.1rem] md:w-[36.9rem] " +
+								"md:h-[37.4rem] lg:w-[67rem] lg:h-[42.2rem]"
+							}
+						/>
+					</picture>
+					<MapMarker
+						className={
+							"w-[1.6rem] h-[2.2rem] absolute top-[8rem] left-[44vw] " +
+							"text-blue-zodiac-950 md:top-[14rem] md:left-[-17rem] " +
+							"lg:left-[17rem] lg:top-[16rem]"
+						}
+					/>
+				</div>
+				<p
+					className={
+						"flex flex-col items-center absolute lg:top-[50%] " +
+						"lg:left-[50%] lg:translate-x-[-70%] lg:translate-y-[-50%] " +
+						"top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-center " +
+						"md:mr-[-30rem] md:translate-x-[-120%]"
+					}
+				>
+					<span
+						className={
+							"font-raleway font-bold text-blue-zodiac-950 text-sm-16px mb-[0.5rem]"
+						}
+					>
+						Не удалось загрузить карту.
+					</span>
+					<span
+						className={"font-raleway font-semibold text-blue-zodiac-950 text-sm-16px"}
+					>
+						Отсутствует API ключ.
+					</span>
+				</p>
+			</div>
+		);
 	}
 
 	return (
@@ -37,23 +84,9 @@ const Map = () => {
 					"object-cover w-full h-[28.1rem] md:w-[36.9rem] " +
 					"md:h-[37.4rem] lg:w-[67rem] lg:h-[42.2rem]"
 				}
-			/>
+			></div>
 		</div>
 	);
-
-	// <picture className={"md:ml-[-34.5rem] lg:ml-[-18.4rem]"}>
-	// 	<source media="(min-width:1366px)" srcSet={mapLg} />
-	// 	<source media="(min-width:768px)" srcSet={mapMd} />
-	// 	<source media="(min-width:320px)" srcSet={mapSm} />
-	// 	<img
-	// 		src={mapLg}
-	// 		alt="map"
-	// className={
-	// 	"object-cover w-full h-[28.1rem] md:w-[36.9rem] " +
-	// 	"md:h-[37.4rem] lg:w-[67rem] lg:h-[42.2rem]"
-	// }
-	// 	/>
-	// </picture>
 };
 
 export default Map;
