@@ -2,29 +2,67 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+import "./styles.scss";
 import { ReactComponent as MapMarker } from "./assets/map-marker.svg";
 import mapSm from "./assets/map-sm.jpg";
 import mapMd from "./assets/map-md.jpg";
 import mapLg from "./assets/map-lg.jpg";
+import { CustomMarkers } from "./types";
 
 const Map = () => {
 	const mapContainer = useRef(null);
 
 	const mapApiKey = process.env.REACT_APP_MAP_API_KEY ?? "";
 
+	const customMarkers: CustomMarkers = {
+		markers: [
+			{
+				type: "Marker",
+				geometry: {
+					type: "Point",
+					coordinates: [18.06324, 59.334591],
+				},
+				properties: {
+					title: "Maroon",
+					description: "Shop",
+				},
+			},
+		],
+	};
+
 	mapboxgl.accessToken = mapApiKey;
 
 	useEffect(() => {
 		if (!mapContainer.current) return;
+
 		if (mapApiKey !== "") {
-			new mapboxgl.Map({
+			const map = new mapboxgl.Map({
 				container: mapContainer.current,
-				style: "mapbox://styles/mapbox/satellite-streets-v12",
-				center: [12.567898, 55.67583],
-				zoom: 9,
+				style: "mapbox://styles/mapbox/light-v11",
+				center: [18.06324, 59.334591],
+				zoom: 6,
 			});
+
+			for (const marker of customMarkers.markers) {
+				const markerElement = document.createElement("div");
+				markerElement.classList.add("map-marker");
+
+				new mapboxgl.Marker(markerElement)
+					.setLngLat(marker.geometry.coordinates)
+					.addTo(map);
+
+				new mapboxgl.Marker(markerElement)
+					.setLngLat(marker.geometry.coordinates)
+					.setPopup(
+						new mapboxgl.Popup({ offset: 25 }).setHTML(
+							`<h3>${marker.properties.title}</h3><p>${marker.properties.description}</p>`,
+						),
+					)
+					.addTo(map);
+			}
 		}
-	}, [mapApiKey]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	if (mapApiKey === "") {
 		return (
