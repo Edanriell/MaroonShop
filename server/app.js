@@ -26,6 +26,7 @@ app.use(cookieParser());
 
 // Static files
 app.use("/images", express.static(path.join(__dirname, "public", "products-images")));
+app.use("/gallery-images", express.static(path.join(__dirname, "public", "gallery-images")));
 
 // Routes
 app.use("/products", productsRouter);

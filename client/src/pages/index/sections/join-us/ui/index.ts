@@ -1,1 +1,1 @@
-export { default as Gallery } from "./gallery";
+export { default as ImageGrid } from "./image-grid";

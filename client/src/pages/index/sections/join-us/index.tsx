@@ -1,5 +1,5 @@
 import { Button } from "shared/ui";
-import { Gallery } from "./ui";
+import { ImageGrid } from "./ui";
 import { JoinUsProps } from "./types";
 
 const JoinUs = ({ title }: JoinUsProps) => {
@@ -50,7 +50,7 @@ const JoinUs = ({ title }: JoinUsProps) => {
 						classes={"md:pl-[3.3rem] md:pr-[3.3rem]"}
 					/>
 				</div>
-				<Gallery />
+				<ImageGrid />
 			</div>
 		</div>
 	);
