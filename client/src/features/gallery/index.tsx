@@ -1,14 +1,41 @@
-import { useRef, MouseEvent } from "react";
+import { useRef, MouseEvent, useState, useEffect } from "react";
 import { register } from "swiper/element/bundle";
 
+import { GalleryPagination, GalleryNavigation } from "./ui";
 import styles from "./styles.module.scss";
 
 register();
 
 const Gallery = () => {
+	const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
 	const galleryBackdropRef = useRef<HTMLDivElement | null>(null);
 	const galleryRef = useRef<HTMLDivElement | null>(null);
-	const gallerySliderRef = useRef(null);
+	const gallerySliderRef = useRef<HTMLElement | null>(null);
+
+	useEffect(() => {
+		if (!gallerySliderRef.current) return;
+		const slider = (gallerySliderRef.current as any).swiper;
+
+		function handleSlideChange() {
+			setCurrentSlideIndex(slider.realIndex);
+		}
+
+		slider.on("slideChange", handleSlideChange);
+
+		return () => {
+			slider.off("slideChange", handleSlideChange);
+		};
+	}, []);
+
+	function handlePreviousSlideButtonClick() {
+		if (!gallerySliderRef.current) return;
+		(gallerySliderRef.current as any).swiper.slidePrev();
+	}
+
+	function handleNextSlideButtonClick() {
+		if (!gallerySliderRef.current) return;
+		(gallerySliderRef.current as any).swiper.slideNext();
+	}
 
 	function handleCloseGallery(event: MouseEvent) {
 		// console.log("Close");
@@ -29,9 +56,8 @@ const Gallery = () => {
 				className={
 					styles.galleryShadow +
 					" z-[50] border-none rounded-[0.2rem] max-w-[120rem] w-[90%] mr-[1.5rem] " +
-					"ml-[1.5rem] mt-[1.5rem] mb-[1.5rem] bg-white max-h-[80rem]"
+					"ml-[1.5rem] mt-[1.5rem] mb-[1.5rem] bg-white max-h-[80rem] relative"
 				}
-				// max-h-[80rem] h-[100%]
 			>
 				<swiper-container
 					ref={gallerySliderRef}
@@ -40,55 +66,80 @@ const Gallery = () => {
 					keyboard="true"
 					grab-cursor="true"
 					speed="500"
-					loop="true"
 					update-on-window-resize="true"
-					autoplay-delay="6000"
-					autoplay-pause-on-mouse-enter="true"
-					class="border-none rounded-[0.2rem]"
+					lazy="true"
+					zoom="true"
+					class="border-none rounded-[0.2rem] relative"
 				>
-					<swiper-slide>
-						<img
-							src="http://localhost:4020/gallery-images/1/full.jpg"
-							alt=""
-							className="w-full h-[100vw] max-h-[80rem] object-cover"
-						/>
+					<swiper-slide lazy="true">
+						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
+							<img
+								src="http://localhost:4020/gallery-images/1/full.jpg"
+								alt=""
+								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
+								loading="lazy"
+							/>
+						</div>
 					</swiper-slide>
-					<swiper-slide>
-						<img
-							src="http://localhost:4020/gallery-images/2/full.jpg"
-							alt=""
-							className="w-full h-[100vw] max-h-[80rem] object-cover"
-						/>
+					<swiper-slide lazy="true">
+						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
+							<img
+								src="http://localhost:4020/gallery-images/2/full.jpg"
+								alt=""
+								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
+								loading="lazy"
+							/>
+						</div>
 					</swiper-slide>
-					<swiper-slide>
-						<img
-							src="http://localhost:4020/gallery-images/3/full.jpg"
-							alt=""
-							className="w-full h-[100vw] max-h-[80rem] object-cover"
-						/>
+					<swiper-slide lazy="true">
+						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
+							<img
+								src="http://localhost:4020/gallery-images/3/full.jpg"
+								alt=""
+								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
+								loading="lazy"
+							/>
+						</div>
 					</swiper-slide>
-					<swiper-slide>
-						<img
-							src="http://localhost:4020/gallery-images/4/full.jpg"
-							alt=""
-							className="w-full h-[100vw] max-h-[80rem] object-cover"
-						/>
+					<swiper-slide lazy="true">
+						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
+							<img
+								src="http://localhost:4020/gallery-images/4/full.jpg"
+								alt=""
+								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
+								loading="lazy"
+							/>
+						</div>
 					</swiper-slide>
-					<swiper-slide>
-						<img
-							src="http://localhost:4020/gallery-images/5/full.jpg"
-							alt=""
-							className="w-full h-[100vw] max-h-[80rem] object-cover"
-						/>
+					<swiper-slide lazy="true">
+						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
+							<img
+								src="http://localhost:4020/gallery-images/5/full.jpg"
+								alt=""
+								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
+								loading="lazy"
+							/>
+						</div>
 					</swiper-slide>
-					<swiper-slide>
-						<img
-							src="http://localhost:4020/gallery-images/6/full.jpg"
-							alt=""
-							className="w-full h-[100vw] max-h-[80rem] object-cover"
-						/>
+					<swiper-slide lazy="true">
+						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
+							<img
+								src="http://localhost:4020/gallery-images/6/full.jpg"
+								alt=""
+								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
+								loading="lazy"
+							/>
+						</div>
 					</swiper-slide>
 				</swiper-container>
+				<GalleryNavigation
+					onNextSlideButtonClick={handleNextSlideButtonClick}
+					onPreviousSlideButtonClick={handlePreviousSlideButtonClick}
+				/>
+				<GalleryPagination
+					gallerySliderRef={gallerySliderRef}
+					currentSlideIndex={currentSlideIndex}
+				/>
 			</div>
 		</div>
 	);
