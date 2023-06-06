@@ -4,7 +4,7 @@ import { register } from "swiper/element/bundle";
 
 import { Spinner, Button } from "shared/ui";
 import { galleryApi } from "shared/api";
-import { GalleryPagination, GalleryNavigation } from "./ui";
+import { GalleryPagination, GalleryNavigation, GalleryContainer } from "./ui";
 import {
 	isFirstSlideActive,
 	isLastSlideActive,
@@ -15,7 +15,6 @@ import {
 	isGalleryImage,
 } from "./model";
 import { GalleryProps } from "./types";
-import { ReactComponent as XmarkSvg } from "./assets/xmark-solid.svg";
 import styles from "./styles.module.scss";
 import "./styles.scss";
 
@@ -117,37 +116,19 @@ const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
 		galleryCtx.remove();
 	}
 
-	return (
-		<div
-			ref={galleryBackdropRef}
-			className={
-				"fixed top-0 left-0 z-40 w-full h-full " +
-				"bg-[rgba(0,0,0,0.6)] flex flex-row items-center " +
-				"justify-around"
-			}
-		>
-			<button
-				onClick={handleGalleryClose}
-				className={"absolute top-[2rem] right-[2rem] w-[4.6rem] h-[4.6rem]"}
-			>
-				<XmarkSvg
-					className={
-						styles.closeButtonAnimations +
-						" ease-in-out duration-500 transition-transform text-white"
-					}
-				/>
-				<span className="sr-only">Закрыть галерею</span>
-			</button>
-			<div
-				ref={galleryRef}
-				className={
-					styles.galleryShadow +
-					" z-[50] border-none rounded-[0.2rem] max-w-[120rem] w-[90%] mr-[1.5rem] " +
-					"ml-[1.5rem] mt-[1.5rem] mb-[1.5rem] bg-desert-storm-50 max-h-[80rem] relative h-[100vw]"
-				}
+	if (isLoading) {
+		return (
+			<GalleryContainer
+				galleryBackdropRef={galleryBackdropRef}
+				galleryRef={galleryRef}
+				onGalleryClose={handleGalleryClose}
 			>
 				{isLoading && (
-					<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+					<div
+						className={
+							"absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+						}
+					>
 						<Spinner
 							width={"3rem"}
 							height={"3rem"}
@@ -156,76 +137,90 @@ const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
 						/>
 					</div>
 				)}
-				{!isLoading && !isSuccessfullyLoaded && (
-					<div
-						className={
-							"absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] " +
-							"flex flex-col items-center gap-y-[1rem] text-blue-zodiac-950"
-						}
-					>
-						<p className="font-medium font-mPlus text-sm-22px">
-							Не удалось загрузить галерею.
-						</p>
-						<Button text={"Обновить"} click={() => setReload(Math.random())} />
-					</div>
-				)}
-				{!isLoading && isSuccessfullyLoaded && (
-					<swiper-container
-						ref={gallerySliderRef}
-						init="true"
-						slides-per-view="1"
-						keyboard="true"
-						grab-cursor="true"
-						speed="500"
-						update-on-window-resize="true"
-						lazy="true"
-						zoom="true"
-						class="border-none rounded-[0.2rem] relative"
-					>
-						{images.length > 0 &&
-							images.map((image: any) => {
-								return (
-									<swiper-slide key={image.imageId} lazy="true">
-										<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
-											<img
-												src={image.imageUrl}
-												alt="Присоединяйтесь к нам"
-												className={
-													"w-full h-[100vw] max-h-[80rem] " +
-													styles.imageFit
-												}
-												loading="lazy"
-											/>
-											<div className="swiper-lazy-preloader"></div>
-										</div>
-									</swiper-slide>
-								);
-							})}
-					</swiper-container>
-				)}
-				{!isLoading && isSuccessfullyLoaded && (
-					<MemoizedGalleryNavigation
-						onNextSlideButtonClick={handleNextSlideButtonClick}
-						onPreviousSlideButtonClick={handlePreviousSlideButtonClick}
-						isFirstSlideActive={isFirstSlideActive({
-							activeSlide: (gallerySliderRef.current as any)?.swiper.realIndex,
-						})}
-						isLastSlideActive={isLastSlideActive({
-							activeSlide: (gallerySliderRef.current as any)?.swiper.realIndex,
-							totalSlidesCount: (gallerySliderRef.current as any)?.swiper.slides
-								.length,
-						})}
-					/>
-				)}
-				{!isLoading && isSuccessfullyLoaded && totalSlides > 0 && (
-					<MemoizedGalleryPagination
-						gallerySliderRef={gallerySliderRef}
-						currentSlideIndex={currentSlideIndex}
-						totalSlides={totalSlides}
-					/>
-				)}
-			</div>
-		</div>
+			</GalleryContainer>
+		);
+	}
+
+	if (!isSuccessfullyLoaded) {
+		return (
+			<GalleryContainer
+				galleryBackdropRef={galleryBackdropRef}
+				galleryRef={galleryRef}
+				onGalleryClose={handleGalleryClose}
+			>
+				<div
+					className={
+						"absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] " +
+						"flex flex-col items-center gap-y-[1rem] text-blue-zodiac-950"
+					}
+				>
+					<p className={"font-medium font-mPlus text-sm-22px"}>
+						Не удалось загрузить галерею.
+					</p>
+					<Button text={"Обновить"} click={() => setReload(Math.random())} />
+				</div>
+			</GalleryContainer>
+		);
+	}
+
+	return (
+		<GalleryContainer
+			galleryBackdropRef={galleryBackdropRef}
+			galleryRef={galleryRef}
+			onGalleryClose={handleGalleryClose}
+		>
+			<swiper-container
+				ref={gallerySliderRef}
+				init="true"
+				slides-per-view="1"
+				keyboard="true"
+				grab-cursor="true"
+				speed="500"
+				update-on-window-resize="true"
+				lazy="true"
+				zoom="true"
+				class="border-none rounded-[0.2rem] relative"
+			>
+				{images.length > 0 &&
+					images.map((image: any) => {
+						return (
+							<swiper-slide key={image.imageId} lazy="true">
+								<div
+									className={
+										"swiper-zoom-container w-full h-[100vw] max-h-[80rem]"
+									}
+								>
+									<img
+										src={image.imageUrl}
+										alt="Присоединяйтесь к нам"
+										className={
+											"w-full h-[100vw] max-h-[80rem] " + styles.imageFit
+										}
+										loading="lazy"
+									/>
+									<div className={"swiper-lazy-preloader"}></div>
+								</div>
+							</swiper-slide>
+						);
+					})}
+			</swiper-container>
+			<MemoizedGalleryNavigation
+				onNextSlideButtonClick={handleNextSlideButtonClick}
+				onPreviousSlideButtonClick={handlePreviousSlideButtonClick}
+				isFirstSlideActive={isFirstSlideActive({
+					activeSlide: (gallerySliderRef.current as any)?.swiper.realIndex,
+				})}
+				isLastSlideActive={isLastSlideActive({
+					activeSlide: (gallerySliderRef.current as any)?.swiper.realIndex,
+					totalSlidesCount: (gallerySliderRef.current as any)?.swiper.slides.length,
+				})}
+			/>
+			<MemoizedGalleryPagination
+				gallerySliderRef={gallerySliderRef}
+				currentSlideIndex={currentSlideIndex}
+				totalSlides={totalSlides}
+			/>
+		</GalleryContainer>
 	);
 };
 

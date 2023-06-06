@@ -37,7 +37,7 @@ const GalleryNavigation = ({
 						" w-[5rem] h-[5rem] text-white transition-all ease-in-out duration-500"
 					}
 				/>
-				<span className="sr-only">Показать предыдущий слайд</span>
+				<span className={"sr-only"}>Показать предыдущий слайд</span>
 			</button>
 			<button
 				disabled={isLastSlideActive}
@@ -52,7 +52,7 @@ const GalleryNavigation = ({
 						" w-[5rem] h-[5rem] text-white transition-all ease-in-out duration-500"
 					}
 				/>
-				<span className="sr-only">Показать следующий слайд</span>
+				<span className={"sr-only"}>Показать следующий слайд</span>
 			</button>
 		</div>
 	);

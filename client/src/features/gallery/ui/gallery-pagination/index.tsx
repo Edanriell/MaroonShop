@@ -37,7 +37,7 @@ const GalleryPagination = ({
 							}
 							data-image-id={i}
 						/>
-						<span className="sr-only">Перейти на слайд номер {i}</span>
+						<span className={"sr-only"}>Перейти на слайд номер {i}</span>
 					</button>,
 				);
 			}
