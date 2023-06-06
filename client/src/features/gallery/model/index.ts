@@ -1,6 +1,7 @@
 import { MutableRefObject } from "react";
 import { gsap } from "gsap";
 
+import { GalleryImage } from "shared/api";
 import { isFirstSlideActiveParameters, isLastSlideActiveParameters } from "./types";
 
 export const isFirstSlideActive = ({ activeSlide }: isFirstSlideActiveParameters): boolean =>
@@ -10,6 +11,12 @@ export const isLastSlideActive = ({
 	activeSlide,
 	totalSlidesCount,
 }: isLastSlideActiveParameters): boolean => totalSlidesCount - 1 === activeSlide;
+
+export const isGalleryImage = (object: any): object is GalleryImage => {
+	return (
+		typeof object === "object" && object !== null && "imageUrl" in object && "imageId" in object
+	);
+};
 
 export const displayGallery = (galleryRef: MutableRefObject<HTMLDivElement | null>): void => {
 	gsap.fromTo(

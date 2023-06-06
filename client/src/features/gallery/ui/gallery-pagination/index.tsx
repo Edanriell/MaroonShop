@@ -4,19 +4,24 @@ import { ReactComponent as Circle } from "./assets/circle-solid.svg";
 import styles from "./styles.module.scss";
 import { GalleryPaginationProps } from "./types";
 
-const GalleryPagination = ({ gallerySliderRef, currentSlideIndex }: GalleryPaginationProps) => {
+const GalleryPagination = ({
+	gallerySliderRef,
+	currentSlideIndex,
+	totalSlides,
+}: GalleryPaginationProps) => {
 	const [paginationButtons, setPaginationButtons] = useState<ReactNode[]>();
 
 	useEffect(() => {
 		if (!gallerySliderRef.current) return;
 
-		const slider = gallerySliderRef.current.swiper;
-		const slideCount = slider?.slides.length;
+		const slideCount = totalSlides;
 
 		if (!slideCount) return;
 
 		function createButtons() {
 			const buttons: ReactNode[] = [];
+
+			if (!slideCount) return;
 
 			for (let i = 0; i < slideCount; i++) {
 				buttons.push(

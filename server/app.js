@@ -9,6 +9,7 @@ const port = 4020;
 
 const productsRouter = require("./routes/products");
 const questionnaireRouter = require("./routes/questionnaire");
+const galleryRouter = require("./routes/gallery");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/gallery-images", express.static(path.join(__dirname, "public", "galler
 // Routes
 app.use("/products", productsRouter);
 app.use("/questionnaire", questionnaireRouter);
+app.use("/gallery", galleryRouter);
 
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
