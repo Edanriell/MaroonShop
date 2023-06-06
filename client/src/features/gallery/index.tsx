@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useLayoutEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect, useCallback, memo } from "react";
 import { gsap } from "gsap";
 import { register } from "swiper/element/bundle";
 
@@ -11,14 +11,17 @@ import {
 	displayGalleryBackdrop,
 	hideGalleryBackdrop,
 } from "./model";
+import { GalleryProps } from "./types";
 import { ReactComponent as XmarkSvg } from "./assets/xmark-solid.svg";
 import styles from "./styles.module.scss";
 import "./styles.scss";
-import { GalleryProps } from "./types";
 
 register();
 
-const Gallery = ({ onGalleryClose }: GalleryProps) => {
+const MemoizedGalleryNavigation = memo(GalleryNavigation);
+const MemoizedGalleryPagination = memo(GalleryPagination);
+
+const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
 	const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
 	const galleryBackdropRef = useRef<HTMLDivElement | null>(null);
 	const galleryRef = useRef<HTMLDivElement | null>(null);
@@ -61,20 +64,20 @@ const Gallery = ({ onGalleryClose }: GalleryProps) => {
 		};
 	}, []);
 
-	// useEffect(() => {
-	// 	if (!gallerySliderRef.current) return;
-	// 	(gallerySliderRef.current as any).swiper.slideTo(3);
-	// }, []);
+	useEffect(() => {
+		if (!gallerySliderRef.current || !activeSlide) return;
+		(gallerySliderRef.current as any).swiper.slideTo(activeSlide);
+	}, [activeSlide]);
 
-	function handlePreviousSlideButtonClick() {
+	const handlePreviousSlideButtonClick = useCallback(() => {
 		if (!gallerySliderRef.current) return;
 		(gallerySliderRef.current as any).swiper.slidePrev();
-	}
+	}, []);
 
-	function handleNextSlideButtonClick() {
+	const handleNextSlideButtonClick = useCallback(() => {
 		if (!gallerySliderRef.current) return;
 		(gallerySliderRef.current as any).swiper.slideNext();
-	}
+	}, []);
 
 	function handleGalleryClose() {
 		galleryBackdropCtx.remove();
@@ -189,7 +192,7 @@ const Gallery = ({ onGalleryClose }: GalleryProps) => {
 						</div>
 					</swiper-slide>
 				</swiper-container>
-				<GalleryNavigation
+				<MemoizedGalleryNavigation
 					onNextSlideButtonClick={handleNextSlideButtonClick}
 					onPreviousSlideButtonClick={handlePreviousSlideButtonClick}
 					isFirstSlideActive={isFirstSlideActive({
@@ -200,7 +203,7 @@ const Gallery = ({ onGalleryClose }: GalleryProps) => {
 						totalSlidesCount: (gallerySliderRef.current as any)?.swiper.slides.length,
 					})}
 				/>
-				<GalleryPagination
+				<MemoizedGalleryPagination
 					gallerySliderRef={gallerySliderRef}
 					currentSlideIndex={currentSlideIndex}
 				/>

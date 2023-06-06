@@ -1,5 +1,6 @@
 export type Image = {
 	id: string;
+	galleryImageId: number;
 	imgSm: string;
 	imgMd: string;
 	imgLg: string;

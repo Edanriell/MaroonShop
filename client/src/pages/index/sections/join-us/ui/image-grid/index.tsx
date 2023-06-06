@@ -24,6 +24,7 @@ import image6lg from "./assets/image-6-lg.jpg";
 const images: Images = [
 	{
 		id: uuidv4(),
+		galleryImageId: 1,
 		imgSm: image1sm,
 		imgMd: image1md,
 		imgLg: image1lg,
@@ -31,6 +32,7 @@ const images: Images = [
 	},
 	{
 		id: uuidv4(),
+		galleryImageId: 2,
 		imgSm: image2sm,
 		imgMd: image2md,
 		imgLg: image2lg,
@@ -38,6 +40,7 @@ const images: Images = [
 	},
 	{
 		id: uuidv4(),
+		galleryImageId: 4,
 		imgSm: image3sm,
 		imgMd: image3md,
 		imgLg: image3lg,
@@ -45,6 +48,7 @@ const images: Images = [
 	},
 	{
 		id: uuidv4(),
+		galleryImageId: 5,
 		imgSm: image4sm,
 		imgMd: image4md,
 		imgLg: image4lg,
@@ -52,6 +56,7 @@ const images: Images = [
 	},
 	{
 		id: uuidv4(),
+		galleryImageId: 0,
 		imgSm: image5lg,
 		imgMd: image5lg,
 		imgLg: image5lg,
@@ -59,6 +64,7 @@ const images: Images = [
 	},
 	{
 		id: uuidv4(),
+		galleryImageId: 3,
 		imgSm: image6lg,
 		imgMd: image6lg,
 		imgLg: image6lg,
@@ -67,7 +73,7 @@ const images: Images = [
 ];
 
 const Image = ({ image }: GalleryImageProps) => (
-	<li>
+	<li data-image-id={image.galleryImageId}>
 		<picture className={"col-start-1 col-end-2 row-start-1 row-end-3"}>
 			<source media="(min-width:1366px)" srcSet={image.imgLg} />
 			<source media="(min-width:768px)" srcSet={image.imgMd} />
@@ -78,6 +84,7 @@ const Image = ({ image }: GalleryImageProps) => (
 );
 
 const ImageGrid = ({ classes = "" }: GalleryProps) => {
+	const [activeSlide, setActiveSlide] = useState<number>();
 	const [showGallery, setShowGallery] = useState<boolean>();
 	const [gallerySize, setGallerySize] = useState<GallerySize>(4);
 	const { width } = useScreenSize();
@@ -91,7 +98,12 @@ const ImageGrid = ({ classes = "" }: GalleryProps) => {
 	}, [width]);
 
 	function handleImageClick(event: MouseEvent) {
-		// console.log(event.target);
+		const activeImageId = (
+			event.target as HTMLElement
+		).parentElement?.parentElement?.getAttribute("data-image-id");
+
+		setActiveSlide(Number(activeImageId));
+
 		setShowGallery(true);
 	}
 
@@ -112,7 +124,10 @@ const ImageGrid = ({ classes = "" }: GalleryProps) => {
 			</ul>
 			{showGallery &&
 				createPortal(
-					<Gallery onGalleryClose={() => setShowGallery(false)} />,
+					<Gallery
+						onGalleryClose={() => setShowGallery(false)}
+						activeSlide={activeSlide}
+					/>,
 					document.getElementById("gallery-container") as Element,
 				)}
 		</div>
