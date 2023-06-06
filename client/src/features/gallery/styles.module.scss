@@ -9,3 +9,11 @@
 .imageFit {
 	object-fit: cover !important;
 }
+
+.closeButtonAnimations:hover {
+	transform: scale(0.9);
+}
+
+.closeButtonAnimations:active {
+	transform: scale(0.7);
+}

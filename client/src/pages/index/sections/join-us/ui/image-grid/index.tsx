@@ -27,42 +27,42 @@ const images: Images = [
 		imgSm: image1sm,
 		imgMd: image1md,
 		imgLg: image1lg,
-		label: "Первая картинка",
+		label: "Присоединяйтесь к нам",
 	},
 	{
 		id: uuidv4(),
 		imgSm: image2sm,
 		imgMd: image2md,
 		imgLg: image2lg,
-		label: "Вторая картинка",
+		label: "Присоединяйтесь к нам",
 	},
 	{
 		id: uuidv4(),
 		imgSm: image3sm,
 		imgMd: image3md,
 		imgLg: image3lg,
-		label: "Третья картинка",
+		label: "Присоединяйтесь к нам",
 	},
 	{
 		id: uuidv4(),
 		imgSm: image4sm,
 		imgMd: image4md,
 		imgLg: image4lg,
-		label: "Четвертая картинка",
+		label: "Присоединяйтесь к нам",
 	},
 	{
 		id: uuidv4(),
 		imgSm: image5lg,
 		imgMd: image5lg,
 		imgLg: image5lg,
-		label: "Пятая картинка",
+		label: "Присоединяйтесь к нам",
 	},
 	{
 		id: uuidv4(),
 		imgSm: image6lg,
 		imgMd: image6lg,
 		imgLg: image6lg,
-		label: "Шестая картинка",
+		label: "Присоединяйтесь к нам",
 	},
 ];
 
@@ -111,7 +111,10 @@ const ImageGrid = ({ classes = "" }: GalleryProps) => {
 				})}
 			</ul>
 			{showGallery &&
-				createPortal(<Gallery />, document.getElementById("gallery-container") as Element)}
+				createPortal(
+					<Gallery onGalleryClose={() => setShowGallery(false)} />,
+					document.getElementById("gallery-container") as Element,
+				)}
 		</div>
 	);
 };

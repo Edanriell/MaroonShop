@@ -1,16 +1,50 @@
-import { useRef, MouseEvent, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
+import { gsap } from "gsap";
 import { register } from "swiper/element/bundle";
 
 import { GalleryPagination, GalleryNavigation } from "./ui";
+import {
+	isFirstSlideActive,
+	isLastSlideActive,
+	displayGallery,
+	hideGallery,
+	displayGalleryBackdrop,
+	hideGalleryBackdrop,
+} from "./model";
+import { ReactComponent as XmarkSvg } from "./assets/xmark-solid.svg";
 import styles from "./styles.module.scss";
+import "./styles.scss";
+import { GalleryProps } from "./types";
 
 register();
 
-const Gallery = () => {
+const Gallery = ({ onGalleryClose }: GalleryProps) => {
 	const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
 	const galleryBackdropRef = useRef<HTMLDivElement | null>(null);
 	const galleryRef = useRef<HTMLDivElement | null>(null);
 	const gallerySliderRef = useRef<HTMLElement | null>(null);
+
+	const [galleryBackdropCtx] = useState(gsap.context(() => {}, galleryBackdropRef));
+	const [galleryCtx] = useState(gsap.context(() => {}, galleryRef));
+
+	useLayoutEffect(() => {
+		displayGallery(galleryRef);
+		displayGalleryBackdrop(galleryBackdropRef);
+
+		galleryCtx.add("remove", () => {
+			hideGallery(galleryRef, onGalleryClose);
+		});
+
+		galleryBackdropCtx.add("remove", () => {
+			hideGalleryBackdrop(galleryBackdropRef);
+		});
+
+		return () => {
+			galleryCtx.revert();
+			galleryBackdropCtx.revert();
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [galleryBackdropCtx, galleryCtx]);
 
 	useEffect(() => {
 		if (!gallerySliderRef.current) return;
@@ -27,6 +61,11 @@ const Gallery = () => {
 		};
 	}, []);
 
+	// useEffect(() => {
+	// 	if (!gallerySliderRef.current) return;
+	// 	(gallerySliderRef.current as any).swiper.slideTo(3);
+	// }, []);
+
 	function handlePreviousSlideButtonClick() {
 		if (!gallerySliderRef.current) return;
 		(gallerySliderRef.current as any).swiper.slidePrev();
@@ -37,20 +76,32 @@ const Gallery = () => {
 		(gallerySliderRef.current as any).swiper.slideNext();
 	}
 
-	function handleCloseGallery(event: MouseEvent) {
-		// console.log("Close");
+	function handleGalleryClose() {
+		galleryBackdropCtx.remove();
+		galleryCtx.remove();
 	}
 
 	return (
 		<div
 			ref={galleryBackdropRef}
-			onMouseDown={(event) => handleCloseGallery(event)}
 			className={
 				"fixed top-0 left-0 z-40 w-full h-full " +
 				"bg-[rgba(0,0,0,0.6)] flex flex-row items-center " +
 				"justify-around"
 			}
 		>
+			<button
+				onClick={handleGalleryClose}
+				className={"absolute top-[2rem] right-[2rem] w-[4.6rem] h-[4.6rem]"}
+			>
+				<XmarkSvg
+					className={
+						styles.closeButtonAnimations +
+						" ease-in-out duration-500 transition-transform text-white"
+					}
+				/>
+				<span className="sr-only">Закрыть галерею</span>
+			</button>
 			<div
 				ref={galleryRef}
 				className={
@@ -75,66 +126,79 @@ const Gallery = () => {
 						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
 							<img
 								src="http://localhost:4020/gallery-images/1/full.jpg"
-								alt=""
+								alt="Присоединяйтесь к нам"
 								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
 								loading="lazy"
 							/>
+							<div className="swiper-lazy-preloader"></div>
 						</div>
 					</swiper-slide>
 					<swiper-slide lazy="true">
 						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
 							<img
 								src="http://localhost:4020/gallery-images/2/full.jpg"
-								alt=""
+								alt="Присоединяйтесь к нам"
 								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
 								loading="lazy"
 							/>
+							<div className="swiper-lazy-preloader"></div>
 						</div>
 					</swiper-slide>
 					<swiper-slide lazy="true">
 						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
 							<img
 								src="http://localhost:4020/gallery-images/3/full.jpg"
-								alt=""
+								alt="Присоединяйтесь к нам"
 								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
 								loading="lazy"
 							/>
+							<div className="swiper-lazy-preloader"></div>
 						</div>
 					</swiper-slide>
 					<swiper-slide lazy="true">
 						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
 							<img
 								src="http://localhost:4020/gallery-images/4/full.jpg"
-								alt=""
+								alt="Присоединяйтесь к нам"
 								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
 								loading="lazy"
 							/>
+							<div className="swiper-lazy-preloader"></div>
 						</div>
 					</swiper-slide>
 					<swiper-slide lazy="true">
 						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
 							<img
 								src="http://localhost:4020/gallery-images/5/full.jpg"
-								alt=""
+								alt="Присоединяйтесь к нам"
 								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
 								loading="lazy"
 							/>
+							<div className="swiper-lazy-preloader"></div>
 						</div>
 					</swiper-slide>
 					<swiper-slide lazy="true">
 						<div className="swiper-zoom-container w-full h-[100vw] max-h-[80rem]">
 							<img
 								src="http://localhost:4020/gallery-images/6/full.jpg"
-								alt=""
+								alt="Присоединяйтесь к нам"
 								className={"w-full h-[100vw] max-h-[80rem] " + styles.imageFit}
 								loading="lazy"
 							/>
+							<div className="swiper-lazy-preloader"></div>
 						</div>
 					</swiper-slide>
 				</swiper-container>
 				<GalleryNavigation
 					onNextSlideButtonClick={handleNextSlideButtonClick}
 					onPreviousSlideButtonClick={handlePreviousSlideButtonClick}
+					isFirstSlideActive={isFirstSlideActive({
+						activeSlide: (gallerySliderRef.current as any)?.swiper.realIndex,
+					})}
+					isLastSlideActive={isLastSlideActive({
+						activeSlide: (gallerySliderRef.current as any)?.swiper.realIndex,
+						totalSlidesCount: (gallerySliderRef.current as any)?.swiper.slides.length,
+					})}
 				/>
 				<GalleryPagination
 					gallerySliderRef={gallerySliderRef}

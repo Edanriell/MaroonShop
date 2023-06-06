@@ -9,8 +9,11 @@ const GalleryPagination = ({ gallerySliderRef, currentSlideIndex }: GalleryPagin
 
 	useEffect(() => {
 		if (!gallerySliderRef.current) return;
+
 		const slider = gallerySliderRef.current.swiper;
-		const slideCount = slider.slides.length;
+		const slideCount = slider?.slides.length;
+
+		if (!slideCount) return;
 
 		function createButtons() {
 			const buttons: ReactNode[] = [];
@@ -19,9 +22,14 @@ const GalleryPagination = ({ gallerySliderRef, currentSlideIndex }: GalleryPagin
 				buttons.push(
 					<button key={i} className={styles.circleShadow + " rounded-s-full"}>
 						<Circle
-							className={`w-[1.5rem] h-[1.5rem] ${
-								currentSlideIndex === i ? "text-white" : "text-black opacity-[0.3]"
-							}`}
+							className={
+								styles.circleAnimation +
+								` w-[1.5rem] h-[1.5rem] ease-in-out duration-500 transition-all ${
+									currentSlideIndex === i
+										? "text-white"
+										: "text-black opacity-[0.3]"
+								}`
+							}
 							data-image-id={i}
 						/>
 						<span className="sr-only">Перейти на слайд номер {i}</span>

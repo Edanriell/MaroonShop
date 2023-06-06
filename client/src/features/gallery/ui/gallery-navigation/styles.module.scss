@@ -1,0 +1,15 @@
+.leftChevronAnimation:hover {
+	transform: translateX(-6%) scale(0.9);
+}
+
+.rightChevronAnimation:hover {
+	transform: translateX(6%) scale(0.9);
+}
+
+.leftChevronAnimation:active {
+	transform: translateX(-6%) scale(0.7);
+}
+
+.rightChevronAnimation:active {
+	transform: translateX(6%) scale(0.7);
+}
