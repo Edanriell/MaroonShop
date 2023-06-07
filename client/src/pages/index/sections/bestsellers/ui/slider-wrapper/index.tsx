@@ -1,6 +1,8 @@
+import { useDispatch } from "react-redux";
+
 import { BestsellersSlider } from "widgets/bestsellers-slider";
+import { productModel } from "entities/product";
 import { Spinner } from "shared/ui";
-import { SliderWrapperProps } from "./types";
 
 const ProductsLoading = () => {
 	return (
@@ -11,7 +13,7 @@ const ProductsLoading = () => {
 				"md:tranlsate-y-[-50%]"
 			}
 		>
-			<p className={"font-normal font-raleway text-sm-14px mb-[1rem] md:text-md-16px"}>
+			<p className={"font-normal font-raleway text-sm-14px mb-[1rem] md:text-md-18px"}>
 				Загрузка товаров
 			</p>
 			<Spinner width={"3rem"} height={"3rem"} color={"blue-zodiac-950"} />
@@ -28,8 +30,11 @@ const ProductsNotFound = () => {
 				"md:tranlsate-y-[-50%]"
 			}
 		>
-			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-16px font-medium"}>
+			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-18px font-medium"}>
 				Неудалось загрузить товары.
+			</p>
+			<p className={"font-raleway text-sm-14px mb-[1rem] font-normal"}>
+				Попробуйте обновить страницу.
 			</p>
 		</div>
 	);
@@ -51,14 +56,20 @@ const BestSellersNotFound = () => {
 	);
 };
 
-const SliderWrapper = ({ isFetching, isEmpty, bestSellers }: SliderWrapperProps) => {
+const SliderWrapper = () => {
+	const dispatch = useDispatch();
+
+	const { isFetching } = productModel.getProductsAsync()(dispatch);
+	const bestsellers = productModel.getBestsellers();
+	const isEmpty = productModel.isProductsEmpty();
+
 	if (isFetching) return <ProductsLoading />;
 
 	if (isEmpty) return <ProductsNotFound />;
 
-	if (bestSellers.length === 0) return <BestSellersNotFound />;
+	if (bestsellers.length === 0) return <BestSellersNotFound />;
 
-	return <BestsellersSlider bestSellers={bestSellers} />;
+	return <BestsellersSlider bestSellers={bestsellers} />;
 };
 
 export default SliderWrapper;

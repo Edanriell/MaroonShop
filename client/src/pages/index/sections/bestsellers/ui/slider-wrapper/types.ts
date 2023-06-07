@@ -4,4 +4,5 @@ export type SliderWrapperProps = {
 	isFetching: boolean;
 	isEmpty: boolean;
 	bestSellers: Product[];
+	onReload: () => void;
 };

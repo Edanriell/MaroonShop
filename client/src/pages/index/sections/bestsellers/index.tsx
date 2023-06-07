@@ -1,17 +1,8 @@
-import { useDispatch } from "react-redux";
-
-import { productModel } from "entities/product";
 import { Button } from "shared/ui";
 import { SliderWrapper } from "./ui";
 import { BestsellersProps } from "./types";
 
 const Bestsellers = ({ title }: BestsellersProps) => {
-	const dispatch = useDispatch();
-
-	const { isFetching } = productModel.getProductsAsync()(dispatch);
-	const bestSellers = productModel.getBestsellers();
-	const isEmpty = productModel.isProductsEmpty();
-
 	return (
 		<div
 			className={
@@ -47,11 +38,7 @@ const Bestsellers = ({ title }: BestsellersProps) => {
 				</p>
 			</header>
 			<div className={"md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-6 relative"}>
-				<SliderWrapper
-					isFetching={isFetching}
-					isEmpty={isEmpty}
-					bestSellers={bestSellers}
-				/>
+				<SliderWrapper />
 			</div>
 			<div
 				className={
