@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Gallery from "features/gallery";
 import { useScreenSize } from "shared/lib/hooks";
 import { Images, GalleryImageProps, GalleryProps, GallerySize } from "./types";
+import styles from "./styles.module.scss";
 
 import image1sm from "./assets/image-1-sm.jpg";
 import image1md from "./assets/image-1-md.jpg";
@@ -73,12 +74,26 @@ const images: Images = [
 ];
 
 const Image = ({ image }: GalleryImageProps) => (
-	<li data-image-id={image.galleryImageId}>
-		<picture className={"col-start-1 col-end-2 row-start-1 row-end-3"}>
+	<li
+		className={
+			styles.imageHoverEffect +
+			" relative transition-all after:ease-in-out after:duration-[250ms] overflow-hidden " +
+			"before:ease-in-out before:duration-[250ms] "
+		}
+		data-image-id={image.galleryImageId}
+	>
+		<picture className={"relative col-start-1 col-end-2 row-start-1 row-end-3"}>
 			<source media="(min-width:1366px)" srcSet={image.imgLg} />
 			<source media="(min-width:768px)" srcSet={image.imgMd} />
 			<source media="(min-width:320px)" srcSet={image.imgSm} />
-			<img src={image.imgLg} alt={image.label} className={"w-[100%] h-[100%] object-cover"} />
+			<img
+				src={image.imgLg}
+				alt={image.label}
+				className={
+					"w-[100%] h-[100%] object-cover relative " +
+					"transition-transform duration-500 ease-in-out"
+				}
+			/>
 		</picture>
 	</li>
 );

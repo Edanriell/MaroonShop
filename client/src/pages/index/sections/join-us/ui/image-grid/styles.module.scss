@@ -1,0 +1,45 @@
+.imageHoverEffect {
+	cursor: pointer;
+
+	&::before {
+		opacity: 0;
+		position: absolute;
+		display: block;
+		width: 5rem;
+		height: 5rem;
+		background-image: url("./assets/magnifying-glass-plus-solid.svg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0.6);
+		z-index: 20;
+	}
+
+	&::after {
+		opacity: 0;
+		content: "";
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: rgba(1, 1, 1, 0.55);
+	}
+
+	&:hover {
+		img {
+			transform: scale(1.25) rotate(10deg);
+		}
+
+		&::after {
+			opacity: 1;
+		}
+
+		&::before {
+			opacity: 1;
+			transform: translate(-50%, -50%) scale(1);
+		}
+	}
+}
