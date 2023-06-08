@@ -7,15 +7,17 @@ import {
 	displayBurgerMenu,
 	hideBurgerMenu,
 } from "./model";
+
 import { BurgerMenu, BurgerIcon } from "./ui";
+
 import { IsDisplayed, IsTransitioning } from "./types";
 
 const Burger = () => {
-	const burgerMenuRef = useRef(null);
-	const firstBurgerBarRef = useRef(null);
-	const secondBurgerBarRef = useRef(null);
-	const thirdBurgerBarRef = useRef(null);
-	const fourthBurgerBarRef = useRef(null);
+	const burgerMenuRef = useRef<null>(null);
+	const firstBurgerBarRef = useRef<null>(null);
+	const secondBurgerBarRef = useRef<null>(null);
+	const thirdBurgerBarRef = useRef<null>(null);
+	const fourthBurgerBarRef = useRef<null>(null);
 
 	const [isDisplayed, setIsDisplayed] = useState<IsDisplayed>(false);
 	const [isTransitioning, setIsTransitioning] = useState<IsTransitioning>(false);

@@ -1,7 +1,8 @@
+import { FC } from "react";
+
 import { Button } from "shared/ui";
+
 import { HeroCard } from "./ui";
-import { CardImages, HeroProps } from "./types";
-import styles from "./styles.module.scss";
 
 import imgCard1Sm from "./assets/card-image1-sm.jpg";
 import imgCard2Sm from "./assets/card-image2-sm.jpg";
@@ -9,6 +10,10 @@ import imgCard1Md from "./assets/card-image1-md.jpg";
 import imgCard2Md from "./assets/card-image2-md.jpg";
 import imgCard1Lg from "./assets/card-image1-lg.jpg";
 import imgCard2Lg from "./assets/card-image2-lg.jpg";
+
+import { CardImages, HeroProps } from "./types";
+
+import styles from "./styles.module.scss";
 
 const card1Images: CardImages = {
 	imgLg: imgCard1Lg,
@@ -22,7 +27,7 @@ const card2Images: CardImages = {
 	imgSm: imgCard2Sm,
 };
 
-const Hero = ({ title }: HeroProps) => {
+const Hero: FC<HeroProps> = ({ title }) => {
 	return (
 		<div
 			className={

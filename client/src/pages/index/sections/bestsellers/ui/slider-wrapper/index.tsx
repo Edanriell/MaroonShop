@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
 
 import { BestsellersSlider } from "widgets/bestsellers-slider";
+
 import { productModel } from "entities/product";
+
 import { Spinner } from "shared/ui";
 
 const ProductsLoading = () => {

@@ -1,8 +1,11 @@
+import { FC } from "react";
 import classNames from "classnames";
+
 import { InputProps } from "./types";
+
 import "./styles.scss";
 
-const Input = ({
+const Input: FC<InputProps> = ({
 	inputType,
 	inputId,
 	inputName,
@@ -10,7 +13,7 @@ const Input = ({
 	labelFor,
 	classes = "",
 	...rest
-}: InputProps) => {
+}) => {
 	const { inputValue, onInputChange } = rest;
 
 	const inputClasses = classNames({

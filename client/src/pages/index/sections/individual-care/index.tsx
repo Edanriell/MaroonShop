@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { createPortal } from "react-dom";
 
 import QuestionnaireForm from "features/questionnaire-form";
+
 import { Button, Card3d, Modal } from "shared/ui";
 import { useScreenSize } from "shared/lib/hooks";
-import { IndividualCareProps, IndividualCareCard } from "./types";
 
 import IndividualCareCardSm from "./assets/card-sm.jpg";
 import IndividualCareCardMd from "./assets/card-md.jpg";
 import IndividualCareCardLg from "./assets/card-lg.jpg";
+
+import { IndividualCareProps, IndividualCareCard } from "./types";
 
 const individualCareCard: IndividualCareCard = {
 	cardSm: IndividualCareCardSm,
@@ -16,7 +18,7 @@ const individualCareCard: IndividualCareCard = {
 	cardLg: IndividualCareCardLg,
 };
 
-const IndividualCare = ({ title }: IndividualCareProps) => {
+const IndividualCare: FC<IndividualCareProps> = ({ title }) => {
 	const [showModal, setShowModal] = useState<boolean>(false);
 	const { width } = useScreenSize();
 

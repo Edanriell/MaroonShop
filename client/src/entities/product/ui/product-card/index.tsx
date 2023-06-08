@@ -1,11 +1,14 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { getProductType } from "./model";
-import styles from "./styles.module.scss";
+
 import { ProductCardProps } from "./types";
 
+import styles from "./styles.module.scss";
+
 // TODO Make normal card
-export const ProductCard = ({ data, simplified = false }: ProductCardProps) => {
+export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) => {
 	if (simplified) {
 		return (
 			<article className={"grid gird-rows-2-auto w-[22rem] m-auto md:w-[23rem]"}>
@@ -64,5 +67,6 @@ export const ProductCard = ({ data, simplified = false }: ProductCardProps) => {
 			</article>
 		);
 	}
+
 	return <div></div>;
 };

@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+import { JoinUs } from "widgets/join-us";
+import { Contacts } from "widgets/contacts";
+
 import Hero from "./hero";
 import Bestsellers from "./bestsellers";
 import NewCollection from "./new-collection";
 import IndividualCare from "./individual-care";
 import ShopHistory from "./shop-history";
-import JoinUs from "./join-us";
-import Contacts from "./contacts";
 
 import { IndexPageSections, SectionWrapperProps } from "./types";
 

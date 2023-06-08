@@ -1,16 +1,19 @@
+import { FC } from "react";
 import classNames from "classnames";
 
 import { ReactComponent as LeftChevron } from "./assets/chevron-left-solid.svg";
 import { ReactComponent as RightChevron } from "./assets/chevron-right-solid.svg";
+
 import { GalleryNavigationProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const GalleryNavigation = ({
+const GalleryNavigation: FC<GalleryNavigationProps> = ({
 	onNextSlideButtonClick,
 	onPreviousSlideButtonClick,
 	isFirstSlideActive,
 	isLastSlideActive,
-}: GalleryNavigationProps) => {
+}) => {
 	const leftChevronClasses = classNames({
 		"opacity-25": isFirstSlideActive,
 	});

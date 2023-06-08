@@ -1,7 +1,10 @@
+import { FC } from "react";
+
 import { LinkExternalProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const LinkExternal = ({
+const LinkExternal: FC<LinkExternalProps> = ({
 	text,
 	commonButtonClasses,
 	handleButtonMouseEnter,
@@ -11,7 +14,7 @@ const LinkExternal = ({
 	buttonTextRef,
 	linkExternal,
 	classes,
-}: LinkExternalProps) => {
+}) => {
 	return (
 		<div className={"relative z-10"}>
 			<a

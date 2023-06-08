@@ -1,4 +1,5 @@
 import { Button } from "shared/ui";
+
 import style from "./styles.module.scss";
 
 const NewCollection = () => {

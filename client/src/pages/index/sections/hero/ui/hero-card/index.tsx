@@ -1,10 +1,13 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { Card3d } from "shared/ui";
-import { HeroCardProps } from "./types";
+
 import { ReactComponent as Arrow } from "./assets/arrow.svg";
 
-const HeroCard = ({ classes, images, link, label }: HeroCardProps) => {
+import { HeroCardProps } from "./types";
+
+const HeroCard: FC<HeroCardProps> = ({ classes, images, link, label }) => {
 	return (
 		<Card3d classes={classes}>
 			<Link to={link}>

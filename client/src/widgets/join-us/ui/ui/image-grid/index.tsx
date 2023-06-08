@@ -1,11 +1,12 @@
-import { useState, useEffect, MouseEvent } from "react";
+/* eslint-disable no-console */
+
+import { useState, useEffect, MouseEvent, FC } from "react";
 import { createPortal } from "react-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import Gallery from "features/gallery";
+
 import { useScreenSize } from "shared/lib/hooks";
-import { Images, GalleryImageProps, GalleryProps, GallerySize } from "./types";
-import styles from "./styles.module.scss";
 
 import image1sm from "./assets/image-1-sm.jpg";
 import image1md from "./assets/image-1-md.jpg";
@@ -21,6 +22,10 @@ import image4md from "./assets/image-4-md.jpg";
 import image4lg from "./assets/image-4-lg.jpg";
 import image5lg from "./assets/image-5-lg.jpg";
 import image6lg from "./assets/image-6-lg.jpg";
+
+import { Images, GalleryImageProps, GalleryProps, GallerySize } from "./types";
+
+import styles from "./styles.module.scss";
 
 const images: Images = [
 	{
@@ -73,7 +78,7 @@ const images: Images = [
 	},
 ];
 
-const Image = ({ image }: GalleryImageProps) => (
+const Image: FC<GalleryImageProps> = ({ image }) => (
 	<li
 		className={
 			styles.imageHoverEffect +
@@ -98,7 +103,7 @@ const Image = ({ image }: GalleryImageProps) => (
 	</li>
 );
 
-const ImageGrid = ({ classes = "" }: GalleryProps) => {
+const ImageGrid: FC<GalleryProps> = ({ classes = "" }) => {
 	const [activeSlide, setActiveSlide] = useState<number>();
 	const [showGallery, setShowGallery] = useState<boolean>();
 	const [gallerySize, setGallerySize] = useState<GallerySize>(4);
@@ -113,12 +118,16 @@ const ImageGrid = ({ classes = "" }: GalleryProps) => {
 	}, [width]);
 
 	function handleImageClick(event: MouseEvent) {
-		const activeImageId = (
-			event.target as HTMLElement
-		).parentElement?.parentElement?.getAttribute("data-image-id");
+		const activeImageId = (event.target as HTMLElement).getAttribute("data-image-id");
+
+		if (!activeImageId) {
+			setActiveSlide(0);
+
+			console.error("Cant't get the target image id.");
+			console.error("Check data-image-id attribute.");
+		}
 
 		setActiveSlide(Number(activeImageId));
-
 		setShowGallery(true);
 	}
 

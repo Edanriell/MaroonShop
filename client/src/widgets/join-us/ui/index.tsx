@@ -1,8 +1,12 @@
+import { FC } from "react";
+
 import { Button } from "shared/ui";
+
 import { ImageGrid } from "./ui";
+
 import { JoinUsProps } from "./types";
 
-const JoinUs = ({ title }: JoinUsProps) => {
+const JoinUs: FC<JoinUsProps> = ({ title }) => {
 	return (
 		<div
 			className={

@@ -1,14 +1,18 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 import { useScreenSize, useScrollPosition } from "shared/lib/hooks";
+
 import { Burger, PrimaryNavigation, Toolbar } from "./ui";
+
 import { ReactComponent as Logo } from "./assets/logo.svg";
+
 import { HeaderProps } from "./types";
 
 const HeaderBar = () => <div className={"border-b-[0.1rem] border-iron-200 relative z-10"}></div>;
 
-const Header = ({ headerUnderline = false }: HeaderProps) => {
+const Header: FC<HeaderProps> = ({ headerUnderline = false }) => {
 	const { width } = useScreenSize();
 	const { scrollPosition } = useScrollPosition();
 

@@ -1,14 +1,16 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode, FC } from "react";
 
 import { ReactComponent as Circle } from "./assets/circle-solid.svg";
-import styles from "./styles.module.scss";
+
 import { GalleryPaginationProps } from "./types";
 
-const GalleryPagination = ({
+import styles from "./styles.module.scss";
+
+const GalleryPagination: FC<GalleryPaginationProps> = ({
 	gallerySliderRef,
 	currentSlideIndex,
 	totalSlides,
-}: GalleryPaginationProps) => {
+}) => {
 	const [paginationButtons, setPaginationButtons] = useState<ReactNode[]>();
 
 	useEffect(() => {

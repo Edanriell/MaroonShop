@@ -1,7 +1,10 @@
+import { FC } from "react";
+
 import { ButtonProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const Button = ({
+const Button: FC<ButtonProps> = ({
 	text,
 	commonButtonClasses,
 	handleButtonMouseEnter,
@@ -11,7 +14,7 @@ const Button = ({
 	buttonTextRef,
 	classes,
 	click = () => {},
-}: ButtonProps) => {
+}) => {
 	return (
 		<div onClick={() => click()} className={"relative z-10"}>
 			<button

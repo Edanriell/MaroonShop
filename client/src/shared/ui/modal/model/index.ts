@@ -1,7 +1,8 @@
 import { MutableRefObject } from "react";
+
 import { gsap } from "gsap";
 
-export const displayModal = (modalRef: MutableRefObject<null>): void => {
+export const displayModal = (modalRef: MutableRefObject<HTMLDialogElement | null>): void => {
 	gsap.fromTo(
 		modalRef.current,
 		{
@@ -17,7 +18,10 @@ export const displayModal = (modalRef: MutableRefObject<null>): void => {
 	);
 };
 
-export const hideModal = (modalRef: MutableRefObject<null>, closeModal: () => void): void => {
+export const hideModal = (
+	modalRef: MutableRefObject<HTMLDialogElement | null>,
+	closeModal: () => void,
+): void => {
 	gsap.fromTo(
 		modalRef.current,
 		{
@@ -36,7 +40,7 @@ export const hideModal = (modalRef: MutableRefObject<null>, closeModal: () => vo
 	);
 };
 
-export const displayBackdrop = (backdropRef: MutableRefObject<null>): void => {
+export const displayBackdrop = (backdropRef: MutableRefObject<HTMLDivElement | null>): void => {
 	gsap.fromTo(
 		backdropRef.current,
 		{
@@ -50,7 +54,7 @@ export const displayBackdrop = (backdropRef: MutableRefObject<null>): void => {
 	);
 };
 
-export const hideBackdrop = (backdropRef: MutableRefObject<null>): void => {
+export const hideBackdrop = (backdropRef: MutableRefObject<HTMLDivElement | null>): void => {
 	gsap.fromTo(
 		backdropRef.current,
 		{

@@ -1,13 +1,17 @@
-import { ReactComponent as XmarkSvg } from "./assets/xmark-solid.svg";
-import styles from "./styles.module.scss";
+import { FC } from "react";
+
 import { GalleryContainerProps } from "./types";
 
-const GalleryContainer = ({
+import { ReactComponent as XmarkSvg } from "./assets/xmark-solid.svg";
+
+import styles from "./styles.module.scss";
+
+const GalleryContainer: FC<GalleryContainerProps> = ({
 	galleryBackdropRef,
 	galleryRef,
 	onGalleryClose,
 	children,
-}: GalleryContainerProps) => {
+}) => {
 	return (
 		<div
 			ref={galleryBackdropRef}

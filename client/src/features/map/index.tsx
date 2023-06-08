@@ -1,13 +1,16 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
+
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import "./styles.scss";
+import { CustomMarkers } from "./types";
+
 import { ReactComponent as MapMarker } from "./assets/map-marker.svg";
 import mapSm from "./assets/map-sm.jpg";
 import mapMd from "./assets/map-md.jpg";
 import mapLg from "./assets/map-lg.jpg";
-import { CustomMarkers } from "./types";
+
+import "./styles.scss";
 
 const Map = () => {
 	const mapContainer = useRef(null);

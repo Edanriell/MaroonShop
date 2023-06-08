@@ -5,26 +5,26 @@ import type { Product } from "./model";
 
 const BASE_URL = "/products";
 
-// TODO change GetProductsParams type
+// TODO change GetProductsParams type when time comes.
 export type GetProductsParams = {
-	id: number;
-	name: string;
-	description: Array<String>;
-	components: string;
-	usage: string;
-	type: {
+	id?: number;
+	name?: string;
+	description?: Array<String>;
+	components?: string;
+	usage?: string;
+	type?: {
 		main: string;
 		secondary: string;
 		skin: Array<string>;
 	};
-	image: {
+	image?: {
 		lg: string;
 		md: string;
 		sm: string;
 	};
-	price: number;
-	views: number;
-	sells: number;
+	price?: number;
+	views?: number;
+	sells?: number;
 };
 
 export type GetProductByIdParams = {

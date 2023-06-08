@@ -1,7 +1,7 @@
 import { MutableRefObject } from "react";
 import { gsap } from "gsap";
 
-export const displaySnackbar = (snackbarRef: MutableRefObject<null>): void => {
+export const displaySnackbar = (snackbarRef: MutableRefObject<HTMLDivElement | null>): void => {
 	gsap.fromTo(
 		snackbarRef.current,
 		{
@@ -18,7 +18,7 @@ export const displaySnackbar = (snackbarRef: MutableRefObject<null>): void => {
 };
 
 export const hideSnackbar = (
-	snackbarRef: MutableRefObject<null>,
+	snackbarRef: MutableRefObject<HTMLDivElement | null>,
 	handleCloseSnackbar: () => void,
 ): void => {
 	gsap.fromTo(

@@ -1,7 +1,10 @@
+import { FC } from "react";
+
 import { SelectProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const Select = ({
+const Select: FC<SelectProps> = ({
 	selectName,
 	selectId,
 	labelContent,
@@ -9,7 +12,7 @@ const Select = ({
 	children,
 	classes = "",
 	...rest
-}: SelectProps) => {
+}) => {
 	const { selectValue, onSelectChange } = rest;
 
 	return (

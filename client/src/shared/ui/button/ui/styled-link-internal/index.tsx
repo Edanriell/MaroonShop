@@ -1,9 +1,11 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { LinkInternalProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const LinkInternal = ({
+const LinkInternal: FC<LinkInternalProps> = ({
 	text,
 	commonButtonClasses,
 	handleButtonMouseEnter,
@@ -13,7 +15,7 @@ const LinkInternal = ({
 	buttonTextRef,
 	linkInternal,
 	classes,
-}: LinkInternalProps) => {
+}) => {
 	return (
 		<div className={"relative z-10"}>
 			<Link

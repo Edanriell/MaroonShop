@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 
 import { SocialLinks } from "shared/ui";
+
 import { SecondaryNavigation, Copyright } from "./ui";
+
 import { ReactComponent as Logotype } from "./assets/logotype.svg";
 
 const Footer = () => {

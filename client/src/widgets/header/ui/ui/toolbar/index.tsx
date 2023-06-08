@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as CartIcon } from "./assets/cart.svg";
 import { ReactComponent as AuthIcon } from "./assets/auth.svg";
+
 import { UserActions } from "./types";
 
 // TODO FIX links when will be creating corresponding pages.

@@ -1,7 +1,9 @@
 import { useRef, useEffect } from "react";
 
 import { Spinner } from "shared/ui";
-import { displayElement } from "./model/index";
+
+import { displayElement } from "./model";
+
 import { ReactComponent as Logo } from "./assets/logo.svg";
 
 const LoadingPage = () => {

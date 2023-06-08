@@ -9,14 +9,12 @@ export type RootState = {
 	};
 };
 
-// TODO Rethink QueryConfig type
+// TODO Rethink QueryConfig type when time comes.
 export type QueryConfig = {
 	id?: number;
 	type?: {
 		main: string;
 		secondary: string;
-		skin: Array<string>;
+		skin: string[];
 	};
-	views?: number;
-	sells?: number;
 };

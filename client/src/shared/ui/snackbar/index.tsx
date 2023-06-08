@@ -1,15 +1,18 @@
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect, FC } from "react";
 import { gsap } from "gsap";
 import classNames from "classnames";
 
-import { SnackbarProps } from "./types";
-import { ReactComponent as Xmark } from "./assets/xmark-solid.svg";
-import "./styles.scss";
 import { displaySnackbar, hideSnackbar } from "./model";
 
-const Snackbar = ({ type, message, autoCloseDuration }: SnackbarProps) => {
+import { ReactComponent as Xmark } from "./assets/xmark-solid.svg";
+
+import { SnackbarProps } from "./types";
+
+import "./styles.scss";
+
+const Snackbar: FC<SnackbarProps> = ({ type, message, autoCloseDuration }) => {
 	const [displayed, setDisplayed] = useState<boolean>(false);
-	const snackbarRef = useRef(null);
+	const snackbarRef = useRef<HTMLDivElement | null>(null);
 
 	const [snackbarCtx] = useState(gsap.context(() => {}, snackbarRef));
 

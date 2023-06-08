@@ -1,4 +1,5 @@
 import { Button } from "shared/ui";
+
 import styles from "./styles.module.scss";
 
 const ShopHistory = () => {

@@ -1,12 +1,15 @@
+import { FC } from "react";
+
 import { ReactComponent as Bar } from "./assets/bar.svg";
+
 import { BurgerBars, BurgerIconProps } from "./types";
 
-const BurgerIcon = ({
+const BurgerIcon: FC<BurgerIconProps> = ({
 	firstBurgerBarRef,
 	secondBurgerBarRef,
 	thirdBurgerBarRef,
 	fourthBurgerBarRef,
-}: BurgerIconProps) => {
+}) => {
 	const burgerBars: BurgerBars = [
 		{
 			Bar,

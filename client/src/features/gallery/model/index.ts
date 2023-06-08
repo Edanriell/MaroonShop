@@ -2,6 +2,7 @@ import { MutableRefObject } from "react";
 import { gsap } from "gsap";
 
 import { GalleryImage } from "shared/api";
+
 import { isFirstSlideActiveParameters, isLastSlideActiveParameters } from "./types";
 
 export const isFirstSlideActive = ({ activeSlide }: isFirstSlideActiveParameters): boolean =>
@@ -16,6 +17,14 @@ export const isGalleryImage = (object: any): object is GalleryImage => {
 	return (
 		typeof object === "object" && object !== null && "imageUrl" in object && "imageId" in object
 	);
+};
+
+export const setInitialSlide = (
+	gallerySliderRef: MutableRefObject<HTMLElement | null>,
+	activeSlide: number,
+) => {
+	if (!gallerySliderRef.current) return;
+	(gallerySliderRef.current as any).swiper.slideTo(activeSlide, 0);
 };
 
 export const displayGallery = (galleryRef: MutableRefObject<HTMLDivElement | null>): void => {

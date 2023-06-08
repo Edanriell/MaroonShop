@@ -1,9 +1,10 @@
-import { useRef, useState, useEffect, useLayoutEffect, useCallback, memo } from "react";
+import { useRef, useState, useEffect, useLayoutEffect, useCallback, memo, FC } from "react";
 import { gsap } from "gsap";
 import { register } from "swiper/element/bundle";
 
 import { Spinner, Button } from "shared/ui";
-import { galleryApi } from "shared/api";
+import { GalleryImage, galleryApi } from "shared/api";
+
 import { GalleryPagination, GalleryNavigation, GalleryContainer } from "./ui";
 import {
 	isFirstSlideActive,
@@ -13,8 +14,11 @@ import {
 	displayGalleryBackdrop,
 	hideGalleryBackdrop,
 	isGalleryImage,
+	setInitialSlide,
 } from "./model";
+
 import { GalleryProps } from "./types";
+
 import styles from "./styles.module.scss";
 import "./styles.scss";
 
@@ -23,8 +27,8 @@ register();
 const MemoizedGalleryNavigation = memo(GalleryNavigation);
 const MemoizedGalleryPagination = memo(GalleryPagination);
 
-const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
-	const [images, setImages] = useState<any>([]);
+const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
+	const [images, setImages] = useState<GalleryImage[]>([]);
 	const [totalSlides, setTotalSlides] = useState<number>(0);
 	const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
 
@@ -69,6 +73,7 @@ const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
 					setTotalSlides(images.data.length);
 				}
 				setIsSuccessfullyLoaded(true);
+				if (activeSlide) setInitialSlide(gallerySliderRef, activeSlide);
 			} catch (error) {
 				// eslint-disable-next-line no-console
 				console.error(error);
@@ -79,6 +84,7 @@ const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
 		}
 
 		getImages();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reload]);
 
 	useEffect(() => {
@@ -95,11 +101,6 @@ const Gallery = ({ onGalleryClose, activeSlide }: GalleryProps) => {
 			slider?.off("slideChange", handleSlideChange);
 		};
 	}, [images]);
-
-	// useEffect(() => {
-	// 	if (!gallerySliderRef.current || !activeSlide) return;
-	// 	(gallerySliderRef.current as any).swiper.slideTo(activeSlide);
-	// }, [activeSlide]);
 
 	const handlePreviousSlideButtonClick = useCallback(() => {
 		if (!gallerySliderRef.current) return;

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import LoadingPage from "./loading";
 
 const IndexPage = lazy(() => import("./index/index"));

@@ -1,8 +1,12 @@
+import { FC } from "react";
+
 import { Button } from "shared/ui";
+
 import { SliderWrapper } from "./ui";
+
 import { BestsellersProps } from "./types";
 
-const Bestsellers = ({ title }: BestsellersProps) => {
+const Bestsellers: FC<BestsellersProps> = ({ title }) => {
 	return (
 		<div
 			className={

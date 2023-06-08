@@ -1,4 +1,5 @@
 import { SocialLinks } from "shared/ui";
+
 import { BurgerNavigation } from "./ui";
 
 const BurgerMenu = () => {

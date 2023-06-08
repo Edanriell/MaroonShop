@@ -2,11 +2,11 @@ import { MutableRefObject } from "react";
 
 export type MouseMoveEffectParameters = {
 	event: any;
-	cardContentRef: MutableRefObject<null>;
-	cardHighlightRef: MutableRefObject<null>;
+	cardContentRef: MutableRefObject<HTMLDivElement | null>;
+	cardHighlightRef: MutableRefObject<HTMLDivElement | null>;
 };
 
 export type MouseOutEffectParameters = {
-	cardContentRef: MutableRefObject<null>;
-	cardHighlightRef: MutableRefObject<null>;
+	cardContentRef: MutableRefObject<HTMLDivElement | null>;
+	cardHighlightRef: MutableRefObject<HTMLDivElement | null>;
 };

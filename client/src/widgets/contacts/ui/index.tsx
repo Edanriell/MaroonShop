@@ -1,8 +1,12 @@
+import { FC } from "react";
+
 import Map from "features/map";
+
 import { SocialLinks } from "shared/ui";
+
 import { ContactsProps } from "./types";
 
-const Contacts = ({ title }: ContactsProps) => {
+const Contacts: FC<ContactsProps> = ({ title }) => {
 	return (
 		<div
 			className={

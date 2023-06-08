@@ -1,16 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
 import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
+
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
-import styles from "./styles.module.scss";
+
 import { UniversalSliderProps } from "./types";
+
+import styles from "./styles.module.scss";
 
 register();
 
-const UniversalSlider = ({ bestSellers, classes }: UniversalSliderProps) => {
-	const sliderRef = useRef(null);
+const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, classes }) => {
+	const sliderRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
 		const sliderContainer = sliderRef.current;

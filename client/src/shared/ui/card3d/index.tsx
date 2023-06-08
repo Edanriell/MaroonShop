@@ -1,12 +1,14 @@
-import { useRef } from "react";
+import { useRef, FC } from "react";
 
 import { mouseMoveEffect, mouseOutEffect } from "./model";
+
 import { Card3dProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const Card3d = ({ children, classes, highlight = true }: Card3dProps) => {
-	const cardHighlightRef = useRef(null);
-	const cardContentRef = useRef(null);
+const Card3d: FC<Card3dProps> = ({ children, classes, highlight = true }) => {
+	const cardHighlightRef = useRef<HTMLDivElement | null>(null);
+	const cardContentRef = useRef<HTMLDivElement | null>(null);
 
 	function handleCardMouseMove(event: any) {
 		mouseMoveEffect({

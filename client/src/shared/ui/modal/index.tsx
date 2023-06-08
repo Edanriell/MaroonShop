@@ -1,13 +1,15 @@
-import { useLayoutEffect, useRef, useState, MouseEvent } from "react";
+import { useLayoutEffect, useRef, useState, MouseEvent, FC } from "react";
 import { gsap } from "gsap";
 
 import { displayModal, hideModal, displayBackdrop, hideBackdrop } from "./model";
+
 import { ModalProps } from "./types";
+
 import styles from "./styles.module.scss";
 
-const Modal = ({ title, description, children, onModalClose }: ModalProps) => {
-	const backdropRef = useRef(null);
-	const modalRef = useRef(null);
+const Modal: FC<ModalProps> = ({ title, description, children, onModalClose }) => {
+	const backdropRef = useRef<HTMLDivElement | null>(null);
+	const modalRef = useRef<HTMLDialogElement | null>(null);
 
 	const [backdropCtx] = useState(gsap.context(() => {}, backdropRef));
 	const [modalCtx] = useState(gsap.context(() => {}, modalRef));

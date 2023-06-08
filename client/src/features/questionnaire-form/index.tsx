@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { QuestionnaireItem, questionnaireApi } from "shared/api";
 import { Input, Select, Snackbar } from "shared/ui";
 import { useDebounce } from "shared/lib/hooks";
+
 import { SubmitButton } from "./ui";
 import { reducer, initialFormState } from "./model/store";
 import {
@@ -17,6 +18,7 @@ import {
 	selectingLocationAction,
 } from "./model/actions";
 import { isFormValid } from "./model";
+
 import "./styles.scss";
 
 const QuestionnaireForm = () => {
@@ -24,6 +26,7 @@ const QuestionnaireForm = () => {
 	const [isFormSuccessfullySubmitted, setIsFormSuccessfullySubmitted] = useState<boolean | null>(
 		null,
 	);
+
 	const [state, dispatch] = useReducer(reducer, initialFormState);
 	const [debouncedState] = useDebounce(state, 2000);
 

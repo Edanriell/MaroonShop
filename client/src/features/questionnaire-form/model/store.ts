@@ -1,4 +1,3 @@
-import { FormState, FormActions } from "./types";
 import {
 	CHANGEDNAME,
 	CHANGEDSURNAME,
@@ -8,6 +7,9 @@ import {
 	SELECTEDSKINTYPE,
 	SELECTEDLOCATION,
 } from "./actions";
+
+import { FormState, FormActions } from "./types";
+
 import { checkInputLength, checkInputPattern, checkInputRange, checkSelectOption } from "./index";
 
 export const initialFormState: FormState = {

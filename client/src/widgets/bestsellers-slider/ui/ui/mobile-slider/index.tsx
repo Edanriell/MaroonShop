@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
+
 import { useScreenSize } from "shared/lib/hooks";
+
 import { MobileSliderProps } from "./types";
+
 import styles from "./styles.module.scss";
 
 register();
 
-const MobileSlider = ({ bestSellers, classes }: MobileSliderProps) => {
+const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, classes }) => {
 	const [slidesCount, setSlidesCount] = useState<number>(0);
 	const { width } = useScreenSize();
 

@@ -1,7 +1,9 @@
-import { useRef } from "react";
+import { useRef, FC } from "react";
 
 import { StyledButton, StyledLinkInternal, StyledLinkExternal } from "./ui";
+
 import { mouseEnterHoverEffect, mouseLeaveHoverEffect } from "./model";
+
 import { ButtonProps } from "./types";
 
 const commonButtonClasses =
@@ -11,10 +13,17 @@ const commonButtonClasses =
 	"md:text-md-16px-lh-22px md:pl-[2.7rem] md:pr-[2.7rem] md:pt-[0.9rem] md:pb-[0.9rem] " +
 	"pointer-events-auto relative overflow-hidden inline-block";
 
-const Button = ({ type, text, linkInternal, linkExternal, classes = "", click }: ButtonProps) => {
-	const buttonBoxRef = useRef(null);
-	const buttonTextRef = useRef(null);
-	const buttonRef = useRef(null);
+const Button: FC<ButtonProps> = ({
+	type,
+	text,
+	linkInternal,
+	linkExternal,
+	classes = "",
+	click,
+}) => {
+	const buttonBoxRef = useRef<null>(null);
+	const buttonTextRef = useRef<null>(null);
+	const buttonRef = useRef<null>(null);
 
 	function handleButtonMouseEnter() {
 		mouseEnterHoverEffect({

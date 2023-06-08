@@ -1,10 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
 import classNames from "classnames";
 
 import { Spinner } from "shared/ui";
+
 import { displayElement } from "./model";
 
-const SubmitButtonContent = ({ isFormSubmitting }: { isFormSubmitting: boolean }) => {
+import { SubmitButtonContentProps, SubmitButtonProps } from "./types";
+
+const SubmitButtonContent: FC<SubmitButtonContentProps> = ({ isFormSubmitting }) => {
 	const spinnerRef = useRef<HTMLDivElement | null>(null);
 	const textContentRef = useRef<HTMLDivElement | null>(null);
 
@@ -29,14 +32,10 @@ const SubmitButtonContent = ({ isFormSubmitting }: { isFormSubmitting: boolean }
 	);
 };
 
-const SubmitButton = ({
+const SubmitButton: FC<SubmitButtonProps> = ({
 	isFormValid,
 	isFormSubmitting,
 	isFormSuccessfullySubmitted,
-}: {
-	isFormValid: () => boolean;
-	isFormSubmitting: boolean;
-	isFormSuccessfullySubmitted: boolean | null;
 }) => {
 	const submitButtonClasses = classNames({
 		"button-disabled":
