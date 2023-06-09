@@ -8,6 +8,7 @@ import { ProductCardProps } from "./types";
 import styles from "./styles.module.scss";
 
 // TODO Make normal card
+// TODO data should accept bestsellers type and product type
 export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) => {
 	if (simplified) {
 		return (
@@ -68,5 +69,24 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 		);
 	}
 
-	return <div></div>;
+	return (
+		<article>
+			<picture>
+				<source
+					media="(min-width:1366px)"
+					srcSet={`http://localhost:4020${data.image.lg}`}
+				/>
+				<source
+					media="(min-width:768px)"
+					srcSet={`http://localhost:4020${data.image.md}`}
+				/>
+				<source
+					media="(min-width:320px)"
+					srcSet={`http://localhost:4020${data.image.sm}`}
+				/>
+				<img src={`http://localhost:4020${data.image.lg}`} alt={data.name} />
+			</picture>
+			<h3>{data.name}</h3>
+		</article>
+	);
 };

@@ -6,8 +6,9 @@ import { schema, normalize } from "normalizr";
 import type { AxiosResponse } from "axios";
 
 import { Product, productsApi } from "shared/api";
-
 import { NormalizedProducts, QueryConfig, RootState } from "./types";
+
+// GET RID OF useQuery
 
 const PRODUCT_LIST_QUERY_KEY = "products";
 

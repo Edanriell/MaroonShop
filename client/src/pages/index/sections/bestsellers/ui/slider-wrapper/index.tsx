@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { BestsellersSlider } from "widgets/bestsellers-slider";
@@ -23,7 +24,7 @@ const ProductsLoading = () => {
 	);
 };
 
-const ProductsNotFound = () => {
+const ProductsNotFound = ({ reload }: { reload: any }) => {
 	return (
 		<div
 			className={
@@ -38,6 +39,7 @@ const ProductsNotFound = () => {
 			<p className={"font-raleway text-sm-14px mb-[1rem] font-normal"}>
 				Попробуйте обновить страницу.
 			</p>
+			<button onClick={reload}>RELOAD</button>
 		</div>
 	);
 };
@@ -59,6 +61,10 @@ const BestSellersNotFound = () => {
 };
 
 const SliderWrapper = () => {
+	const [reload, setReload] = useState<number>(Math.random());
+	// const [isFetching, setIsFetching] = useState<boolean>();
+	// const [bestsellers, setBestsellers] = useState<any>();
+	// const [isEmpty, setIsEmpty] = useState<boolean>();
 	const dispatch = useDispatch();
 
 	const { isFetching } = productModel.getProductsAsync()(dispatch);
@@ -67,7 +73,7 @@ const SliderWrapper = () => {
 
 	if (isFetching) return <ProductsLoading />;
 
-	if (isEmpty) return <ProductsNotFound />;
+	if (isEmpty) return <ProductsNotFound reload={() => setReload(Math.random())} />;
 
 	if (bestsellers.length === 0) return <BestSellersNotFound />;
 
