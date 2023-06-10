@@ -74,7 +74,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 		<article
 			className={
 				"relative min-w-[27rem] h-[29rem] w-full pl-[2rem] " +
-				"pr-[2rem] pt-[1.5rem] pb-[1.5rem]"
+				"pr-[2rem] pt-[1.5rem] pb-[1.5rem] md:min-w-[32.4rem] md:h-[35rem]"
 			}
 		>
 			<picture>
@@ -93,7 +93,9 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 				<img
 					src={`http://localhost:4020${data.image.lg}`}
 					alt={data.name}
-					className={"absolute top-0 left-0 min-w-[27rem] h-[29rem] w-full object-cover"}
+					className={
+						"absolute top-0 left-0 min-w-[27rem] h-[29rem] w-full object-cover md:min-w-[32.4rem] md:h-[35rem]"
+					}
 				/>
 			</picture>
 			<div className={"relative z-10 flex flex-col justify-end h-full"}>
@@ -108,7 +110,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 					<strong
 						className={
 							"flex flex-row items-center font-medium font-mPlus " +
-							"text-sm-12px text-blue-zodiac-950"
+							"text-sm-12px text-blue-zodiac-950 md:text-md-13px"
 						}
 					>
 						<span>{data.price}</span>
@@ -118,13 +120,21 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 					</strong>
 				</div>
 				<div className={"flex flex-row items-center justify-between"}>
-					<p className={"font-normal font-mPlus text-sm-13px text-manatee-500"}>
+					<p
+						className={
+							"font-normal font-mPlus text-sm-13px text-manatee-500 md:text-md-13px"
+						}
+					>
 						{getProductType({
 							mainType: data.type.main,
 							secondaryType: data.type.secondary,
 						})}
 					</p>
-					<span className={"font-normal font-mPlus text-sm-13px text-manatee-500"}>
+					<span
+						className={
+							"font-normal font-mPlus text-sm-13px text-manatee-500 md:text-md-13px"
+						}
+					>
 						{data.quantity}
 					</span>
 				</div>

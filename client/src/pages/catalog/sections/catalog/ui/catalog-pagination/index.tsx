@@ -6,6 +6,7 @@ import { ReactComponent as RightArrow } from "./assets/right-arrow.svg";
 
 import { CatalogPaginationProps } from "./types";
 
+// TODO CHECK STYLES FOR MD AND FIX CARDS CATEGORIES
 const CatalogPagination: FC<CatalogPaginationProps> = ({
 	currentPage,
 	totalPages,
@@ -22,23 +23,23 @@ const CatalogPagination: FC<CatalogPaginationProps> = ({
 	}
 
 	return (
-		<div className="mt-[3.5rem] flex flex-row items-center justify-between">
+		<div className="mt-[3.5rem] flex flex-row items-center justify-between md:mt-[5rem] md:justify-end">
 			<div className="flex flex-row items-center">
-				<span className="font-medium font-mPlus text-sm-14px-lh-20px text-blue-950">
+				<span className="font-medium font-mPlus text-sm-14px-lh-20px text-blue-950 md:text-md-18px">
 					{currentPage}
 				</span>
-				<Line className="w-[3rem] h-[0.1rem] text-blue-zodiac-950 mr-[0.8rem] ml-[0.8rem]" />
-				<span className="font-medium font-mPlus text-sm-14px-lh-20px text-manatee-500">
+				<Line className="w-[3rem] h-[0.1rem] text-blue-zodiac-950 mr-[0.8rem] ml-[0.8rem] md:w-[5rem] md:mr-[1rem] md:ml-[1rem]" />
+				<span className="font-medium font-mPlus text-sm-14px-lh-20px text-manatee-500 md:text-md-18px">
 					{totalPages}
 				</span>
 			</div>
-			<div className="flex flex-row items-center gap-x-[3rem]">
+			<div className="flex flex-row items-center gap-x-[3rem] md:gap-x-[3.2rem] md:ml-[20.9rem]">
 				<button
 					onClick={handlePreviousPageChange}
 					type="button"
 					disabled={currentPage === 1}
 				>
-					<LeftArrow className="w-[2.4rem] h-[1.1rem] text-blue-950" />
+					<LeftArrow className="w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem]" />
 					<span className="sr-only">Предыдущие товары</span>
 				</button>
 				<button
@@ -46,7 +47,7 @@ const CatalogPagination: FC<CatalogPaginationProps> = ({
 					type="button"
 					disabled={currentPage === totalPages}
 				>
-					<RightArrow className="w-[2.4rem] h-[1.1rem] text-blue-950" />
+					<RightArrow className="w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem]" />
 					<span className="sr-only">Следующие товары</span>
 				</button>
 			</div>

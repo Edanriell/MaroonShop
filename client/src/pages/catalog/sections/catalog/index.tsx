@@ -54,23 +54,27 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	};
 
 	return (
-		<div className={"pt-[3rem] pb-[7rem] pl-[1.5rem] pr-[1.5rem]"}>
-			<div className={"mb-[4rem] flex flex-row justify-between"}>
+		<div
+			className={
+				"pt-[3rem] pb-[7rem] pl-[1.5rem] pr-[1.5rem] md:pr-[4.5rem] md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem]"
+			}
+		>
+			<div className={"mb-[4rem] flex flex-row justify-between md:mb-[3.6rem]"}>
 				<div className={"flex-shrink-0 flex-grow-0"}>
 					<h2
 						className={
-							"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950"
+							"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 md:text-md-36px"
 						}
 					>
 						{title}
 					</h2>
 				</div>
 				<div className={"flex-shrink-0 flex-grow-0"}>
-					<Filter />
+					<Filter classes={"md:pl-[4.1rem] md:pr-[4.1rem]"} />
 				</div>
 			</div>
 			<div>
-				<ul className="flex flex-col items-center gap-y-[3rem]">
+				<ul className="flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] justify-center">
 					{getPageProducts().map((product) => (
 						<li key={product.id}>
 							<ProductCard data={product} />

@@ -87,6 +87,12 @@ module.exports = {
 					lineHeight: "4.9rem",
 				},
 			],
+			"md-13px": [
+				"1.3rem",
+				{
+					lineHeight: "1.9rem",
+				},
+			],
 			"md-16px": [
 				"1.6rem",
 				{
@@ -121,6 +127,12 @@ module.exports = {
 				"3.2rem",
 				{
 					lineHeight: "4.2rem",
+				},
+			],
+			"md-36px": [
+				"3.6rem",
+				{
+					lineHeight: "4.7rem",
 				},
 			],
 			"md-54px": [

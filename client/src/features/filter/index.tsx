@@ -1,7 +1,7 @@
 import { Button } from "shared/ui";
 
-const Filter = () => {
-	return <Button text={"Фильтр"} />;
+const Filter = ({ classes }: { classes: string }) => {
+	return <Button text={"Фильтр"} classes={classes} />;
 };
 
 export default Filter;
