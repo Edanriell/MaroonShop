@@ -7,33 +7,9 @@ import Filter from "features/filter";
 
 import { productModel, ProductCard } from "entities/product";
 
+import { CatalogPagination } from "./ui";
+
 import { CatalogProps } from "./types";
-
-const CatalogPagination = ({
-	products,
-	currentPage,
-	productsPerPage,
-	onPageChange,
-}: {
-	products: productModel.NormalizedProducts;
-	currentPage: number;
-	productsPerPage: number;
-	onPageChange: (page: number) => void;
-}) => {
-	const allProducts = Object.values(products);
-	const totalPages = Math.ceil(allProducts.length / productsPerPage);
-	const pageButtons = [];
-
-	for (let page = 1; page <= totalPages; page++) {
-		pageButtons.push(
-			<button key={page} onClick={() => onPageChange(page)} disabled={page === currentPage}>
-				{page}
-			</button>,
-		);
-	}
-
-	return <>{pageButtons}</>;
-};
 
 const Catalog: FC<CatalogProps> = ({ title }) => {
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
@@ -94,15 +70,16 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 				</div>
 			</div>
 			<div>
-				<div>
+				<ul className="flex flex-col items-center gap-y-[3rem]">
 					{getPageProducts().map((product) => (
-						<ProductCard key={product.id} data={product} />
+						<li key={product.id}>
+							<ProductCard data={product} />
+						</li>
 					))}
-				</div>
+				</ul>
 				<CatalogPagination
-					products={data}
 					currentPage={currentPage}
-					productsPerPage={productsPerPage}
+					totalPages={totalPages}
 					onPageChange={handlePageChange}
 				/>
 			</div>
