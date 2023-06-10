@@ -34,7 +34,7 @@ export const productModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
-			state.data = payload.entities.products;
+			state.data = normalizeProducts(payload).entities.products;
 			state.dataLoading = false;
 		});
 		builder.addCase(getProductsAsync.rejected, (state) => {
@@ -49,7 +49,7 @@ export const getProductsAsync = createAsyncThunk(
 		try {
 			const response = await productsApi.products.getProducts();
 			const { data } = response;
-			return normalizeProducts(data);
+			return data;
 		} catch (err) {
 			// eslint-disable-next-line no-console
 			console.error("Failed to fetch products:", err);

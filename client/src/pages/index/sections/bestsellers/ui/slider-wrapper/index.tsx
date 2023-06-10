@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { BestsellersSlider } from "widgets/bestsellers-slider";
 
@@ -60,7 +61,7 @@ const BestSellersNotFound = () => {
 const SliderWrapper = () => {
 	const [reload, setReload] = useState<number>(Math.random());
 
-	const dispatch = useDispatch();
+	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
 	const products = useSelector((state: productModel.RootState) => state.products.data);
 	const isLoading = useSelector((state: productModel.RootState) => state.products.dataLoading);
@@ -69,7 +70,7 @@ const SliderWrapper = () => {
 	const bestsellers = productModel.getBestsellers(products);
 
 	useEffect(() => {
-		dispatch(productModel.getProductsAsync() as any);
+		dispatch(productModel.getProductsAsync());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reload]);
 
