@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BestsellersSlider } from "widgets/bestsellers-slider";
 
 import { productModel } from "entities/product";
 
-import { Spinner } from "shared/ui";
+import { Spinner, Button } from "shared/ui";
 
 const ProductsLoading = () => {
 	return (
@@ -36,10 +36,7 @@ const ProductsNotFound = ({ reload }: { reload: any }) => {
 			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-18px font-medium"}>
 				Неудалось загрузить товары.
 			</p>
-			<p className={"font-raleway text-sm-14px mb-[1rem] font-normal"}>
-				Попробуйте обновить страницу.
-			</p>
-			<button onClick={reload}>RELOAD</button>
+			<Button text={"Обновить"} click={reload} />
 		</div>
 	);
 };
@@ -62,19 +59,22 @@ const BestSellersNotFound = () => {
 
 const SliderWrapper = () => {
 	const [reload, setReload] = useState<number>(Math.random());
-	// const [isFetching, setIsFetching] = useState<boolean>();
-	// const [bestsellers, setBestsellers] = useState<any>();
-	// const [isEmpty, setIsEmpty] = useState<boolean>();
+
 	const dispatch = useDispatch();
 
-	const { isFetching } = productModel.getProductsAsync()(dispatch);
-	const bestsellers = productModel.getBestsellers();
-	const isEmpty = productModel.isProductsEmpty();
+	const products = useSelector((state: productModel.RootState) => state.products.data);
+	const isLoading = useSelector((state: productModel.RootState) => state.products.dataLoading);
 
-	if (isFetching) return <ProductsLoading />;
+	const isEmpty = productModel.isProductsEmpty(products);
+	const bestsellers = productModel.getBestsellers(products);
 
+	useEffect(() => {
+		dispatch(productModel.getProductsAsync() as any);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [reload]);
+
+	if (isLoading) return <ProductsLoading />;
 	if (isEmpty) return <ProductsNotFound reload={() => setReload(Math.random())} />;
-
 	if (bestsellers.length === 0) return <BestSellersNotFound />;
 
 	return <BestsellersSlider bestSellers={bestsellers} />;

@@ -1,16 +1,9 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { createSelector, createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { useIsFetching, useQuery } from "react-query";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { schema, normalize } from "normalizr";
-import type { AxiosResponse } from "axios";
 
 import { Product, productsApi } from "shared/api";
-import { NormalizedProducts, QueryConfig, RootState } from "./types";
 
-// GET RID OF useQuery
-
-const PRODUCT_LIST_QUERY_KEY = "products";
+import { NormalizedProducts } from "./types";
 
 export const productSchema = new schema.Entity<Product>("products");
 
@@ -22,10 +15,10 @@ export const normalizeProducts = (data: Product[]) =>
 
 export const initialState: {
 	data: NormalizedProducts;
-	queryConfig?: QueryConfig;
+	dataLoading: boolean;
 } = {
 	data: {},
-	queryConfig: {},
+	dataLoading: false,
 };
 
 export const productModel = createSlice({
@@ -35,40 +28,42 @@ export const productModel = createSlice({
 		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
 			state.data = normalizeProducts(payload).entities.products;
 		},
-		setQueryConfig: (state, { payload }: PayloadAction<QueryConfig>) => {
-			state.queryConfig = payload;
-		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(getProductsAsync.pending, (state) => {
+			state.dataLoading = true;
+		});
+		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
+			state.data = payload.entities.products;
+			state.dataLoading = false;
+		});
+		builder.addCase(getProductsAsync.rejected, (state) => {
+			state.dataLoading = false;
+		});
 	},
 });
 
-export const getProductsAsync =
-	(params?: productsApi.products.GetProductsParams) => (dispatch: Dispatch) =>
-		useQuery<AxiosResponse<Product[]>>(
-			PRODUCT_LIST_QUERY_KEY,
-			() => productsApi.products.getProducts(params),
-			{
-				onSuccess: ({ data }) => dispatch(productModel.actions.setProducts(data)),
-				refetchOnWindowFocus: false,
-			},
-		);
+export const getProductsAsync = createAsyncThunk(
+	"products/fetchProducts",
+	async (_, { rejectWithValue }) => {
+		try {
+			const response = await productsApi.products.getProducts();
+			const { data } = response;
+			return normalizeProducts(data);
+		} catch (err) {
+			// eslint-disable-next-line no-console
+			console.error("Failed to fetch products:", err);
+			return rejectWithValue((err as any).message);
+		}
+	},
+);
 
-export const isProductsLoading = (): boolean => useIsFetching([PRODUCT_LIST_QUERY_KEY]) > 0;
+export const isProductsEmpty = (products: NormalizedProducts): boolean => {
+	return Object.keys(products).length === 0;
+};
 
-export const isProductsEmpty = (): boolean =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.data,
-			(products) => Object.keys(products).length === 0,
-		),
-	);
-
-export const getBestsellers = () =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.data,
-			(products: RootState["products"]["data"]) =>
-				Object.values(products).filter((product) => product.sells >= 100),
-		),
-	);
+export const getBestsellers = (products: NormalizedProducts): Product[] => {
+	return Object.values(products).filter((product) => product.sells >= 100);
+};
 
 export const reducer = productModel.reducer;
