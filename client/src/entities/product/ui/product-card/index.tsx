@@ -73,8 +73,9 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 	return (
 		<article
 			className={
-				"relative min-w-[27rem] h-[29rem] w-full pl-[2rem] " +
-				"pr-[2rem] pt-[1.5rem] pb-[1.5rem] md:min-w-[32.4rem] md:h-[35rem]"
+				"relative w-full h-[90.625vw] pl-[2rem] " +
+				"pr-[2rem] pt-[1.5rem] pb-[1.5rem] md:h-[45.57291666666667vw] " +
+				"lg:w-[27rem] lg:h-[35rem]"
 			}
 		>
 			<picture>
@@ -94,7 +95,8 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 					src={`http://localhost:4020${data.image.lg}`}
 					alt={data.name}
 					className={
-						"absolute top-0 left-0 min-w-[27rem] h-[29rem] w-full object-cover md:min-w-[32.4rem] md:h-[35rem]"
+						"absolute w-full h-[90.625vw] top-0 left-0 object-cover " +
+						"md:h-[45.57291666666667vw] lg:w-[27rem] lg:h-[35rem] "
 					}
 				/>
 			</picture>

@@ -56,14 +56,19 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	return (
 		<div
 			className={
-				"pt-[3rem] pb-[7rem] pl-[1.5rem] pr-[1.5rem] md:pr-[4.5rem] md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem]"
+				"pt-[3rem] pb-[7rem] pl-[1.5rem] pr-[1.5rem] md:pr-[4.5rem] " +
+				"md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem] lg:pt-[3.7rem] " +
+				"lg:pb-[13rem] lg:pr-[2.5rem] lg:pl-[2.5rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
 			}
 		>
-			<div className={"mb-[4rem] flex flex-row justify-between md:mb-[3.6rem]"}>
+			<div
+				className={"mb-[4rem] flex flex-row justify-between md:mb-[3.6rem] lg:mb-[4.9rem]"}
+			>
 				<div className={"flex-shrink-0 flex-grow-0"}>
 					<h2
 						className={
-							"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 md:text-md-36px"
+							"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 " +
+							"md:text-md-36px"
 						}
 					>
 						{title}
@@ -74,9 +79,14 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 				</div>
 			</div>
 			<div>
-				<ul className="flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] justify-center">
+				<ul
+					className={
+						"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
+						"justify-center md:grid md:grid-cols-two lg:grid-cols-4"
+					}
+				>
 					{getPageProducts().map((product) => (
-						<li key={product.id}>
+						<li className="w-full" key={product.id}>
 							<ProductCard data={product} />
 						</li>
 					))}
