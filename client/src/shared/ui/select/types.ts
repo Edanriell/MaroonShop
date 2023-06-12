@@ -6,6 +6,6 @@ export type SelectProps = {
 	labelContent: string;
 	labelFor: string;
 	children: ReactNode;
-	classes?: string;
+	className?: string;
 	[x: string]: any;
 };

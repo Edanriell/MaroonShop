@@ -12,27 +12,26 @@ import mapLg from "./assets/map-lg.jpg";
 
 import "./styles.scss";
 
+const customMarkers: CustomMarkers = {
+	markers: [
+		{
+			type: "Marker",
+			geometry: {
+				type: "Point",
+				coordinates: [18.06324, 59.334591],
+			},
+			properties: {
+				title: "Maroon",
+				description: "Shop",
+			},
+		},
+	],
+};
+
 const Map = () => {
 	const mapContainer = useRef(null);
 
 	const mapApiKey = process.env.REACT_APP_MAP_API_KEY ?? "";
-
-	const customMarkers: CustomMarkers = {
-		markers: [
-			{
-				type: "Marker",
-				geometry: {
-					type: "Point",
-					coordinates: [18.06324, 59.334591],
-				},
-				properties: {
-					title: "Maroon",
-					description: "Shop",
-				},
-			},
-		],
-	};
-
 	mapboxgl.accessToken = mapApiKey;
 
 	useEffect(() => {

@@ -7,22 +7,22 @@ import styles from "./styles.module.scss";
 
 const LinkInternal: FC<LinkInternalProps> = ({
 	text,
-	commonButtonClasses,
-	handleButtonMouseEnter,
-	handleButtonMouseLeave,
+	additionalClassNames,
+	onButtonMouseEnter,
+	onButtonMouseLeave,
 	buttonRef,
 	buttonBoxRef,
 	buttonTextRef,
 	linkInternal,
-	classes,
+	className,
 }) => {
 	return (
 		<div className={"relative z-10"}>
 			<Link
 				to={linkInternal}
-				className={commonButtonClasses + " " + classes}
-				onMouseEnter={handleButtonMouseEnter}
-				onMouseLeave={handleButtonMouseLeave}
+				className={additionalClassNames + " " + className}
+				onMouseEnter={onButtonMouseEnter}
+				onMouseLeave={onButtonMouseLeave}
 				ref={buttonRef}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>

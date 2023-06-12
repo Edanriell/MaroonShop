@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { GalleryContainerProps } from "./types";
 
-import { ReactComponent as XmarkSvg } from "./assets/xmark-solid.svg";
+import { ReactComponent as Xmark } from "./assets/xmark-solid.svg";
 
 import styles from "./styles.module.scss";
 
@@ -25,7 +25,7 @@ const GalleryContainer: FC<GalleryContainerProps> = ({
 				onClick={onGalleryClose}
 				className={"absolute top-[2rem] right-[2rem] w-[4.6rem] h-[4.6rem]"}
 			>
-				<XmarkSvg
+				<Xmark
 					className={
 						styles.closeButtonAnimations +
 						" ease-in-out duration-500 transition-transform text-white"

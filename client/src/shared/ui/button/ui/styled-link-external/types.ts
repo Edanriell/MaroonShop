@@ -2,12 +2,12 @@ import { MutableRefObject } from "react";
 
 export type LinkExternalProps = {
 	text: string;
-	commonButtonClasses: string;
-	handleButtonMouseEnter: () => void;
-	handleButtonMouseLeave: () => void;
+	additionalClassNames: string;
+	onButtonMouseEnter: () => void;
+	onButtonMouseLeave: () => void;
 	buttonRef: MutableRefObject<null>;
-	buttonBoxRef: MutableRefObject<null>;
-	buttonTextRef: MutableRefObject<null>;
+	buttonBoxRef: MutableRefObject<HTMLDivElement | null>;
+	buttonTextRef: MutableRefObject<HTMLSpanElement | null>;
 	linkExternal: string;
-	classes: string;
+	className: string;
 };

@@ -1,9 +1,9 @@
 export type InputProps = {
-	inputType: string;
+	type: string;
 	inputId: string;
 	inputName: string;
 	labelContent: string;
 	labelFor: string;
-	classes?: string;
+	className?: string;
 	[x: string]: any;
 };

@@ -113,13 +113,13 @@ const QuestionnaireForm = () => {
 		>
 			<div className={"flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row"}>
 				<Input
-					inputType="text"
+					type="text"
 					inputId="name"
 					inputName="name"
 					labelContent="Имя"
 					labelFor="name"
 					inputValue={state.nameInput.value}
-					classes={nameInputClasses}
+					className={nameInputClasses}
 					onInputChange={(event: ChangeEvent<HTMLInputElement>) =>
 						dispatch(changingNameAction(event.target?.value))
 					}
@@ -143,13 +143,13 @@ const QuestionnaireForm = () => {
 						document.getElementById("snackbars-container") as Element,
 					)}
 				<Input
-					inputType="text"
+					type="text"
 					inputId="surname"
 					inputName="surname"
 					labelContent="Фамилия"
 					labelFor="surname"
 					inputValue={state.surnameInput.value}
-					classes={surnameInputClasses}
+					className={surnameInputClasses}
 					onInputChange={(event: ChangeEvent<HTMLInputElement>) =>
 						dispatch(changingSurnameAction(event.target?.value))
 					}
@@ -174,13 +174,13 @@ const QuestionnaireForm = () => {
 					)}
 			</div>
 			<Input
-				inputType="email"
+				type="email"
 				inputId="email"
 				inputName="email"
 				labelContent="Электронная почта"
 				labelFor="email"
 				inputValue={state.emailInput.value}
-				classes={emailInputClasses}
+				className={emailInputClasses}
 				onInputChange={(event: ChangeEvent<HTMLInputElement>) =>
 					dispatch(changingEmailAction(event.target?.value))
 				}
@@ -204,13 +204,13 @@ const QuestionnaireForm = () => {
 					document.getElementById("snackbars-container") as Element,
 				)}
 			<Input
-				inputType="number"
+				type="number"
 				inputId="age"
 				inputName="age"
 				labelContent="Возраст"
 				labelFor="age"
 				inputValue={state.ageInput.value}
-				classes={ageInputClasses}
+				className={ageInputClasses}
 				onInputChange={(event: ChangeEvent<HTMLInputElement>) =>
 					dispatch(changingAgeAction(event.target?.value))
 				}
@@ -231,7 +231,7 @@ const QuestionnaireForm = () => {
 					labelContent="Образ жизни"
 					labelFor="life-style"
 					selectValue={state.lifeStyleSelect.value}
-					classes={lifestyleSelectClasses}
+					className={lifestyleSelectClasses}
 					onSelectChange={(event: ChangeEvent<HTMLInputElement>) =>
 						dispatch(selectingLifestyleAction(event.target?.value))
 					}
@@ -256,7 +256,7 @@ const QuestionnaireForm = () => {
 					labelContent="Тип кожи"
 					labelFor="skin-type"
 					selectValue={state.skinTypeSelect.value}
-					classes={skintypeSelectClasses}
+					className={skintypeSelectClasses}
 					onSelectChange={(event: ChangeEvent<HTMLInputElement>) =>
 						dispatch(selectingSkintypeAction(event.target?.value))
 					}
@@ -282,7 +282,7 @@ const QuestionnaireForm = () => {
 					labelContent="Место жительства"
 					labelFor="location"
 					selectValue={state.locationSelect.value}
-					classes={locationSelectClasses}
+					className={locationSelectClasses}
 					onSelectChange={(event: ChangeEvent<HTMLInputElement>) =>
 						dispatch(selectingLocationAction(event.target?.value))
 					}

@@ -58,25 +58,24 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 			className={
 				"pt-[3rem] pb-[7rem] pl-[1.5rem] pr-[1.5rem] md:pr-[4.5rem] " +
 				"md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem] lg:pt-[3.7rem] " +
-				"lg:pb-[13rem] lg:pr-[2.5rem] lg:pl-[2.5rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
+				"lg:pb-[13rem] lg:pr-[2.3rem] lg:pl-[2.3rem] lg:mr-auto lg:ml-auto " +
+				"lg:max-w-[120rem]"
 			}
 		>
 			<div
-				className={"mb-[4rem] flex flex-row justify-between md:mb-[3.6rem] lg:mb-[4.9rem]"}
+				className={
+					"mb-[4rem] grid grid-cols-two items-center md:mb-[3.6rem] lg:mb-[4.9rem]"
+				}
 			>
-				<div className={"flex-shrink-0 flex-grow-0"}>
-					<h2
-						className={
-							"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 " +
-							"md:text-md-36px"
-						}
-					>
-						{title}
-					</h2>
-				</div>
-				<div className={"flex-shrink-0 flex-grow-0"}>
-					<Filter classes={"md:pl-[4.1rem] md:pr-[4.1rem]"} />
-				</div>
+				<h2
+					className={
+						"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 " +
+						"md:text-md-36px justify-self-start row-start-1 row-end-2"
+					}
+				>
+					{title}
+				</h2>
+				<Filter className={"md:pl-[4.1rem] md:pr-[4.1rem]"} />
 			</div>
 			<div>
 				<ul
@@ -87,7 +86,7 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 				>
 					{getPageProducts().map((product) => (
 						<li className="w-full" key={product.id}>
-							<ProductCard data={product} />
+							<ProductCard data={product} cardType="advanced" />
 						</li>
 					))}
 				</ul>

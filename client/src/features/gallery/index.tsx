@@ -4,6 +4,7 @@ import { register } from "swiper/element/bundle";
 
 import { Spinner, Button } from "shared/ui";
 import { GalleryImage, galleryApi } from "shared/api";
+import { useControlScrollbar } from "shared/lib/hooks";
 
 import { GalleryPagination, GalleryNavigation, GalleryContainer } from "./ui";
 import {
@@ -42,6 +43,8 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 
 	const [galleryBackdropCtx] = useState(gsap.context(() => {}, galleryBackdropRef));
 	const [galleryCtx] = useState(gsap.context(() => {}, galleryRef));
+
+	useControlScrollbar();
 
 	useLayoutEffect(() => {
 		displayGallery(galleryRef);
@@ -134,7 +137,7 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 							width={"3rem"}
 							height={"3rem"}
 							color={"zodiac-blue-950"}
-							classes={"w-[5rem] h-[5rem]"}
+							className={"w-[5rem] h-[5rem]"}
 						/>
 					</div>
 				)}
@@ -158,7 +161,7 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 					<p className={"font-medium font-mPlus text-sm-22px"}>
 						Не удалось загрузить галерею.
 					</p>
-					<Button text={"Обновить"} click={() => setReload(Math.random())} />
+					<Button text={"Обновить"} onClick={() => setReload(Math.random())} />
 				</div>
 			</GalleryContainer>
 		);
@@ -183,7 +186,7 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 				class="border-none rounded-[0.2rem] relative"
 			>
 				{images.length > 0 &&
-					images.map((image: any) => {
+					images.map((image) => {
 						return (
 							<swiper-slide key={image.imageId} lazy="true">
 								<div

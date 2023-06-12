@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import { JoinUs } from "widgets/join-us";
 import { Contacts } from "widgets/contacts";
+import RecentlyWatched from "widgets/recently-watched";
 
 import Catalog from "./catalog";
-import RecentlyWatched from "./recently-watched";
 
 import { CatalogPageSections, SectionWrapperProps } from "./types";
 

@@ -26,7 +26,7 @@ const LoadingPage = () => {
 					width={"3rem"}
 					height={"3rem"}
 					color={"blue-zodiac-950"}
-					classes={"w-[3.5rem] h-[3.5rem]"}
+					className={"w-[3.5rem] h-[3.5rem]"}
 				/>
 			</div>
 		</main>

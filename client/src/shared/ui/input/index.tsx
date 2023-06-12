@@ -6,18 +6,18 @@ import { InputProps } from "./types";
 import "./styles.scss";
 
 const Input: FC<InputProps> = ({
-	inputType,
+	type,
 	inputId,
 	inputName,
 	labelContent,
 	labelFor,
-	classes = "",
+	className = "",
 	...rest
 }) => {
 	const { inputValue, onInputChange } = rest;
 
 	const inputClasses = classNames({
-		"input-number": inputType === "number",
+		"input-number": type === "number",
 	});
 
 	return (
@@ -30,14 +30,14 @@ const Input: FC<InputProps> = ({
 			</label>
 			<input
 				className={
-					classes +
+					className +
 					" rounded-[0.2rem] border-none font-semibold " +
 					"pl-[1rem] pr-[1rem] pb-[1rem] pt-[2.4rem] font-raleway " +
 					"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
 					"hover:bg-athens-gray-100 focus:bg-athens-gray-100 text-blue-zodiac-950 " +
 					inputClasses
 				}
-				type={inputType}
+				type={type}
 				name={inputName}
 				id={inputId}
 				value={inputValue}

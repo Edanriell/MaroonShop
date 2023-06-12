@@ -1,35 +1,35 @@
-import { getProductTypeParameters } from "./types";
+import { GetProductTypeParameters, ProductType, IProductTypeMapper } from "./types";
 
-export const getProductType = ({ mainType, secondaryType }: getProductTypeParameters): string => {
-	if (mainType === "face") {
-		if (secondaryType === "cream") {
-			return "крем для лица";
-		} else if (secondaryType === "serum") {
-			return "cыворотка для лица";
-		} else if (secondaryType === "mask") {
-			return "маска для лица";
-		} else if (secondaryType === "foam") {
-			return "пенка для лица";
-		} else if (secondaryType === "tonic") {
-			return "тоник для лица";
-		} else if (secondaryType === "powder") {
-			return "минеральная пудра";
+class ProductTypeMapper implements IProductTypeMapper {
+	private productTypes: ProductType = {
+		face: {
+			cream: "крем для лица",
+			serum: "cыворотка для лица",
+			mask: "маска для лица",
+			foam: "пенка для лица",
+			tonic: "тоник для лица",
+			powder: "минеральная пудра",
+		},
+		body: {
+			cream: "крем для тела",
+			oil: "масло для тела",
+			scrub: "скраб для тела",
+			soap: "мыло ручной работы",
+			bathBomb: "бомбочка для ванны",
+			bathSalt: "соль для ванны",
+		},
+	};
+
+	public identifyProductType({ mainType, secondaryType }: GetProductTypeParameters): string {
+		if (mainType in this.productTypes && secondaryType in this.productTypes[mainType]) {
+			return this.productTypes[mainType][secondaryType];
 		}
-	} else if (mainType === "body") {
-		if (secondaryType === "cream") {
-			return "крем для тела";
-		} else if (secondaryType === "oil") {
-			return "масло для тела";
-		} else if (secondaryType === "scrub") {
-			return "скраб для тела";
-		} else if (secondaryType === "soap") {
-			return "мыло ручной работы";
-		} else if (secondaryType === "bath bomb") {
-			return "бомбочка для ванны";
-		} else if (secondaryType === "bath salt") {
-			return "соль для ванны";
-		}
+
+		return "неизвестный тип продукта";
 	}
+}
 
-	return "неизвестный тип продукта";
+export const getProductType = ({ mainType, secondaryType }: GetProductTypeParameters): string => {
+	const productTypeMapper = new ProductTypeMapper();
+	return productTypeMapper.identifyProductType({ mainType, secondaryType });
 };

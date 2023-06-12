@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 
 register();
 
-const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, classes }) => {
+const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, className }) => {
 	const sliderRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
@@ -107,11 +107,11 @@ const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, classes }) => 
 			navigation="true"
 			autoplay-delay="6000"
 			autoplay-pause-on-mouse-enter="true"
-			class={classes + " relative pb-[3.7rem]"}
+			class={className + " relative pb-[3.7rem]"}
 		>
 			{bestSellers.map((bestSeller, id) => (
 				<swiper-slide key={id}>
-					<ProductCard data={bestSeller} simplified />
+					<ProductCard data={bestSeller} cardType="basic" />
 				</swiper-slide>
 			))}
 			<button

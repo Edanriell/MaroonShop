@@ -14,9 +14,9 @@
 			"skin": ["normal"]
 		},
 		"image": {
-			"lg": "/images/1/lg/productImage.jpg",
-			"md": "/images/1/md/productImage.jpg",
-			"sm": "/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "55ml",
@@ -38,9 +38,9 @@
 			"skin": ["fat"]
 		},
 		"image": {
-			"lg": "/images/2/lg/productImage.jpg",
-			"md": "/images/2/md/productImage.jpg",
-			"sm": "/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
 		"price": 490,
 		"quantity": "15g",
@@ -62,9 +62,9 @@
 			"skin": ["combined"]
 		},
 		"image": {
-			"lg": "/images/3/lg/productImage.jpg",
-			"md": "/images/3/md/productImage.jpg",
-			"sm": "/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
 		"price": 600,
 		"quantity": "50ml",
@@ -86,9 +86,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/4/lg/productImage.jpg",
-			"md": "/images/4/md/productImage.jpg",
-			"sm": "/images/4/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/4/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
 		},
 		"price": 720,
 		"quantity": "65ml",
@@ -110,9 +110,9 @@
 			"skin": ["normal"]
 		},
 		"image": {
-			"lg": "/images/1/lg/productImage.jpg",
-			"md": "/images/1/md/productImage.jpg",
-			"sm": "/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "50ml",
@@ -134,9 +134,9 @@
 			"skin": ["fat"]
 		},
 		"image": {
-			"lg": "/images/2/lg/productImage.jpg",
-			"md": "/images/2/md/productImage.jpg",
-			"sm": "/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
 		"price": 490,
 		"quantity": "30g",
@@ -158,9 +158,9 @@
 			"skin": ["combined"]
 		},
 		"image": {
-			"lg": "/images/3/lg/productImage.jpg",
-			"md": "/images/3/md/productImage.jpg",
-			"sm": "/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
 		"price": 600,
 		"quantity": "50ml",
@@ -182,9 +182,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/4/lg/productImage.jpg",
-			"md": "/images/4/md/productImage.jpg",
-			"sm": "/images/4/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/4/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
 		},
 		"price": 720,
 		"quantity": "55ml",
@@ -206,9 +206,9 @@
 			"skin": ["normal"]
 		},
 		"image": {
-			"lg": "/images/1/lg/productImage.jpg",
-			"md": "/images/1/md/productImage.jpg",
-			"sm": "/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "45ml",
@@ -230,9 +230,9 @@
 			"skin": ["fat"]
 		},
 		"image": {
-			"lg": "/images/2/lg/productImage.jpg",
-			"md": "/images/2/md/productImage.jpg",
-			"sm": "/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
 		"price": 490,
 		"quantity": "25g",
@@ -254,9 +254,9 @@
 			"skin": ["combined"]
 		},
 		"image": {
-			"lg": "/images/3/lg/productImage.jpg",
-			"md": "/images/3/md/productImage.jpg",
-			"sm": "/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
 		"price": 600,
 		"quantity": "50ml",
@@ -278,9 +278,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/4/lg/productImage.jpg",
-			"md": "/images/4/md/productImage.jpg",
-			"sm": "/images/4/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/4/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
 		},
 		"price": 720,
 		"quantity": "75ml",
@@ -302,9 +302,9 @@
 			"skin": ["normal"]
 		},
 		"image": {
-			"lg": "/images/1/lg/productImage.jpg",
-			"md": "/images/1/md/productImage.jpg",
-			"sm": "/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "15g",
@@ -326,9 +326,9 @@
 			"skin": ["fat"]
 		},
 		"image": {
-			"lg": "/images/2/lg/productImage.jpg",
-			"md": "/images/2/md/productImage.jpg",
-			"sm": "/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
 		"price": 490,
 		"quantity": "10g",
@@ -350,9 +350,9 @@
 			"skin": ["combined"]
 		},
 		"image": {
-			"lg": "/images/3/lg/productImage.jpg",
-			"md": "/images/3/md/productImage.jpg",
-			"sm": "/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
 		"price": 600,
 		"quantity": "25ml",
@@ -374,9 +374,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/9/lg/productImage.jpg",
-			"md": "/images/9/md/productImage.jpg",
-			"sm": "/images/9/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/9/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/9/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/9/sm/productImage.jpg"
 		},
 		"price": 990,
 		"quantity": "50ml",
@@ -398,9 +398,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/10/lg/productImage.jpg",
-			"md": "/images/10/md/productImage.jpg",
-			"sm": "/images/10/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/10/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/10/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/10/sm/productImage.jpg"
 		},
 		"price": 720,
 		"quantity": "20g",
@@ -422,9 +422,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/11/lg/productImage.jpg",
-			"md": "/images/11/md/productImage.jpg",
-			"sm": "/images/11/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/11/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/11/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/11/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "50ml",
@@ -446,9 +446,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/12/lg/productImage.jpg",
-			"md": "/images/12/md/productImage.jpg",
-			"sm": "/images/12/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/12/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/12/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/12/sm/productImage.jpg"
 		},
 		"price": 790,
 		"quantity": "150ml",
@@ -470,9 +470,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/13/lg/productImage.jpg",
-			"md": "/images/13/md/productImage.jpg",
-			"sm": "/images/13/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/13/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/13/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/13/sm/productImage.jpg"
 		},
 		"price": 590,
 		"quantity": "15g",
@@ -490,13 +490,13 @@
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
 		"type": {
 			"main": "body",
-			"secondary": "bomb",
+			"secondary": "bathBomb",
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/14/lg/productImage.jpg",
-			"md": "/images/14/md/productImage.jpg",
-			"sm": "/images/14/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/14/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/14/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/14/sm/productImage.jpg"
 		},
 		"price": 90,
 		"quantity": "20g",
@@ -518,9 +518,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/15/lg/productImage.jpg",
-			"md": "/images/15/md/productImage.jpg",
-			"sm": "/images/15/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/15/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/15/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/15/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "50ml",
@@ -542,9 +542,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/16/lg/productImage.jpg",
-			"md": "/images/16/md/productImage.jpg",
-			"sm": "/images/16/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/16/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/16/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/16/sm/productImage.jpg"
 		},
 		"price": 490,
 		"quantity": "100g",
@@ -566,9 +566,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/17/lg/productImage.jpg",
-			"md": "/images/17/md/productImage.jpg",
-			"sm": "/images/17/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/17/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/17/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/17/sm/productImage.jpg"
 		},
 		"price": 990,
 		"quantity": "300ml",
@@ -590,9 +590,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/18/lg/productImage.jpg",
-			"md": "/images/18/md/productImage.jpg",
-			"sm": "/images/18/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/18/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/18/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/18/sm/productImage.jpg"
 		},
 		"price": 290,
 		"quantity": "50g",
@@ -614,9 +614,9 @@
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/19/lg/productImage.jpg",
-			"md": "/images/19/md/productImage.jpg",
-			"sm": "/images/19/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/19/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/19/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/19/sm/productImage.jpg"
 		},
 		"price": 890,
 		"quantity": "50ml",
@@ -634,13 +634,13 @@
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
 		"type": {
 			"main": "body",
-			"secondary": "bomb",
+			"secondary": "bathBomb",
 			"skin": ["dry"]
 		},
 		"image": {
-			"lg": "/images/20/lg/productImage.jpg",
-			"md": "/images/20/md/productImage.jpg",
-			"sm": "/images/20/sm/productImage.jpg"
+			"lg": "http://localhost:4020/images/20/lg/productImage.jpg",
+			"md": "http://localhost:4020/images/20/md/productImage.jpg",
+			"sm": "http://localhost:4020/images/20/sm/productImage.jpg"
 		},
 		"price": 90,
 		"quantity": "20g",

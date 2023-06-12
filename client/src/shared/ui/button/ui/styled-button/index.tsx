@@ -5,22 +5,24 @@ import { ButtonProps } from "./types";
 import styles from "./styles.module.scss";
 
 const Button: FC<ButtonProps> = ({
+	type = "button",
 	text,
-	commonButtonClasses,
-	handleButtonMouseEnter,
-	handleButtonMouseLeave,
+	additionalClassNames,
+	onButtonMouseEnter,
+	onButtonMouseLeave,
 	buttonRef,
 	buttonBoxRef,
 	buttonTextRef,
-	classes,
-	click = () => {},
+	className,
+	onClick = () => {},
 }) => {
 	return (
-		<div onClick={() => click()} className={"relative z-10"}>
+		<div onClick={() => onClick()} className={"relative z-10"}>
 			<button
-				className={commonButtonClasses + " " + classes}
-				onMouseEnter={handleButtonMouseEnter}
-				onMouseLeave={handleButtonMouseLeave}
+				type={type}
+				className={additionalClassNames + " " + className}
+				onMouseEnter={onButtonMouseEnter}
+				onMouseLeave={onButtonMouseLeave}
 				ref={buttonRef}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>

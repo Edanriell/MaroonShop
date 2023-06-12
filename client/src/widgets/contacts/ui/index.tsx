@@ -113,7 +113,7 @@ const Contacts: FC<ContactsProps> = ({ title }) => {
 							</div>
 						</dl>
 					</address>
-					<SocialLinks classes={"flex flex-row items-center gap-x-[3rem]"} />
+					<SocialLinks className={"flex flex-row items-center gap-x-[3rem]"} />
 				</div>
 				<Map />
 			</div>

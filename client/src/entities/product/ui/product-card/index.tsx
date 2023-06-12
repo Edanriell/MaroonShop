@@ -3,32 +3,22 @@ import { Link } from "react-router-dom";
 
 import { getProductType } from "./model";
 
-import { ReactComponent as RubleIcon } from "./assets/ruble.svg";
-
 import { ProductCardProps } from "./types";
+
+import { ReactComponent as RubleIcon } from "./assets/ruble.svg";
 
 import styles from "./styles.module.scss";
 
-// TODO data should accept bestsellers type and product type
-export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) => {
-	if (simplified) {
+export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
+	if (cardType === "basic") {
 		return (
 			<article className={"grid gird-rows-2-auto w-[22rem] m-auto md:w-[23rem]"}>
 				<picture className={"col-start-1 col-end-2 row-start-1 row-end-3"}>
-					<source
-						media="(min-width:1366px)"
-						srcSet={`http://localhost:4020${data.image.lg}`}
-					/>
-					<source
-						media="(min-width:768px)"
-						srcSet={`http://localhost:4020${data.image.md}`}
-					/>
-					<source
-						media="(min-width:320px)"
-						srcSet={`http://localhost:4020${data.image.sm}`}
-					/>
+					<source media="(min-width:1366px)" srcSet={data.image.lg} />
+					<source media="(min-width:768px)" srcSet={data.image.md} />
+					<source media="(min-width:320px)" srcSet={data.image.sm} />
 					<img
-						src={`http://localhost:4020${data.image.lg}`}
+						src={data.image.lg}
 						alt={data.name}
 						className={"w-[100%] h-[29.7rem] object-cover md:h-[31.2rem]"}
 					/>
@@ -79,24 +69,15 @@ export const ProductCard: FC<ProductCardProps> = ({ data, simplified = false }) 
 			}
 		>
 			<picture>
-				<source
-					media="(min-width:1366px)"
-					srcSet={`http://localhost:4020${data.image.lg}`}
-				/>
-				<source
-					media="(min-width:768px)"
-					srcSet={`http://localhost:4020${data.image.md}`}
-				/>
-				<source
-					media="(min-width:320px)"
-					srcSet={`http://localhost:4020${data.image.sm}`}
-				/>
+				<source media="(min-width:1366px)" srcSet={data.image.lg} />
+				<source media="(min-width:768px)" srcSet={data.image.md} />
+				<source media="(min-width:320px)" srcSet={data.image.sm} />
 				<img
-					src={`http://localhost:4020${data.image.lg}`}
+					src={data.image.lg}
 					alt={data.name}
 					className={
 						"absolute w-full h-[90.625vw] top-0 left-0 object-cover " +
-						"md:h-[45.57291666666667vw] lg:w-[27rem] lg:h-[35rem] "
+						"md:h-[45.57291666666667vw] lg:w-[27rem] lg:h-[35rem]"
 					}
 				/>
 			</picture>

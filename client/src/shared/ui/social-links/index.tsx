@@ -7,14 +7,13 @@ import { ReactComponent as Twitter } from "./assets/twitter.svg";
 
 import { SocialLink, SocialLinksProps } from "./types";
 
-// TODO FIX links when will be creating corresponding pages.
 const socialLinks: Array<SocialLink> = [
 	{
 		label: "Наша страничка в Facebook",
 		Icon: Facebook,
 		iconWidth: "w-[1.1rem]",
 		iconHeight: "h-[1.8rem]",
-		url: "/",
+		url: "https://www.facebook.com/",
 		id: uuidv4(),
 	},
 	{
@@ -22,7 +21,7 @@ const socialLinks: Array<SocialLink> = [
 		Icon: Instagram,
 		iconWidth: "w-[2rem]",
 		iconHeight: "h-[2rem]",
-		url: "/",
+		url: "https://www.instagram.com/",
 		id: uuidv4(),
 	},
 	{
@@ -30,14 +29,14 @@ const socialLinks: Array<SocialLink> = [
 		Icon: Twitter,
 		iconWidth: "w-[2rem]",
 		iconHeight: "h-[1.7rem]",
-		url: "/",
+		url: "https://twitter.com/",
 		id: uuidv4(),
 	},
 ];
 
-const SocialLinks: FC<SocialLinksProps> = ({ classes = "" }) => {
+const SocialLinks: FC<SocialLinksProps> = ({ className = "" }) => {
 	return (
-		<ul className={classes}>
+		<ul className={className}>
 			{socialLinks.map(({ label, Icon, iconWidth, iconHeight, url, id }) => (
 				<li key={id}>
 					<a href={url}>

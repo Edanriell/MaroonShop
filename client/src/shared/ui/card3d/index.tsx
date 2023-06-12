@@ -6,7 +6,7 @@ import { Card3dProps } from "./types";
 
 import styles from "./styles.module.scss";
 
-const Card3d: FC<Card3dProps> = ({ children, classes, highlight = true }) => {
+const Card3d: FC<Card3dProps> = ({ children, className, highlight = true }) => {
 	const cardHighlightRef = useRef<HTMLDivElement | null>(null);
 	const cardContentRef = useRef<HTMLDivElement | null>(null);
 
@@ -29,7 +29,7 @@ const Card3d: FC<Card3dProps> = ({ children, classes, highlight = true }) => {
 		<div
 			onMouseMove={(event) => handleCardMouseMove(event)}
 			onMouseOut={handleCardMouseOut}
-			className={styles.card3d + " " + classes}
+			className={styles.card3d + " " + className}
 		>
 			<div ref={cardContentRef}>
 				{highlight && <div className={styles.cardHighlight} ref={cardHighlightRef}></div>}

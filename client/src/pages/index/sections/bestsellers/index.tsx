@@ -51,7 +51,7 @@ const Bestsellers: FC<BestsellersProps> = ({ title }) => {
 				}
 			>
 				<Button
-					classes={"md:pr-[2.3rem] md:pl-[2.3rem] lg:pr-[2.3rem] lg:pl-[2.3rem]"}
+					className={"md:pr-[2.3rem] md:pl-[2.3rem] lg:pr-[2.3rem] lg:pl-[2.3rem]"}
 					type="link-internal"
 					text="Смотреть все"
 					linkInternal="/"

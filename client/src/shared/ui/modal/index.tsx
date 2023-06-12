@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef, useState, MouseEvent, FC } from "react";
 import { gsap } from "gsap";
 
+import { useControlScrollbar } from "shared/lib/hooks";
+
 import { displayModal, hideModal, displayBackdrop, hideBackdrop } from "./model";
 
 import { ModalProps } from "./types";
@@ -14,15 +16,7 @@ const Modal: FC<ModalProps> = ({ title, description, children, onModalClose }) =
 	const [backdropCtx] = useState(gsap.context(() => {}, backdropRef));
 	const [modalCtx] = useState(gsap.context(() => {}, modalRef));
 
-	useLayoutEffect(() => {
-		const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
-		document.body.style.overflowY = "hidden";
-		document.body.style.paddingRight = `${scrollbarWidth}px`;
-		return () => {
-			document.body.style.overflowY = "initial";
-			document.body.style.paddingRight = "0px";
-		};
-	});
+	useControlScrollbar();
 
 	useLayoutEffect(() => {
 		displayModal(modalRef);

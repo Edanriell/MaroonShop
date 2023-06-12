@@ -12,7 +12,7 @@ export type Images = Array<Image>;
 export type GallerySize = 4 | 6;
 
 export type GalleryProps = {
-	classes?: string;
+	className?: string;
 };
 
 export type GalleryImageProps = {

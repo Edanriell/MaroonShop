@@ -1,10 +1,11 @@
-export type ButtonType = "button" | "link-internal" | "link-external";
+export type ButtonType = "button" | "submit" | "reset" | "link-internal" | "link-external";
 
 export type ButtonProps = {
 	text: string;
 	type?: ButtonType;
 	linkInternal?: string;
 	linkExternal?: string;
-	classes?: string;
-	click?: () => void;
+	darkBorder?: boolean;
+	className?: string;
+	onClick?: () => void;
 };

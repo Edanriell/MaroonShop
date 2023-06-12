@@ -1,7 +1,7 @@
 import { MutableRefObject } from "react";
 
 export type HoverEffectParameters = {
-	buttonBoxRef: MutableRefObject<null>;
-	buttonTextRef: MutableRefObject<null>;
+	buttonBoxRef: MutableRefObject<HTMLDivElement | null>;
+	buttonTextRef: MutableRefObject<HTMLSpanElement | null>;
 	buttonRef: MutableRefObject<null>;
 };

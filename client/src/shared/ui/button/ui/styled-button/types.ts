@@ -1,13 +1,14 @@
 import { MutableRefObject } from "react";
 
 export type ButtonProps = {
+	type?: any;
 	text: string;
-	commonButtonClasses: string;
-	handleButtonMouseEnter: () => void;
-	handleButtonMouseLeave: () => void;
+	additionalClassNames: string;
+	onButtonMouseEnter: () => void;
+	onButtonMouseLeave: () => void;
 	buttonRef: MutableRefObject<null>;
-	buttonBoxRef: MutableRefObject<null>;
-	buttonTextRef: MutableRefObject<null>;
-	classes: string;
-	click?: () => void;
+	buttonBoxRef: MutableRefObject<HTMLDivElement | null>;
+	buttonTextRef: MutableRefObject<HTMLSpanElement | null>;
+	className: string;
+	onClick?: () => void;
 };

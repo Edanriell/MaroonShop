@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 
 register();
 
-const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, classes }) => {
+const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, className }) => {
 	const [slidesCount, setSlidesCount] = useState<number>(0);
 	const { width } = useScreenSize();
 
@@ -33,11 +33,11 @@ const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, classes }) => {
 			loop="true"
 			autoplay-delay="6000"
 			autoplay-pause-on-mouse-enter="true"
-			class={classes + " " + styles.sliderContainer}
+			class={className + " " + styles.sliderContainer}
 		>
 			{bestSellers.map((bestSeller, id) => (
 				<swiper-slide key={id}>
-					<ProductCard data={bestSeller} simplified />
+					<ProductCard data={bestSeller} cardType="basic" />
 				</swiper-slide>
 			))}
 		</swiper-container>

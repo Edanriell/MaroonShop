@@ -9,7 +9,7 @@ import { HeroCardProps } from "./types";
 
 const HeroCard: FC<HeroCardProps> = ({ classes, images, link, label }) => {
 	return (
-		<Card3d classes={classes}>
+		<Card3d className={classes}>
 			<Link to={link}>
 				<picture className={"mb-[0.6rem] md:mb-[0.9rem] block"}>
 					<source media="(min-width:1366px)" srcSet={images.imgLg} />

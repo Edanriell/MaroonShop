@@ -3,11 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import { MainNavigation } from "./types";
 
-// TODO FIX links when will be creating corresponding pages.
 const mainNavigation: MainNavigation = [
 	{
 		label: "Каталог",
-		url: "/",
+		url: "/catalog",
 		id: uuidv4(),
 	},
 	{

@@ -4,14 +4,14 @@ import { Button } from "shared/ui";
 
 import { HeroCard } from "./ui";
 
+import { CardImages, HeroProps } from "./types";
+
 import imgCard1Sm from "./assets/card-image1-sm.jpg";
 import imgCard2Sm from "./assets/card-image2-sm.jpg";
 import imgCard1Md from "./assets/card-image1-md.jpg";
 import imgCard2Md from "./assets/card-image2-md.jpg";
 import imgCard1Lg from "./assets/card-image1-lg.jpg";
 import imgCard2Lg from "./assets/card-image2-lg.jpg";
-
-import { CardImages, HeroProps } from "./types";
 
 import styles from "./styles.module.scss";
 

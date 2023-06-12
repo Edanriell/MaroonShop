@@ -10,7 +10,7 @@ const Select: FC<SelectProps> = ({
 	labelContent,
 	labelFor,
 	children,
-	classes = "",
+	className = "",
 	...rest
 }) => {
 	const { selectValue, onSelectChange } = rest;
@@ -25,7 +25,7 @@ const Select: FC<SelectProps> = ({
 			</label>
 			<select
 				className={
-					classes +
+					className +
 					" " +
 					styles.select +
 					" rounded-[0.2rem] border-none font-semibold pl-[1rem] " +

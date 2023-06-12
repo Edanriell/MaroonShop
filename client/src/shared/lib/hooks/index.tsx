@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 import { ScreenSize, ScrollPosition } from "./types";
 
@@ -62,4 +62,16 @@ export const useDebounce = (value: any, delay: number) => {
 	}, [value, delay]);
 
 	return [debouncedValue];
+};
+
+export const useControlScrollbar = () => {
+	useLayoutEffect(() => {
+		const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
+		document.body.style.overflowY = "hidden";
+		document.body.style.paddingRight = `${scrollbarWidth}px`;
+		return () => {
+			document.body.style.overflowY = "initial";
+			document.body.style.paddingRight = "0px";
+		};
+	}, []);
 };

@@ -3,11 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Navigation } from "./types";
 
-// TODO FIX links when will be creating corresponding pages.
 const burgerNavigation: Navigation = [
 	{
 		label: "Каталог",
-		url: "/",
+		url: "/catalog",
 		id: uuidv4(),
 	},
 	{

@@ -103,7 +103,7 @@ const Image: FC<GalleryImageProps> = ({ image }) => (
 	</li>
 );
 
-const ImageGrid: FC<GalleryProps> = ({ classes = "" }) => {
+const ImageGrid: FC<GalleryProps> = ({ className = "" }) => {
 	const [activeSlide, setActiveSlide] = useState<number>();
 	const [showGallery, setShowGallery] = useState<boolean>();
 	const [gallerySize, setGallerySize] = useState<GallerySize>(4);
@@ -132,7 +132,7 @@ const ImageGrid: FC<GalleryProps> = ({ classes = "" }) => {
 	}
 
 	return (
-		<div className={classes}>
+		<div className={className}>
 			<ul
 				onClick={handleImageClick}
 				className={

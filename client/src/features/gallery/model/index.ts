@@ -3,15 +3,15 @@ import { gsap } from "gsap";
 
 import { GalleryImage } from "shared/api";
 
-import { isFirstSlideActiveParameters, isLastSlideActiveParameters } from "./types";
+import { IsFirstSlideActiveParameters, IsLastSlideActiveParameters } from "./types";
 
-export const isFirstSlideActive = ({ activeSlide }: isFirstSlideActiveParameters): boolean =>
+export const isFirstSlideActive = ({ activeSlide }: IsFirstSlideActiveParameters): boolean =>
 	activeSlide === 0;
 
 export const isLastSlideActive = ({
 	activeSlide,
 	totalSlidesCount,
-}: isLastSlideActiveParameters): boolean => totalSlidesCount - 1 === activeSlide;
+}: IsLastSlideActiveParameters): boolean => totalSlidesCount - 1 === activeSlide;
 
 export const isGalleryImage = (object: any): object is GalleryImage => {
 	return (

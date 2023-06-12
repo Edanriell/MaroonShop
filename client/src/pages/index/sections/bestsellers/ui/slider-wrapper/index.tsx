@@ -37,7 +37,7 @@ const ProductsNotFound = ({ reload }: { reload: any }) => {
 			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-18px font-medium"}>
 				Неудалось загрузить товары.
 			</p>
-			<Button text={"Обновить"} click={reload} />
+			<Button text={"Обновить"} onClick={reload} />
 		</div>
 	);
 };

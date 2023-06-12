@@ -18,11 +18,12 @@ const Button: FC<ButtonProps> = ({
 	text,
 	linkInternal,
 	linkExternal,
-	classes = "",
-	click,
+	className = "",
+	darkBorder = false,
+	onClick,
 }) => {
-	const buttonBoxRef = useRef<null>(null);
-	const buttonTextRef = useRef<null>(null);
+	const buttonBoxRef = useRef<HTMLDivElement | null>(null);
+	const buttonTextRef = useRef<HTMLSpanElement | null>(null);
 	const buttonRef = useRef<null>(null);
 
 	function handleButtonMouseEnter() {
@@ -45,14 +46,14 @@ const Button: FC<ButtonProps> = ({
 		return (
 			<StyledLinkInternal
 				text={text}
-				commonButtonClasses={commonButtonClasses}
-				handleButtonMouseEnter={handleButtonMouseEnter}
-				handleButtonMouseLeave={handleButtonMouseLeave}
+				additionalClassNames={commonButtonClasses}
+				onButtonMouseEnter={handleButtonMouseEnter}
+				onButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
 				buttonBoxRef={buttonBoxRef}
 				buttonTextRef={buttonTextRef}
 				linkInternal={linkInternal}
-				classes={classes}
+				className={className}
 			/>
 		);
 	}
@@ -61,29 +62,30 @@ const Button: FC<ButtonProps> = ({
 		return (
 			<StyledLinkExternal
 				text={text}
-				commonButtonClasses={commonButtonClasses}
-				handleButtonMouseEnter={handleButtonMouseEnter}
-				handleButtonMouseLeave={handleButtonMouseLeave}
+				additionalClassNames={commonButtonClasses}
+				onButtonMouseEnter={handleButtonMouseEnter}
+				onButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
 				buttonBoxRef={buttonBoxRef}
 				buttonTextRef={buttonTextRef}
 				linkExternal={linkExternal}
-				classes={classes}
+				className={className}
 			/>
 		);
 	}
 
 	return (
 		<StyledButton
+			type={type}
 			text={text}
-			commonButtonClasses={commonButtonClasses}
-			handleButtonMouseEnter={handleButtonMouseEnter}
-			handleButtonMouseLeave={handleButtonMouseLeave}
+			additionalClassNames={commonButtonClasses}
+			onButtonMouseEnter={handleButtonMouseEnter}
+			onButtonMouseLeave={handleButtonMouseLeave}
 			buttonRef={buttonRef}
 			buttonBoxRef={buttonBoxRef}
 			buttonTextRef={buttonTextRef}
-			classes={classes}
-			click={click}
+			className={className}
+			onClick={onClick}
 		/>
 	);
 };

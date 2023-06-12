@@ -86,7 +86,7 @@ const IndividualCare: FC<IndividualCareProps> = ({ title }) => {
 						Заполните анкету, и мы подберем уход, подходящий именно вам, учитывая ваш
 						образ жизни, место жительства и другие факторы.
 					</p>
-					<Button click={handleModalOpen} text="Заполнить анкету" />
+					<Button onClick={handleModalOpen} text="Заполнить анкету" />
 					{showModal &&
 						createPortal(
 							<Modal
@@ -99,7 +99,7 @@ const IndividualCare: FC<IndividualCareProps> = ({ title }) => {
 							document.body,
 						)}
 				</div>
-				<Card3d classes={"sm:self-center md:self-auto mt-[-6rem] md:mt-[0rem]"}>
+				<Card3d className={"sm:self-center md:self-auto mt-[-6rem] md:mt-[0rem]"}>
 					<picture className="">
 						<source media="(min-width:1366px)" srcSet={individualCareCard.cardLg} />
 						<source media="(min-width:768px)" srcSet={individualCareCard.cardMd} />

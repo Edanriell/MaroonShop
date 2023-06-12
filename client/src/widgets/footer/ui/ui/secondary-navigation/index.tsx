@@ -11,7 +11,7 @@ const secondaryNavigation: FooterSecondaryNavigation = [
 			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 " +
 			"duration-500 ease-out basic-hover-underline-animation " +
 			"md:text-md-16px mr-[3.4rem] md:mr-[0rem]",
-		url: "/",
+		url: "/catalog",
 		id: uuidv4(),
 	},
 	{

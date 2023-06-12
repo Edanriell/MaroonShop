@@ -51,7 +51,7 @@ const JoinUs: FC<JoinUsProps> = ({ title }) => {
 						type="link-external"
 						linkExternal="https://www.instagram.com/"
 						text="Подписаться"
-						classes={"md:pl-[3.3rem] md:pr-[3.3rem]"}
+						className={"md:pl-[3.3rem] md:pr-[3.3rem]"}
 					/>
 				</div>
 				<ImageGrid />

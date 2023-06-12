@@ -1,4 +1,6 @@
 export type ProductCardProps = {
 	data: import("shared/api").Product;
-	simplified?: boolean;
+	cardType: ProductCardTypes;
 };
+
+export type ProductCardTypes = "basic" | "advanced";

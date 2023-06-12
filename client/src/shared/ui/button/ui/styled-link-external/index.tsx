@@ -6,14 +6,14 @@ import styles from "./styles.module.scss";
 
 const LinkExternal: FC<LinkExternalProps> = ({
 	text,
-	commonButtonClasses,
-	handleButtonMouseEnter,
-	handleButtonMouseLeave,
+	additionalClassNames,
+	onButtonMouseEnter,
+	onButtonMouseLeave,
 	buttonRef,
 	buttonBoxRef,
 	buttonTextRef,
 	linkExternal,
-	classes,
+	className,
 }) => {
 	return (
 		<div className={"relative z-10"}>
@@ -21,9 +21,9 @@ const LinkExternal: FC<LinkExternalProps> = ({
 				href={`${linkExternal}`}
 				target="_blank"
 				rel="noreferrer"
-				className={commonButtonClasses + " " + classes}
-				onMouseEnter={handleButtonMouseEnter}
-				onMouseLeave={handleButtonMouseLeave}
+				className={additionalClassNames + " " + className}
+				onMouseEnter={onButtonMouseEnter}
+				onMouseLeave={onButtonMouseLeave}
 				ref={buttonRef}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>

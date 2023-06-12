@@ -10,5 +10,5 @@ export type SocialLink = {
 };
 
 export type SocialLinksProps = {
-	classes: string;
+	className: string;
 };

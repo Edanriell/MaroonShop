@@ -1,10 +1,10 @@
 import { FC } from "react";
 import classNames from "classnames";
 
+import { GalleryNavigationProps } from "./types";
+
 import { ReactComponent as LeftChevron } from "./assets/chevron-left-solid.svg";
 import { ReactComponent as RightChevron } from "./assets/chevron-right-solid.svg";
-
-import { GalleryNavigationProps } from "./types";
 
 import styles from "./styles.module.scss";
 

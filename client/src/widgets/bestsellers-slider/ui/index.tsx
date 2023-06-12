@@ -6,12 +6,12 @@ import { MobileSlider, UniversalSlider } from "./ui";
 
 import { BestsellersSliderProps } from "./types";
 
-const BestsellersSlider: FC<BestsellersSliderProps> = ({ bestSellers, classes = "" }) => {
+const BestsellersSlider: FC<BestsellersSliderProps> = ({ bestSellers, className = "" }) => {
 	const { width } = useScreenSize();
 
-	if (width >= 768) return <UniversalSlider bestSellers={bestSellers} classes={classes} />;
+	if (width >= 768) return <UniversalSlider bestSellers={bestSellers} className={className} />;
 
-	return <MobileSlider bestSellers={bestSellers} classes={classes} />;
+	return <MobileSlider bestSellers={bestSellers} className={className} />;
 };
 
 export default BestsellersSlider;

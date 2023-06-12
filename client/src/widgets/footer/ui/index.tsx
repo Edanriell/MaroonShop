@@ -28,7 +28,7 @@ const Footer = () => {
 					</Link>
 					<SecondaryNavigation />
 					<SocialLinks
-						classes={
+						className={
 							"flex items-center justify-start gap-x-[3rem] " +
 							"md:ml-auto md:gap-x-[2.5rem] lg:gap-x-[3rem]"
 						}

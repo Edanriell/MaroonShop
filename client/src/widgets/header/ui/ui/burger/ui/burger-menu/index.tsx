@@ -12,7 +12,7 @@ const BurgerMenu = () => {
 		>
 			<BurgerNavigation />
 			<SocialLinks
-				classes={
+				className={
 					"flex items-center justify-start mt-[4.2rem] gap-x-[3rem] " +
 					"md:gap-x-[2.5rem] md:mt-[5.1rem]"
 				}
