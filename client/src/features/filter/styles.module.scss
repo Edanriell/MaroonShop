@@ -2,23 +2,12 @@
 	all: unset;
 }
 
-.accordion2 {
-	background-color: red;
-	overflow: hidden;
-	max-height: 0;
+.buttonPadding18 {
+	padding-left: 1.8rem !important;
+	padding-right: 1.8rem !important;
 }
 
-.accordion {
-	legend {
-		background-color: green;
-
-		&:hover {
-			background-color: yellow;
-			& + .accordion2 {
-				// max-height: 400px;
-				background-color: blue;
-				max-height: 100%;
-			}
-		}
-	}
+.buttonPadding24 {
+	padding-left: 2.4rem !important;
+	padding-right: 2.4rem !important;
 }

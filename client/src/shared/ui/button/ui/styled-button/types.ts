@@ -1,4 +1,4 @@
-import { MutableRefObject } from "react";
+import { MutableRefObject, CSSProperties } from "react";
 
 export type ButtonProps = {
 	type?: any;
@@ -11,4 +11,5 @@ export type ButtonProps = {
 	buttonTextRef: MutableRefObject<HTMLSpanElement | null>;
 	className: string;
 	onClick?: () => void;
+	style?: CSSProperties;
 };

@@ -1,4 +1,4 @@
-import { MutableRefObject } from "react";
+import { MutableRefObject, CSSProperties } from "react";
 
 export type LinkInternalProps = {
 	text: string;
@@ -10,4 +10,5 @@ export type LinkInternalProps = {
 	buttonTextRef: MutableRefObject<HTMLSpanElement | null>;
 	linkInternal: string;
 	className: string;
+	style?: CSSProperties;
 };

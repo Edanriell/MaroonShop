@@ -6,13 +6,6 @@ import { mouseEnterHoverEffect, mouseLeaveHoverEffect } from "./model";
 
 import { ButtonProps } from "./types";
 
-const commonButtonClasses =
-	"font-medium bg-transparent text-blue-zodiac-950 font-mPlus " +
-	"text-sm-14px-lh-20px border-bombay-400 border-solid " +
-	"border-[0.1rem] rounded-[0.2rem] pt-[1rem] pl-[2.8rem] pb-[1rem] pr-[2.8rem] " +
-	"md:text-md-16px-lh-22px md:pl-[2.7rem] md:pr-[2.7rem] md:pt-[0.9rem] md:pb-[0.9rem] " +
-	"pointer-events-auto relative overflow-hidden inline-block";
-
 const Button: FC<ButtonProps> = ({
 	type,
 	text,
@@ -27,6 +20,13 @@ const Button: FC<ButtonProps> = ({
 	const buttonBoxRef = useRef<HTMLDivElement | null>(null);
 	const buttonTextRef = useRef<HTMLSpanElement | null>(null);
 	const buttonRef = useRef<null>(null);
+
+	const commonButtonClasses =
+		"font-medium bg-transparent text-blue-zodiac-950 font-mPlus " +
+		"text-sm-14px-lh-20px border-bombay-400 border-solid " +
+		"border-[0.1rem] rounded-[0.2rem] pt-[1rem] pl-[2.8rem] pb-[1rem] pr-[2.8rem] " +
+		"md:text-md-16px-lh-22px md:pl-[2.7rem] md:pr-[2.7rem] md:pt-[0.9rem] md:pb-[0.9rem] " +
+		"pointer-events-auto relative overflow-hidden inline-block";
 
 	function handleButtonMouseEnter() {
 		mouseEnterHoverEffect({
@@ -54,9 +54,7 @@ const Button: FC<ButtonProps> = ({
 		return (
 			<StyledLinkInternal
 				text={text}
-				additionalClassNames={
-					commonButtonClasses + (borderColor ? ` border-[${borderColor}]` : "")
-				}
+				additionalClassNames={commonButtonClasses}
 				onButtonMouseEnter={handleButtonMouseEnter}
 				onButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
@@ -64,6 +62,7 @@ const Button: FC<ButtonProps> = ({
 				buttonTextRef={buttonTextRef}
 				linkInternal={linkInternal}
 				className={className}
+				style={{ borderColor: borderColor }}
 			/>
 		);
 	}
@@ -72,9 +71,7 @@ const Button: FC<ButtonProps> = ({
 		return (
 			<StyledLinkExternal
 				text={text}
-				additionalClassNames={
-					commonButtonClasses + (borderColor ? ` border-[${borderColor}]` : "")
-				}
+				additionalClassNames={commonButtonClasses}
 				onButtonMouseEnter={handleButtonMouseEnter}
 				onButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
@@ -82,6 +79,7 @@ const Button: FC<ButtonProps> = ({
 				buttonTextRef={buttonTextRef}
 				linkExternal={linkExternal}
 				className={className}
+				style={{ borderColor: borderColor }}
 			/>
 		);
 	}
@@ -90,9 +88,7 @@ const Button: FC<ButtonProps> = ({
 		<StyledButton
 			type={type}
 			text={text}
-			additionalClassNames={
-				commonButtonClasses + (borderColor ? ` border-[${borderColor}]` : "")
-			}
+			additionalClassNames={commonButtonClasses}
 			onButtonMouseEnter={handleButtonMouseEnter}
 			onButtonMouseLeave={handleButtonMouseLeave}
 			buttonRef={buttonRef}
@@ -100,6 +96,7 @@ const Button: FC<ButtonProps> = ({
 			buttonTextRef={buttonTextRef}
 			className={className}
 			onClick={onClick}
+			style={{ borderColor: borderColor }}
 		/>
 	);
 };

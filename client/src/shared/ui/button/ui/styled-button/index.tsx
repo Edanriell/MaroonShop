@@ -15,6 +15,7 @@ const Button: FC<ButtonProps> = ({
 	buttonTextRef,
 	className,
 	onClick = () => {},
+	...style
 }) => {
 	return (
 		<div onClick={() => onClick()} className={"relative z-10"}>
@@ -24,6 +25,7 @@ const Button: FC<ButtonProps> = ({
 				onMouseEnter={onButtonMouseEnter}
 				onMouseLeave={onButtonMouseLeave}
 				ref={buttonRef}
+				{...style}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
 				<span className={"relative z-10 block"} ref={buttonTextRef}>
