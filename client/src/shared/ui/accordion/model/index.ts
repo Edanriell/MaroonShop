@@ -5,11 +5,15 @@ import { gsap } from "gsap";
 export const displayAccordionContent = (
 	accordionContentRef: MutableRefObject<HTMLDivElement | null>,
 ): void => {
-	gsap.set(accordionContentRef.current, { height: "auto" });
-	gsap.from(accordionContentRef.current, {
+	gsap.set(accordionContentRef.current, {
 		height: 0,
 		opacity: 0,
-		translateY: "10px",
+		translateY: "20px",
+	});
+	gsap.to(accordionContentRef.current, {
+		height: "auto",
+		opacity: 1,
+		translateY: "0px",
 		duration: 0.5,
 		ease: "power2.out",
 	});
@@ -23,7 +27,7 @@ export const hideAccordionContent = (
 		height: 0,
 		opacity: 0,
 		duration: 0.25,
-		translateY: "10px",
+		translateY: "20px",
 		ease: "power2.out",
 		onComplete: () => {
 			gsap.set(accordionContentRef.current, { height: 0 });

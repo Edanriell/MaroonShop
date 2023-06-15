@@ -5,7 +5,9 @@ export type ButtonProps = {
 	type?: ButtonType;
 	linkInternal?: string;
 	linkExternal?: string;
-	darkBorder?: boolean;
+	borderColor?: string;
+	backgroundColor?: string;
+	textColor?: string;
 	className?: string;
 	onClick?: () => void;
 };

@@ -19,7 +19,9 @@ const Button: FC<ButtonProps> = ({
 	linkInternal,
 	linkExternal,
 	className = "",
-	darkBorder = false,
+	borderColor,
+	backgroundColor,
+	textColor,
 	onClick,
 }) => {
 	const buttonBoxRef = useRef<HTMLDivElement | null>(null);
@@ -31,6 +33,9 @@ const Button: FC<ButtonProps> = ({
 			buttonBoxRef,
 			buttonTextRef,
 			buttonRef,
+			borderColor,
+			backgroundColor,
+			textColor,
 		});
 	}
 
@@ -39,6 +44,9 @@ const Button: FC<ButtonProps> = ({
 			buttonBoxRef,
 			buttonTextRef,
 			buttonRef,
+			borderColor,
+			backgroundColor,
+			textColor,
 		});
 	}
 
@@ -46,7 +54,9 @@ const Button: FC<ButtonProps> = ({
 		return (
 			<StyledLinkInternal
 				text={text}
-				additionalClassNames={commonButtonClasses}
+				additionalClassNames={
+					commonButtonClasses + (borderColor ? ` border-[${borderColor}]` : "")
+				}
 				onButtonMouseEnter={handleButtonMouseEnter}
 				onButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
@@ -62,7 +72,9 @@ const Button: FC<ButtonProps> = ({
 		return (
 			<StyledLinkExternal
 				text={text}
-				additionalClassNames={commonButtonClasses}
+				additionalClassNames={
+					commonButtonClasses + (borderColor ? ` border-[${borderColor}]` : "")
+				}
 				onButtonMouseEnter={handleButtonMouseEnter}
 				onButtonMouseLeave={handleButtonMouseLeave}
 				buttonRef={buttonRef}
@@ -78,7 +90,9 @@ const Button: FC<ButtonProps> = ({
 		<StyledButton
 			type={type}
 			text={text}
-			additionalClassNames={commonButtonClasses}
+			additionalClassNames={
+				commonButtonClasses + (borderColor ? ` border-[${borderColor}]` : "")
+			}
 			onButtonMouseEnter={handleButtonMouseEnter}
 			onButtonMouseLeave={handleButtonMouseLeave}
 			buttonRef={buttonRef}

@@ -30,7 +30,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				</div>
 				<form
 					className={
-						"grid col-start-1 col-end-3 row-start-2 row-end-3 justify-self-center"
+						"grid col-start-1 col-end-3 row-start-2 row-end-3 justify-self-center mt-[3.5rem] w-[25rem]"
 					}
 					action="#"
 					method="get"
@@ -72,7 +72,11 @@ const Filter: FC<FilterProps> = ({ className }) => {
 									id="tonic"
 								/>
 							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
+							<div
+								className={
+									"flex flex-row-reverse items-center justify-end mb-[2.9rem]"
+								}
+							>
 								<label className={"cursor-pointer"} htmlFor="powder">
 									Пудры
 								</label>
@@ -112,7 +116,11 @@ const Filter: FC<FilterProps> = ({ className }) => {
 								</label>
 								<input type="checkbox" name="Бомбочки для ванны" id="bath-bomb" />
 							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
+							<div
+								className={
+									"flex flex-row-reverse items-center justify-end mb-[2.9rem]"
+								}
+							>
 								<label className={"cursor-pointer"} htmlFor="bath-salt">
 									Соль для ванны
 								</label>
@@ -121,7 +129,11 @@ const Filter: FC<FilterProps> = ({ className }) => {
 						</Accordion>
 					</fieldset>
 					<fieldset className={styles.resetStyles + " "}>
-						<Accordion triggerName={"Тип кожи"} triggerType={"legend"}>
+						<Accordion
+							className={"pb-[4.3rem]"}
+							triggerName={"Тип кожи"}
+							triggerType={"legend"}
+						>
 							<div className={"flex flex-row-reverse items-center justify-end"}>
 								<label className={"cursor-pointer"} htmlFor="normal">
 									Нормальная
@@ -140,7 +152,11 @@ const Filter: FC<FilterProps> = ({ className }) => {
 								</label>
 								<input type="checkbox" name="Жирная" id="fat" />
 							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
+							<div
+								className={
+									"flex flex-row-reverse items-center justify-end mb-[0.3rem]"
+								}
+							>
 								<label className={"cursor-pointer"} htmlFor="combined">
 									Комбинированная{" "}
 								</label>
@@ -148,9 +164,16 @@ const Filter: FC<FilterProps> = ({ className }) => {
 							</div>
 						</Accordion>
 					</fieldset>
-					<div className={"flex flex-row items-center"}>
-						<Button text={"Применить"} type="submit" />
-						<Button text={"Сбросить"} type="reset" />
+					<div className={"flex flex-row items-center justify-between"}>
+						<Button
+							className={"pl-[18px] pr-[18px]"}
+							text={"Применить"}
+							type="submit"
+							borderColor={"#122947"}
+							backgroundColor={"#122947"}
+							textColor={"#FFF"}
+						/>
+						<Button className={"pl-[24px] pr-[24px]"} text={"Сбросить"} type="reset" />
 					</div>
 				</form>
 			</>
