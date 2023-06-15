@@ -166,18 +166,14 @@ const Filter: FC<FilterProps> = ({ className }) => {
 					</fieldset>
 					<div className={"flex flex-row items-center justify-between"}>
 						<Button
-							className={"pl-[1.8rem] pr-[1.8rem]"}
+							className={styles.buttonPadding18}
 							text={"Применить"}
 							type="submit"
 							borderColor={"#122947"}
 							backgroundColor={"#122947"}
 							textColor={"#FFF"}
 						/>
-						<Button
-							className={"pl-[2.4rem] pr-[2.4rem]"}
-							text={"Сбросить"}
-							type="reset"
-						/>
+						<Button className={styles.buttonPadding24} text={"Сбросить"} type="reset" />
 					</div>
 				</form>
 			</>

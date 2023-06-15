@@ -1,11 +1,7 @@
 import { FC, useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
-// import { FC, useState, useRef } from "react";
 
 import { displayAccordionContent, hideAccordionContent } from "./model";
-
-import { ReactComponent as Plus } from "./assets/plus.svg";
-import { ReactComponent as Minus } from "./assets/minus.svg";
 
 import { AccordionProps } from "./types";
 
@@ -37,7 +33,6 @@ const Accordion: FC<AccordionProps> = ({
 
 	function handleTriggerClick() {
 		isAccordionContentShown ? accordionContentCtx.remove() : setIsAccordionContentShown(true);
-		// setIsAccordionContentShown(true);
 	}
 
 	return (
@@ -56,10 +51,24 @@ const Accordion: FC<AccordionProps> = ({
 						{triggerName}
 					</span>
 					{!isAccordionContentShown && (
-						<Plus className={"w-[1.2rem] h-[1.2rem] text-blue-zodiac-950"} />
+						<div
+							className={
+								"w-[1.4rem] h-[1.4rem] relative after:content-[''] after:w-[1.4rem] " +
+								"after:h-[0.1rem] after:bg-blue-zodiac-950 after:block after:absolute " +
+								"after:top-[50%] after:left-0 before:content-[''] before:w-[1.4rem] " +
+								"before:h-[0.01rem] before:bg-blue-zodiac-950 before:block before:absolute " +
+								"before:top-[50%] before:left-0 before:rotate-90"
+							}
+						></div>
 					)}
 					{isAccordionContentShown && (
-						<Minus className={"w-[1.2rem] h-[0.1rem] text-blue-zodiac-950"} />
+						<div
+							className={
+								"w-[1.4rem] h-[1.4rem] relative after:content-[''] after:w-[1.4rem] " +
+								"after:h-[0.1rem] after:bg-blue-zodiac-950 after:block after:absolute " +
+								"after:top-[50%] after:left-0"
+							}
+						></div>
 					)}
 				</legend>
 			)}
@@ -77,10 +86,24 @@ const Accordion: FC<AccordionProps> = ({
 						{triggerName}
 					</span>
 					{!isAccordionContentShown && (
-						<Plus className={"w-[1.2rem] h-[1.2rem] text-blue-zodiac-950"} />
+						<div
+							className={
+								"w-[1.4rem] h-[1.4rem] relative after:content-[''] after:w-[1.4rem] " +
+								"after:h-[0.1rem] after:bg-blue-zodiac-950 after:block after:absolute " +
+								"after:top-[50%] after:left-0 before:content-[''] before:w-[1.4rem] " +
+								"before:h-[0.01rem] before:bg-blue-zodiac-950 before:block before:absolute " +
+								"before:top-[50%] before:left-0 before:rotate-90"
+							}
+						></div>
 					)}
 					{isAccordionContentShown && (
-						<Minus className={"w-[1.2rem] h-[0.1rem] text-blue-zodiac-950"} />
+						<div
+							className={
+								"w-[1.4rem] h-[1.4rem] relative after:content-[''] after:w-[1.4rem] " +
+								"after:h-[0.1rem] after:bg-blue-zodiac-950 after:block after:absolute " +
+								"after:top-[50%] after:left-0"
+							}
+						></div>
 					)}
 				</div>
 			)}
