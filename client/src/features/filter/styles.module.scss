@@ -1,0 +1,24 @@
+.resetStyles {
+	all: unset;
+}
+
+.accordion2 {
+	background-color: red;
+	overflow: hidden;
+	max-height: 0;
+}
+
+.accordion {
+	legend {
+		background-color: green;
+
+		&:hover {
+			background-color: yellow;
+			& + .accordion2 {
+				// max-height: 400px;
+				background-color: blue;
+				max-height: 100%;
+			}
+		}
+	}
+}

@@ -6,3 +6,4 @@ export { default as Input } from "./input";
 export { default as Select } from "./select";
 export { default as Snackbar } from "./snackbar";
 export { default as Spinner } from "./spinner";
+export { default as Accordion } from "./accordion";
