@@ -30,7 +30,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	const [closeFilterButtonCtx] = useState(gsap.context(() => {}, closeFilterButtonRef));
 
 	useLayoutEffect(() => {
-		displayFilter(filterRef);
+		if (isShown && filterRef) displayFilter(filterRef);
 
 		filterCtx.add("hide", () => {
 			hideFilter(filterRef, () => setIsShown(false));
@@ -42,7 +42,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	}, [filterCtx, isShown]);
 
 	useLayoutEffect(() => {
-		if (!isShown) displayOpenFilterButton(openFilterButtonRef);
+		if (!isShown && openFilterButtonRef) displayOpenFilterButton(openFilterButtonRef);
 
 		openFilterButtonCtx.add("hide", () => {
 			hideOpenFilterButton(openFilterButtonRef, () => setIsShown(true));
@@ -54,7 +54,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	}, [openFilterButtonCtx, isShown]);
 
 	useLayoutEffect(() => {
-		if (isShown) displayCloseFilterButton(closeFilterButtonRef);
+		if (isShown && closeFilterButtonRef) displayCloseFilterButton(closeFilterButtonRef);
 
 		closeFilterButtonCtx.add("hide", () => {
 			hideCloseFilterButton(closeFilterButtonRef);
