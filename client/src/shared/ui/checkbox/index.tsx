@@ -2,7 +2,7 @@ import { FC, useState, useRef, useEffect, MouseEvent } from "react";
 import { gsap } from "gsap";
 import classNames from "classnames";
 
-import { displayInputCircle, hideInputCircle } from "./model/index";
+import { displayInputCircle, hideInputCircle, changeLabelColor } from "./model/index";
 
 import { CheckboxProps } from "./types";
 
@@ -20,12 +20,25 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className }) => {
 	useEffect(() => {
 		if (isChecked === true) {
 			displayInputCircle(inputCircleRef);
-			
+			changeLabelColor({
+				startColor: "#9A9DA0",
+				endColor: "#122947",
+				elementRef: inputLabelRef,
+			});
 		}
-		inputCircleCtx.add("remove", () => {
+
+		inputCircleCtx.add("hide", () => {
 			hideInputCircle(inputCircleRef, () => setIsChecked(false));
 		});
-	}, [inputCircleCtx, isChecked]);
+
+		inputLabelCtx.add("change", () => {
+			changeLabelColor({
+				startColor: "#122947",
+				endColor: "#9A9DA0",
+				elementRef: inputLabelRef,
+			});
+		});
+	}, [inputCircleCtx, inputLabelCtx, isChecked]);
 
 	const labelClasses = classNames({
 		"text-blue-zodiac-950": isChecked,
@@ -34,7 +47,12 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className }) => {
 
 	function handleCheckboxToggle(event: MouseEvent) {
 		if (event.currentTarget === event.target) {
-			!isChecked ? setIsChecked(true) : inputCircleCtx.remove();
+			if (!isChecked) {
+				setIsChecked(true);
+			} else {
+				inputLabelCtx.change();
+				inputCircleCtx.hide();
+			}
 		}
 	}
 

@@ -1,6 +1,16 @@
-import { useState, FC } from "react";
+import { useState, FC, useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
 
 import { Button, Accordion, Checkbox } from "shared/ui";
+
+import {
+	displayFilter,
+	hideFilter,
+	displayOpenFilterButton,
+	hideOpenFilterButton,
+	displayCloseFilterButton,
+	hideCloseFilterButton,
+} from "./model";
 
 import { FilterProps } from "./types";
 
@@ -11,14 +21,66 @@ import styles from "./styles.module.scss";
 const Filter: FC<FilterProps> = ({ className }) => {
 	const [isShown, setIsShown] = useState<boolean>(false);
 
+	const filterRef = useRef<HTMLFormElement | null>(null);
+	const openFilterButtonRef = useRef<HTMLDivElement | null>(null);
+	const closeFilterButtonRef = useRef<HTMLDivElement | null>(null);
+
+	const [filterCtx] = useState(gsap.context(() => {}, filterRef));
+	const [openFilterButtonCtx] = useState(gsap.context(() => {}, openFilterButtonRef));
+	const [closeFilterButtonCtx] = useState(gsap.context(() => {}, closeFilterButtonRef));
+
+	useLayoutEffect(() => {
+		displayFilter(filterRef);
+
+		filterCtx.add("hide", () => {
+			hideFilter(filterRef, () => setIsShown(false));
+		});
+
+		return () => {
+			filterCtx.revert();
+		};
+	}, [filterCtx, isShown]);
+
+	useLayoutEffect(() => {
+		if (!isShown) displayOpenFilterButton(openFilterButtonRef);
+
+		openFilterButtonCtx.add("hide", () => {
+			hideOpenFilterButton(openFilterButtonRef, () => setIsShown(true));
+		});
+
+		return () => {
+			openFilterButtonCtx.revert();
+		};
+	}, [openFilterButtonCtx, isShown]);
+
+	useLayoutEffect(() => {
+		if (isShown) displayCloseFilterButton(closeFilterButtonRef);
+
+		closeFilterButtonCtx.add("hide", () => {
+			hideCloseFilterButton(closeFilterButtonRef);
+		});
+
+		return () => {
+			closeFilterButtonCtx.revert();
+		};
+	}, [closeFilterButtonCtx, isShown]);
+
 	function handleButtonClick() {
-		setIsShown(!isShown);
+		if (isShown) {
+			filterCtx.hide();
+			closeFilterButtonCtx.hide();
+		} else {
+			openFilterButtonCtx.hide();
+		}
 	}
 
 	if (isShown) {
 		return (
 			<>
-				<div className={"row-start-1 row-end-2 justify-self-end"}>
+				<div
+					ref={closeFilterButtonRef}
+					className={"row-start-1 row-end-2 justify-self-end"}
+				>
 					<button onClick={handleButtonClick} type="button">
 						<Cross
 							className={
@@ -29,6 +91,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 					</button>
 				</div>
 				<form
+					ref={filterRef}
 					className={
 						"grid col-start-1 col-end-3 row-start-2 row-end-3 justify-self-center mt-[3.5rem] w-[25rem]"
 					}
@@ -109,7 +172,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	}
 
 	return (
-		<div className={"row-start-1 row-end-2 justify-self-end"}>
+		<div ref={openFilterButtonRef} className={"row-start-1 row-end-2 justify-self-end"}>
 			<Button onClick={handleButtonClick} text={"Фильтр"} className={className} />
 		</div>
 	);

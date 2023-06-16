@@ -43,3 +43,27 @@ export const hideInputCircle = (
 		},
 	);
 };
+
+export const changeLabelColor = ({
+	startColor,
+	endColor,
+	elementRef,
+}: {
+	startColor: string;
+	endColor: string;
+	elementRef: MutableRefObject<HTMLLabelElement | null>;
+}): void => {
+	gsap.fromTo(
+		elementRef.current,
+		{
+			color: startColor,
+			duration: 0.5,
+			ease: "power2.out",
+		},
+		{
+			color: endColor,
+			duration: 0.5,
+			ease: "power2.out",
+		},
+	);
+};
