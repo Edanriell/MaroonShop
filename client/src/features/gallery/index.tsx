@@ -161,7 +161,13 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 					<p className={"font-medium font-mPlus text-sm-22px"}>
 						Не удалось загрузить галерею.
 					</p>
-					<Button text={"Обновить"} onClick={() => setReload(Math.random())} />
+					<Button
+						text={"Обновить"}
+						borderColor={"#122947"}
+						backgroundColor={"#122947"}
+						textColor={"#FFF"}
+						onClick={() => setReload(Math.random())}
+					/>
 				</div>
 			</GalleryContainer>
 		);

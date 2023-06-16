@@ -1,6 +1,6 @@
 import { useState, FC } from "react";
 
-import { Button, Accordion } from "shared/ui";
+import { Button, Accordion, Checkbox } from "shared/ui";
 
 import { FilterProps } from "./types";
 
@@ -37,94 +37,39 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				>
 					<fieldset className={styles.resetStyles + " "}>
 						<Accordion triggerName={"Уход для лица"} triggerType={"legend"}>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="cream">
-									Крема
-								</label>
-								<input type="checkbox" name="Крема" id="cream" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="serum">
-									Сыворотки
-								</label>
-								<input type="checkbox" name="Сыворотки" id="serum" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="mask">
-									Маски
-								</label>
-								<input type="checkbox" name="Маски" id="mask" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="foam">
-									Пенки
-								</label>
-								<input type="checkbox" name="Пенки" id="foam" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="tonic">
-									Тоники
-								</label>
-								<input
-									className={"cursor-pointer"}
-									type="checkbox"
-									name="Тоники"
-									id="tonic"
+							<div className={"flex flex-col gap-y-[1.4rem]"}>
+								<Checkbox htmlFor={"cream"} name={"Крема"} id={"cream"} />
+								<Checkbox htmlFor={"serum"} name={"Сыворотки"} id={"serum"} />
+								<Checkbox htmlFor={"mask"} name={"Маски"} id={"mask"} />
+								<Checkbox htmlFor={"foam"} name={"Пенки"} id={"foam"} />
+								<Checkbox htmlFor={"tonic"} name={"Тоники"} id={"tonic"} />
+								<Checkbox
+									className={"mb-[2.9rem]"}
+									htmlFor={"powder"}
+									name={"Пудры"}
+									id={"powder"}
 								/>
-							</div>
-							<div
-								className={
-									"flex flex-row-reverse items-center justify-end mb-[2.9rem]"
-								}
-							>
-								<label className={"cursor-pointer"} htmlFor="powder">
-									Пудры
-								</label>
-								<input type="checkbox" name="Пудры" id="powder" />
 							</div>
 						</Accordion>
 					</fieldset>
 					<fieldset className={styles.resetStyles + " "}>
 						<Accordion triggerName={"Уход для тела"} triggerType={"legend"}>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="cream">
-									Крема
-								</label>
-								<input type="checkbox" name="Крема" id="cream" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="oil">
-									Масла
-								</label>
-								<input type="checkbox" name="Масла" id="oil" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="scrub">
-									Скрабы
-								</label>
-								<input type="checkbox" name="Скрабы" id="scrub" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="soap">
-									Мыло
-								</label>
-								<input type="checkbox" name="Мыло" id="soap" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="bath-bomb">
-									Бомбочки для ванны
-								</label>
-								<input type="checkbox" name="Бомбочки для ванны" id="bath-bomb" />
-							</div>
-							<div
-								className={
-									"flex flex-row-reverse items-center justify-end mb-[2.9rem]"
-								}
-							>
-								<label className={"cursor-pointer"} htmlFor="bath-salt">
-									Соль для ванны
-								</label>
-								<input type="checkbox" name="Соль для ванны" id="bath-salt" />
+							<div className={"flex flex-col gap-y-[1.4rem]"}>
+								<Checkbox htmlFor={"cream"} name={"Крема"} id={"cream"} />
+								<Checkbox htmlFor={"oil"} name={"Масла"} id={"oil"} />
+								<Checkbox htmlFor={"scrub"} name={"Скрабы"} id={"scrub"} />
+								<Checkbox htmlFor={"soap"} name={"Мыло"} id={"soap"} />
+								<Checkbox
+									htmlFor={"bath-bomb"}
+									name={"Бомбочки для ванны"}
+									id={"bath-bomb"}
+								/>
+								<Checkbox
+									className={"mb-[2.9rem]"}
+									htmlFor={"bath-salt"}
+									name={"Соль для ванны"}
+									id={"bath-salt"}
+								/>
 							</div>
 						</Accordion>
 					</fieldset>
@@ -134,33 +79,16 @@ const Filter: FC<FilterProps> = ({ className }) => {
 							triggerName={"Тип кожи"}
 							triggerType={"legend"}
 						>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="normal">
-									Нормальная
-								</label>
-								<input type="checkbox" name="Нормальная" id="normal" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="dry">
-									Сухая
-								</label>
-								<input type="checkbox" name="Сухая" id="dry" />
-							</div>
-							<div className={"flex flex-row-reverse items-center justify-end"}>
-								<label className={"cursor-pointer"} htmlFor="fat">
-									Жирная
-								</label>
-								<input type="checkbox" name="Жирная" id="fat" />
-							</div>
-							<div
-								className={
-									"flex flex-row-reverse items-center justify-end mb-[0.3rem]"
-								}
-							>
-								<label className={"cursor-pointer"} htmlFor="combined">
-									Комбинированная{" "}
-								</label>
-								<input type="checkbox" name="Комбинированная " id="combined" />
+							<div className={"flex flex-col gap-y-[1.4rem]"}>
+								<Checkbox htmlFor={"normal"} name={"Нормальная"} id={"normal"} />
+								<Checkbox htmlFor={"dry"} name={"Сухая"} id={"dry"} />
+								<Checkbox htmlFor={"fat"} name={"Жирная"} id={"fat"} />
+								<Checkbox
+									className={"mb-[0.3rem]"}
+									htmlFor={"combined"}
+									name={"Комбинированная"}
+									id={"combined"}
+								/>
 							</div>
 						</Accordion>
 					</fieldset>

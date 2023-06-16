@@ -35,3 +35,43 @@ export const hideAccordionContent = (
 		},
 	});
 };
+
+export const transformPlusToMinus = (
+	plusIconBar1Ref: MutableRefObject<HTMLDivElement | null>,
+	plusIconBar2Ref: MutableRefObject<HTMLDivElement | null>,
+): void => {
+	gsap.set(plusIconBar1Ref.current, {
+		rotate: 90,
+	});
+	gsap.set(plusIconBar2Ref.current, {
+		rotate: 0,
+	});
+	gsap.to(plusIconBar1Ref.current, {
+		rotate: 0,
+		duration: 0.5,
+		ease: "power2.out",
+	});
+	gsap.to(plusIconBar2Ref.current, {
+		rotate: -90,
+		duration: 0.5,
+		opacity: 0,
+		ease: "power2.out",
+	});
+};
+
+export const transformMinusToPlus = (
+	plusIconBar1Ref: MutableRefObject<HTMLDivElement | null>,
+	plusIconBar2Ref: MutableRefObject<HTMLDivElement | null>,
+): void => {
+	gsap.to(plusIconBar1Ref.current, {
+		rotate: 90,
+		duration: 0.5,
+		ease: "power2.out",
+	});
+	gsap.to(plusIconBar2Ref.current, {
+		rotate: 0,
+		duration: 0.5,
+		opacity: 1,
+		ease: "power2.out",
+	});
+};

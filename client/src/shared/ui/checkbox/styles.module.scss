@@ -1,0 +1,25 @@
+.input {
+	width: 1.6rem;
+	height: 1.6rem;
+	background-color: transparent;
+	border-radius: 50%;
+	border: 0.1rem solid #cdcdcd;
+	appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+	cursor: pointer;
+	pointer-events: none;
+}
+
+.inputCircle {
+	position: absolute;
+	width: 1.2rem;
+	height: 1.2rem;
+	border-radius: 50%;
+	background-color: #122947;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	pointer-events: none;
+}
