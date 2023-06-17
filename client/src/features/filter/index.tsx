@@ -20,6 +20,8 @@ import styles from "./styles.module.scss";
 
 const Filter: FC<FilterProps> = ({ className }) => {
 	const [isShown, setIsShown] = useState<boolean>(false);
+	const [isOpenFilterButtonAnimationLocked, setIsOpenFilterButtonAnimationLocked] =
+		useState<boolean>(true);
 
 	const filterRef = useRef<HTMLFormElement | null>(null);
 	const openFilterButtonRef = useRef<HTMLDivElement | null>(null);
@@ -42,7 +44,8 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	}, [filterCtx, isShown]);
 
 	useLayoutEffect(() => {
-		if (!isShown && openFilterButtonRef) displayOpenFilterButton(openFilterButtonRef);
+		if (!isShown && openFilterButtonRef && !isOpenFilterButtonAnimationLocked)
+			displayOpenFilterButton(openFilterButtonRef);
 
 		openFilterButtonCtx.add("hide", () => {
 			hideOpenFilterButton(openFilterButtonRef, () => setIsShown(true));
@@ -51,7 +54,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 		return () => {
 			openFilterButtonCtx.revert();
 		};
-	}, [openFilterButtonCtx, isShown]);
+	}, [openFilterButtonCtx, isOpenFilterButtonAnimationLocked, isShown]);
 
 	useLayoutEffect(() => {
 		if (isShown && closeFilterButtonRef) displayCloseFilterButton(closeFilterButtonRef);
@@ -68,6 +71,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	function handleButtonClick() {
 		if (isShown) {
 			filterCtx.hide();
+			if (isOpenFilterButtonAnimationLocked) setIsOpenFilterButtonAnimationLocked(false);
 			closeFilterButtonCtx.hide();
 		} else {
 			openFilterButtonCtx.hide();
@@ -79,9 +83,13 @@ const Filter: FC<FilterProps> = ({ className }) => {
 			<>
 				<div
 					ref={closeFilterButtonRef}
-					className={"row-start-1 row-end-2 justify-self-end"}
+					className={"row-start-1 row-end-2 justify-self-end pr-[1.5rem] z-[14]"}
 				>
-					<button onClick={handleButtonClick} type="button">
+					<button
+						onClick={handleButtonClick}
+						className={"mt-[1.4rem] mb-[1.4rem]"}
+						type="button"
+					>
 						<Cross
 							className={
 								"w-[1.4rem] h-[1.4rem] md:w-[1.8rem] md:h-[1.8rem] text-blue-zodiac-950"
@@ -93,7 +101,10 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				<form
 					ref={filterRef}
 					className={
-						"grid col-start-1 col-end-3 row-start-2 row-end-3 justify-self-center mt-[3.5rem] w-[25rem]"
+						"grid col-start-1 col-end-3 row-start-2 row-end-3 " +
+						"justify-self-stretch pt-[10.3rem] w-full pl-[3.5rem] pr-[3.5rem] " +
+						"absolute top-0 left-0 bg-desert-storm-50 z-[12] pb-[6rem] " +
+						styles.filterShadow
 					}
 					action="#"
 					method="get"
@@ -155,7 +166,11 @@ const Filter: FC<FilterProps> = ({ className }) => {
 							</div>
 						</Accordion>
 					</fieldset>
-					<div className={"flex flex-row items-center justify-between"}>
+					<div
+						className={
+							"flex flex-row items-center justify-center gap-x-[2rem] gap-y-[2rem] flex-wrap"
+						}
+					>
 						<Button
 							className={styles.buttonPadding18}
 							text={"Применить"}
@@ -172,7 +187,10 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	}
 
 	return (
-		<div ref={openFilterButtonRef} className={"row-start-1 row-end-2 justify-self-end"}>
+		<div
+			ref={openFilterButtonRef}
+			className={"row-start-1 row-end-2 justify-self-end pr-[1.5rem] z-[14]"}
+		>
 			<Button onClick={handleButtonClick} text={"Фильтр"} className={className} />
 		</div>
 	);

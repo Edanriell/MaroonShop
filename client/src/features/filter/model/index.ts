@@ -7,7 +7,7 @@ export const displayFilter = (filterRef: MutableRefObject<HTMLFormElement | null
 		filterRef.current,
 		{
 			opacity: 0,
-			translateY: -30,
+			translateY: 15,
 		},
 		{
 			opacity: 1,
@@ -30,7 +30,7 @@ export const hideFilter = (
 		},
 		{
 			opacity: 0,
-			translateY: -30,
+			translateY: 15,
 			duration: 0.25,
 			ease: "power2.out",
 			onComplete: () => {

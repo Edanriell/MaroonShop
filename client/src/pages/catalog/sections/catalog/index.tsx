@@ -56,21 +56,22 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	return (
 		<div
 			className={
-				"pt-[3rem] pb-[7rem] pl-[1.5rem] pr-[1.5rem] md:pr-[4.5rem] " +
+				"pt-[3rem] pb-[7rem] md:pr-[4.5rem] " +
 				"md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem] lg:pt-[3.7rem] " +
 				"lg:pb-[13rem] lg:pr-[2.3rem] lg:pl-[2.3rem] lg:mr-auto lg:ml-auto " +
-				"lg:max-w-[120rem]"
+				"lg:max-w-[120rem] relative"
 			}
 		>
 			<div
 				className={
-					"mb-[4rem] grid grid-cols-two items-center md:mb-[3.6rem] lg:mb-[4.9rem]"
+					"mb-[4rem] flex flex-row items-center justify-between md:mb-[3.6rem] lg:mb-[4.9rem]"
 				}
 			>
 				<h2
 					className={
 						"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 " +
-						"md:text-md-36px justify-self-start row-start-1 row-end-2"
+						"md:text-md-36px justify-self-start row-start-1 row-end-2 pl-[1.5rem] " +
+						"z-[14]"
 					}
 				>
 					{title}
