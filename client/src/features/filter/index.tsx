@@ -1,4 +1,4 @@
-import { useState, FC, useRef, useLayoutEffect } from "react";
+import { useState, FC, useRef, useLayoutEffect, useEffect } from "react";
 import { gsap } from "gsap";
 
 import { useScreenSize } from "shared/lib/hooks";
@@ -20,7 +20,7 @@ import { ReactComponent as Cross } from "./assets/cross.svg";
 import styles from "./styles.module.scss";
 
 const Filter: FC<FilterProps> = ({ className }) => {
-	const { width } = useScreenSize();
+	const [selectedFilters, setSelectedFilters] = useState<Array<string>>([]);
 
 	const [isShown, setIsShown] = useState<boolean>(false);
 	const [isOpenFilterButtonAnimationLocked, setIsOpenFilterButtonAnimationLocked] =
@@ -33,6 +33,16 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	const [filterCtx] = useState(gsap.context(() => {}, filterRef));
 	const [openFilterButtonCtx] = useState(gsap.context(() => {}, openFilterButtonRef));
 	const [closeFilterButtonCtx] = useState(gsap.context(() => {}, closeFilterButtonRef));
+
+	const { width } = useScreenSize();
+
+	useEffect(() => {
+		console.log(selectedFilters);
+	}, [selectedFilters]);
+
+	useEffect(() => {
+		console.log(selectedFilters);
+	});
 
 	useLayoutEffect(() => {
 		if (isShown && filterRef) displayFilter(filterRef);
@@ -71,13 +81,21 @@ const Filter: FC<FilterProps> = ({ className }) => {
 		};
 	}, [closeFilterButtonCtx, isShown]);
 
-	function handleButtonClick() {
+	function handleFilterButtonClick() {
 		if (isShown) {
 			filterCtx.hide();
 			if (isOpenFilterButtonAnimationLocked) setIsOpenFilterButtonAnimationLocked(false);
 			closeFilterButtonCtx.hide();
 		} else {
 			openFilterButtonCtx.hide();
+		}
+	}
+
+	function handleFilterSelect(selectedFilter: string, isCheckboxChecked: boolean) {
+		if (!isCheckboxChecked) {
+			setSelectedFilters([...selectedFilters, selectedFilter]);
+		} else {
+			setSelectedFilters(selectedFilters.filter((filter) => filter !== selectedFilter));
 		}
 	}
 
@@ -92,7 +110,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 					}
 				>
 					<button
-						onClick={handleButtonClick}
+						onClick={handleFilterButtonClick}
 						className={"mt-[1.4rem] mb-[1.4rem]"}
 						type="button"
 					>
@@ -127,16 +145,42 @@ const Filter: FC<FilterProps> = ({ className }) => {
 						{width < 768 && (
 							<Accordion triggerName={"Уход для лица"} triggerType={"legend"}>
 								<div className={"flex flex-col gap-y-[1.4rem]"}>
-									<Checkbox htmlFor={"cream"} name={"Крема"} id={"cream"} />
-									<Checkbox htmlFor={"serum"} name={"Сыворотки"} id={"serum"} />
-									<Checkbox htmlFor={"mask"} name={"Маски"} id={"mask"} />
-									<Checkbox htmlFor={"foam"} name={"Пенки"} id={"foam"} />
-									<Checkbox htmlFor={"tonic"} name={"Тоники"} id={"tonic"} />
+									<Checkbox
+										htmlFor={"face-cream"}
+										name={"Крема"}
+										id={"face-cream"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"face-serum"}
+										name={"Сыворотки"}
+										id={"face-serum"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"face-mask"}
+										name={"Маски"}
+										id={"face-mask"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"face-foam"}
+										name={"Пенки"}
+										id={"face-foam"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"face-tonic"}
+										name={"Тоники"}
+										id={"face-tonic"}
+										onFilterSelect={handleFilterSelect}
+									/>
 									<Checkbox
 										className={"mb-[2.9rem]"}
-										htmlFor={"powder"}
+										htmlFor={"face-powder"}
 										name={"Пудры"}
-										id={"powder"}
+										id={"face-powder"}
+										onFilterSelect={handleFilterSelect}
 									/>
 								</div>
 							</Accordion>
@@ -154,20 +198,42 @@ const Filter: FC<FilterProps> = ({ className }) => {
 								</legend>
 								<div className={"overflow-hidden"}>
 									<div className={"flex flex-col gap-y-[1.4rem] lg:gap-y-[1rem]"}>
-										<Checkbox htmlFor={"cream"} name={"Крема"} id={"cream"} />
 										<Checkbox
-											htmlFor={"serum"}
-											name={"Сыворотки"}
-											id={"serum"}
+											htmlFor={"face-cream"}
+											name={"Крема"}
+											id={"face-cream"}
+											onFilterSelect={handleFilterSelect}
 										/>
-										<Checkbox htmlFor={"mask"} name={"Маски"} id={"mask"} />
-										<Checkbox htmlFor={"foam"} name={"Пенки"} id={"foam"} />
-										<Checkbox htmlFor={"tonic"} name={"Тоники"} id={"tonic"} />
+										<Checkbox
+											htmlFor={"face-serum"}
+											name={"Сыворотки"}
+											id={"face-serum"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"face-mask"}
+											name={"Маски"}
+											id={"face-mask"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"face-foam"}
+											name={"Пенки"}
+											id={"face-foam"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"face-tonic"}
+											name={"Тоники"}
+											id={"face-tonic"}
+											onFilterSelect={handleFilterSelect}
+										/>
 										<Checkbox
 											className={"mb-[0rem]"}
-											htmlFor={"powder"}
+											htmlFor={"face-powder"}
 											name={"Пудры"}
-											id={"powder"}
+											id={"face-powder"}
+											onFilterSelect={handleFilterSelect}
 										/>
 									</div>
 								</div>
@@ -183,20 +249,42 @@ const Filter: FC<FilterProps> = ({ className }) => {
 						{width < 768 && (
 							<Accordion triggerName={"Уход для тела"} triggerType={"legend"}>
 								<div className={"flex flex-col gap-y-[1.4rem]"}>
-									<Checkbox htmlFor={"cream"} name={"Крема"} id={"cream"} />
-									<Checkbox htmlFor={"oil"} name={"Масла"} id={"oil"} />
-									<Checkbox htmlFor={"scrub"} name={"Скрабы"} id={"scrub"} />
-									<Checkbox htmlFor={"soap"} name={"Мыло"} id={"soap"} />
 									<Checkbox
-										htmlFor={"bath-bomb"}
+										htmlFor={"body-cream"}
+										name={"Крема"}
+										id={"body-cream"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"body-oil"}
+										name={"Масла"}
+										id={"body-oil"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"body-scrub"}
+										name={"Скрабы"}
+										id={"body-scrub"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"body-soap"}
+										name={"Мыло"}
+										id={"body-soap"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"body-bath-bomb"}
 										name={"Бомбочки для ванны"}
-										id={"bath-bomb"}
+										id={"body-bath-bomb"}
+										onFilterSelect={handleFilterSelect}
 									/>
 									<Checkbox
 										className={"mb-[2.9rem]"}
-										htmlFor={"bath-salt"}
+										htmlFor={"body-bath-salt"}
 										name={"Соль для ванны"}
-										id={"bath-salt"}
+										id={"body-bath-salt"}
+										onFilterSelect={handleFilterSelect}
 									/>
 								</div>
 							</Accordion>
@@ -214,20 +302,42 @@ const Filter: FC<FilterProps> = ({ className }) => {
 								</legend>
 								<div className={"overflow-hidden"}>
 									<div className={"flex flex-col gap-y-[1.4rem] lg:gap-y-[1rem]"}>
-										<Checkbox htmlFor={"cream"} name={"Крема"} id={"cream"} />
-										<Checkbox htmlFor={"oil"} name={"Масла"} id={"oil"} />
-										<Checkbox htmlFor={"scrub"} name={"Скрабы"} id={"scrub"} />
-										<Checkbox htmlFor={"soap"} name={"Мыло"} id={"soap"} />
 										<Checkbox
-											htmlFor={"bath-bomb"}
+											htmlFor={"body-cream"}
+											name={"Крема"}
+											id={"body-cream"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"body-oil"}
+											name={"Масла"}
+											id={"body-oil"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"body-scrub"}
+											name={"Скрабы"}
+											id={"body-scrub"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"body-soap"}
+											name={"Мыло"}
+											id={"body-soap"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"body-bath-bomb"}
 											name={"Бомбочки для ванны"}
-											id={"bath-bomb"}
+											id={"body-bath-bomb"}
+											onFilterSelect={handleFilterSelect}
 										/>
 										<Checkbox
 											className={"mb-[0rem]"}
-											htmlFor={"bath-salt"}
+											htmlFor={"body-bath-salt"}
 											name={"Соль для ванны"}
-											id={"bath-salt"}
+											id={"body-bath-salt"}
+											onFilterSelect={handleFilterSelect}
 										/>
 									</div>
 								</div>
@@ -248,17 +358,29 @@ const Filter: FC<FilterProps> = ({ className }) => {
 							>
 								<div className={"flex flex-col gap-y-[1.4rem]"}>
 									<Checkbox
-										htmlFor={"normal"}
+										htmlFor={"skin-normal"}
 										name={"Нормальная"}
-										id={"normal"}
+										id={"skin-normal"}
+										onFilterSelect={handleFilterSelect}
 									/>
-									<Checkbox htmlFor={"dry"} name={"Сухая"} id={"dry"} />
-									<Checkbox htmlFor={"fat"} name={"Жирная"} id={"fat"} />
+									<Checkbox
+										htmlFor={"skin-dry"}
+										name={"Сухая"}
+										id={"skin-dry"}
+										onFilterSelect={handleFilterSelect}
+									/>
+									<Checkbox
+										htmlFor={"skin-fat"}
+										name={"Жирная"}
+										id={"skin-fat"}
+										onFilterSelect={handleFilterSelect}
+									/>
 									<Checkbox
 										className={"mb-[0.3rem]"}
-										htmlFor={"combined"}
+										htmlFor={"skin-combined"}
 										name={"Комбинированная"}
-										id={"combined"}
+										id={"skin-combined"}
+										onFilterSelect={handleFilterSelect}
 									/>
 								</div>
 							</Accordion>
@@ -277,17 +399,29 @@ const Filter: FC<FilterProps> = ({ className }) => {
 								<div className={"overflow-hidden"}>
 									<div className={"flex flex-col gap-y-[1.4rem] lg:gap-y-[1rem]"}>
 										<Checkbox
-											htmlFor={"normal"}
+											htmlFor={"skin-normal"}
 											name={"Нормальная"}
-											id={"normal"}
+											id={"skin-normal"}
+											onFilterSelect={handleFilterSelect}
 										/>
-										<Checkbox htmlFor={"dry"} name={"Сухая"} id={"dry"} />
-										<Checkbox htmlFor={"fat"} name={"Жирная"} id={"fat"} />
+										<Checkbox
+											htmlFor={"skin-dry"}
+											name={"Сухая"}
+											id={"skin-dry"}
+											onFilterSelect={handleFilterSelect}
+										/>
+										<Checkbox
+											htmlFor={"skin-fat"}
+											name={"Жирная"}
+											id={"skin-fat"}
+											onFilterSelect={handleFilterSelect}
+										/>
 										<Checkbox
 											className={"mb-[0rem]"}
-											htmlFor={"combined"}
+											htmlFor={"skin-combined"}
 											name={"Комбинированная"}
-											id={"combined"}
+											id={"skin-combined"}
+											onFilterSelect={handleFilterSelect}
 										/>
 									</div>
 								</div>
@@ -326,7 +460,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 			ref={openFilterButtonRef}
 			className={"row-start-1 row-end-2 justify-self-end pr-[1.5rem] z-[14] md:pr-[0rem]"}
 		>
-			<Button onClick={handleButtonClick} text={"Фильтр"} className={className} />
+			<Button onClick={handleFilterButtonClick} text={"Фильтр"} className={className} />
 		</div>
 	);
 };

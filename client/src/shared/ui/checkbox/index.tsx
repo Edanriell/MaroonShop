@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect, MouseEvent } from "react";
+import { FC, useState, useRef, useEffect, ChangeEvent } from "react";
 import { gsap } from "gsap";
 import classNames from "classnames";
 
@@ -8,7 +8,7 @@ import { CheckboxProps } from "./types";
 
 import styles from "./styles.module.scss";
 
-const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className }) => {
+const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSelect }) => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 
 	const inputCircleRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +45,7 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className }) => {
 		"text-manatee-500": !isChecked,
 	});
 
-	function handleCheckboxToggle(event: MouseEvent) {
+	function handleCheckboxToggle(event: ChangeEvent) {
 		if (event.currentTarget === event.target) {
 			if (!isChecked) {
 				setIsChecked(true);
@@ -56,11 +56,26 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className }) => {
 		}
 	}
 
+	function handleCheckboxCheck(
+		event: ChangeEvent,
+		onFilterSelect?: CheckboxProps["onFilterSelect"],
+	) {
+		handleCheckboxToggle(event);
+
+		if (onFilterSelect) {
+			const selectedFilter = id;
+			const isCheckboxChecked = isChecked;
+
+			if (event.currentTarget === event.target) {
+				onFilterSelect(selectedFilter, isCheckboxChecked);
+			}
+		}
+	}
+
 	return (
 		<div className={"flex flex-row-reverse items-center justify-end " + className}>
 			<label
 				ref={inputLabelRef}
-				onClick={(event) => handleCheckboxToggle(event)}
 				className={
 					labelClasses + " cursor-pointer font-mPlus font-normal text-sm-16px ml-[1rem]"
 				}
@@ -68,12 +83,9 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className }) => {
 			>
 				{name}
 			</label>
-			<div
-				onClick={(event) => handleCheckboxToggle(event)}
-				className={"flex flex-row relative cursor-pointer"}
-			>
+			<div className={"flex flex-row relative cursor-pointer"}>
 				<input
-					onChange={() => {}}
+					onChange={(event) => handleCheckboxCheck(event, onFilterSelect)}
 					className={styles.input}
 					type="checkbox"
 					name={name}
