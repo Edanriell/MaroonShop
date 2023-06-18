@@ -333,6 +333,7 @@ module.exports = {
 				"join-us-two-sm": "repeat(2, minmax(13.6rem, 45.31vw))",
 				"join-us-two-md": "repeat(2, 17.7rem)",
 				"join-us-two-lg": "repeat(3, 23.3rem)",
+				"3-auto": "repeat(3, auto)",
 			},
 			gridTemplateRows: {
 				"2-auto": "repeat(2, auto)",

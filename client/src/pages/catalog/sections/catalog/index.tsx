@@ -57,28 +57,36 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 		<div
 			className={
 				"pt-[3rem] pb-[7rem] md:pr-[4.5rem] " +
-				"md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem] lg:pt-[3.7rem] " +
-				"lg:pb-[13rem] lg:pr-[2.3rem] lg:pl-[2.3rem] lg:mr-auto lg:ml-auto " +
-				"lg:max-w-[120rem] relative"
+				"md:pl-[4.5rem] md:pt-[3.6rem] md:pb-[11rem] " +
+				"relative lg:pt-[3.7rem] lg:pb-[13rem]"
 			}
 		>
 			<div
-				className={
-					"mb-[4rem] flex flex-row items-center justify-between md:mb-[3.6rem] lg:mb-[4.9rem]"
-				}
+				className={"lg:pr-[2.3rem] lg:pl-[2.3rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"}
 			>
-				<h2
+				<div
 					className={
-						"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 " +
-						"md:text-md-36px justify-self-start row-start-1 row-end-2 pl-[1.5rem] " +
-						"z-[14]"
+						"mb-[4rem] flex flex-row items-center justify-between md:mb-[3.6rem] lg:mb-[4.9rem]"
 					}
 				>
-					{title}
-				</h2>
-				<Filter className={"md:pl-[4.1rem] md:pr-[4.1rem]"} />
+					<h2
+						className={
+							"font-raleway font-normal text-sm-28px text-left text-blue-zodiac-950 " +
+							"md:text-md-36px justify-self-start row-start-1 row-end-2 pl-[1.5rem] " +
+							"z-[14] md:pl-[0rem]"
+						}
+					>
+						{title}
+					</h2>
+					<Filter className={"md:pl-[4.1rem] md:pr-[4.1rem]"} />
+				</div>
 			</div>
-			<div>
+			<div
+				className={
+					"pl-[1.5rem] pr-[1.5rem] md:pl-[0rem] md:pr-[0rem] lg:pr-[2.3rem] " +
+					"lg:pl-[2.3rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
+				}
+			>
 				<ul
 					className={
 						"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
