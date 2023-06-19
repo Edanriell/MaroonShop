@@ -8,38 +8,30 @@ import {
 	selectingLocationAction,
 } from "./actions";
 
+export type FormInput = {
+	value: "" | string;
+	validLength: null | boolean;
+	validPattern: null | boolean;
+};
+
+export type FormAgeInput = {
+	value: "" | string;
+	validRange: null | boolean;
+};
+
+export type FormSelect = {
+	value: "" | string;
+	validOption: null | boolean;
+};
+
 export type FormState = {
-	nameInput: {
-		value: "" | string;
-		validLength: null | boolean;
-		validPattern: null | boolean;
-	};
-	surnameInput: {
-		value: "" | string;
-		validLength: null | boolean;
-		validPattern: null | boolean;
-	};
-	emailInput: {
-		value: "" | string;
-		validLength: null | boolean;
-		validPattern: null | boolean;
-	};
-	ageInput: {
-		value: "" | string;
-		validRange: null | boolean;
-	};
-	lifeStyleSelect: {
-		value: "" | string;
-		validOption: null | boolean;
-	};
-	skinTypeSelect: {
-		value: "" | string;
-		validOption: null | boolean;
-	};
-	locationSelect: {
-		value: "" | string;
-		validOption: null | boolean;
-	};
+	nameInput: FormInput;
+	surnameInput: FormInput;
+	emailInput: FormInput;
+	ageInput: FormAgeInput;
+	lifeStyleSelect: FormSelect;
+	skinTypeSelect: FormSelect;
+	locationSelect: FormSelect;
 };
 
 export type FormActions =

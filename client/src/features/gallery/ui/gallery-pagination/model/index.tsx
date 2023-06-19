@@ -9,17 +9,12 @@ import styles from "./styles.module.scss";
 export const createCircleButtons = ({
 	totalSlides,
 	currentSlideIndex,
-	handleCircleClick,
 }: CreateCircleButtonsParameters): ReactNode[] => {
 	const buttons: ReactNode[] = [];
 
 	for (let i = 0; i < totalSlides; i++) {
 		buttons.push(
-			<button
-				key={i}
-				className={`${styles.circleShadow} rounded-s-full`}
-				onClick={() => handleCircleClick(i)}
-			>
+			<button key={i} className={`${styles.circleShadow} rounded-s-full`}>
 				<Circle
 					className={`${
 						styles.circleAnimation

@@ -7,14 +7,14 @@ import { displayElement } from "./model";
 import { ReactComponent as Logo } from "./assets/logo.svg";
 
 const LoadingPage = () => {
-	const componentRef = useRef<HTMLElement | null>(null);
+	const mainRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
-		displayElement(componentRef);
+		displayElement(mainRef);
 	}, []);
 
 	return (
-		<main ref={componentRef}>
+		<main ref={mainRef}>
 			<div className={"flex flex-col items-center justify-center h-[100vh]"}>
 				<Logo
 					className={

@@ -12,8 +12,8 @@ const SubmitButtonContent: FC<SubmitButtonContentProps> = ({ isFormSubmitting })
 	const textContentRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
-		displayElement(spinnerRef);
-		displayElement(textContentRef);
+		if (spinnerRef.current) displayElement(spinnerRef);
+		if (textContentRef.current) displayElement(textContentRef);
 	}, [isFormSubmitting]);
 
 	if (isFormSubmitting) {

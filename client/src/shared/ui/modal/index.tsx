@@ -20,27 +20,34 @@ const Modal: FC<ModalProps> = ({ title, description, children, onModalClose }) =
 
 	useLayoutEffect(() => {
 		displayModal(modalRef);
-		displayBackdrop(backdropRef);
 
-		modalCtx.add("remove", () => {
+		modalCtx.add("hide", () => {
 			hideModal(modalRef, onModalClose);
-		});
-
-		backdropCtx.add("remove", () => {
-			hideBackdrop(backdropRef);
 		});
 
 		return () => {
 			modalCtx.revert();
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [modalCtx]);
+
+	useLayoutEffect(() => {
+		displayBackdrop(backdropRef);
+
+		backdropCtx.add("hide", () => {
+			hideBackdrop(backdropRef);
+		});
+
+		return () => {
 			backdropCtx.revert();
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [backdropCtx, modalCtx]);
+	}, [backdropCtx]);
 
 	function handleModalClose(event: MouseEvent) {
 		if (event.currentTarget === event.target) {
-			backdropCtx.remove();
-			modalCtx.remove();
+			backdropCtx.hide();
+			modalCtx.hide();
 		}
 	}
 

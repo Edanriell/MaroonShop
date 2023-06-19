@@ -28,7 +28,7 @@ const Accordion: FC<AccordionProps> = ({
 	useLayoutEffect(() => {
 		if (accordionContentRef.current) displayAccordionContent(accordionContentRef);
 
-		accordionContentCtx.add("remove", () => {
+		accordionContentCtx.add("hide", () => {
 			hideAccordionContent(accordionContentRef, () => setIsAccordionContentShown(false));
 		});
 
@@ -41,7 +41,7 @@ const Accordion: FC<AccordionProps> = ({
 	function handleContentToggle() {
 		if (isAccordionContentShown) {
 			transformMinusToPlus(plusIconBar1Ref, plusIconBar2Ref);
-			accordionContentCtx.remove();
+			accordionContentCtx.hide();
 		} else {
 			transformPlusToMinus(plusIconBar1Ref, plusIconBar2Ref);
 			setIsAccordionContentShown(true);

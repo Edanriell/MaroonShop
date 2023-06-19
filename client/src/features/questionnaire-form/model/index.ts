@@ -1,4 +1,4 @@
-import { FormState } from "./types";
+import { FormState, FormInput, FormAgeInput, FormSelect } from "./types";
 
 export const checkInputLength = (value: string, minLength: number): boolean =>
 	value.length >= minLength;
@@ -10,14 +10,31 @@ export const checkInputRange = (value: string, range: [number, number]): boolean
 
 export const checkSelectOption = (value: string): boolean => value !== "";
 
-export const isFormValid = (formState: FormState): boolean =>
-	Boolean(formState.nameInput.validLength) &&
-	Boolean(formState.nameInput.validPattern) &&
-	Boolean(formState.surnameInput.validLength) &&
-	Boolean(formState.surnameInput.validPattern) &&
-	Boolean(formState.emailInput.validLength) &&
-	Boolean(formState.emailInput.validPattern) &&
-	Boolean(formState.ageInput.validRange) &&
-	Boolean(formState.lifeStyleSelect.validOption) &&
-	Boolean(formState.skinTypeSelect.validOption) &&
-	Boolean(formState.locationSelect.validOption);
+const isInputValid = (input: FormInput): boolean =>
+	Boolean(input.validLength) && Boolean(input.validPattern);
+
+const isRangeInputValid = (input: FormAgeInput): boolean => Boolean(input.validRange);
+
+const isSelectValid = (select: FormSelect): boolean => Boolean(select.validOption);
+
+export const isFormValid = (formState: FormState): boolean => {
+	const {
+		nameInput,
+		surnameInput,
+		emailInput,
+		ageInput,
+		lifeStyleSelect,
+		skinTypeSelect,
+		locationSelect,
+	} = formState;
+
+	return (
+		isInputValid(nameInput) &&
+		isInputValid(surnameInput) &&
+		isInputValid(emailInput) &&
+		isRangeInputValid(ageInput) &&
+		isSelectValid(lifeStyleSelect) &&
+		isSelectValid(skinTypeSelect) &&
+		isSelectValid(locationSelect)
+	);
+};

@@ -24,11 +24,9 @@ const Burger = () => {
 	const [burgerMenuCtx] = useState(gsap.context(() => {}, burgerMenuRef));
 
 	useLayoutEffect(() => {
-		if (burgerMenuRef.current) {
-			displayBurgerMenu(burgerMenuRef);
-		}
+		if (burgerMenuRef.current) displayBurgerMenu(burgerMenuRef);
 
-		burgerMenuCtx.add("remove", () => {
+		burgerMenuCtx.add("hide", () => {
 			hideBurgerMenu(burgerMenuRef, setIsDisplayed);
 		});
 
@@ -46,7 +44,7 @@ const Burger = () => {
 				onBurgerTransition: setIsTransitioning,
 			});
 		} else {
-			burgerMenuCtx.remove();
+			burgerMenuCtx.hide();
 			transformCrossToBurger({
 				firstBurgerBarRef,
 				secondBurgerBarRef,

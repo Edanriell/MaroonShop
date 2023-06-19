@@ -17,24 +17,14 @@ const Snackbar: FC<SnackbarProps> = ({ type, message, autoCloseDuration }) => {
 	const [snackbarCtx] = useState(gsap.context(() => {}, snackbarRef));
 
 	useLayoutEffect(() => {
-		setDisplayed(true);
+		if (!displayed) setDisplayed(true);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	useEffect(() => {
-		if (autoCloseDuration) {
-			const timeout = setTimeout(() => {
-				if (displayed) snackbarCtx.remove();
-			}, +autoCloseDuration);
-			return () => {
-				clearTimeout(timeout);
-			};
-		}
-	});
-
 	useLayoutEffect(() => {
-		if (snackbarRef && displayed) displaySnackbar(snackbarRef);
+		if (snackbarRef.current && displayed) displaySnackbar(snackbarRef);
 
-		snackbarCtx.add("remove", () => {
+		snackbarCtx.add("hide", () => {
 			hideSnackbar(snackbarRef, () => setDisplayed(false));
 		});
 
@@ -43,8 +33,23 @@ const Snackbar: FC<SnackbarProps> = ({ type, message, autoCloseDuration }) => {
 		};
 	}, [displayed, snackbarCtx]);
 
+	useEffect(() => {
+		if (autoCloseDuration) {
+			const timeout = setTimeout(() => {
+				if (displayed) {
+					snackbarCtx.hide();
+				}
+			}, +autoCloseDuration);
+
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [displayed]);
+
 	function handleSnackbarClose() {
-		snackbarCtx.remove();
+		snackbarCtx.hide();
 	}
 
 	const snackbarClasses = classNames({
@@ -72,7 +77,7 @@ const Snackbar: FC<SnackbarProps> = ({ type, message, autoCloseDuration }) => {
 					"rounded-[0.2rem] snackbar-shadow justify-between"
 				}
 			>
-				<p className={"font-medium text-white text-sm-14px font-mPlus text-left"}>
+				<p className={"font-medium text-white text-sm-14px font-raleway text-left"}>
 					{message}
 				</p>
 				<div className={"w-[3rem] h-[3rem] relative ml-[4rem] flex-shrink-0 flex-grow-0"}>

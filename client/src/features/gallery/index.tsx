@@ -48,22 +48,29 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 
 	useLayoutEffect(() => {
 		displayGallery(galleryRef);
-		displayGalleryBackdrop(galleryBackdropRef);
 
-		galleryCtx.add("remove", () => {
+		galleryCtx.add("hide", () => {
 			hideGallery(galleryRef, onGalleryClose);
-		});
-
-		galleryBackdropCtx.add("remove", () => {
-			hideGalleryBackdrop(galleryBackdropRef);
 		});
 
 		return () => {
 			galleryCtx.revert();
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [galleryCtx]);
+
+	useLayoutEffect(() => {
+		displayGalleryBackdrop(galleryBackdropRef);
+
+		galleryBackdropCtx.add("hide", () => {
+			hideGalleryBackdrop(galleryBackdropRef);
+		});
+
+		return () => {
 			galleryBackdropCtx.revert();
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [galleryBackdropCtx, galleryCtx]);
+	}, [galleryBackdropCtx]);
 
 	useLayoutEffect(() => {
 		async function getImages() {
@@ -116,8 +123,8 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 	}, []);
 
 	function handleGalleryClose() {
-		galleryBackdropCtx.remove();
-		galleryCtx.remove();
+		galleryBackdropCtx.hide();
+		galleryCtx.hide();
 	}
 
 	if (isLoading) {

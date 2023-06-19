@@ -20,16 +20,21 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 	useEffect(() => {
 		if (isChecked === true) {
 			displayInputCircle(inputCircleRef);
+		}
+
+		inputCircleCtx.add("hide", () => {
+			hideInputCircle(inputCircleRef, () => setIsChecked(false));
+		});
+	}, [inputCircleCtx, isChecked]);
+
+	useEffect(() => {
+		if (isChecked === true) {
 			changeLabelColor({
 				startColor: "#9A9DA0",
 				endColor: "#122947",
 				elementRef: inputLabelRef,
 			});
 		}
-
-		inputCircleCtx.add("hide", () => {
-			hideInputCircle(inputCircleRef, () => setIsChecked(false));
-		});
 
 		inputLabelCtx.add("change", () => {
 			changeLabelColor({
@@ -38,7 +43,7 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 				elementRef: inputLabelRef,
 			});
 		});
-	}, [inputCircleCtx, inputLabelCtx, isChecked]);
+	}, [inputLabelCtx, isChecked]);
 
 	const labelClasses = classNames({
 		"text-blue-zodiac-950": isChecked,
