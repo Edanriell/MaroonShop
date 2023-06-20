@@ -3,20 +3,20 @@ import { GetProductTypeParameters, ProductType, IProductTypeMapper } from "./typ
 class ProductTypeMapper implements IProductTypeMapper {
 	private productTypes: ProductType = {
 		face: {
-			cream: "крем для лица",
-			serum: "cыворотка для лица",
-			mask: "маска для лица",
-			foam: "пенка для лица",
-			tonic: "тоник для лица",
-			powder: "минеральная пудра",
+			"face-cream": "крем для лица",
+			"face-serum": "cыворотка для лица",
+			"face-mask": "маска для лица",
+			"face-foam": "пенка для лица",
+			"face-tonic": "тоник для лица",
+			"face-powder": "минеральная пудра",
 		},
 		body: {
-			cream: "крем для тела",
-			oil: "масло для тела",
-			scrub: "скраб для тела",
-			soap: "мыло ручной работы",
-			bathBomb: "бомбочка для ванны",
-			bathSalt: "соль для ванны",
+			"body-cream": "крем для тела",
+			"body-oil": "масло для тела",
+			"body-scrub": "скраб для тела",
+			"body-soap": "мыло ручной работы",
+			"body-bath-bomb": "бомбочка для ванны",
+			"body-bath-salt": "соль для ванны",
 		},
 	};
 
