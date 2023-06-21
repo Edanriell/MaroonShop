@@ -39,8 +39,8 @@ export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
 					</h3>
 					<p className={"font-normal lowercase font-mPlus text-sm-13px text-manatee-500"}>
 						{getProductType({
-							mainType: data.type.main,
-							secondaryType: data.type.secondary,
+							mainType: data.category.main,
+							secondaryType: data.category.secondary,
 						})}
 					</p>
 					<Link
@@ -109,8 +109,8 @@ export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
 						}
 					>
 						{getProductType({
-							mainType: data.type.main,
-							secondaryType: data.type.secondary,
+							mainType: data.category.main,
+							secondaryType: data.category.secondary,
 						})}
 					</p>
 					<span

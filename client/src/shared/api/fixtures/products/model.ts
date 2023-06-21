@@ -4,10 +4,10 @@ export type Product = {
 	description: Array<String>;
 	components: string;
 	usage: string;
-	type: {
-		main: string;
-		secondary: string;
-		skin: Array<string>;
+	category: {
+		"main": string;
+		"secondary": string;
+		"skin-type": Array<string>;
 	};
 	image: {
 		lg: string;

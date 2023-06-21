@@ -8,10 +8,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["normal"]
+			"skinType": ["skin-normal"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
@@ -32,10 +32,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-powder",
-			"skin": ["fat"]
+			"skinType": ["skin-fat"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
@@ -56,10 +56,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["combined"]
+			"skinType": ["skin-combined"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
@@ -80,10 +80,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-oil",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
@@ -104,10 +104,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["normal"]
+			"skinType": ["skin-normal"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
@@ -128,10 +128,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-powder",
-			"skin": ["fat"]
+			"skinType": ["skin-fat"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
@@ -152,10 +152,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["combined"]
+			"skinType": ["skin-combined"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
@@ -176,10 +176,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-oil",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
@@ -200,10 +200,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["normal"]
+			"skinType": ["skin-normal"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
@@ -224,10 +224,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-powder",
-			"skin": ["fat"]
+			"skinType": ["skin-fat"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
@@ -248,10 +248,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["combined"]
+			"skinType": ["skin-combined"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
@@ -272,10 +272,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-oil",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
@@ -296,10 +296,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["normal"]
+			"skinType": ["skin-normal"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
@@ -320,10 +320,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-powder",
-			"skin": ["fat"]
+			"skinType": ["skin-fat"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
@@ -344,10 +344,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["combined"]
+			"skinType": ["skin-combined"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
@@ -368,10 +368,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/9/lg/productImage.jpg",
@@ -392,10 +392,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-powder",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/10/lg/productImage.jpg",
@@ -416,10 +416,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-cream",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/11/lg/productImage.jpg",
@@ -440,10 +440,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-oil",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/12/lg/productImage.jpg",
@@ -464,10 +464,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-powder",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/13/lg/productImage.jpg",
@@ -488,10 +488,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-bath-bomb",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/14/lg/productImage.jpg",
@@ -512,10 +512,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-oil",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/15/lg/productImage.jpg",
@@ -536,10 +536,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-mask",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/16/lg/productImage.jpg",
@@ -560,10 +560,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-oil",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/17/lg/productImage.jpg",
@@ -584,10 +584,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-soap",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/18/lg/productImage.jpg",
@@ -608,10 +608,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "face",
 			"secondary": "face-mask",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/19/lg/productImage.jpg",
@@ -632,10 +632,10 @@
 		],
 		"components": "Aqua, Cyclomethicone, Dicaprylyl Carbonate, Butylene Glycol, Glycerin, Tapioca Starch, Nelumbium Speciosum Flower Extract, Calendula Officinalis Flower Extract, Propylene Glycol, Tocopherol, Glycine Soja Oil, Dimethiconol, Citronellol, Limonene.",
 		"usage": "Нанесите крем на очищенную кожу лица легкими массажными круговыми движениями, избегая области вокруг глаз. Подходит для дневного и ночного ухода.",
-		"type": {
+		"category": {
 			"main": "body",
 			"secondary": "body-bath-bomb",
-			"skin": ["dry"]
+			"skinType": ["skin-dry"]
 		},
 		"image": {
 			"lg": "http://localhost:4020/images/20/lg/productImage.jpg",

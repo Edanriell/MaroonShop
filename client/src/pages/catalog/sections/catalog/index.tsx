@@ -22,6 +22,7 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
 
 	const products = useSelector((state: productModel.RootState) => state.products);
+
 	const { data } = products;
 
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);

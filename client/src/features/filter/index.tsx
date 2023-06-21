@@ -1,6 +1,9 @@
-import { useState, FC, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, FC, useRef, useLayoutEffect, useEffect, FormEvent } from "react";
 import { gsap } from "gsap";
+import { useDispatch, useSelector } from "react-redux";
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
+import { productModel } from "entities/product";
 import { useScreenSize } from "shared/lib/hooks";
 import { Button, Accordion, Checkbox } from "shared/ui";
 
@@ -13,16 +16,24 @@ import {
 	hideCloseFilterButton,
 } from "./model";
 
-import { FilterProps } from "./types";
+import { FilterProps, Filters } from "./types";
 
 import { ReactComponent as Cross } from "./assets/cross.svg";
 
 import styles from "./styles.module.scss";
 
 const Filter: FC<FilterProps> = ({ className }) => {
-	const [selectedFilters, setSelectedFilters] = useState<Array<string>>([]);
+	const initialFilters: Filters = {
+		filters: {
+			"main-category": null,
+			"secondary-category": null,
+			"skin-type-category": null,
+		},
+	};
+	const [selectedFilters, setSelectedFilters] = useState<Filters>(initialFilters);
 
-	const [isShown, setIsShown] = useState<boolean>(false);
+	const [isFiltersShown, setIsFiltersShown] = useState<boolean>(false);
+
 	const [isOpenFilterButtonAnimationLocked, setIsOpenFilterButtonAnimationLocked] =
 		useState<boolean>(true);
 
@@ -36,41 +47,52 @@ const Filter: FC<FilterProps> = ({ className }) => {
 
 	const { width } = useScreenSize();
 
+	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
+
+	// TODO Should be fixed
+	const products = useSelector((state: productModel.RootState) => state.products.filteredData);
+	// TODO Should be fixed
+
 	useEffect(() => {
 		console.log(selectedFilters);
 	}, [selectedFilters]);
 
-	useEffect(() => {
-		console.log(selectedFilters);
-	});
+	// useEffect(() => {
+	// 	console.log(selectedFilters);
+	// });
+
+	// useEffect(() => {
+	// 	console.log("Filtered products");
+	// 	console.log(products);
+	// });
 
 	useLayoutEffect(() => {
-		if (isShown && filterRef) displayFilter(filterRef);
+		if (isFiltersShown && filterRef) displayFilter(filterRef);
 
 		filterCtx.add("hide", () => {
-			hideFilter(filterRef, () => setIsShown(false));
+			hideFilter(filterRef, () => setIsFiltersShown(false));
 		});
 
 		return () => {
 			filterCtx.revert();
 		};
-	}, [filterCtx, isShown]);
+	}, [filterCtx, isFiltersShown]);
 
 	useLayoutEffect(() => {
-		if (!isShown && openFilterButtonRef && !isOpenFilterButtonAnimationLocked)
+		if (!isFiltersShown && openFilterButtonRef && !isOpenFilterButtonAnimationLocked)
 			displayOpenFilterButton(openFilterButtonRef);
 
 		openFilterButtonCtx.add("hide", () => {
-			hideOpenFilterButton(openFilterButtonRef, () => setIsShown(true));
+			hideOpenFilterButton(openFilterButtonRef, () => setIsFiltersShown(true));
 		});
 
 		return () => {
 			openFilterButtonCtx.revert();
 		};
-	}, [openFilterButtonCtx, isOpenFilterButtonAnimationLocked, isShown]);
+	}, [openFilterButtonCtx, isOpenFilterButtonAnimationLocked, isFiltersShown]);
 
 	useLayoutEffect(() => {
-		if (isShown && closeFilterButtonRef) displayCloseFilterButton(closeFilterButtonRef);
+		if (isFiltersShown && closeFilterButtonRef) displayCloseFilterButton(closeFilterButtonRef);
 
 		closeFilterButtonCtx.add("hide", () => {
 			hideCloseFilterButton(closeFilterButtonRef);
@@ -79,10 +101,10 @@ const Filter: FC<FilterProps> = ({ className }) => {
 		return () => {
 			closeFilterButtonCtx.revert();
 		};
-	}, [closeFilterButtonCtx, isShown]);
+	}, [closeFilterButtonCtx, isFiltersShown]);
 
 	function handleFilterButtonClick() {
-		if (isShown) {
+		if (isFiltersShown) {
 			filterCtx.hide();
 			if (isOpenFilterButtonAnimationLocked) setIsOpenFilterButtonAnimationLocked(false);
 			closeFilterButtonCtx.hide();
@@ -91,15 +113,93 @@ const Filter: FC<FilterProps> = ({ className }) => {
 		}
 	}
 
-	function handleFilterSelect(selectedFilter: string, isCheckboxChecked: boolean) {
+	function addFilter({
+		prevFilters,
+		selectedFilter,
+		category,
+	}: {
+		prevFilters: Filters;
+		selectedFilter: string;
+		category: "secondary-category" | "skin-type-category";
+	}) {
+		const updatedFilters = { ...prevFilters.filters };
+
+		if (updatedFilters[category] === null) {
+			updatedFilters[category] = [selectedFilter];
+		} else if (Array.isArray(updatedFilters[category])) {
+			if (!updatedFilters[category]?.includes(selectedFilter)) {
+				updatedFilters[category]?.push(selectedFilter);
+			}
+		}
+
+		return {
+			...prevFilters,
+			filters: updatedFilters,
+		};
+	}
+
+	function removeFilter({
+		prevFilters,
+		selectedFilter,
+		category,
+	}: {
+		prevFilters: Filters;
+		selectedFilter: string;
+		category: "secondary-category" | "skin-type-category";
+	}) {
+		const updatedFilters = { ...prevFilters.filters };
+
+		if (Array.isArray(updatedFilters[category])) {
+			updatedFilters[category] = (updatedFilters[category] as Array<string>).filter(
+				(filter) => filter !== selectedFilter,
+			);
+
+			if (updatedFilters[category]?.length === 0) {
+				updatedFilters[category] = null;
+			}
+		}
+
+		return {
+			...prevFilters,
+			filters: updatedFilters,
+		};
+	}
+	// TODO So far we have two problems.
+	// First stupid check for !isCheckboxChecke, it should be true than we add otherwise we remove filter.
+	// Second because of React.StrictMode we have additional rerender and we eventually are adding duplicate filters.
+	function handleSecondaryCategorySelect(selectedFilter: string, isCheckboxChecked: boolean) {
+		console.log(isCheckboxChecked);
 		if (!isCheckboxChecked) {
-			setSelectedFilters([...selectedFilters, selectedFilter]);
+			setSelectedFilters((prevFilters) =>
+				addFilter({ prevFilters, selectedFilter, category: "secondary-category" }),
+			);
 		} else {
-			setSelectedFilters(selectedFilters.filter((filter) => filter !== selectedFilter));
+			setSelectedFilters((prevFilters) =>
+				removeFilter({ prevFilters, selectedFilter, category: "secondary-category" }),
+			);
 		}
 	}
 
-	if (isShown) {
+	function handleSkinTypeCategorySelect(selectedFilter: string, isCheckboxChecked: boolean) {
+		console.log(isCheckboxChecked);
+		if (!isCheckboxChecked) {
+			setSelectedFilters((prevFilters) =>
+				addFilter({ prevFilters, selectedFilter, category: "skin-type-category" }),
+			);
+		} else {
+			setSelectedFilters((prevFilters) =>
+				removeFilter({ prevFilters, selectedFilter, category: "skin-type-category" }),
+			);
+		}
+	}
+
+	function handleFormSubmit(event: FormEvent) {
+		event.preventDefault();
+		console.log("submit button clicked");
+		// dispatch(productModel.getFilteredProductsAsync(selectedFilters));
+	}
+
+	if (isFiltersShown) {
 		return (
 			<>
 				<div
@@ -123,6 +223,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 					</button>
 				</div>
 				<form
+					onSubmit={(event) => handleFormSubmit(event)}
 					ref={filterRef}
 					className={
 						"grid col-start-1 col-end-3 row-start-2 row-end-3 " +
@@ -149,38 +250,38 @@ const Filter: FC<FilterProps> = ({ className }) => {
 										htmlFor={"face-cream"}
 										name={"Крема"}
 										id={"face-cream"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"face-serum"}
 										name={"Сыворотки"}
 										id={"face-serum"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"face-mask"}
 										name={"Маски"}
 										id={"face-mask"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"face-foam"}
 										name={"Пенки"}
 										id={"face-foam"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"face-tonic"}
 										name={"Тоники"}
 										id={"face-tonic"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										className={"mb-[2.9rem]"}
 										htmlFor={"face-powder"}
 										name={"Пудры"}
 										id={"face-powder"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 								</div>
 							</Accordion>
@@ -202,38 +303,38 @@ const Filter: FC<FilterProps> = ({ className }) => {
 											htmlFor={"face-cream"}
 											name={"Крема"}
 											id={"face-cream"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"face-serum"}
 											name={"Сыворотки"}
 											id={"face-serum"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"face-mask"}
 											name={"Маски"}
 											id={"face-mask"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"face-foam"}
 											name={"Пенки"}
 											id={"face-foam"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"face-tonic"}
 											name={"Тоники"}
 											id={"face-tonic"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											className={"mb-[0rem]"}
 											htmlFor={"face-powder"}
 											name={"Пудры"}
 											id={"face-powder"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 									</div>
 								</div>
@@ -253,38 +354,38 @@ const Filter: FC<FilterProps> = ({ className }) => {
 										htmlFor={"body-cream"}
 										name={"Крема"}
 										id={"body-cream"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"body-oil"}
 										name={"Масла"}
 										id={"body-oil"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"body-scrub"}
 										name={"Скрабы"}
 										id={"body-scrub"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"body-soap"}
 										name={"Мыло"}
 										id={"body-soap"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"body-bath-bomb"}
 										name={"Бомбочки для ванны"}
 										id={"body-bath-bomb"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 									<Checkbox
 										className={"mb-[2.9rem]"}
 										htmlFor={"body-bath-salt"}
 										name={"Соль для ванны"}
 										id={"body-bath-salt"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSecondaryCategorySelect}
 									/>
 								</div>
 							</Accordion>
@@ -306,38 +407,38 @@ const Filter: FC<FilterProps> = ({ className }) => {
 											htmlFor={"body-cream"}
 											name={"Крема"}
 											id={"body-cream"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"body-oil"}
 											name={"Масла"}
 											id={"body-oil"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"body-scrub"}
 											name={"Скрабы"}
 											id={"body-scrub"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"body-soap"}
 											name={"Мыло"}
 											id={"body-soap"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"body-bath-bomb"}
 											name={"Бомбочки для ванны"}
 											id={"body-bath-bomb"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 										<Checkbox
 											className={"mb-[0rem]"}
 											htmlFor={"body-bath-salt"}
 											name={"Соль для ванны"}
 											id={"body-bath-salt"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSecondaryCategorySelect}
 										/>
 									</div>
 								</div>
@@ -361,26 +462,26 @@ const Filter: FC<FilterProps> = ({ className }) => {
 										htmlFor={"skin-normal"}
 										name={"Нормальная"}
 										id={"skin-normal"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSkinTypeCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"skin-dry"}
 										name={"Сухая"}
 										id={"skin-dry"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSkinTypeCategorySelect}
 									/>
 									<Checkbox
 										htmlFor={"skin-fat"}
 										name={"Жирная"}
 										id={"skin-fat"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSkinTypeCategorySelect}
 									/>
 									<Checkbox
 										className={"mb-[0.3rem]"}
 										htmlFor={"skin-combined"}
 										name={"Комбинированная"}
 										id={"skin-combined"}
-										onFilterSelect={handleFilterSelect}
+										onFilterSelect={handleSkinTypeCategorySelect}
 									/>
 								</div>
 							</Accordion>
@@ -402,26 +503,26 @@ const Filter: FC<FilterProps> = ({ className }) => {
 											htmlFor={"skin-normal"}
 											name={"Нормальная"}
 											id={"skin-normal"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSkinTypeCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"skin-dry"}
 											name={"Сухая"}
 											id={"skin-dry"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSkinTypeCategorySelect}
 										/>
 										<Checkbox
 											htmlFor={"skin-fat"}
 											name={"Жирная"}
 											id={"skin-fat"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSkinTypeCategorySelect}
 										/>
 										<Checkbox
 											className={"mb-[0rem]"}
 											htmlFor={"skin-combined"}
 											name={"Комбинированная"}
 											id={"skin-combined"}
-											onFilterSelect={handleFilterSelect}
+											onFilterSelect={handleSkinTypeCategorySelect}
 										/>
 									</div>
 								</div>
