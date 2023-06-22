@@ -21,13 +21,21 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const pageParam = searchParams.get("page");
 	const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
 
+	// TODO How works ??
 	const products = useSelector((state: productModel.RootState) => state.products);
 
-	const { data } = products;
+	// TODO FIX THIS TRASH CODE
+	const { data, filteredData } = products;
+	// TODO FIX THIS TRASH CODE
 
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
+
+	// TODO FIX THIS TRASH CODE
+	const [totalPages, setTotalPages] = useState<number>(0);
+	// TODO FIX THIS TRASH CODE
+
 	const productsPerPage = 12;
-	const totalPages = Math.ceil(Object.values(data).length / productsPerPage);
+	// const totalPages = ;
 
 	useEffect(() => {
 		dispatch(productModel.getProductsAsync());
@@ -42,8 +50,27 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 		}
 	}, [totalPages, initialPage, currentPage, navigate]);
 
+	// TODO FIX THIS TRASH CODE
+	useEffect(() => {
+		if (filteredData) {
+			setTotalPages(Math.ceil(Object.values(filteredData).length / productsPerPage));
+		} else {
+			setTotalPages(Math.ceil(Object.values(data).length / productsPerPage));
+		}
+	}, [filteredData, data]);
+	// TODO FIX THIS TRASH CODE
+
 	const getPageProducts = () => {
-		const allProducts = Object.values(data);
+		// TODO FIX THIS TRASH CODE
+		const allProducts = getAllProducts();
+		function getAllProducts() {
+			if (filteredData) {
+				return Object.values(filteredData);
+			}
+			return Object.values(data);
+		}
+		// TODO FIX THIS TRASH CODE
+
 		const startIndex = (currentPage - 1) * productsPerPage;
 		const endIndex = startIndex + productsPerPage;
 		return allProducts.slice(startIndex, endIndex);

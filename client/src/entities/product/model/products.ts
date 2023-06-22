@@ -74,9 +74,7 @@ export const getFilteredProductsAsync = createAsyncThunk(
 	"products/fetchFilteredProducts",
 	async (parameters: any, { rejectWithValue }) => {
 		try {
-			const response = await productsApi.products.getFilteredProducts({
-				filters: parameters,
-			});
+			const response = await productsApi.products.getFilteredProducts(parameters);
 			const { data } = response;
 			console.log(data);
 			return data;

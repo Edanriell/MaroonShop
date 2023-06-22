@@ -5,9 +5,7 @@ import type { Product } from "./model";
 
 export type GetFilteredProductsParams = {
 	filters: {
-		"main-category": Array<string> | null;
-		"secondary-category": Array<string> | null;
-		"skin-type-category": Array<string> | null;
+		[key: string]: Array<string> | null;
 	};
 };
 
@@ -18,7 +16,7 @@ export const getProducts = (): AxiosPromise<Product[]> => {
 	return apiInstance.get(BASE_URL);
 };
 
-export const getFilteredProducts = (params: GetFilteredProductsParams): AxiosPromise<Product[]> => {
+export const getFilteredProducts = (params: any): AxiosPromise<Product[]> => {
 	return apiInstance.get(BASE_FILTER_URL, { params });
 };
 

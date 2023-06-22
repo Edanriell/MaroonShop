@@ -69,7 +69,7 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 
 		if (onFilterSelect) {
 			const selectedFilter = id;
-			const isCheckboxChecked = isChecked;
+			const isCheckboxChecked = !isChecked;
 
 			if (event.currentTarget === event.target) {
 				onFilterSelect(selectedFilter, isCheckboxChecked);
