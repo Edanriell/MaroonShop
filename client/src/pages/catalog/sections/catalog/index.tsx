@@ -7,6 +7,8 @@ import Filter from "features/filter";
 
 import { productModel, ProductCard } from "entities/product";
 
+import { Spinner } from "shared/ui";
+
 import { CatalogPagination } from "./ui";
 
 import { CatalogProps } from "./types";
@@ -67,7 +69,9 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 		setCurrentPage(page);
 		navigate(`?page=${page}`);
 	}
-
+	// TODO In catalog we should handle two more things
+	// TODO First we should display the error if products are not loaded with reload button
+	// TODO Second we should display error when no matching products found
 	return (
 		<div
 			className={
@@ -102,23 +106,39 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					"lg:pl-[2.3rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
 				}
 			>
+				{dataLoading && (
+					<div className="flex flex-col items-center justify-center mt-[12rem] md:mt-[14rem]">
+						<p className="font-raleway font-medium text-sm-18px mb-[1rem] md:text-[2.2rem]">
+							Загрузка товаров
+						</p>
+						<Spinner
+							className={"w-[4.2rem] h-[4.2rem] md:w-[4.6rem] md:h-[4.6rem]"}
+							width={"3rem"}
+							height={"3rem"}
+							color={"blue-zodiac-950"}
+						/>
+					</div>
+				)}
 				<ul
 					className={
 						"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
 						"justify-center md:grid md:grid-cols-two lg:grid-cols-4"
 					}
 				>
-					{getPageProducts().map((product) => (
-						<li className="w-full" key={product.id}>
-							<ProductCard data={product} cardType="advanced" />
-						</li>
-					))}
+					{!dataLoading &&
+						getPageProducts().map((product) => (
+							<li className="w-full" key={product.id}>
+								<ProductCard data={product} cardType="advanced" />
+							</li>
+						))}
 				</ul>
-				<CatalogPagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					onPageChange={handlePageChange}
-				/>
+				{!dataLoading && (
+					<CatalogPagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						onPageChange={handlePageChange}
+					/>
+				)}
 			</div>
 		</div>
 	);

@@ -134,9 +134,16 @@ const Filter: FC<FilterProps> = ({ className }) => {
 
 	function handleFormSubmit(event: FormEvent) {
 		event.preventDefault();
-
+		console.log("Selected Filters!");
+		console.log(selectedFilters);
 		dispatch(productModel.getFilteredProductsAsync(selectedFilters));
 	}
+
+	// TODO Tons of problems here.
+	// TODO First We should implement filters reset button.
+	// TODO Also we should display all selected filters on reopen the filters.
+	// TODO How ? Use Context ???
+	// TODO Checkbox buttons on transition should be fully locked.
 
 	if (isFiltersShown) {
 		return (
