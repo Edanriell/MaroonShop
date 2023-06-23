@@ -1,4 +1,9 @@
-import { GetProductTypeParameters, ProductType, IProductTypeMapper } from "./types";
+import {
+	GetProductTypeParameters,
+	AddProductTypeParameters,
+	ProductType,
+	IProductTypeMapper,
+} from "./types";
 
 class ProductTypeMapper implements IProductTypeMapper {
 	private productTypes: ProductType = {
@@ -26,6 +31,24 @@ class ProductTypeMapper implements IProductTypeMapper {
 		}
 
 		return "неизвестный тип продукта";
+	}
+
+	public addProductType({
+		mainType,
+		secondaryTypes,
+		secondaryTypesMeanings,
+	}: AddProductTypeParameters) {
+		if (mainType in this.productTypes) return;
+		if (secondaryTypes.length !== secondaryTypesMeanings.length) return;
+
+		this.productTypes[mainType] = {};
+		for (const [i, secondaryType] of Object.entries(secondaryTypes)) {
+			this.productTypes[mainType][secondaryType] = secondaryTypesMeanings[+i];
+		}
+	}
+
+	get getProductTypes(): ProductType {
+		return this.productTypes;
 	}
 }
 

@@ -21,25 +21,18 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const pageParam = searchParams.get("page");
 	const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
 
-	// TODO How works ??
 	const products = useSelector((state: productModel.RootState) => state.products);
-
-	// TODO FIX THIS TRASH CODE
-	const { data, filteredData } = products;
-	// TODO FIX THIS TRASH CODE
+	const { data, filteredData, dataLoading } = products;
 
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
-
-	// TODO FIX THIS TRASH CODE
 	const [totalPages, setTotalPages] = useState<number>(0);
-	// TODO FIX THIS TRASH CODE
 
-	const productsPerPage = 12;
-	// const totalPages = ;
+	const productsPerPage: 12 = 12;
 
 	useEffect(() => {
 		dispatch(productModel.getProductsAsync());
-	}, [currentPage, dispatch]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		if (initialPage <= 0 || (initialPage > totalPages && totalPages !== 0)) {
@@ -50,7 +43,6 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 		}
 	}, [totalPages, initialPage, currentPage, navigate]);
 
-	// TODO FIX THIS TRASH CODE
 	useEffect(() => {
 		if (filteredData) {
 			setTotalPages(Math.ceil(Object.values(filteredData).length / productsPerPage));
@@ -58,28 +50,23 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 			setTotalPages(Math.ceil(Object.values(data).length / productsPerPage));
 		}
 	}, [filteredData, data]);
-	// TODO FIX THIS TRASH CODE
 
-	const getPageProducts = () => {
-		// TODO FIX THIS TRASH CODE
-		const allProducts = getAllProducts();
-		function getAllProducts() {
-			if (filteredData) {
-				return Object.values(filteredData);
-			}
-			return Object.values(data);
-		}
-		// TODO FIX THIS TRASH CODE
+	function getProducts() {
+		if (filteredData) return Object.values(filteredData);
+		return Object.values(data);
+	}
 
+	function getPageProducts() {
+		const products = getProducts();
 		const startIndex = (currentPage - 1) * productsPerPage;
 		const endIndex = startIndex + productsPerPage;
-		return allProducts.slice(startIndex, endIndex);
-	};
+		return products.slice(startIndex, endIndex);
+	}
 
-	const handlePageChange = (page: number) => {
+	function handlePageChange(page: number) {
 		setCurrentPage(page);
 		navigate(`?page=${page}`);
-	};
+	}
 
 	return (
 		<div
