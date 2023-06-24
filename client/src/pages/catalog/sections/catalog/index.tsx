@@ -7,13 +7,15 @@ import Filter from "features/filter";
 
 import { productModel, ProductCard } from "entities/product";
 
-import { Spinner } from "shared/ui";
+import { Spinner, Button } from "shared/ui";
 
 import { CatalogPagination } from "./ui";
 
 import { CatalogProps } from "./types";
 
 const Catalog: FC<CatalogProps> = ({ title }) => {
+	const [reload, setReload] = useState<number>(Math.random());
+
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
 	const navigate = useNavigate();
@@ -24,17 +26,21 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
 
 	const products = useSelector((state: productModel.RootState) => state.products);
+	console.log(products);
 	const { data, filteredData, dataLoading } = products;
-
+	// console.log(filteredData);
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
 	const [totalPages, setTotalPages] = useState<number>(0);
 
 	const productsPerPage: 12 = 12;
 
+	const isProductsEmpty = productModel.isProductsEmpty(data);
+	const isFilteredProductsEmpty = productModel.isFilteredProductsEmpty(filteredData);
+
 	useEffect(() => {
 		dispatch(productModel.getProductsAsync());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [reload]);
 
 	useEffect(() => {
 		if (initialPage <= 0 || (initialPage > totalPages && totalPages !== 0)) {
@@ -69,9 +75,45 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 		setCurrentPage(page);
 		navigate(`?page=${page}`);
 	}
-	// TODO In catalog we should handle two more things
-	// TODO First we should display the error if products are not loaded with reload button
-	// TODO Second we should display error when no matching products found
+
+	function handleReloadButtonClick() {
+		setReload(Math.random());
+	}
+
+	const CatalogPageProducts = () => {
+		if (filteredData && "error" in filteredData) {
+			return <div>NO DATA</div>;
+		} else if (dataLoading) {
+			return null;
+		}
+
+		return (
+			<>
+				{getPageProducts().map((product) => (
+					<li className="w-full" key={product.id}>
+						<ProductCard data={product} cardType="advanced" />
+					</li>
+				))}
+			</>
+		);
+	};
+
+	const CatalogPagePagination = () => {
+		if (dataLoading || isProductsEmpty) {
+			return null;
+		} else if (filteredData && "error" in filteredData) {
+			return null;
+		}
+
+		return (
+			<CatalogPagination
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPageChange={handlePageChange}
+			/>
+		);
+	};
+
 	return (
 		<div
 			className={
@@ -119,26 +161,39 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 						/>
 					</div>
 				)}
+				{!dataLoading && isProductsEmpty && isFilteredProductsEmpty && (
+					<div
+						className={
+							"flex flex-col items-center justify-center col-start-1 " +
+							"col-end-[-1] mt-[12rem] md:mt-[14rem]"
+						}
+					>
+						<p
+							className={
+								"font-raleway text-sm-18px mb-[1.5rem] md:text-[2.2rem] " +
+								"font-medium text-center"
+							}
+						>
+							Не удалось загрузить товары.
+						</p>
+						<Button
+							text={"Обновить"}
+							onClick={handleReloadButtonClick}
+							borderColor={"#122947"}
+							backgroundColor={"#122947"}
+							textColor={"#FFF"}
+						/>
+					</div>
+				)}
 				<ul
 					className={
 						"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
 						"justify-center md:grid md:grid-cols-two lg:grid-cols-4"
 					}
 				>
-					{!dataLoading &&
-						getPageProducts().map((product) => (
-							<li className="w-full" key={product.id}>
-								<ProductCard data={product} cardType="advanced" />
-							</li>
-						))}
+					<CatalogPageProducts />
 				</ul>
-				{!dataLoading && (
-					<CatalogPagination
-						currentPage={currentPage}
-						totalPages={totalPages}
-						onPageChange={handlePageChange}
-					/>
-				)}
+				<CatalogPagePagination />
 			</div>
 		</div>
 	);

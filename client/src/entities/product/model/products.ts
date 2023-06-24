@@ -3,7 +3,7 @@ import { schema, normalize } from "normalizr";
 
 import { Product, productsApi } from "shared/api";
 
-import { NormalizedProducts } from "./types";
+import { NormalizedProducts, ProductsNotFound } from "./types";
 
 export const productSchema = new schema.Entity<Product>("products");
 
@@ -15,7 +15,7 @@ export const normalizeProducts = (data: Product[]) =>
 
 export const initialState: {
 	data: NormalizedProducts;
-	filteredData: NormalizedProducts | null;
+	filteredData: NormalizedProducts | ProductsNotFound | null;
 	dataLoading: boolean;
 } = {
 	data: {},
@@ -46,7 +46,12 @@ export const productModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(getFilteredProductsAsync.fulfilled, (state, { payload }) => {
-			state.filteredData = normalizeProducts(payload).entities.products;
+			if (payload.length <= 0) {
+				state.filteredData = { error: "Товары не найдены" };
+			} else {
+				state.filteredData = normalizeProducts(payload).entities.products;
+			}
+
 			state.dataLoading = false;
 		});
 		builder.addCase(getFilteredProductsAsync.rejected, (state) => {
@@ -88,6 +93,11 @@ export const getFilteredProductsAsync = createAsyncThunk(
 
 export const isProductsEmpty = (products: NormalizedProducts): boolean => {
 	return Object.keys(products).length === 0;
+};
+
+export const isFilteredProductsEmpty = (filteredProducts: any): boolean => {
+	if (!filteredProducts) return true;
+	return Object.keys(filteredProducts).length === 0;
 };
 
 export const getBestsellers = (products: NormalizedProducts): Product[] => {

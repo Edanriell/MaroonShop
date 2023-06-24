@@ -25,7 +25,7 @@ const ProductsLoading = () => {
 	);
 };
 
-const ProductsNotFound = ({ reload }: { reload: any }) => {
+const ProductsNotFound = ({ onReloadButtonClick }: { onReloadButtonClick: () => void }) => {
 	return (
 		<div
 			className={
@@ -35,11 +35,11 @@ const ProductsNotFound = ({ reload }: { reload: any }) => {
 			}
 		>
 			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-18px font-medium"}>
-				Неудалось загрузить товары.
+				Не удалось загрузить товары.
 			</p>
 			<Button
 				text={"Обновить"}
-				onClick={reload}
+				onClick={onReloadButtonClick}
 				borderColor={"#122947"}
 				backgroundColor={"#122947"}
 				textColor={"#FFF"}
@@ -81,7 +81,7 @@ const SliderWrapper = () => {
 	}, [reload]);
 
 	if (isLoading) return <ProductsLoading />;
-	if (isEmpty) return <ProductsNotFound reload={() => setReload(Math.random())} />;
+	if (isEmpty) return <ProductsNotFound onReloadButtonClick={() => setReload(Math.random())} />;
 	if (bestsellers.length === 0) return <BestSellersNotFound />;
 
 	return <BestsellersSlider bestSellers={bestsellers} />;

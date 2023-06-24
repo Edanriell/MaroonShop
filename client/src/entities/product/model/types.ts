@@ -9,3 +9,7 @@ export type RootState = {
 		dataLoading: boolean;
 	};
 };
+
+export type ProductsNotFound = {
+	error: string;
+};
