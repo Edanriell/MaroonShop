@@ -5,11 +5,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import Filter from "features/filter";
 
-import { productModel, ProductCard } from "entities/product";
+import { productModel } from "entities/product";
 
-import { Spinner, Button } from "shared/ui";
-
-import { CatalogPagination } from "./ui";
+import { CatalogPagination, CatalogProducts, CatalogLoading, CatalogError } from "./ui";
 
 import { CatalogProps } from "./types";
 
@@ -28,7 +26,7 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const products = useSelector((state: productModel.RootState) => state.products);
 	console.log(products);
 	const { data, filteredData, dataLoading } = products;
-	// console.log(filteredData);
+
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
 	const [totalPages, setTotalPages] = useState<number>(0);
 
@@ -59,18 +57,6 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 		}
 	}, [filteredData, data]);
 
-	function getProducts() {
-		if (filteredData) return Object.values(filteredData);
-		return Object.values(data);
-	}
-
-	function getPageProducts() {
-		const products = getProducts();
-		const startIndex = (currentPage - 1) * productsPerPage;
-		const endIndex = startIndex + productsPerPage;
-		return products.slice(startIndex, endIndex);
-	}
-
 	function handlePageChange(page: number) {
 		setCurrentPage(page);
 		navigate(`?page=${page}`);
@@ -79,40 +65,6 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	function handleReloadButtonClick() {
 		setReload(Math.random());
 	}
-
-	const CatalogPageProducts = () => {
-		if (filteredData && "error" in filteredData) {
-			return <div>NO DATA</div>;
-		} else if (dataLoading) {
-			return null;
-		}
-
-		return (
-			<>
-				{getPageProducts().map((product) => (
-					<li className="w-full" key={product.id}>
-						<ProductCard data={product} cardType="advanced" />
-					</li>
-				))}
-			</>
-		);
-	};
-
-	const CatalogPagePagination = () => {
-		if (dataLoading || isProductsEmpty) {
-			return null;
-		} else if (filteredData && "error" in filteredData) {
-			return null;
-		}
-
-		return (
-			<CatalogPagination
-				currentPage={currentPage}
-				totalPages={totalPages}
-				onPageChange={handlePageChange}
-			/>
-		);
-	};
 
 	return (
 		<div
@@ -148,52 +100,28 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					"lg:pl-[2.3rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
 				}
 			>
-				{dataLoading && (
-					<div className="flex flex-col items-center justify-center mt-[12rem] md:mt-[14rem]">
-						<p className="font-raleway font-medium text-sm-18px mb-[1rem] md:text-[2.2rem]">
-							Загрузка товаров
-						</p>
-						<Spinner
-							className={"w-[4.2rem] h-[4.2rem] md:w-[4.6rem] md:h-[4.6rem]"}
-							width={"3rem"}
-							height={"3rem"}
-							color={"blue-zodiac-950"}
-						/>
-					</div>
-				)}
-				{!dataLoading && isProductsEmpty && isFilteredProductsEmpty && (
-					<div
-						className={
-							"flex flex-col items-center justify-center col-start-1 " +
-							"col-end-[-1] mt-[12rem] md:mt-[14rem]"
-						}
-					>
-						<p
-							className={
-								"font-raleway text-sm-18px mb-[1.5rem] md:text-[2.2rem] " +
-								"font-medium text-center"
-							}
-						>
-							Не удалось загрузить товары.
-						</p>
-						<Button
-							text={"Обновить"}
-							onClick={handleReloadButtonClick}
-							borderColor={"#122947"}
-							backgroundColor={"#122947"}
-							textColor={"#FFF"}
-						/>
-					</div>
-				)}
-				<ul
-					className={
-						"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
-						"justify-center md:grid md:grid-cols-two lg:grid-cols-4"
-					}
-				>
-					<CatalogPageProducts />
-				</ul>
-				<CatalogPagePagination />
+				<CatalogLoading dataLoading={dataLoading} />
+				<CatalogError
+					dataLoading={dataLoading}
+					isProductsEmpty={isProductsEmpty}
+					isFilteredProductsEmpty={isFilteredProductsEmpty}
+					onReloadButtonClick={handleReloadButtonClick}
+				/>
+				<CatalogProducts
+					filteredData={filteredData}
+					data={data}
+					currentPage={currentPage}
+					productsPerPage={productsPerPage}
+					dataLoading={dataLoading}
+				/>
+				<CatalogPagination
+					dataLoading={dataLoading}
+					isProductsEmpty={isProductsEmpty}
+					filteredData={filteredData}
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={handlePageChange}
+				/>
 			</div>
 		</div>
 	);
