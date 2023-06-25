@@ -1,8 +1,12 @@
+import { FC } from "react";
+
 import { Accordion, Checkbox } from "shared/ui";
 
 import { useScreenSize } from "shared/lib/hooks";
 
-const SkinTypeFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
+import { SkinTypeFiltersProps } from "./types";
+
+const SkinTypeFilters: FC<SkinTypeFiltersProps> = ({ onFilterSelect, isFiltersReset }) => {
 	const { width } = useScreenSize();
 
 	return (
@@ -19,18 +23,21 @@ const SkinTypeFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 							name={"Нормальная"}
 							id={"skin-normal"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							htmlFor={"skin-dry"}
 							name={"Сухая"}
 							id={"skin-dry"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							htmlFor={"skin-fat"}
 							name={"Жирная"}
 							id={"skin-fat"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							className={"mb-[0.3rem]"}
@@ -38,6 +45,7 @@ const SkinTypeFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 							name={"Комбинированная"}
 							id={"skin-combined"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 					</div>
 				</Accordion>
@@ -58,18 +66,21 @@ const SkinTypeFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 								name={"Нормальная"}
 								id={"skin-normal"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								htmlFor={"skin-dry"}
 								name={"Сухая"}
 								id={"skin-dry"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								htmlFor={"skin-fat"}
 								name={"Жирная"}
 								id={"skin-fat"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								className={"mb-[0rem]"}
@@ -77,6 +88,7 @@ const SkinTypeFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 								name={"Комбинированная"}
 								id={"skin-combined"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 						</div>
 					</div>

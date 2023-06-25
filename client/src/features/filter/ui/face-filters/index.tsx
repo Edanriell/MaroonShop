@@ -1,8 +1,12 @@
+import { FC } from "react";
+
 import { Accordion, Checkbox } from "shared/ui";
 
 import { useScreenSize } from "shared/lib/hooks";
 
-const FaceFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
+import { FaceFiltersProps } from "./types";
+
+const FaceFilters: FC<FaceFiltersProps> = ({ onFilterSelect, isFiltersReset }) => {
 	const { width } = useScreenSize();
 
 	return (
@@ -15,30 +19,35 @@ const FaceFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 							name={"Крема"}
 							id={"body-cream"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							htmlFor={"body-oil"}
 							name={"Масла"}
 							id={"body-oil"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							htmlFor={"body-scrub"}
 							name={"Скрабы"}
 							id={"body-scrub"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							htmlFor={"body-soap"}
 							name={"Мыло"}
 							id={"body-soap"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							htmlFor={"body-bath-bomb"}
 							name={"Бомбочки для ванны"}
 							id={"body-bath-bomb"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 						<Checkbox
 							className={"mb-[2.9rem]"}
@@ -46,6 +55,7 @@ const FaceFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 							name={"Соль для ванны"}
 							id={"body-bath-salt"}
 							onFilterSelect={onFilterSelect}
+							isFiltersReset={isFiltersReset}
 						/>
 					</div>
 				</Accordion>
@@ -66,30 +76,35 @@ const FaceFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 								name={"Крема"}
 								id={"body-cream"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								htmlFor={"body-oil"}
 								name={"Масла"}
 								id={"body-oil"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								htmlFor={"body-scrub"}
 								name={"Скрабы"}
 								id={"body-scrub"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								htmlFor={"body-soap"}
 								name={"Мыло"}
 								id={"body-soap"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								htmlFor={"body-bath-bomb"}
 								name={"Бомбочки для ванны"}
 								id={"body-bath-bomb"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 							<Checkbox
 								className={"mb-[0rem]"}
@@ -97,6 +112,7 @@ const FaceFilters = ({ onFilterSelect }: { onFilterSelect: any }) => {
 								name={"Соль для ванны"}
 								id={"body-bath-salt"}
 								onFilterSelect={onFilterSelect}
+								isFiltersReset={isFiltersReset}
 							/>
 						</div>
 					</div>

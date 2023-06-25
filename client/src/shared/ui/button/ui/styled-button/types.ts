@@ -12,4 +12,5 @@ export type ButtonProps = {
 	className: string;
 	onClick?: () => void;
 	style?: CSSProperties;
+	disabled?: boolean;
 };

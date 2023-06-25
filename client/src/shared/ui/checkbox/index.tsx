@@ -8,7 +8,14 @@ import { CheckboxProps } from "./types";
 
 import styles from "./styles.module.scss";
 
-const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSelect }) => {
+const Checkbox: FC<CheckboxProps> = ({
+	htmlFor,
+	name,
+	id,
+	className,
+	onFilterSelect,
+	isFiltersReset,
+}) => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 
 	const inputCircleRef = useRef<HTMLDivElement | null>(null);
@@ -17,13 +24,19 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 	const [inputCircleCtx] = useState(gsap.context(() => {}, inputCircleRef));
 	const [inputLabelCtx] = useState(gsap.context(() => {}, inputLabelRef));
 
+	const [isCheckboxLocked, setIsCheckboxLocked] = useState<boolean>(false);
+
 	useEffect(() => {
 		if (isChecked === true) {
-			displayInputCircle(inputCircleRef);
+			displayInputCircle(inputCircleRef, () => setIsCheckboxLocked(false));
 		}
 
 		inputCircleCtx.add("hide", () => {
-			hideInputCircle(inputCircleRef, () => setIsChecked(false));
+			hideInputCircle(
+				inputCircleRef,
+				() => setIsChecked(false),
+				() => setIsCheckboxLocked(false),
+			);
 		});
 	}, [inputCircleCtx, isChecked]);
 
@@ -43,7 +56,15 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 				elementRef: inputLabelRef,
 			});
 		});
-	}, [inputLabelCtx, isChecked]);
+	}, [inputLabelCtx, isChecked, isFiltersReset]);
+
+	useEffect(() => {
+		if (isFiltersReset === true && isChecked) {
+			inputLabelCtx.change();
+			inputCircleCtx.hide();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isFiltersReset]);
 
 	const labelClasses = classNames({
 		"text-blue-zodiac-950": isChecked,
@@ -53,8 +74,10 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 	function handleCheckboxToggle(event: ChangeEvent) {
 		if (event.currentTarget === event.target) {
 			if (!isChecked) {
+				setIsCheckboxLocked(true);
 				setIsChecked(true);
 			} else {
+				setIsCheckboxLocked(true);
 				inputLabelCtx.change();
 				inputCircleCtx.hide();
 			}
@@ -96,6 +119,7 @@ const Checkbox: FC<CheckboxProps> = ({ htmlFor, name, id, className, onFilterSel
 					name={name}
 					id={id}
 					checked={isChecked}
+					disabled={isCheckboxLocked}
 				/>
 				<div ref={inputCircleRef} className={styles.inputCircle}></div>
 			</div>

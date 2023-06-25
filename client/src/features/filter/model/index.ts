@@ -95,6 +95,7 @@ export const displayFilter = (filterRef: MutableRefObject<HTMLFormElement | null
 			opacity: 1,
 			translateY: 0,
 			duration: 0.5,
+			display: "grid",
 			ease: "power2.out",
 		},
 	);
@@ -104,22 +105,16 @@ export const hideFilter = (
 	filterRef: MutableRefObject<HTMLFormElement | null>,
 	closeFilter: () => void,
 ): void => {
-	gsap.fromTo(
-		filterRef.current,
-		{
-			opacity: 1,
-			translateY: 0,
+	gsap.to(filterRef.current, {
+		opacity: 0,
+		translateY: 15,
+		duration: 0.25,
+		ease: "power2.out",
+		onComplete: () => {
+			(filterRef.current as HTMLFormElement).style.display = "none";
+			closeFilter();
 		},
-		{
-			opacity: 0,
-			translateY: 15,
-			duration: 0.25,
-			ease: "power2.out",
-			onComplete: () => {
-				closeFilter();
-			},
-		},
-	);
+	});
 };
 
 export const displayOpenFilterButton = (
@@ -143,6 +138,7 @@ export const displayOpenFilterButton = (
 export const hideOpenFilterButton = (
 	openFilterButtonRef: MutableRefObject<HTMLDivElement | null>,
 	showFilter: () => void,
+	setIsFiltersOpenButtonLocked: () => void,
 ): void => {
 	gsap.fromTo(
 		openFilterButtonRef.current,
@@ -155,7 +151,10 @@ export const hideOpenFilterButton = (
 			scale: 0.6,
 			duration: 0.25,
 			ease: "power2.out",
-			onComplete: () => showFilter(),
+			onComplete: () => {
+				showFilter();
+				setIsFiltersOpenButtonLocked();
+			},
 		},
 	);
 };
@@ -180,6 +179,7 @@ export const displayCloseFilterButton = (
 
 export const hideCloseFilterButton = (
 	closeFilterButtonRef: MutableRefObject<HTMLDivElement | null>,
+	setIsFiltersCloseButtonLocked: () => void,
 ): void => {
 	gsap.fromTo(
 		closeFilterButtonRef.current,
@@ -192,6 +192,7 @@ export const hideCloseFilterButton = (
 			scale: 0.6,
 			duration: 0.25,
 			ease: "power2.out",
+			onComplete: () => setIsFiltersCloseButtonLocked(),
 		},
 	);
 };

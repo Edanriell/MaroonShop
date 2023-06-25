@@ -16,6 +16,7 @@ const Button: FC<ButtonProps> = ({
 	backgroundColor,
 	textColor,
 	onClick,
+	disabled = false,
 }) => {
 	const buttonBoxRef = useRef<HTMLDivElement | null>(null);
 	const buttonTextRef = useRef<HTMLSpanElement | null>(null);
@@ -97,6 +98,7 @@ const Button: FC<ButtonProps> = ({
 			className={className}
 			onClick={onClick}
 			style={{ borderColor: borderColor }}
+			disabled={disabled}
 		/>
 	);
 };

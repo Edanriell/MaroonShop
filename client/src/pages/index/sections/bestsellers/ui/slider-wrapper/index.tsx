@@ -6,63 +6,7 @@ import { BestsellersSlider } from "widgets/bestsellers-slider";
 
 import { productModel } from "entities/product";
 
-import { Spinner, Button } from "shared/ui";
-
-const ProductsLoading = () => {
-	return (
-		<div
-			className={
-				"flex flex-col items-center md:absolute " +
-				"md:top-[50%] md:left-[50%] md:translate-x-[-50%] " +
-				"md:tranlsate-y-[-50%]"
-			}
-		>
-			<p className={"font-normal font-raleway text-sm-14px mb-[1rem] md:text-md-18px"}>
-				Загрузка товаров
-			</p>
-			<Spinner width={"3rem"} height={"3rem"} color={"blue-zodiac-950"} />
-		</div>
-	);
-};
-
-const ProductsNotFound = ({ onReloadButtonClick }: { onReloadButtonClick: () => void }) => {
-	return (
-		<div
-			className={
-				"flex flex-col items-center md:absolute " +
-				"md:top-[50%] md:left-[50%] md:translate-x-[-50%] " +
-				"md:tranlsate-y-[-50%]"
-			}
-		>
-			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-18px font-medium"}>
-				Не удалось загрузить товары.
-			</p>
-			<Button
-				text={"Обновить"}
-				onClick={onReloadButtonClick}
-				borderColor={"#122947"}
-				backgroundColor={"#122947"}
-				textColor={"#FFF"}
-			/>
-		</div>
-	);
-};
-
-const BestSellersNotFound = () => {
-	return (
-		<div
-			className={
-				"flex flex-col items-center md:absolute " +
-				"md:top-[50%] md:left-[50%] md:translate-x-[-50%] " +
-				"md:tranlsate-y-[-50%]"
-			}
-		>
-			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-16px font-medium"}>
-				Не найдено не одного бестселлера.
-			</p>
-		</div>
-	);
-};
+import { ProductsLoading, ProductsNotFound, BestsellersNotFound } from "./ui";
 
 const SliderWrapper = () => {
 	const [reload, setReload] = useState<number>(Math.random());
@@ -80,9 +24,13 @@ const SliderWrapper = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reload]);
 
+	function handleReloadButtonClick() {
+		setReload(Math.random());
+	}
+
 	if (isLoading) return <ProductsLoading />;
-	if (isEmpty) return <ProductsNotFound onReloadButtonClick={() => setReload(Math.random())} />;
-	if (bestsellers.length === 0) return <BestSellersNotFound />;
+	if (isEmpty) return <ProductsNotFound onReloadButtonClick={handleReloadButtonClick} />;
+	if (bestsellers.length === 0) return <BestsellersNotFound />;
 
 	return <BestsellersSlider bestSellers={bestsellers} />;
 };

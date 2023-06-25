@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { schema, normalize } from "normalizr";
 
 import { Product, productsApi } from "shared/api";
@@ -29,6 +29,13 @@ export const productModel = createSlice({
 	reducers: {
 		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
 			state.data = normalizeProducts(payload).entities.products;
+		},
+		setFilteredData: (state, { payload }: PayloadAction<Product[]>) => {
+			if (payload === null) {
+				state.filteredData = payload;
+			} else {
+				state.filteredData = normalizeProducts(payload).entities.products;
+			}
 		},
 	},
 	extraReducers: (builder) => {
@@ -89,6 +96,10 @@ export const getFilteredProductsAsync = createAsyncThunk(
 			return rejectWithValue((err as any).message);
 		}
 	},
+);
+
+export const setFilteredProducts = createAction<NormalizedProducts | ProductsNotFound | null>(
+	"products/setFilteredData",
 );
 
 export const isProductsEmpty = (products: NormalizedProducts): boolean => {

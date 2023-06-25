@@ -14,11 +14,17 @@ const Button: FC<ButtonProps> = ({
 	buttonBoxRef,
 	buttonTextRef,
 	className,
+	disabled,
 	onClick = () => {},
 	...style
 }) => {
+	function handleDisabledButtonClick() {
+		if (disabled) return;
+		return onClick();
+	}
+
 	return (
-		<div onClick={() => onClick()} className={"relative z-10"}>
+		<div onClick={handleDisabledButtonClick} className={"relative z-10"}>
 			<button
 				type={type}
 				className={additionalClassNames + " " + className}
@@ -26,6 +32,7 @@ const Button: FC<ButtonProps> = ({
 				onMouseLeave={onButtonMouseLeave}
 				ref={buttonRef}
 				{...style}
+				disabled={disabled}
 			>
 				<div className={styles.buttonBox} ref={buttonBoxRef}></div>
 				<span className={"relative z-10 block"} ref={buttonTextRef}>

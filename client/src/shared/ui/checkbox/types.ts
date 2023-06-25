@@ -4,4 +4,5 @@ export type CheckboxProps = {
 	id: string;
 	className?: string;
 	onFilterSelect?: (selectedFilter: string, isCheckboxChecked: boolean) => void;
+	isFiltersReset?: boolean;
 };

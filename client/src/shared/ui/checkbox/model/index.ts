@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 
 export const displayInputCircle = (
 	inputCircleRef: MutableRefObject<HTMLDivElement | null>,
+	setIsCheckboxLocked: () => void,
 ): void => {
 	gsap.fromTo(
 		inputCircleRef.current,
@@ -18,6 +19,7 @@ export const displayInputCircle = (
 			scale: 1,
 			duration: 0.5,
 			ease: "power2.out",
+			onComplete: () => setIsCheckboxLocked(),
 		},
 	);
 };
@@ -25,6 +27,7 @@ export const displayInputCircle = (
 export const hideInputCircle = (
 	inputCircleRef: MutableRefObject<HTMLDivElement | null>,
 	setIsChecked: () => void,
+	setIsCheckboxLocked: () => void,
 ): void => {
 	gsap.fromTo(
 		inputCircleRef.current,
@@ -39,7 +42,10 @@ export const hideInputCircle = (
 			scale: 0.6,
 			duration: 0.5,
 			ease: "power2.out",
-			onComplete: () => setIsChecked(),
+			onComplete: () => {
+				setIsChecked();
+				setIsCheckboxLocked();
+			},
 		},
 	);
 };
