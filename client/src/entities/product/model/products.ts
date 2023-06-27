@@ -1,9 +1,16 @@
-import { createSlice, PayloadAction, createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import {
+	createSlice,
+	PayloadAction,
+	createAsyncThunk,
+	createAction,
+	createSelector,
+} from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 import { schema, normalize } from "normalizr";
 
 import { Product, productsApi } from "shared/api";
 
-import { NormalizedProducts, ProductsNotFound } from "./types";
+import { NormalizedProducts, ProductsNotFound, ProductNotFound, RootState } from "./types";
 
 export const productSchema = new schema.Entity<Product>("products");
 
@@ -16,10 +23,12 @@ export const normalizeProducts = (data: Product[]) =>
 export const initialState: {
 	data: NormalizedProducts;
 	filteredData: NormalizedProducts | ProductsNotFound | null;
+	filteredDataById: NormalizedProducts | ProductNotFound | null;
 	dataLoading: boolean;
 } = {
 	data: {},
 	filteredData: null,
+	filteredDataById: null,
 	dataLoading: false,
 };
 
@@ -64,6 +73,16 @@ export const productModel = createSlice({
 		builder.addCase(getFilteredProductsAsync.rejected, (state) => {
 			state.dataLoading = false;
 		});
+		builder.addCase(getProductByIdAsync.pending, (state) => {
+			state.dataLoading = true;
+		});
+		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
+			state.filteredDataById = normalizeProduct(payload).entities.products;
+			state.dataLoading = false;
+		});
+		builder.addCase(getProductByIdAsync.rejected, (state) => {
+			state.dataLoading = false;
+		});
 	},
 });
 
@@ -98,9 +117,67 @@ export const getFilteredProductsAsync = createAsyncThunk(
 	},
 );
 
+export const getProductByIdAsync = createAsyncThunk(
+	"products/fetchProductById",
+	async (productId: number, { rejectWithValue }) => {
+		try {
+			const response = await productsApi.products.getProductById(productId);
+			const { data } = response;
+			console.log(data);
+			return data;
+		} catch (err) {
+			// eslint-disable-next-line no-console
+			console.error("Failed to fetch product:", err);
+			return rejectWithValue((err as any).message);
+		}
+	},
+);
+
+export const setProducts = createAction<NormalizedProducts | {}>("products/setProducts");
+
 export const setFilteredProducts = createAction<NormalizedProducts | ProductsNotFound | null>(
 	"products/setFilteredData",
 );
+
+export const useProducts = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data,
+			(products) => {
+				return products;
+			},
+		),
+	);
+
+export const useProduct = (productId: number) =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.filteredDataById,
+			(products) => {
+				if (products) return products[productId];
+			},
+		),
+	);
+
+export const useFilteredProducts = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.filteredData,
+			(products) => {
+				return products;
+			},
+		),
+	);
+
+export const useBestsellers = ({ sells }: { sells: number }) =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data,
+			(products) => {
+				return Object.values(products).filter((product) => product.sells >= sells);
+			},
+		),
+	);
 
 export const isProductsEmpty = (products: NormalizedProducts): boolean => {
 	return Object.keys(products).length === 0;
@@ -109,10 +186,6 @@ export const isProductsEmpty = (products: NormalizedProducts): boolean => {
 export const isFilteredProductsEmpty = (filteredProducts: any): boolean => {
 	if (!filteredProducts) return true;
 	return Object.keys(filteredProducts).length === 0;
-};
-
-export const getBestsellers = (products: NormalizedProducts): Product[] => {
-	return Object.values(products).filter((product) => product.sells >= 100);
 };
 
 export const reducer = productModel.reducer;

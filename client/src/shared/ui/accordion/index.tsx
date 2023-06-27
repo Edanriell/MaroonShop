@@ -96,12 +96,14 @@ const Accordion: FC<AccordionProps> = ({
 					</span>
 					<div className={"w-[1.2rem] h-[1.2rem] relative"}>
 						<div
+							ref={plusIconBar1Ref}
 							className={
 								"w-[1.2rem] h-[0.1rem] bg-blue-zodiac-950 block " +
 								"top-[50%] left-0 absolute"
 							}
 						></div>
 						<div
+							ref={plusIconBar2Ref}
 							className={
 								"w-[1.2rem] h-[0.01rem] bg-blue-zodiac-950 block " +
 								"absolute top-[50%] left-0 rotate-90"

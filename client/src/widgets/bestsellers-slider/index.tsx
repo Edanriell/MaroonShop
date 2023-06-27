@@ -1,1 +1,1 @@
-export { default as BestsellersSlider } from "./ui";
+export { default as Bestsellers } from "./ui";

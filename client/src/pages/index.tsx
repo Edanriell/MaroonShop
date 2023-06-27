@@ -5,6 +5,7 @@ import LoadingPage from "./loading";
 
 const IndexPage = lazy(() => import("./index/index"));
 const CatalogPage = lazy(() => import("./catalog/index"));
+const ProductPage = lazy(() => import("./product/index"));
 
 const router = createBrowserRouter([
 	{
@@ -20,6 +21,14 @@ const router = createBrowserRouter([
 		element: (
 			<Suspense fallback={<LoadingPage />}>
 				<CatalogPage />
+			</Suspense>
+		),
+	},
+	{
+		path: "/product/:productId",
+		element: (
+			<Suspense fallback={<LoadingPage />}>
+				<ProductPage />
 			</Suspense>
 		),
 	},

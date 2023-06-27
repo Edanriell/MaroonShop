@@ -11,6 +11,7 @@ const productsRouter = require("./routes/products");
 const questionnaireRouter = require("./routes/questionnaire");
 const galleryRouter = require("./routes/gallery");
 const filteredProductsRouter = require("./routes/filteredProducts");
+const filteredProductByIdRouter = require("./routes/filteredProductById");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/products", productsRouter);
 app.use("/questionnaire", questionnaireRouter);
 app.use("/gallery", galleryRouter);
 app.use("/products/filtered", filteredProductsRouter);
+app.use("/products", filteredProductByIdRouter);
 
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);

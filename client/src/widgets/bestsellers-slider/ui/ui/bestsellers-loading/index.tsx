@@ -1,6 +1,6 @@
 import { Spinner } from "shared/ui";
 
-const ProductsLoading = () => {
+const BestsellersLoading = () => {
 	return (
 		<div
 			className={
@@ -17,4 +17,4 @@ const ProductsLoading = () => {
 	);
 };
 
-export default ProductsLoading;
+export default BestsellersLoading;

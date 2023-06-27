@@ -16,8 +16,8 @@ export type Product = {
 		md: string;
 		sm: string;
 	};
-	price: number;
-	quantity: string;
+	price: Array<number>;
+	quantity: Array<string>;
 	views: number;
 	sells: number;
 };

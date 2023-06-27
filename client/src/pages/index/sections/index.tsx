@@ -5,7 +5,7 @@ import { JoinUs } from "widgets/join-us";
 import { Contacts } from "widgets/contacts";
 
 import Hero from "./hero";
-import Bestsellers from "./bestsellers";
+import BestSellingProducts from "./best-selling-products";
 import NewCollection from "./new-collection";
 import IndividualCare from "./individual-care";
 import ShopHistory from "./shop-history";
@@ -20,7 +20,7 @@ const sections: IndexPageSections = [
 	},
 	{
 		id: uuidv4(),
-		Section: Bestsellers,
+		Section: BestSellingProducts,
 		title: "Бестселлеры",
 		classes: "bg-desert-storm-50",
 	},

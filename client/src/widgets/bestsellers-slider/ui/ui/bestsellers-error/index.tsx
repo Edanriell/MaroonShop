@@ -2,9 +2,9 @@ import { FC } from "react";
 
 import { Button } from "shared/ui";
 
-import { ProductsNotFoundProps } from "./types";
+import { BestsellersErrorProps } from "./types";
 
-const ProductsNotFound: FC<ProductsNotFoundProps> = ({ onReloadButtonClick }) => {
+const BestsellersError: FC<BestsellersErrorProps> = ({ onReloadButtonClick }) => {
 	return (
 		<div
 			className={
@@ -27,4 +27,4 @@ const ProductsNotFound: FC<ProductsNotFoundProps> = ({ onReloadButtonClick }) =>
 	);
 };
 
-export default ProductsNotFound;
+export default BestsellersError;

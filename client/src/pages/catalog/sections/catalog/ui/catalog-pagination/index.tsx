@@ -9,7 +9,7 @@ import { CatalogPaginationProps } from "./types";
 const CatalogPagination: FC<CatalogPaginationProps> = ({
 	dataLoading,
 	isProductsEmpty,
-	filteredData,
+	filteredProducts,
 	currentPage,
 	totalPages,
 	onPageChange,
@@ -28,7 +28,7 @@ const CatalogPagination: FC<CatalogPaginationProps> = ({
 		<>
 			{!dataLoading &&
 				!isProductsEmpty &&
-				(filteredData === null || !("error" in filteredData)) && (
+				(filteredProducts === null || !("error" in filteredProducts)) && (
 					<div
 						className={
 							"mt-[3.5rem] flex flex-row items-center justify-between md:mt-[5rem] " +

@@ -18,8 +18,8 @@
 			"md": "http://localhost:4020/images/1/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "55ml",
+		"price": [490,890],
+		"quantity": ["25ml","55ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -42,8 +42,8 @@
 			"md": "http://localhost:4020/images/2/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
-		"price": 490,
-		"quantity": "15g",
+		"price": [490, 690],
+		"quantity": ["15g", "30g"],
 		"views": 0,
 		"sells": 100
 	},
@@ -66,8 +66,8 @@
 			"md": "http://localhost:4020/images/3/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
-		"price": 600,
-		"quantity": "50ml",
+		"price": [600],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -90,8 +90,8 @@
 			"md": "http://localhost:4020/images/4/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
 		},
-		"price": 720,
-		"quantity": "65ml",
+		"price": [720],
+		"quantity": ["65ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -114,8 +114,8 @@
 			"md": "http://localhost:4020/images/1/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "50ml",
+		"price": [890],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -138,8 +138,8 @@
 			"md": "http://localhost:4020/images/2/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
-		"price": 490,
-		"quantity": "30g",
+		"price": [490],
+		"quantity": ["30g"],
 		"views": 0,
 		"sells": 100
 	},
@@ -162,8 +162,8 @@
 			"md": "http://localhost:4020/images/3/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
-		"price": 600,
-		"quantity": "50ml",
+		"price": [600],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -186,8 +186,8 @@
 			"md": "http://localhost:4020/images/4/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
 		},
-		"price": 720,
-		"quantity": "55ml",
+		"price": [720],
+		"quantity": ["55ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -210,8 +210,8 @@
 			"md": "http://localhost:4020/images/1/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "45ml",
+		"price": [890],
+		"quantity": ["45ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -234,8 +234,8 @@
 			"md": "http://localhost:4020/images/2/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
-		"price": 490,
-		"quantity": "25g",
+		"price": [490],
+		"quantity": ["25g"],
 		"views": 0,
 		"sells": 100
 	},
@@ -258,8 +258,8 @@
 			"md": "http://localhost:4020/images/3/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
-		"price": 600,
-		"quantity": "50ml",
+		"price": [600],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -282,8 +282,8 @@
 			"md": "http://localhost:4020/images/4/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
 		},
-		"price": 720,
-		"quantity": "75ml",
+		"price": [720],
+		"quantity": ["75ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -306,8 +306,8 @@
 			"md": "http://localhost:4020/images/1/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "15g",
+		"price": [890],
+		"quantity": ["15g"],
 		"views": 0,
 		"sells": 100
 	},
@@ -330,8 +330,8 @@
 			"md": "http://localhost:4020/images/2/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
 		},
-		"price": 490,
-		"quantity": "10g",
+		"price": [490],
+		"quantity": ["10g"],
 		"views": 0,
 		"sells": 100
 	},
@@ -354,8 +354,8 @@
 			"md": "http://localhost:4020/images/3/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
 		},
-		"price": 600,
-		"quantity": "25ml",
+		"price": [600],
+		"quantity": ["25ml"],
 		"views": 0,
 		"sells": 100
 	},
@@ -378,8 +378,8 @@
 			"md": "http://localhost:4020/images/9/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/9/sm/productImage.jpg"
 		},
-		"price": 990,
-		"quantity": "50ml",
+		"price": [990],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 0
 	},
@@ -402,8 +402,8 @@
 			"md": "http://localhost:4020/images/10/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/10/sm/productImage.jpg"
 		},
-		"price": 720,
-		"quantity": "20g",
+		"price": [720],
+		"quantity": ["20g"],
 		"views": 0,
 		"sells": 0
 	},
@@ -426,8 +426,8 @@
 			"md": "http://localhost:4020/images/11/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/11/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "50ml",
+		"price": [890],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 0
 	},
@@ -450,8 +450,8 @@
 			"md": "http://localhost:4020/images/12/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/12/sm/productImage.jpg"
 		},
-		"price": 790,
-		"quantity": "150ml",
+		"price": [790],
+		"quantity": ["150ml"],
 		"views": 0,
 		"sells": 0
 	},
@@ -474,8 +474,8 @@
 			"md": "http://localhost:4020/images/13/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/13/sm/productImage.jpg"
 		},
-		"price": 590,
-		"quantity": "15g",
+		"price": [590],
+		"quantity": ["15g"],
 		"views": 0,
 		"sells": 0
 	},
@@ -498,8 +498,8 @@
 			"md": "http://localhost:4020/images/14/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/14/sm/productImage.jpg"
 		},
-		"price": 90,
-		"quantity": "20g",
+		"price": [90],
+		"quantity": ["20g"],
 		"views": 0,
 		"sells": 0
 	},
@@ -522,8 +522,8 @@
 			"md": "http://localhost:4020/images/15/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/15/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "50ml",
+		"price": [890],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 0
 	},
@@ -546,8 +546,8 @@
 			"md": "http://localhost:4020/images/16/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/16/sm/productImage.jpg"
 		},
-		"price": 490,
-		"quantity": "100g",
+		"price": [490],
+		"quantity": ["100g"],
 		"views": 0,
 		"sells": 0
 	},
@@ -570,8 +570,8 @@
 			"md": "http://localhost:4020/images/17/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/17/sm/productImage.jpg"
 		},
-		"price": 990,
-		"quantity": "300ml",
+		"price": [990],
+		"quantity": ["300ml"],
 		"views": 0,
 		"sells": 0
 	},
@@ -594,8 +594,8 @@
 			"md": "http://localhost:4020/images/18/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/18/sm/productImage.jpg"
 		},
-		"price": 290,
-		"quantity": "50g",
+		"price": [290],
+		"quantity": ["50g"],
 		"views": 0,
 		"sells": 0
 	},
@@ -618,8 +618,8 @@
 			"md": "http://localhost:4020/images/19/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/19/sm/productImage.jpg"
 		},
-		"price": 890,
-		"quantity": "50ml",
+		"price": [890],
+		"quantity": ["50ml"],
 		"views": 0,
 		"sells": 0
 	},
@@ -642,8 +642,8 @@
 			"md": "http://localhost:4020/images/20/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/20/sm/productImage.jpg"
 		},
-		"price": 90,
-		"quantity": "20g",
+		"price": [90],
+		"quantity": ["20g"],
 		"views": 0,
 		"sells": 0
 	}

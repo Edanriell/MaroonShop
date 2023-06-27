@@ -18,15 +18,15 @@ const CatalogProductsWrapper: FC<CatalogProductsWrapperProps> = ({ children }) =
 };
 
 const CatalogProducts: FC<CatalogProductsProps> = ({
-	filteredData,
-	data,
+	filteredProducts,
+	products,
 	currentPage,
 	productsPerPage,
 	dataLoading,
 }) => {
 	function getProducts() {
-		if (filteredData) return Object.values(filteredData);
-		return Object.values(data);
+		if (filteredProducts) return Object.values(filteredProducts);
+		return Object.values(products);
 	}
 
 	function getPageProducts() {
@@ -38,7 +38,7 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 
 	return (
 		<>
-			{!dataLoading && filteredData && "error" in filteredData && (
+			{!dataLoading && filteredProducts && "error" in filteredProducts && (
 				<div
 					className={
 						"col-start-1 col-end-[-1] items-center justify-center " +
@@ -49,7 +49,7 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 					По вашему запросу не найдено не одного товара.
 				</div>
 			)}
-			{!dataLoading && data && !(filteredData && "error" in filteredData) && (
+			{!dataLoading && products && !(filteredProducts && "error" in filteredProducts) && (
 				<CatalogProductsWrapper>
 					{getPageProducts().map((product) => (
 						<li className="w-full" key={product.id}>

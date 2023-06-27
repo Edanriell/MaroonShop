@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import { productModel } from "entities/product";
 
 export type CatalogProductsProps = {
-	filteredData: productModel.NormalizedProducts | null;
-	data: productModel.NormalizedProducts;
+	filteredProducts: productModel.NormalizedProducts | null;
+	products: productModel.NormalizedProducts;
 	currentPage: number;
 	productsPerPage: 12;
 	dataLoading: boolean;

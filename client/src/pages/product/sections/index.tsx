@@ -1,37 +1,22 @@
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { JoinUs } from "widgets/join-us";
-import { Contacts } from "widgets/contacts";
-import RecentlyWatchedProducts from "widgets/recently-watched-products";
+import ProductsSuggestions from "widgets/products-suggestions";
 
-import Catalog from "./catalog";
+import Product from "./product";
 
 import { CatalogPageSections, SectionWrapperProps } from "./types";
 
 const sections: CatalogPageSections = [
 	{
 		id: uuidv4(),
-		Section: Catalog,
-		title: "Каталог",
+		Section: Product,
 		classes: "bg-desert-storm-50",
 	},
 	{
 		id: uuidv4(),
-		Section: RecentlyWatchedProducts,
-		title: "Вы недавно смотрели",
-		classes: "bg-desert-storm-50",
-	},
-	{
-		id: uuidv4(),
-		Section: JoinUs,
-		title: "Присоединяйтесь к нам",
-		classes: "bg-desert-storm-50",
-	},
-	{
-		id: uuidv4(),
-		Section: Contacts,
-		title: "Контакты",
+		Section: ProductsSuggestions,
+		title: "Вам также может понравиться",
 		classes: "bg-desert-storm-50",
 	},
 ];
@@ -43,9 +28,10 @@ const SectionWrapper: FC<SectionWrapperProps> = ({ srTitle, children, classes })
 	</section>
 );
 
+// TODO Think about h1 title
 const Sections = () => (
 	<main className={"flex flex-col"}>
-		<h1 className={"sr-only"}>Каталог интернет-магазина Maroon</h1>
+		<h1 className={"sr-only"}>Страница товара</h1>
 		{sections.map(({ id, Section, srOnlyTitle, title, classes }) => (
 			<SectionWrapper key={id} srTitle={srOnlyTitle} classes={classes}>
 				<Section title={title} />

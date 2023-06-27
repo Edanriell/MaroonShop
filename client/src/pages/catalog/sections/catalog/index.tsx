@@ -23,17 +23,19 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const pageParam = searchParams.get("page");
 	const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
 
-	const products = useSelector((state: productModel.RootState) => state.products);
-	console.log(products);
-	const { data, filteredData, dataLoading } = products;
+	const store = useSelector((state: productModel.RootState) => state.products);
+	const { dataLoading } = store;
+
+	const products = productModel.useProducts();
+	const filteredProducts = productModel.useFilteredProducts();
 
 	const [currentPage, setCurrentPage] = useState<number>(initialPage);
 	const [totalPages, setTotalPages] = useState<number>(0);
 
 	const productsPerPage: 12 = 12;
 
-	const isProductsEmpty = productModel.isProductsEmpty(data);
-	const isFilteredProductsEmpty = productModel.isFilteredProductsEmpty(filteredData);
+	const isProductsEmpty = productModel.isProductsEmpty(products);
+	const isFilteredProductsEmpty = productModel.isFilteredProductsEmpty(filteredProducts);
 
 	useEffect(() => {
 		dispatch(productModel.getProductsAsync());
@@ -50,12 +52,12 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	}, [totalPages, initialPage, currentPage, navigate]);
 
 	useEffect(() => {
-		if (filteredData) {
-			setTotalPages(Math.ceil(Object.values(filteredData).length / productsPerPage));
+		if (filteredProducts) {
+			setTotalPages(Math.ceil(Object.values(filteredProducts).length / productsPerPage));
 		} else {
-			setTotalPages(Math.ceil(Object.values(data).length / productsPerPage));
+			setTotalPages(Math.ceil(Object.values(products).length / productsPerPage));
 		}
-	}, [filteredData, data]);
+	}, [filteredProducts, products]);
 
 	function handlePageChange(page: number) {
 		setCurrentPage(page);
@@ -108,8 +110,8 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					onReloadButtonClick={handleReloadButtonClick}
 				/>
 				<CatalogProducts
-					filteredData={filteredData}
-					data={data}
+					filteredProducts={filteredProducts}
+					products={products}
 					currentPage={currentPage}
 					productsPerPage={productsPerPage}
 					dataLoading={dataLoading}
@@ -117,7 +119,7 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 				<CatalogPagination
 					dataLoading={dataLoading}
 					isProductsEmpty={isProductsEmpty}
-					filteredData={filteredData}
+					filteredProducts={filteredProducts}
 					currentPage={currentPage}
 					totalPages={totalPages}
 					onPageChange={handlePageChange}
