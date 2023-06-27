@@ -6,18 +6,18 @@ import ProductsSuggestions from "widgets/products-suggestions";
 import Product from "./product";
 
 import { CatalogPageSections, SectionWrapperProps } from "./types";
-
+// TODO Check background colors
 const sections: CatalogPageSections = [
 	{
 		id: uuidv4(),
 		Section: Product,
-		classes: "bg-desert-storm-50",
+		classes: "bg-red-600",
 	},
 	{
 		id: uuidv4(),
 		Section: ProductsSuggestions,
 		title: "Вам также может понравиться",
-		classes: "bg-desert-storm-50",
+		classes: "bg-red-600",
 	},
 ];
 
@@ -28,10 +28,8 @@ const SectionWrapper: FC<SectionWrapperProps> = ({ srTitle, children, classes })
 	</section>
 );
 
-// TODO Think about h1 title
 const Sections = () => (
 	<main className={"flex flex-col"}>
-		<h1 className={"sr-only"}>Страница товара</h1>
 		{sections.map(({ id, Section, srOnlyTitle, title, classes }) => (
 			<SectionWrapper key={id} srTitle={srOnlyTitle} classes={classes}>
 				<Section title={title} />
