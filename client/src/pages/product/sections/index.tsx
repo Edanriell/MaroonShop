@@ -6,18 +6,18 @@ import ProductsSuggestions from "widgets/products-suggestions";
 import Product from "./product";
 
 import { CatalogPageSections, SectionWrapperProps } from "./types";
-// TODO Check background colors
+
 const sections: CatalogPageSections = [
 	{
 		id: uuidv4(),
 		Section: Product,
-		classes: "bg-red-600",
+		classes: "bg-desert-storm-50",
 	},
 	{
 		id: uuidv4(),
 		Section: ProductsSuggestions,
 		title: "Вам также может понравиться",
-		classes: "bg-red-600",
+		classes: "bg-desert-storm-50",
 	},
 ];
 

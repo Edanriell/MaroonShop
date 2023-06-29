@@ -18,8 +18,8 @@
 			"md": "http://localhost:4020/images/1/md/productImage.jpg",
 			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
 		},
-		"price": [490,890],
-		"quantity": ["25ml","55ml"],
+		"price": [490, 890],
+		"quantity": ["25ml", "55ml"],
 		"views": 0,
 		"sells": 100
 	},

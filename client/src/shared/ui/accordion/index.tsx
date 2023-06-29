@@ -15,6 +15,9 @@ const Accordion: FC<AccordionProps> = ({
 	accordionContentClasses,
 	triggerName,
 	triggerType,
+	splitterColor = "",
+	contentWithinSplitter = false,
+	triggerNameClasses = "",
 	children,
 }) => {
 	const [isAccordionContentShown, setIsAccordionContentShown] = useState<boolean>(false);
@@ -54,68 +57,110 @@ const Accordion: FC<AccordionProps> = ({
 				<legend
 					onClick={handleContentToggle}
 					className={
-						"relative flex flex-row items-center justify-between " +
-						"cursor-pointer after:content-[''] after:w-full after:h-[0.1rem] " +
-						"after:bg-iron-200 after:absolute after:left-0 after:bottom-0 " +
-						"after:block pb-[1.2rem] mb-[1.3rem]"
+						"relative flex flex-col items-center " +
+						"cursor-pointer after:content-[''] " +
+						"mb-[1.2rem]"
 					}
 				>
-					<span className={"font-medium font-mPlus text-sm-18px text-blue-zodiac-950"}>
-						{triggerName}
-					</span>
-					<div className={"w-[1.2rem] h-[1.2rem] relative"}>
-						<div
-							ref={plusIconBar1Ref}
+					<div className={"flex flex-row items-center justify-between w-full"}>
+						<span
 							className={
-								"w-[1.2rem] h-[0.1rem] bg-blue-zodiac-950 block " +
-								"top-[50%] left-0 absolute"
+								"font-medium font-mPlus text-sm-18px text-blue-zodiac-950 " +
+								triggerNameClasses
 							}
-						></div>
-						<div
-							ref={plusIconBar2Ref}
-							className={
-								"w-[1.2rem] h-[0.01rem] bg-blue-zodiac-950 block " +
-								"absolute top-[50%] left-0 rotate-90"
-							}
-						></div>
+						>
+							{triggerName}
+						</span>
+						<div className={"w-[1.2rem] h-[1.2rem] relative"}>
+							<div
+								ref={plusIconBar1Ref}
+								className={
+									"w-[1.2rem] h-[0.1rem] bg-blue-zodiac-950 block " +
+									"top-[50%] left-0 absolute"
+								}
+							></div>
+							<div
+								ref={plusIconBar2Ref}
+								className={
+									"w-[1.2rem] h-[0.01rem] bg-blue-zodiac-950 block " +
+									"absolute top-[50%] left-0 rotate-90"
+								}
+							></div>
+						</div>
 					</div>
+					{isAccordionContentShown && contentWithinSplitter && (
+						<div
+							ref={accordionContentRef}
+							className={
+								accordionContentClasses + " overflow-hidden pt-[0.4rem] pb-[0.2rem]"
+							}
+						>
+							{children}
+						</div>
+					)}
+					<div
+						className={
+							"w-full h-[0.1rem] bg-iron-200 bloc mt-[1.2rem] " + splitterColor
+						}
+					></div>
 				</legend>
 			)}
 			{triggerType === "div" && (
 				<div
 					onClick={handleContentToggle}
 					className={
-						"relative flex flex-row items-center justify-between " +
-						"cursor-pointer after:content-[''] after:w-full after:h-[0.1rem] " +
-						"after:bg-iron-200 after:absolute after:left-0 after:bottom-0 " +
-						"after:block pb-[1.2rem] mb-[1.3rem]"
+						"relative flex flex-col items-center " +
+						"cursor-pointer after:content-[''] " +
+						"mb-[1.2rem]"
 					}
 				>
-					<span className={"font-medium font-mPlus text-sm-18px text-blue-zodiac-950"}>
-						{triggerName}
-					</span>
-					<div className={"w-[1.2rem] h-[1.2rem] relative"}>
-						<div
-							ref={plusIconBar1Ref}
+					<div className={"flex flex-row items-center justify-between w-full"}>
+						<span
 							className={
-								"w-[1.2rem] h-[0.1rem] bg-blue-zodiac-950 block " +
-								"top-[50%] left-0 absolute"
+								"font-medium font-mPlus text-sm-18px text-blue-zodiac-950 " +
+								triggerNameClasses
 							}
-						></div>
-						<div
-							ref={plusIconBar2Ref}
-							className={
-								"w-[1.2rem] h-[0.01rem] bg-blue-zodiac-950 block " +
-								"absolute top-[50%] left-0 rotate-90"
-							}
-						></div>
+						>
+							{triggerName}
+						</span>
+						<div className={"w-[1.2rem] h-[1.2rem] relative"}>
+							<div
+								ref={plusIconBar1Ref}
+								className={
+									"w-[1.2rem] h-[0.1rem] bg-blue-zodiac-950 block " +
+									"top-[50%] left-0 absolute"
+								}
+							></div>
+							<div
+								ref={plusIconBar2Ref}
+								className={
+									"w-[1.2rem] h-[0.01rem] bg-blue-zodiac-950 block " +
+									"absolute top-[50%] left-0 rotate-90"
+								}
+							></div>
+						</div>
 					</div>
+					{isAccordionContentShown && contentWithinSplitter && (
+						<div
+							ref={accordionContentRef}
+							className={
+								accordionContentClasses + " overflow-hidden pt-[0.4rem] pb-[0.2rem]"
+							}
+						>
+							{children}
+						</div>
+					)}
+					<div
+						className={
+							"w-full h-[0.1rem] bg-iron-200 bloc mt-[1.2rem] " + splitterColor
+						}
+					></div>
 				</div>
 			)}
-			{isAccordionContentShown && (
+			{isAccordionContentShown && !contentWithinSplitter && (
 				<div
 					ref={accordionContentRef}
-					className={accordionContentClasses + " overflow-hidden pt-[0.3rem]"}
+					className={accordionContentClasses + " overflow-hidden pt-[0.4rem]"}
 				>
 					{children}
 				</div>

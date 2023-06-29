@@ -8,4 +8,7 @@ export type AccordionProps = {
 	triggerName: string;
 	triggerType: AccordionTriggerTypes;
 	children: ReactNode;
+	splitterColor?: string;
+	contentWithinSplitter?: boolean;
+	triggerNameClasses?: string;
 };

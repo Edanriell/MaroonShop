@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Bestsellers } from "widgets/bestsellers-slider";
+import { Bestsellers } from "widgets/bestsellers";
 
 import { Button } from "shared/ui";
 
