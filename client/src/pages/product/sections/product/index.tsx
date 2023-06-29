@@ -7,6 +7,8 @@ import { productModel } from "entities/product";
 
 import { Accordion, Button, Radio } from "shared/ui";
 
+import { getProductType } from "shared/lib/functions";
+
 import styles from "./styles.module.scss";
 
 const Product = () => {
@@ -56,7 +58,10 @@ const Product = () => {
 							{product.name}
 						</h2>
 						<p className={"font-mPlus font-normal text-sm-16px text-manatee-500"}>
-							CATEGORY
+							{getProductType({
+								mainType: product.category.main,
+								secondaryType: product.category.secondary,
+							})}
 						</p>
 					</header>
 					<div>

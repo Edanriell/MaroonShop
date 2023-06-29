@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { getProductType } from "./model";
+import { getProductType } from "shared/lib/functions";
 
 import { ProductCardProps } from "./types";
 
