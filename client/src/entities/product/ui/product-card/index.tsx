@@ -96,7 +96,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
 							"text-sm-12px text-blue-zodiac-950 md:text-md-13px"
 						}
 					>
-						<span>{data.price}</span>
+						<span>{data.price[0]}</span>
 						<RubleIcon
 							className={"w-[0.7rem] h-[0.9rem] text-blue-zodiac-950 ml-[0.3rem]"}
 						/>
@@ -118,7 +118,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
 							"font-normal font-mPlus text-sm-13px text-manatee-500 md:text-md-13px"
 						}
 					>
-						{data.quantity}
+						{data.quantity[0]}
 					</span>
 				</div>
 			</div>

@@ -117,6 +117,12 @@ module.exports = {
 					lineHeight: "2.6rem",
 				},
 			],
+			"md-26px": [
+				"2.6rem",
+				{
+					lineHeight: "3.77rem",
+				},
+			],
 			"md-31.7px": [
 				"3.17rem",
 				{

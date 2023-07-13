@@ -1,6 +1,9 @@
 import { FC, useState, useEffect, ChangeEvent, useRef } from "react";
+
 import { displayInputCircle, hideInputCircle, changeLabelColor } from "./model/index";
+
 import { RadioProps } from "./types";
+
 import styles from "./styles.module.scss";
 
 const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
@@ -59,7 +62,7 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
 		if (!priceContainerRef) return;
 
 		const RubleSvg = `
-			<svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="${styles.rubleSvg}" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M2.12195 17V13.7619H0V12.2143H2.12195V10.0952H0V8.28571H2.12195V0H6.70732C8.8374 
 				0 10.4146 0.420635 11.439 1.26191C12.4797 2.10317 13 3.3254 13 4.92857C13 6.54762 12.439 
 				7.81746 11.3171 8.7381C10.1951 9.64286 8.54471 10.0952 6.36585 
@@ -71,7 +74,7 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
 		`;
 
 		const priceElement = `
-			<b class="font-mPlus font-medium text-sm-22px text-blue-zodiac-950">
+			<b class="font-mPlus font-medium text-sm-22px text-blue-zodiac-950 md:text-md-26px">
 				${event.target.value}
 			</b>
 		`;
@@ -87,15 +90,17 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
 	return (
 		<div className={"flex flex-row gap-x-[1.5rem] flex-wrap gap-y-[1.5rem]"}>
 			{quantity.map((quantityValue: string, index: number) => (
-				<div key={index} className="flex flex-row-reverse items-center justify-end">
+				<div key={index} className={"flex flex-row-reverse items-center justify-end"}>
 					<label
 						ref={(ref) => (inputLabelRefs.current[index] = ref)}
-						className="cursor-pointer font-mPlus font-normal text-sm-16px ml-[1rem]"
+						className={
+							"cursor-pointer font-mPlus font-normal text-sm-16px ml-[1rem] md:text-md-18px"
+						}
 						htmlFor={quantityValue}
 					>
 						{quantityValue}
 					</label>
-					<div className="relative flex flex-row cursor-pointer">
+					<div className={"relative flex flex-row cursor-pointer"}>
 						<input
 							onChange={handleRadioSelect}
 							className={styles.input}

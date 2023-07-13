@@ -92,7 +92,7 @@ const Accordion: FC<AccordionProps> = ({
 						<div
 							ref={accordionContentRef}
 							className={
-								accordionContentClasses + " overflow-hidden pt-[0.4rem] pb-[0.2rem]"
+								"overflow-hidden pt-[0.4rem] pb-[0.2rem] " + accordionContentClasses
 							}
 						>
 							{children}
@@ -144,7 +144,7 @@ const Accordion: FC<AccordionProps> = ({
 						<div
 							ref={accordionContentRef}
 							className={
-								accordionContentClasses + " overflow-hidden pt-[0.4rem] pb-[0.2rem]"
+								"overflow-hidden pt-[0.4rem] pb-[0.2rem] " + accordionContentClasses
 							}
 						>
 							{children}
@@ -160,7 +160,7 @@ const Accordion: FC<AccordionProps> = ({
 			{isAccordionContentShown && !contentWithinSplitter && (
 				<div
 					ref={accordionContentRef}
-					className={accordionContentClasses + " overflow-hidden pt-[0.4rem]"}
+					className={"overflow-hidden pt-[0.4rem] " + accordionContentClasses}
 				>
 					{children}
 				</div>

@@ -22,3 +22,13 @@
 	opacity: 0;
 	pointer-events: none;
 }
+
+.rubleSvg {
+	width: 1.3rem;
+	height: 1.7rem;
+
+	@media only screen and (min-width: 768px) {
+		width: 1.5rem;
+		height: 1.9rem;
+	  }
+}

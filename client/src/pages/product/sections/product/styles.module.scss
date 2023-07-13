@@ -1,6 +1,15 @@
-.textSm16Important {
+.triggerNameText {
 	font-size: 1.6rem !important;
 	line-height: 145% !important;
+
+	@media only screen and (min-width: 768px) {
+		font-size: 1.8rem !important;
+		line-height: 145% !important;
+	}
+}
+
+.splitter {
+	background-color: #b3bac1 !important;
 }
 
 .unset {
