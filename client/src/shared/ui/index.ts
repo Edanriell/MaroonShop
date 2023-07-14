@@ -9,3 +9,4 @@ export { default as Spinner } from "./spinner";
 export { default as Accordion } from "./accordion";
 export { default as Checkbox } from "./checkbox";
 export { default as Radio } from "./radio";
+export { default as Card3dFlip } from "./card3d-flip";

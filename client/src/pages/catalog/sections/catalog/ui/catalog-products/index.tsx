@@ -2,6 +2,8 @@ import { FC } from "react";
 
 import { ProductCard } from "entities/product";
 
+import { Card3dFlip } from "shared/ui";
+
 import { CatalogProductsProps, CatalogProductsWrapperProps } from "./types";
 
 const CatalogProductsWrapper: FC<CatalogProductsWrapperProps> = ({ children }) => {
@@ -53,7 +55,9 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 				<CatalogProductsWrapper>
 					{getPageProducts().map((product) => (
 						<li className="w-full" key={product.id}>
-							<ProductCard data={product} cardType="advanced" />
+							<Card3dFlip>
+								<ProductCard data={product} cardType="advanced" />
+							</Card3dFlip>
 						</li>
 					))}
 				</CatalogProductsWrapper>
