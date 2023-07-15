@@ -55,7 +55,7 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 				<CatalogProductsWrapper>
 					{getPageProducts().map((product) => (
 						<li className="w-full" key={product.id}>
-							<Card3dFlip>
+							<Card3dFlip data={product}>
 								<ProductCard data={product} cardType="advanced" />
 							</Card3dFlip>
 						</li>
