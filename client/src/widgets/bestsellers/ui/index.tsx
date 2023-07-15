@@ -23,7 +23,7 @@ const Bestsellers = () => {
 	const { dataLoading } = store;
 
 	const products = productModel.useProducts();
-	const bestsellers = productModel.useBestsellers({ sells: 100 });
+	const bestsellers = productModel.useBestsellers({ maxProductsCount: 20 });
 
 	const isEmpty = productModel.isProductsEmpty(products);
 

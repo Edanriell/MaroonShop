@@ -169,12 +169,26 @@ export const useFilteredProducts = () =>
 		),
 	);
 
-export const useBestsellers = ({ sells }: { sells: number }) =>
+export const useBestsellers = ({ maxProductsCount }: { maxProductsCount: number }) =>
 	useSelector(
 		createSelector(
 			(state: RootState) => state.products.data,
 			(products) => {
-				return Object.values(products).filter((product) => product.sells >= sells);
+				return Object.values(products)
+					.sort((a, b) => b.sells - a.sells)
+					.slice(0, maxProductsCount);
+			},
+		),
+	);
+
+export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: number }) =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data,
+			(products) => {
+				return Object.values(products)
+					.sort((a, b) => b.views - a.views)
+					.slice(0, maxProductsCount);
 			},
 		),
 	);
