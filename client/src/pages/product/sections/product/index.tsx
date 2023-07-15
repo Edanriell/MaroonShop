@@ -9,6 +9,8 @@ import { Accordion, Button, Radio } from "shared/ui";
 
 import { getProductType } from "shared/lib/functions";
 
+import { ProductLoading, ProductNotFound } from "./ui";
+
 import styles from "./styles.module.scss";
 
 const Product = () => {
@@ -29,10 +31,10 @@ const Product = () => {
 	const priceContainerRef = useRef(null);
 
 	if (dataLoading) {
-		return <div>LOADING</div>;
+		return <ProductLoading />;
 	}
 
-	if (!product) return null;
+	if (!product) return <ProductNotFound />;
 
 	return (
 		<>
