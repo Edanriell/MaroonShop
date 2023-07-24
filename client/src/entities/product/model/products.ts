@@ -202,4 +202,9 @@ export const isFilteredProductsEmpty = (filteredProducts: any): boolean => {
 	return Object.keys(filteredProducts).length === 0;
 };
 
+export const isMostViewedProductsEmpty = (mostViewedProducts: NormalizedProducts): boolean => {
+	if (!mostViewedProducts) return true;
+	return Object.keys(mostViewedProducts).length === 0;
+};
+
 export const reducer = productModel.reducer;

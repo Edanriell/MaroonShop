@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 
 register();
 
-const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, className = "" }) => {
+const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 	const [slidesCount, setSlidesCount] = useState<number>(0);
 	const { width } = useScreenSize();
 
@@ -33,11 +33,11 @@ const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, className = "" }) =>
 			loop="true"
 			autoplay-delay="6000"
 			autoplay-pause-on-mouse-enter="true"
-			class={className + " " + styles.sliderContainer}
+			class={styles.sliderContainer}
 		>
-			{bestSellers.map((bestSeller, id) => (
+			{mostViewedProducts.map((mostViewedProduct, id) => (
 				<swiper-slide key={id}>
-					<ProductCard data={bestSeller} cardType="basic" />
+					<ProductCard data={mostViewedProduct} cardType="advanced" />
 				</swiper-slide>
 			))}
 		</swiper-container>

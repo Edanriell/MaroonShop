@@ -9,10 +9,10 @@ import { ReactComponent as RubleIcon } from "./assets/ruble.svg";
 
 import styles from "./styles.module.scss";
 
-export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
+export const ProductCard: FC<ProductCardProps> = ({ data, cardType, className = "" }) => {
 	if (cardType === "basic") {
 		return (
-			<article className={"grid gird-rows-2-auto w-[22rem] m-auto md:w-[23rem]"}>
+			<article className={"grid gird-rows-2-auto w-[22rem] m-auto md:w-[23rem] " + className}>
 				<picture className={"col-start-1 col-end-2 row-start-1 row-end-3"}>
 					<source media="(min-width:1366px)" srcSet={data.image.lg} />
 					<source media="(min-width:768px)" srcSet={data.image.md} />
@@ -65,7 +65,8 @@ export const ProductCard: FC<ProductCardProps> = ({ data, cardType }) => {
 			className={
 				"relative w-full h-[90.625vw] pl-[2rem] " +
 				"pr-[2rem] pt-[1.5rem] pb-[1.5rem] md:h-[45.57291666666667vw] " +
-				"lg:w-[27rem] lg:h-[35rem]"
+				"lg:w-[27rem] lg:h-[35rem] " +
+				className
 			}
 		>
 			<picture>
