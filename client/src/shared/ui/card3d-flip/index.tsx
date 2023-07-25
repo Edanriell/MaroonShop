@@ -6,9 +6,9 @@ import { Card3dFlipProps } from "./types";
 
 import styles from "./styles.module.scss";
 
-const Card3dFlip: FC<Card3dFlipProps> = ({ children, data }) => {
+const Card3dFlip: FC<Card3dFlipProps> = ({ children, data, className = "" }) => {
 	return (
-		<div className={styles.productCard}>
+		<div className={styles.productCard + " " + className}>
 			<div className={styles.productCardFront}>
 				<div className={styles.productCardInner + " " + styles.productCardInnerFront}>
 					{children}

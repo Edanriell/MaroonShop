@@ -6,6 +6,8 @@ import { productModel } from "entities/product";
 
 import { useScreenSize } from "shared/lib/hooks";
 
+import { Button } from "shared/ui";
+
 import { MobileSlider, TabletSlider, DesktopSlider } from "./ui";
 
 import { ProductsSuggestionsProps } from "./types";

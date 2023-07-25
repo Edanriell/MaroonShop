@@ -1,9 +1,12 @@
 import { FC, useState, useEffect } from "react";
 import { register } from "swiper/element/bundle";
+import { Link } from "react-router-dom";
 
 import { ProductCard } from "entities/product";
 
 import { useScreenSize } from "shared/lib/hooks";
+
+import { Card3dFlip, Button } from "shared/ui";
 
 import { MobileSliderProps } from "./types";
 
@@ -23,6 +26,8 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 		}
 	}, [width]);
 
+	console.log(mostViewedProducts);
+
 	return (
 		<swiper-container
 			slides-per-view={slidesCount}
@@ -37,7 +42,14 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 		>
 			{mostViewedProducts.map((mostViewedProduct, id) => (
 				<swiper-slide key={id}>
-					<ProductCard data={mostViewedProduct} cardType="advanced" />
+					{/* <Card3dFlip data={mostViewedProduct} className={styles.sliderSlide}>
+
+					</Card3dFlip> */}
+					<ProductCard
+						data={mostViewedProduct}
+						cardType="advanced"
+						className={styles.sliderSlide}
+					/>
 				</swiper-slide>
 			))}
 		</swiper-container>

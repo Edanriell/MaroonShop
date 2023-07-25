@@ -4,6 +4,12 @@
 	margin-right: auto;
 }
 
+.sliderSlide {
+	margin: 0 auto;
+	width: 27rem !important;
+	max-width: 29rem !important;
+}
+
 @media only screen and (min-width: 520px) {
 	.sliderContainer {
 		// max-width: 610px;

@@ -26,7 +26,7 @@ const Product = () => {
 	useEffect(() => {
 		dispatch(productModel.getProductByIdAsync(+productId!));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [productId]);
 
 	const priceContainerRef = useRef(null);
 
