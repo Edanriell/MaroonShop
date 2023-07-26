@@ -1,0 +1,69 @@
+.swiper-button-next,
+.swiper-button-prev {
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	position: absolute;
+	transition: all 0.5s;
+	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.swiper-button-prev {
+	background-repeat: no-repeat;
+	width: 26px;
+	height: 12px;
+	top: 100%;
+	transform: translateY(-100%);
+	left: 20.6rem;
+	z-index: 100;
+}
+
+.swiper-button-prev:hover {
+	transform: translateY(-100%) scale(1.1);
+}
+
+.swiper-button-prev:active {
+	transform: translateY(-100%) translateX(-4px) scale(1.1);
+}
+
+.swiper-button-next {
+	background-repeat: no-repeat;
+	width: 26px;
+	height: 12px;
+	top: 100%;
+	transform: translateY(-100%);
+	right: 1rem;
+	z-index: 100;
+}
+
+.swiper-button-next:hover {
+	transform: translateY(-100%) scale(1.1);
+}
+
+.swiper-button-next:active {
+	transform: translateY(-100%) translateX(4px) scale(1.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+	content: "";
+}
+
+@media only screen and (min-width: 337px) {
+	.swiper-button-next {
+		right: 0rem;
+	}
+
+	.swiper-button-prev {
+		left: 21.1rem;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	.swiper-button-prev {
+	}
+
+	.swiper-button-next {
+	}
+}

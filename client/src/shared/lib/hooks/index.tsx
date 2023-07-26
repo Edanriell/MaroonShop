@@ -75,3 +75,21 @@ export const useControlScrollbar = () => {
 		};
 	}, []);
 };
+
+export const useSplitArray = (originalArray: Array<any>, splitCount: number) => {
+	const [splitArrays, setSplitArrays] = useState<Array<any>>([]);
+
+	const splitArray = () => {
+		const arrayLength = originalArray.length;
+		const splitSize = Math.ceil(arrayLength / splitCount);
+
+		const newArray = [];
+		for (let i = 0; i < arrayLength; i += splitSize) {
+			newArray.push(originalArray.slice(i, i + splitSize));
+		}
+
+		setSplitArrays(newArray);
+	};
+
+	return { splitArrays, splitArray };
+};
