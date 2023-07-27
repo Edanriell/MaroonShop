@@ -36,17 +36,20 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 	}
 
 	return (
-		<article className={"mb-[8rem]"}>
+		<article className={"mb-[8rem] md:mb-[12rem] lg:mb-[14rem]"}>
 			<h2
 				className={
-					"text-center font-raleway text-sm-28px-lh-35px font-medium text-blue-zodiac-950 mb-[3.2rem]"
+					"text-center font-raleway text-sm-28px-lh-35px font-medium " +
+					"text-blue-zodiac-950 mb-[3.2rem] md:text-md-32px md:mb-[5.1rem]"
 				}
 			>
 				{title}
 			</h2>
 			{width < 768 && <MobileSlider mostViewedProducts={mostViewedProducts} />}
-			{width < 768 && <TabletSlider mostViewedProducts={mostViewedProducts} />}
-			{width < 768 && <DesktopSlider mostViewedProducts={mostViewedProducts} />}
+			{width >= 768 && width < 1366 && (
+				<TabletSlider mostViewedProducts={mostViewedProducts} />
+			)}
+			{width >= 1366 && <DesktopSlider mostViewedProducts={mostViewedProducts} />}
 		</article>
 	);
 };

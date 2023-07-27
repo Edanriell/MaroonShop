@@ -1,0 +1,29 @@
+.sliderContainer {
+	width: 100%;
+	max-width: 1170px;
+}
+
+.sliderSlide {
+	max-width: 27rem;
+	width: 100% !important;
+	height: 35rem !important;
+	margin: 0 auto;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+
+.sliderSlideBackgroundImage {
+	height: 35rem !important;
+}
+
+@media only screen and (min-width: 1666px) {
+	.sliderContainer {
+		max-width: 1470px;
+	}
+}
+
+@media only screen and (min-width: 1966px) {
+	.sliderContainer {
+		max-width: 1770px;
+	}
+}

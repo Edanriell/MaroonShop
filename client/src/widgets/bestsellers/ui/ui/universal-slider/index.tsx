@@ -28,7 +28,7 @@ const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, className }) =
                         margin: 0;
                         display: inline-block;
                         position: absolute;
-						transition: all 0.5s;
+						transition: all 0.25s;
 						transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
                     }
 

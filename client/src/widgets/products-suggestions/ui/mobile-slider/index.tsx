@@ -1,12 +1,11 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { register } from "swiper/element/bundle";
-import { Link } from "react-router-dom";
 
 import { ProductCard } from "entities/product";
 
-import { useScreenSize } from "shared/lib/hooks";
+import { useScreenSize, useArrayGrouper } from "shared/lib/hooks";
 
-import { Card3dFlip, Button } from "shared/ui";
+import { Card3dFlip } from "shared/ui";
 
 import { MobileSliderProps } from "./types";
 
@@ -19,6 +18,8 @@ register();
 
 const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 	const { width } = useScreenSize();
+
+	const mostViewedProductsGrouped = useArrayGrouper(mostViewedProducts, 2);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -35,7 +36,7 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
                         margin: 0;
                         display: inline-block;
                         position: absolute;
-						transition: all 0.5s;
+						transition: all 0.25s;
 						transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
                     }
 
@@ -124,21 +125,21 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 
 					@media only screen and (min-width: 337px) {
 						.swiper-button-next {
-							right: 0rem;
+							right: 0.2rem;
 						}
 
 						.swiper-button-prev {
 							left: 21.1rem;
 						}
+
+						.swiper-pagination {
+							left: 0;
+						}
 					}
 
-					@media only screen and (min-width: 1366px) {
+					@media only screen and (min-width: 660px) {
 						.swiper-button-prev {
-							
-						}
-
-						.swiper-button-next {
-							
+							left: 53.1rem;
 						}
 					}
                 `,
@@ -150,42 +151,45 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 	}, []);
 
 	if (width >= 660) {
-		return null;
-		// <swiper-container
-		// 	slides-per-view="1"
-		// 	keyboard="true"
-		// 	grab-cursor="true"
-		// 	speed="500"
-		// 	space-between="30"
-		// 	loop="true"
-		// 	autoplay-delay="6000"
-		// 	autoplay-pause-on-mouse-enter="true"
-		// 	class={styles.sliderContainer}
-		// >
-		// 	{mostViewedProducts.map((mostViewedProduct, id) => (
-		// 		<swiper-slide key={id}>
-		// 			{/* <Card3dFlip data={mostViewedProduct} className={styles.sliderSlide}>
-
-		// 			</Card3dFlip> */}
-		// 			<div className="flex flex-row gap-x-[3rem]">
-		// 				<ProductCard
-		// 					data={mostViewedProduct}
-		// 					cardType="advanced"
-		// 					className={styles.sliderSlide}
-		// 					backgroundImageClassName={styles.sliderSlideBackgroundImage}
-		// 				/>
-		// 				{width >= 660 && (
-		// 					<ProductCard
-		// 						data={mostViewedProduct}
-		// 						cardType="advanced"
-		// 						className={styles.sliderSlide}
-		// 						backgroundImageClassName={styles.sliderSlideBackgroundImage}
-		// 					/>
-		// 				)}
-		// 			</div>
-		// 		</swiper-slide>
-		// 	))}
-		// </swiper-container>
+		return (
+			<swiper-container
+				ref={sliderRef}
+				init="false"
+				slides-per-view="1"
+				keyboard="true"
+				grab-cursor="true"
+				speed="500"
+				space-between="30"
+				autoplay-delay="6000"
+				autoplay-pause-on-mouse-enter="true"
+				update-on-window-resize="true"
+				navigation="true"
+				pagination="true"
+				pagination-type="fraction"
+				class={styles.sliderContainer + " relative pb-[4.6rem]"}
+			>
+				{mostViewedProductsGrouped.map((mostViewedProductsGroup, id) => (
+					<swiper-slide key={id}>
+						<div className="flex flex-row gap-x-[3rem]">
+							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
+								<Card3dFlip
+									key={id}
+									data={mostViewedProduct}
+									className={styles.sliderSlide}
+								>
+									<ProductCard
+										data={mostViewedProduct}
+										cardType="advanced"
+										className={styles.sliderSlide}
+										backgroundImageClassName={styles.sliderSlideBackgroundImage}
+									/>
+								</Card3dFlip>
+							))}
+						</div>
+					</swiper-slide>
+				))}
+			</swiper-container>
+		);
 	}
 	return (
 		<swiper-container

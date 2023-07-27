@@ -76,7 +76,7 @@ const CatalogPagination: FC<CatalogPaginationProps> = ({
 								<LeftArrow
 									className={
 										"w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem] " +
-										"ease-in-out duration-500 hover:scale-[1.1] active:translate-x-[-0.4rem] " +
+										"ease-in-out duration-250 hover:scale-[1.1] active:translate-x-[-0.4rem] " +
 										"active:scale-[1.1]"
 									}
 								/>
@@ -90,7 +90,7 @@ const CatalogPagination: FC<CatalogPaginationProps> = ({
 								<RightArrow
 									className={
 										"w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem] " +
-										"ease-in-out duration-500 hover:scale-[1.1] active:translate-x-[0.4rem] " +
+										"ease-in-out duration-250 hover:scale-[1.1] active:translate-x-[0.4rem] " +
 										"active:scale-[1.1]"
 									}
 								/>
