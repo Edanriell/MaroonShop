@@ -47,7 +47,7 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        left: 20.6rem;
+                        left: 21.1rem;
                         z-index: 100;
                     }
 
@@ -170,7 +170,7 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 			>
 				{mostViewedProductsGrouped.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="flex flex-row gap-x-[3rem]">
+						<div className="grid grid-cols-[29rem_29rem] gap-x-[3rem]">
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}

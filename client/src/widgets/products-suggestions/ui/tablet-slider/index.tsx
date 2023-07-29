@@ -127,7 +127,7 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
 
 					@media only screen and (min-width: 1142px) {
 						.swiper-button-prev {
-							left: 94.8rem;
+							left: 94.7rem;
 						}
 					}
                 `,
@@ -158,7 +158,12 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
 			{width < 1142 &&
 				mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="flex flex-row flex-wrap gap-x-[3rem] gap-y-[3rem]">
+						<div
+							className={
+								"grid grid-cols-[32.4rem_32.4rem] grid-rows-[35rem_35rem] " +
+								"gap-x-[3rem] gap-y-[3rem]"
+							}
+						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
@@ -179,7 +184,12 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
 			{width >= 1142 &&
 				mostViewedProductsGroupedBy6.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="flex flex-row flex-wrap gap-x-[3rem] gap-y-[3rem]">
+						<div
+							className={
+								"grid grid-cols-[32.4rem_32.4rem_32.4rem] grid-rows-[35rem_35rem] " +
+								"gap-x-[3rem] gap-y-[3rem]"
+							}
+						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}

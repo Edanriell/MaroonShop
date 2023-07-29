@@ -49,7 +49,7 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        left: 59.3rem;
+                        left: 108.5rem;
                         z-index: 100;
                     }
 
@@ -126,18 +126,16 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 						color: #9A9DA0;
 					}
 
-					@media only screen and (min-width: 1142px) {
-						.swiper-button-prev {
-							left: 94.8rem;
-						}
-					}
-
 					@media only screen and (min-width: 1666px) {
-
+						.swiper-button-prev {
+							left: 138.5rem;
+						}
 					}
 					
 					@media only screen and (min-width: 1966px) {
-
+						.swiper-button-prev {
+							left: 168.5rem;
+						}
 					}
                 `,
 			],
@@ -168,7 +166,7 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 				width < 1666 &&
 				mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="flex flex-row gap-x-[3rem]">
+						<div className={"grid grid-cols-[27rem_27rem_27rem_27rem] gap-x-[3rem]"}>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
@@ -190,7 +188,11 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 				width < 1966 &&
 				mostViewedProductsGroupedBy5.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="flex flex-row gap-x-[3rem]">
+						<div
+							className={
+								"grid grid-cols-[27rem_27rem_27rem_27rem_27rem] gap-x-[3rem]"
+							}
+						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
@@ -211,7 +213,11 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 			{width >= 1966 &&
 				mostViewedProductsGroupedBy6.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="flex flex-row gap-x-[3rem]">
+						<div
+							className={
+								"grid grid-cols-[27rem_27rem_27rem_27rem_27rem_27rem] gap-x-[3rem]"
+							}
+						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
