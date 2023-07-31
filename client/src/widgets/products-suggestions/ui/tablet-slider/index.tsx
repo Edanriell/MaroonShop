@@ -160,8 +160,8 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
 					<swiper-slide key={id}>
 						<div
 							className={
-								"grid grid-cols-[32.4rem_32.4rem] grid-rows-[35rem_35rem] " +
-								"gap-x-[3rem] gap-y-[3rem]"
+								"grid grid-cols-[31.6rem_31.6rem] grid-rows-[35rem_35rem] " +
+								"gap-x-[3rem] gap-y-[3rem] justify-center min-[776px]:grid-cols-[32.4rem_32.4rem]"
 							}
 						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (

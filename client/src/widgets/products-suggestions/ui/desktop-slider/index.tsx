@@ -166,7 +166,12 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 				width < 1666 &&
 				mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className={"grid grid-cols-[27rem_27rem_27rem_27rem] gap-x-[3rem]"}>
+						<div
+							className={
+								"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] justify-center " +
+								"min-[1386px]:grid-cols-[27rem_27rem_27rem_27rem]"
+							}
+						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
