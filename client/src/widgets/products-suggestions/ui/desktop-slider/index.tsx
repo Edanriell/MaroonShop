@@ -169,7 +169,7 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 						<div
 							className={
 								"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] justify-center " +
-								"min-[1386px]:grid-cols-[27rem_27rem_27rem_27rem]"
+								"min-[1386px]:grid-cols-[27rem_27rem_27rem_27rem] "
 							}
 						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
@@ -195,7 +195,8 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 					<swiper-slide key={id}>
 						<div
 							className={
-								"grid grid-cols-[27rem_27rem_27rem_27rem_27rem] gap-x-[3rem]"
+								"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] " +
+								"justify-center min-[1691px]:grid-cols-[27rem_27rem_27rem_27rem_27rem]"
 							}
 						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
@@ -220,7 +221,8 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 					<swiper-slide key={id}>
 						<div
 							className={
-								"grid grid-cols-[27rem_27rem_27rem_27rem_27rem_27rem] gap-x-[3rem]"
+								"grid grid-cols-[26.6rem_26.6rem_26.6rem_26.6rem_26.6rem_26.6rem] gap-x-[3rem] " +
+								"justify-center min-[1990px]:grid-cols-[27rem_27rem_27rem_27rem_27rem_27rem]"
 							}
 						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
