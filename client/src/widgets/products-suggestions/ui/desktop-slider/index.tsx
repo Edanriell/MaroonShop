@@ -68,7 +68,7 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        right: 0.2rem;
+                        right: 0.8rem;
                         z-index: 100;
                     }
 
@@ -126,15 +126,41 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 						color: #9A9DA0;
 					}
 
+					@media only screen and (min-width: 1386px) {
+						.swiper-button-next {
+							right: 0.2rem;
+						}
+					}
+
 					@media only screen and (min-width: 1666px) {
 						.swiper-button-prev {
 							left: 138.5rem;
+						}
+
+						.swiper-button-next {
+							right: 0.8rem;
+						}
+					}
+
+					@media only screen and (min-width: 1691px) {
+						.swiper-button-next {
+							right: 0.2rem;
 						}
 					}
 					
 					@media only screen and (min-width: 1966px) {
 						.swiper-button-prev {
 							left: 168.5rem;
+						}
+
+						.swiper-button-next {
+							right: 0.8rem;
+						}
+					}
+
+					@media only screen and (min-width: 1990px) {
+						.swiper-button-next {
+							right: 0.2rem;
 						}
 					}
                 `,

@@ -67,7 +67,7 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        right: 0.2rem;
+                        right: 1rem;
                         z-index: 100;
                     }
 
@@ -123,6 +123,12 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
 
 					.swiper-pagination-total {
 						color: #9A9DA0;
+					}
+
+					@media only screen and (min-width: 784px) {
+						.swiper-button-next {
+							right: 0.2rem;
+						}
 					}
 
 					@media only screen and (min-width: 1142px) {
