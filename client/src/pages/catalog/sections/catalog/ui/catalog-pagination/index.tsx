@@ -63,40 +63,42 @@ const CatalogPagination: FC<CatalogPaginationProps> = ({
 								{totalPages}
 							</span>
 						</div>
-						<div
-							className={
-								"flex flex-row items-center gap-x-[3rem] md:gap-x-[3.2rem] md:justify-self-end"
-							}
-						>
-							<button
-								onClick={handlePreviousPageChange}
-								type="button"
-								disabled={currentPage === 1}
+						{totalPages >= 2 && (
+							<div
+								className={
+									"flex flex-row items-center gap-x-[3rem] md:gap-x-[3.2rem] md:justify-self-end"
+								}
 							>
-								<LeftArrow
-									className={
-										"w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem] " +
-										"ease-in-out duration-250 hover:scale-[1.1] active:translate-x-[-0.4rem] " +
-										"active:scale-[1.1]"
-									}
-								/>
-								<span className={"sr-only"}>Предыдущие товары</span>
-							</button>
-							<button
-								onClick={handleNextPageChange}
-								type="button"
-								disabled={currentPage === totalPages}
-							>
-								<RightArrow
-									className={
-										"w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem] " +
-										"ease-in-out duration-250 hover:scale-[1.1] active:translate-x-[0.4rem] " +
-										"active:scale-[1.1]"
-									}
-								/>
-								<span className={"sr-only"}>Следующие товары</span>
-							</button>
-						</div>
+								<button
+									onClick={handlePreviousPageChange}
+									type="button"
+									disabled={currentPage === 1}
+								>
+									<LeftArrow
+										className={
+											"w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem] " +
+											"ease-in-out duration-[250ms] hover:scale-[1.1] " +
+											"active:translate-x-[-0.4rem] active:scale-[1.1]"
+										}
+									/>
+									<span className={"sr-only"}>Предыдущие товары</span>
+								</button>
+								<button
+									onClick={handleNextPageChange}
+									type="button"
+									disabled={currentPage === totalPages}
+								>
+									<RightArrow
+										className={
+											"w-[2.4rem] h-[1.1rem] text-blue-950 md:w-[2.6rem] md:h-[1.2rem] " +
+											"ease-in-out duration-[250ms] hover:scale-[1.1] " +
+											"active:translate-x-[0.4rem] active:scale-[1.1]"
+										}
+									/>
+									<span className={"sr-only"}>Следующие товары</span>
+								</button>
+							</div>
+						)}
 					</div>
 				)}
 		</>

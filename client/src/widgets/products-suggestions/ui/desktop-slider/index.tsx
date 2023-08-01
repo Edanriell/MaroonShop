@@ -3,7 +3,7 @@ import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
 
-import { useArrayGrouper, useScreenSize } from "shared/lib/hooks";
+import { useArrayGrouper } from "shared/lib/hooks";
 
 import { Card3dFlip } from "shared/ui";
 
@@ -18,10 +18,6 @@ register();
 
 const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
-	const mostViewedProductsGroupedBy5 = useArrayGrouper(mostViewedProducts, 5);
-	const mostViewedProductsGroupedBy6 = useArrayGrouper(mostViewedProducts, 6);
-
-	const { width } = useScreenSize();
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -131,38 +127,6 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 							right: 0.2rem;
 						}
 					}
-
-					@media only screen and (min-width: 1666px) {
-						.swiper-button-prev {
-							left: 138.5rem;
-						}
-
-						.swiper-button-next {
-							right: 0.8rem;
-						}
-					}
-
-					@media only screen and (min-width: 1691px) {
-						.swiper-button-next {
-							right: 0.2rem;
-						}
-					}
-					
-					@media only screen and (min-width: 1966px) {
-						.swiper-button-prev {
-							left: 168.5rem;
-						}
-
-						.swiper-button-next {
-							right: 0.8rem;
-						}
-					}
-
-					@media only screen and (min-width: 1990px) {
-						.swiper-button-next {
-							right: 0.2rem;
-						}
-					}
                 `,
 			],
 		};
@@ -188,86 +152,31 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 			pagination-type="fraction"
 			class={styles.sliderContainer + " relative pb-[6.3rem]"}
 		>
-			{width >= 1366 &&
-				width < 1666 &&
-				mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
-					<swiper-slide key={id}>
-						<div
-							className={
-								"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] justify-center " +
-								"min-[1386px]:grid-cols-[27rem_27rem_27rem_27rem] "
-							}
-						>
-							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-								<Card3dFlip
-									key={id}
+			{mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
+				<swiper-slide key={id}>
+					<div
+						className={
+							"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] justify-center " +
+							"min-[1386px]:grid-cols-[27rem_27rem_27rem_27rem] "
+						}
+					>
+						{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
+							<Card3dFlip
+								key={id}
+								data={mostViewedProduct}
+								className={styles.sliderSlide}
+							>
+								<ProductCard
 									data={mostViewedProduct}
+									cardType="advanced"
 									className={styles.sliderSlide}
-								>
-									<ProductCard
-										data={mostViewedProduct}
-										cardType="advanced"
-										className={styles.sliderSlide}
-										backgroundImageClassName={styles.sliderSlideBackgroundImage}
-									/>
-								</Card3dFlip>
-							))}
-						</div>
-					</swiper-slide>
-				))}
-			{width >= 1666 &&
-				width < 1966 &&
-				mostViewedProductsGroupedBy5.map((mostViewedProductsGroup, id) => (
-					<swiper-slide key={id}>
-						<div
-							className={
-								"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] " +
-								"justify-center min-[1691px]:grid-cols-[27rem_27rem_27rem_27rem_27rem]"
-							}
-						>
-							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-								<Card3dFlip
-									key={id}
-									data={mostViewedProduct}
-									className={styles.sliderSlide}
-								>
-									<ProductCard
-										data={mostViewedProduct}
-										cardType="advanced"
-										className={styles.sliderSlide}
-										backgroundImageClassName={styles.sliderSlideBackgroundImage}
-									/>
-								</Card3dFlip>
-							))}
-						</div>
-					</swiper-slide>
-				))}
-			{width >= 1966 &&
-				mostViewedProductsGroupedBy6.map((mostViewedProductsGroup, id) => (
-					<swiper-slide key={id}>
-						<div
-							className={
-								"grid grid-cols-[26.6rem_26.6rem_26.6rem_26.6rem_26.6rem_26.6rem] gap-x-[3rem] " +
-								"justify-center min-[1990px]:grid-cols-[27rem_27rem_27rem_27rem_27rem_27rem]"
-							}
-						>
-							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-								<Card3dFlip
-									key={id}
-									data={mostViewedProduct}
-									className={styles.sliderSlide}
-								>
-									<ProductCard
-										data={mostViewedProduct}
-										cardType="advanced"
-										className={styles.sliderSlide}
-										backgroundImageClassName={styles.sliderSlideBackgroundImage}
-									/>
-								</Card3dFlip>
-							))}
-						</div>
-					</swiper-slide>
-				))}
+									backgroundImageClassName={styles.sliderSlideBackgroundImage}
+								/>
+							</Card3dFlip>
+						))}
+					</div>
+				</swiper-slide>
+			))}
 		</swiper-container>
 	);
 };
