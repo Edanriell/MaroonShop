@@ -6,9 +6,13 @@ import { productModel } from "entities/product";
 
 import { useScreenSize } from "shared/lib/hooks";
 
-import { Button } from "shared/ui";
-
-import { MobileSlider, TabletSlider, DesktopSlider } from "./ui";
+import {
+	MobileSlider,
+	TabletSlider,
+	DesktopSlider,
+	ProductsSuggestionsError,
+	ProductsSuggestionsLoading,
+} from "./ui";
 
 import { ProductsSuggestionsProps } from "./types";
 
@@ -33,6 +37,14 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 
 	function handleReloadButtonClick() {
 		setReload(Math.random());
+	}
+
+	if (dataLoading) {
+		return <ProductsSuggestionsLoading />;
+	}
+
+	if (!dataLoading && isEmpty) {
+		return <ProductsSuggestionsError onReloadButtonClick={handleReloadButtonClick} />;
 	}
 
 	return (
