@@ -59,7 +59,7 @@ export const ProductCard: FC<ProductCardProps> = ({
 							"hover:text-blue-zodiac-800 hover:after:bg-blue-zodiac-800 " +
 							"duration-500 ease-out after:duration-500 after:ease-out md:mb-[2.5rem] md:mt-[1rem]"
 						}
-						to={`/${data.id}`}
+						to={`/product/${data.id}`}
 					>
 						Подробнее
 					</Link>

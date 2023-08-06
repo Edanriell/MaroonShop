@@ -31,6 +31,7 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 	const { width } = useScreenSize();
 
 	useEffect(() => {
+		// Change to fetching recent watcher products later.
 		dispatch(productModel.getProductsAsync());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reload]);
