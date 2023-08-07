@@ -1,11 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const helmet = require("helmet");
 const path = require("path");
+const mongoose = require("mongoose");
+const router = require("./router/index");
 
-const port = 4020;
+const PORT = process.env.PORT || 4020;
 
 const productsRouter = require("./routes/products");
 const questionnaireRouter = require("./routes/questionnaire");
@@ -37,9 +40,22 @@ app.use("/questionnaire", questionnaireRouter);
 app.use("/gallery", galleryRouter);
 app.use("/products/filtered", filteredProductsRouter);
 app.use("/products", filteredProductByIdRouter);
+app.use("/api", router); // FIX !!!
 
-app.listen(port, () => {
-	console.log(`Server listening on port ${port}`);
-});
+const startServer = async () => {
+	try {
+		await mongoose.connect(process.env.DB_URL, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
+		app.listen(PORT, () => {
+			console.log(`Server listening on port ${PORT}`);
+		});
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+startServer();
 
 module.exports = app;
