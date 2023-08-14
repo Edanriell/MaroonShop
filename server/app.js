@@ -29,6 +29,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(cors());
 
 // Static files
 app.use("/images", express.static(path.join(__dirname, "public", "products-images")));
