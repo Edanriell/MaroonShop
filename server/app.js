@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const path = require("path");
 const mongoose = require("mongoose");
 const router = require("./router/index");
+const errorMiddleware = require("./middlewares/error-middleware");
 
 const PORT = process.env.PORT || 4020;
 
@@ -42,6 +43,7 @@ app.use("/gallery", galleryRouter);
 app.use("/products/filtered", filteredProductsRouter);
 app.use("/products", filteredProductByIdRouter);
 app.use("/api", router); // FIX !!!
+app.use(errorMiddleware);
 
 const startServer = async () => {
 	try {
