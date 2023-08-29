@@ -2,6 +2,7 @@ import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import login from "./login";
+import test from "./test";
 
 import { LoginPageSections, SectionWrapperProps } from "./types";
 
@@ -9,6 +10,11 @@ const sections: LoginPageSections = [
 	{
 		id: uuidv4(),
 		Section: login,
+		classes: "bg-desert-storm-50",
+	},
+	{
+		id: uuidv4(),
+		Section: test,
 		classes: "bg-desert-storm-50",
 	},
 ];

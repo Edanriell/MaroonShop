@@ -1,6 +1,14 @@
 import { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
+
+import { sessionModel } from "entities/session";
 
 const Login: FC = () => {
+	// FIX ANY TYPE
+	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
+
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
@@ -18,8 +26,15 @@ const Login: FC = () => {
 				type="text"
 				placeholder="Password"
 			/>
-			<button>Login</button>
-			<button>Registration</button>
+			<button onClick={() => dispatch(sessionModel.login({ email, password }))} type="button">
+				Login
+			</button>
+			<button
+				onClick={() => dispatch(sessionModel.registration({ email, password }))}
+				type="button"
+			>
+				Registration
+			</button>
 		</div>
 	);
 };

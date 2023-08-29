@@ -142,3 +142,4 @@ export const reducer = sessionModel.reducer;
 
 // All this code needs to be tested !
 // http://localhost:4020 needs to be pulled out
+// pull out t credintails type { email: string; password: string } in types.ts
