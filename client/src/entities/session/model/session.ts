@@ -116,6 +116,7 @@ export const registration = createAsyncThunk(
 
 export const logout = createAsyncThunk("session/logout", async () => {
 	try {
+		console.log("logout clicked");
 		const response = await AuthService.logout();
 		localStorage.removeItem("token");
 		console.log(response);

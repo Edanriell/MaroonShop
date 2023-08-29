@@ -1,5 +1,7 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { sessionModel } from "entities/session";
 
@@ -7,6 +9,8 @@ import { UserService } from "shared/services";
 import { User } from "shared/api";
 
 const Test: FC = () => {
+	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
+
 	const isLoading = useSelector((state) => (state as any).session.dataLoading);
 	const user = useSelector((state) => (state as any).session.user);
 	const isAuthorized = useSelector((state) => (state as any).session.isAuthorized);
@@ -15,36 +19,51 @@ const Test: FC = () => {
 
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
-			sessionModel.checkAuth();
+			dispatch(sessionModel.checkAuth());
 		}
 	}, []);
+
+	useEffect(() => {
+		console.log(`${isLoading} isLoading`);
+		console.log(`${user} user`);
+		console.log(user);
+		console.log(`${isAuthorized} isAuthorized`);
+	});
 
 	async function getUsers() {
 		try {
 			const response = await UserService.fetchUsers();
+			console.log("=====getUsersResponse=====");
+			console.log(response);
+			console.log("=====getUsersResponse=====");
 			setUsers(response.data);
 		} catch (e) {
 			console.log(e);
 		}
 	}
 
+	async function logoutTest() {
+		console.log("clicked");
+		dispatch(sessionModel.logout());
+	}
+
 	if (isLoading) {
 		return <div>Загрузка...</div>;
 	}
 
-	if (isAuthorized) {
-		return (
-			<div>
-				<button onClick={getUsers}>Получить пользователей</button>
-			</div>
-		);
-	}
+	// if (isAuthorized) {
+	// 	return (
+	// 		<div>
+	// 			<button onClick={getUsers}>Получить пользователей</button>
+	// 		</div>
+	// 	);
+	// }
 
 	return (
 		<div>
+			<button onClick={() => logoutTest()}>Выйти</button>
 			<h1>{isAuthorized ? `Пользователь авторизован ${user.email}` : "АВТОРИЗУЙТЕСЬ"}</h1>
 			<h1>{user.isActivated ? "Аккаунт подтвержден по почте" : "ПОДТВЕРДИТЕ АККАУНТ!!!!"}</h1>
-			<button onClick={() => sessionModel.logout()}>Выйти</button>
 			<div>
 				<button onClick={getUsers}>Получить пользователей</button>
 			</div>
