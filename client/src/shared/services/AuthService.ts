@@ -1,21 +1,21 @@
 import { AxiosResponse } from "axios";
 
-import { usersApi, AuthResponse } from "shared/api";
+import { authApi, AuthResponse } from "shared/api";
 
 class AuthService {
 	static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-		return usersApi.users.userLogin(email, password);
+		return authApi.auth.userLogin(email, password);
 	}
 
 	static async registration(
 		email: string,
 		password: string,
 	): Promise<AxiosResponse<AuthResponse>> {
-		return usersApi.users.userRegistration(email, password);
+		return authApi.auth.userRegistration(email, password);
 	}
 
 	static async logout(): Promise<void> {
-		return usersApi.users.userLogout();
+		return authApi.auth.userLogout();
 	}
 }
 

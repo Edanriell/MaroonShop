@@ -1,8 +1,4 @@
-export type User = {
-	email: string;
-	isActivated: boolean;
-	id: string;
-};
+import { User } from "../users/model";
 
 export type AuthResponse = {
 	accessToken: string;
