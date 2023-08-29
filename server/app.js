@@ -25,7 +25,8 @@ app.use(
 		crossOriginResourcePolicy: false,
 	}),
 );
-app.use(cors({ origin: "http://localhost:3001" }));
+// CHANGE TO CLIENT_URL
+app.use(cors({ credentials: true, origin: "http://localhost:3001" }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
