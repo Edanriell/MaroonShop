@@ -7,12 +7,20 @@ import {
 } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { schema, normalize } from "normalizr";
 
 import { AuthService } from "shared/services";
 import { User, AuthResponse } from "shared/api";
 
+import { RootState, NormalizedUser, Credentials } from "./types";
+
+export const userSchema = new schema.Entity<User>("user");
+
+export const normalizeUser = (data: User) =>
+	normalize<User, { user: NormalizedUser }>(data, userSchema);
+
 export const initialState: {
-	user: User | {};
+	user: NormalizedUser | {};
 	isAuthorized: boolean;
 	dataLoading: boolean;
 } = {
@@ -26,7 +34,7 @@ export const sessionModel = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, { payload }: PayloadAction<User>) => {
-			state.user = payload;
+			state.user = normalizeUser(payload).entities.user;
 		},
 		setIsAuthorized: (state, { payload }: PayloadAction<boolean>) => {
 			state.isAuthorized = payload;
@@ -40,7 +48,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(login.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
+			state.user = normalizeUser(payload as User).entities.user;
 			state.isAuthorized = true;
 			state.dataLoading = false;
 		});
@@ -51,7 +59,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(registration.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
+			state.user = normalizeUser(payload as User).entities.user;
 			state.isAuthorized = true;
 			state.dataLoading = false;
 		});
@@ -62,7 +70,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(logout.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
+			state.user = normalizeUser(payload as User).entities.user;
 			state.isAuthorized = false;
 			state.dataLoading = false;
 		});
@@ -73,7 +81,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
+			state.user = normalizeUser(payload as User).entities.user;
 			state.isAuthorized = true;
 			state.dataLoading = false;
 		});
@@ -83,23 +91,20 @@ export const sessionModel = createSlice({
 	},
 });
 
-export const login = createAsyncThunk(
-	"session/login",
-	async (credentials: { email: string; password: string }) => {
-		try {
-			const response = await AuthService.login(credentials.email, credentials.password);
-			console.log(response);
-			localStorage.setItem("token", response.data.accessToken);
-			return response.data.user;
-		} catch (error) {
-			console.log((error as any).response?.data?.message);
-		}
-	},
-);
+export const login = createAsyncThunk("session/login", async (credentials: Credentials) => {
+	try {
+		const response = await AuthService.login(credentials.email, credentials.password);
+		console.log(response);
+		localStorage.setItem("token", response.data.accessToken);
+		return response.data.user;
+	} catch (error) {
+		console.log((error as any).response?.data?.message);
+	}
+});
 
 export const registration = createAsyncThunk(
 	"session/registration",
-	async (credentials: { email: string; password: string }) => {
+	async (credentials: Credentials) => {
 		try {
 			const response = await AuthService.registration(
 				credentials.email,
@@ -143,4 +148,3 @@ export const reducer = sessionModel.reducer;
 
 // All this code needs to be tested !
 // http://localhost:4020 needs to be pulled out
-// pull out t credintails type { email: string; password: string } in types.ts
