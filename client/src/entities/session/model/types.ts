@@ -1,10 +1,8 @@
 import { User } from "shared/api";
 
-export type NormalizedUser = Record<number, User>;
-
 export type RootState = {
 	session: {
-		user: NormalizedUser | {};
+		user: User | {};
 		isAuthorized: boolean;
 		dataLoading: boolean;
 	};

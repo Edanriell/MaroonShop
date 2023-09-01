@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import LoginForm from "features/login-form";
+import RegistrationForm from "features/registration-form";
 
-import { LoginProps } from "./types";
+import { RegistrationProps } from "./types";
 
-const Login: FC<LoginProps> = ({ title }) => {
+const Login: FC<RegistrationProps> = ({ title }) => {
 	return (
 		<section className="flex flex-col items-center mt-[6rem] mb-[12rem]">
 			<h2
@@ -16,11 +16,11 @@ const Login: FC<LoginProps> = ({ title }) => {
 			>
 				{title}
 			</h2>
-			<LoginForm />
+			<RegistrationForm />
 			<div className={"mt-[2.4rem] flex flex-row items-center justify-center w-full"}>
-				<p className={"font-mPlus font-medium text-sm-12px mr-[1rem]"}>Нет аккаунта?</p>
-				<Link to={"/registration"} className={"font-mPlus font-semibold text-sm-12px"}>
-					Зарегистрироваться
+				<p className={"font-mPlus font-medium text-sm-12px mr-[1rem]"}>Есть аккаунт?</p>
+				<Link to={"/login"} className={"font-mPlus font-semibold text-sm-12px"}>
+					Войти
 				</Link>
 			</div>
 		</section>

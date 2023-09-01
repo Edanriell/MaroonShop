@@ -2,7 +2,7 @@ import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { Sections } from "./sections";
 
-const LoginPage = () => {
+const ProfilePage = () => {
 	return (
 		<>
 			<Header headerUnderline={true} />
@@ -12,4 +12,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default ProfilePage;

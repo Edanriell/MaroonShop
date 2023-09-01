@@ -7,6 +7,8 @@ const IndexPage = lazy(() => import("./index/index"));
 const CatalogPage = lazy(() => import("./catalog/index"));
 const ProductPage = lazy(() => import("./product/index"));
 const LoginPage = lazy(() => import("./login/index"));
+const RegistrationPage = lazy(() => import("./registration/index"));
+const ProfilePage = lazy(() => import("./profile/index"));
 
 const router = createBrowserRouter([
 	{
@@ -38,6 +40,22 @@ const router = createBrowserRouter([
 		element: (
 			<Suspense fallback={<LoadingPage />}>
 				<LoginPage />
+			</Suspense>
+		),
+	},
+	{
+		path: "/registration",
+		element: (
+			<Suspense fallback={<LoadingPage />}>
+				<RegistrationPage />
+			</Suspense>
+		),
+	},
+	{
+		path: "/profile",
+		element: (
+			<Suspense fallback={<LoadingPage />}>
+				<ProfilePage />
 			</Suspense>
 		),
 	},

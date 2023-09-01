@@ -69,7 +69,7 @@ const Modal: FC<ModalProps> = ({ title, description, children, onModalClose }) =
 					styles.modalShadow +
 					" " +
 					styles.dialogReset +
-					" flex flex-col gap-y-[3rem] z-[50] border-none rounded-[0.2rem] " +
+					" flex flex-col gap-y-[3rem] z-[50] border-none " +
 					"max-w-[60rem] w-[90%] mr-[1.5rem] ml-[1.5rem] pt-[4rem] pb-[4rem] " +
 					"pl-[3rem] pr-[3rem] min-[500px]:gap-y-[4rem]"
 				}
@@ -97,7 +97,7 @@ const Modal: FC<ModalProps> = ({ title, description, children, onModalClose }) =
 					<button
 						className={
 							"p-4 font-raleway text-blue-zodiac-950 text-sm-12px " +
-							"rounded-[0.2rem] hover:bg-athens-gray-100 duration-500 ease-out"
+							"hover:bg-athens-gray-100 duration-500 ease-out"
 						}
 						onClick={(event) => handleModalClose(event)}
 						type="button"

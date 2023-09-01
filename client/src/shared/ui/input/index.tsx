@@ -31,7 +31,7 @@ const Input: FC<InputProps> = ({
 			<input
 				className={
 					className +
-					" rounded-[0.2rem] border-none font-semibold " +
+					" border-none font-semibold " +
 					"pl-[1rem] pr-[1rem] pb-[1rem] pt-[2.4rem] font-raleway " +
 					"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
 					"hover:bg-athens-gray-100 focus:bg-athens-gray-100 text-blue-zodiac-950 " +

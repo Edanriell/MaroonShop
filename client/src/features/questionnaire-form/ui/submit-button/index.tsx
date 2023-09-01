@@ -46,7 +46,7 @@ const SubmitButton: FC<SubmitButtonProps> = ({
 		<button
 			className={
 				submitButtonClasses +
-				" rounded-[0.2rem] p-4 font-raleway text-blue-zodiac-950 " +
+				" p-4 font-raleway text-blue-zodiac-950 " +
 				"text-sm-12px bg-athens-gray-50 hover:bg-athens-gray-100 " +
 				"font-medium duration-500 ease-out flex-shrink-0 flex-grow-0 " +
 				"h-[5.5rem]"

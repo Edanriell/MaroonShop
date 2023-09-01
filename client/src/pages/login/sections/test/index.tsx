@@ -58,11 +58,11 @@ const Test: FC = () => {
 	// 		</div>
 	// 	);
 	// }
-
+	const { email } = user;
 	return (
 		<div>
 			<button onClick={() => logoutTest()}>Выйти</button>
-			<h1>{isAuthorized ? `Пользователь авторизован ${user.email}` : "АВТОРИЗУЙТЕСЬ"}</h1>
+			<h1>{isAuthorized ? `Пользователь авторизован ${email}` : "АВТОРИЗУЙТЕСЬ"}</h1>
 			<h1>{user.isActivated ? "Аккаунт подтвержден по почте" : "ПОДТВЕРДИТЕ АККАУНТ!!!!"}</h1>
 			<div>
 				<button onClick={getUsers}>Получить пользователей</button>

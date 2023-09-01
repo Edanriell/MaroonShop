@@ -1,16 +1,16 @@
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import login from "./login";
+import registration from "./registration";
 
-import { LoginPageSections, SectionWrapperProps } from "./types";
+import { RegistrationPageSections, SectionWrapperProps } from "./types";
 
-const sections: LoginPageSections = [
+const sections: RegistrationPageSections = [
 	{
 		id: uuidv4(),
-		Section: login,
+		Section: registration,
 		classes: "bg-desert-storm-50",
-		title: "Вход",
+		title: "Регистрация",
 	},
 ];
 

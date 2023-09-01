@@ -1,26 +1,13 @@
-import {
-	createSlice,
-	PayloadAction,
-	createAsyncThunk,
-	createAction,
-	createSelector,
-} from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { schema, normalize } from "normalizr";
 
 import { AuthService } from "shared/services";
 import { User, AuthResponse } from "shared/api";
 
-import { RootState, NormalizedUser, Credentials } from "./types";
-
-export const userSchema = new schema.Entity<User>("user");
-
-export const normalizeUser = (data: User) =>
-	normalize<User, { user: NormalizedUser }>(data, userSchema);
+import { Credentials } from "./types";
 
 export const initialState: {
-	user: NormalizedUser | {};
+	user: User | {};
 	isAuthorized: boolean;
 	dataLoading: boolean;
 } = {
@@ -34,7 +21,7 @@ export const sessionModel = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, { payload }: PayloadAction<User>) => {
-			state.user = normalizeUser(payload).entities.user;
+			state.user = payload;
 		},
 		setIsAuthorized: (state, { payload }: PayloadAction<boolean>) => {
 			state.isAuthorized = payload;
@@ -48,7 +35,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(login.fulfilled, (state, { payload }) => {
-			state.user = normalizeUser(payload as User).entities.user;
+			state.user = payload as User;
 			state.isAuthorized = true;
 			state.dataLoading = false;
 		});
@@ -59,7 +46,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(registration.fulfilled, (state, { payload }) => {
-			state.user = normalizeUser(payload as User).entities.user;
+			state.user = payload as User;
 			state.isAuthorized = true;
 			state.dataLoading = false;
 		});
@@ -70,7 +57,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(logout.fulfilled, (state, { payload }) => {
-			state.user = normalizeUser(payload as User).entities.user;
+			state.user = payload as User;
 			state.isAuthorized = false;
 			state.dataLoading = false;
 		});
@@ -81,7 +68,7 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
-			state.user = normalizeUser(payload as User).entities.user;
+			state.user = payload as User;
 			state.isAuthorized = true;
 			state.dataLoading = false;
 		});
@@ -136,7 +123,9 @@ export const checkAuth = createAsyncThunk("session/checkAuth", async () => {
 		const response = await axios.get<AuthResponse>(`http://localhost:4020/api/refresh`, {
 			withCredentials: true,
 		});
+		console.log("Response from checkAuth");
 		console.log(response);
+		console.log("Response from checkAuth");
 		localStorage.setItem("token", response.data.accessToken);
 		return response.data.user;
 	} catch (error) {
