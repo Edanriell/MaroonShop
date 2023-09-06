@@ -20,10 +20,13 @@ export const normalizeProduct = (data: Product) =>
 export const normalizeProducts = (data: Product[]) =>
 	normalize<Product, { products: NormalizedProducts }>(data, [productSchema]);
 
+// Get rid of filteredData and filteredDataById
 export const initialState: {
 	data: NormalizedProducts;
+
 	filteredData: NormalizedProducts | ProductsNotFound | null;
 	filteredDataById: NormalizedProducts | ProductNotFound | null;
+
 	dataLoading: boolean;
 } = {
 	data: {},
@@ -100,7 +103,7 @@ export const getProductsAsync = createAsyncThunk(
 		}
 	},
 );
-
+// getFilteredProductsByParameters!!!
 export const getFilteredProductsAsync = createAsyncThunk(
 	"products/fetchFilteredProducts",
 	async (parameters: any, { rejectWithValue }) => {

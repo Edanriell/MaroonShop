@@ -13,11 +13,12 @@ import { ProfileProps } from "./types";
 const Profile: FC<ProfileProps> = ({ title }) => {
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
-	const user = useSelector((state) => (state as any).session.user);
-	const isAuthorized = useSelector((state) => (state as any).session.isAuthorized);
+	const user = sessionModel.useUser();
+	const isAuthorized = sessionModel.useIsAuthorized();
 
 	const [users, setUsers] = useState<User[]>([]);
 
+	// Not sure about layout effect here....
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
 			dispatch(sessionModel.checkAuth());
@@ -68,8 +69,16 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 
 	const renderAuthorizedUser = () => (
 		<div>
-			<p>{isAuthorized ? `Пользователь авторизован ${user?.email}` : "АВТОРИЗУЙТЕСЬ"}</p>
-			<p>{user?.isActivated ? "Аккаунт подтвержден по почте" : "ПОДТВЕРДИТЕ АККАУНТ!!!!"}</p>
+			<p>
+				{isAuthorized
+					? `Пользователь авторизован ${(user as User)?.email}`
+					: "АВТОРИЗУЙТЕСЬ"}
+			</p>
+			<p>
+				{(user as User)?.isActivated
+					? "Аккаунт подтвержден по почте"
+					: "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
+			</p>
 			<button onClick={() => logoutTest()}>Выйти</button>
 			<div>
 				<button onClick={getUsers}>Получить пользователей</button>

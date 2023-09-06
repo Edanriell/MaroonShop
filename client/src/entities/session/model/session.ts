@@ -1,19 +1,28 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+	createSlice,
+	PayloadAction,
+	createAsyncThunk,
+	createSelector,
+	createAction,
+} from "@reduxjs/toolkit";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import { AuthService } from "shared/services";
 import { User, AuthResponse } from "shared/api";
 
-import { Credentials } from "./types";
+import { Credentials, RootState } from "./types";
 
 export const initialState: {
 	user: User | {};
 	isAuthorized: boolean;
 	dataLoading: boolean;
+	errorMessage: string | null;
 } = {
 	user: {},
 	isAuthorized: false,
 	dataLoading: false,
+	errorMessage: null,
 };
 
 export const sessionModel = createSlice({
@@ -29,19 +38,27 @@ export const sessionModel = createSlice({
 		setDataLoading: (state, { payload }: PayloadAction<boolean>) => {
 			state.dataLoading = payload;
 		},
+		setErrorMessage: (state, { payload }: PayloadAction<string | null>) => {
+			state.errorMessage = payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(login.pending, (state) => {
 			state.dataLoading = true;
 		});
 		builder.addCase(login.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
-			state.isAuthorized = true;
+			if ("error" in payload) {
+				state.errorMessage = payload.error;
+			} else if ("user" in payload) {
+				state.user = payload.user as User;
+				state.isAuthorized = true;
+			}
 			state.dataLoading = false;
 		});
-		builder.addCase(login.rejected, (state) => {
+		builder.addCase(login.rejected, (state, { payload }) => {
 			state.dataLoading = false;
 		});
+
 		builder.addCase(registration.pending, (state) => {
 			state.dataLoading = true;
 		});
@@ -53,6 +70,7 @@ export const sessionModel = createSlice({
 		builder.addCase(registration.rejected, (state) => {
 			state.dataLoading = false;
 		});
+
 		builder.addCase(logout.pending, (state) => {
 			state.dataLoading = true;
 		});
@@ -64,6 +82,7 @@ export const sessionModel = createSlice({
 		builder.addCase(logout.rejected, (state) => {
 			state.dataLoading = false;
 		});
+
 		builder.addCase(checkAuth.pending, (state) => {
 			state.dataLoading = true;
 		});
@@ -81,11 +100,11 @@ export const sessionModel = createSlice({
 export const login = createAsyncThunk("session/login", async (credentials: Credentials) => {
 	try {
 		const response = await AuthService.login(credentials.email, credentials.password);
-		console.log(response);
 		localStorage.setItem("token", response.data.accessToken);
-		return response.data.user;
+		return { user: response.data.user };
 	} catch (error) {
-		console.log((error as any).response?.data?.message);
+		const errorMessage = (error as any).response?.data?.message;
+		return { error: errorMessage };
 	}
 });
 
@@ -133,7 +152,46 @@ export const checkAuth = createAsyncThunk("session/checkAuth", async () => {
 	}
 });
 
+export const useErrorMessage = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.session.errorMessage,
+			(errorMessage: string | null) => errorMessage,
+		),
+	);
+
+export const useUser = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.session.user,
+			(user: User | {}) => user,
+		),
+	);
+
+export const useIsAuthorized = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.session.isAuthorized,
+			(isAuthorized: boolean) => isAuthorized,
+		),
+	);
+
+export const useDataLoading = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.session.dataLoading,
+			(dataLoading: boolean) => dataLoading,
+		),
+	);
+
+export const setUser = createAction<string | null>("session/setUser");
+
+export const setIsAuthorized = createAction<string | null>("session/setIsAuthorized");
+
+export const setDataLoading = createAction<string | null>("session/setDataLoading");
+
+export const setErrorMessage = createAction<string | null>("session/setErrorMessage");
+
 export const reducer = sessionModel.reducer;
 
-// All this code needs to be tested !
-// http://localhost:4020 needs to be pulled out
+// http://localhost:4020 needs to be pulled out.

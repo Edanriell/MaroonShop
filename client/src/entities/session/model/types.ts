@@ -5,6 +5,7 @@ export type RootState = {
 		user: User | {};
 		isAuthorized: boolean;
 		dataLoading: boolean;
+		errorMessage: string | null;
 	};
 };
 
