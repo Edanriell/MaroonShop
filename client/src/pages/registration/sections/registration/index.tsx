@@ -1,13 +1,32 @@
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { FC, useLayoutEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import RegistrationForm from "features/registration-form";
 
+import { sessionModel } from "entities/session";
+
 import { RegistrationProps } from "./types";
 
-const Login: FC<RegistrationProps> = ({ title }) => {
+const Registration: FC<RegistrationProps> = ({ title }) => {
+	const navigate = useNavigate();
+	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
+
+	const isUserAuthorized = sessionModel.useIsAuthorized();
+
+	useLayoutEffect(() => {
+		if (localStorage.getItem("token")) {
+			dispatch(sessionModel.checkAuth());
+		}
+	}, [dispatch]);
+
+	useLayoutEffect(() => {
+		if (isUserAuthorized) navigate("/profile");
+	}, [isUserAuthorized, navigate]);
+
 	return (
-		<section className="flex flex-col items-center mt-[6rem] mb-[12rem]">
+		<section className="flex flex-col items-center mt-[30vh] mb-[40vh]">
 			<h2
 				className={
 					"font-raleway font-normal text-sm-28px text-center text-blue-zodiac-950 " +
@@ -27,4 +46,4 @@ const Login: FC<RegistrationProps> = ({ title }) => {
 	);
 };
 
-export default Login;
+export default Registration;

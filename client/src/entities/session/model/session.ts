@@ -63,8 +63,12 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(registration.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
-			state.isAuthorized = true;
+			if ("error" in payload) {
+				state.errorMessage = payload.error;
+			} else if ("user" in payload) {
+				state.user = payload.user as User;
+				state.isAuthorized = true;
+			}
 			state.dataLoading = false;
 		});
 		builder.addCase(registration.rejected, (state) => {
@@ -116,11 +120,11 @@ export const registration = createAsyncThunk(
 				credentials.email,
 				credentials.password,
 			);
-			console.log(response);
 			localStorage.setItem("token", response.data.accessToken);
-			return response.data.user;
+			return { user: response.data.user };
 		} catch (error) {
-			console.log((error as any).response?.data?.message);
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
 		}
 	},
 );

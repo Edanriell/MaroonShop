@@ -1,4 +1,4 @@
-import { FC, useEffect, useLayoutEffect } from "react";
+import { FC, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
@@ -21,12 +21,12 @@ const Login: FC<LoginProps> = ({ title }) => {
 		}
 	}, [dispatch]);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (isUserAuthorized) navigate("/profile");
-	});
+	}, [isUserAuthorized, navigate]);
 
 	return (
-		<section className="flex flex-col items-center mt-[6rem] mb-[12rem]">
+		<section className="flex flex-col items-center mt-[30vh] mb-[40vh]">
 			<h2
 				className={
 					"font-raleway font-normal text-sm-28px text-center text-blue-zodiac-950 " +
