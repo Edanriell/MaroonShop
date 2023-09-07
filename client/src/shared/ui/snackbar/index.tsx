@@ -74,7 +74,7 @@ const Snackbar: FC<SnackbarProps> = ({ type, message, autoCloseDuration }) => {
 					snackbarClasses +
 					" min-h-[6rem] min-w-[30rem] max-w-[38rem] flex flex-row " +
 					"items-center p-[1rem] border-none " +
-					"rounded-[0.2rem] snackbar-shadow justify-between"
+					"snackbar-shadow justify-between"
 				}
 			>
 				<p className={"font-medium text-white text-sm-14px font-raleway text-left"}>

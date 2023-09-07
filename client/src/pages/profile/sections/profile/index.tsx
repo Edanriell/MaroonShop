@@ -1,6 +1,6 @@
 import { FC, useEffect, useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { sessionModel } from "entities/session";

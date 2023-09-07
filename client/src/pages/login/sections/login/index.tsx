@@ -1,11 +1,30 @@
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { FC, useEffect, useLayoutEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import LoginForm from "features/login-form";
+
+import { sessionModel } from "entities/session";
 
 import { LoginProps } from "./types";
 
 const Login: FC<LoginProps> = ({ title }) => {
+	const navigate = useNavigate();
+	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
+
+	const isUserAuthorized = sessionModel.useIsAuthorized();
+
+	useLayoutEffect(() => {
+		if (localStorage.getItem("token")) {
+			dispatch(sessionModel.checkAuth());
+		}
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (isUserAuthorized) navigate("/profile");
+	});
+
 	return (
 		<section className="flex flex-col items-center mt-[6rem] mb-[12rem]">
 			<h2

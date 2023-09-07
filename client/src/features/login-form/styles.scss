@@ -1,0 +1,15 @@
+.inputInvalid {
+	background-color: #fee2e2 !important;
+
+	&:hover {
+		background-color: #fecaca !important;
+	}
+
+	&:focus {
+		background-color: #fecaca !important;
+	}
+}
+
+.submitButtonInvalid {
+	pointer-events: none !important;
+}
