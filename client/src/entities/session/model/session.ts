@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { AuthService } from "shared/services";
 import { User, AuthResponse } from "shared/api";
 
-import { Credentials, RootState } from "./types";
+import { Credentials, RegistrationCredentials, RootState } from "./types";
 
 export const initialState: {
 	user: User | {};
@@ -103,7 +103,10 @@ export const sessionModel = createSlice({
 
 export const login = createAsyncThunk("session/login", async (credentials: Credentials) => {
 	try {
-		const response = await AuthService.login(credentials.email, credentials.password);
+		const response = await AuthService.login({
+			email: credentials.email,
+			password: credentials.password,
+		});
 		localStorage.setItem("token", response.data.accessToken);
 		return { user: response.data.user };
 	} catch (error) {
@@ -114,13 +117,19 @@ export const login = createAsyncThunk("session/login", async (credentials: Crede
 
 export const registration = createAsyncThunk(
 	"session/registration",
-	async (credentials: Credentials) => {
+	async (credentials: RegistrationCredentials) => {
 		try {
-			const response = await AuthService.registration(
-				credentials.email,
-				credentials.password,
-			);
+			const response = await AuthService.registration({
+				name: credentials.name,
+				surname: credentials.surname,
+				address: credentials.address,
+				email: credentials.email,
+				password: credentials.password,
+			});
 			localStorage.setItem("token", response.data.accessToken);
+			console.log("session");
+			console.log(response.data.user);
+			console.log("session");
 			return { user: response.data.user };
 		} catch (error) {
 			const errorMessage = (error as any).response?.data?.message;
@@ -146,10 +155,13 @@ export const checkAuth = createAsyncThunk("session/checkAuth", async () => {
 		const response = await axios.get<AuthResponse>(`http://localhost:4020/api/refresh`, {
 			withCredentials: true,
 		});
-		console.log("Response from checkAuth");
-		console.log(response);
-		console.log("Response from checkAuth");
+		// console.log("Response from checkAuth");
+		// console.log(response);
+		// console.log("Response from checkAuth");
 		localStorage.setItem("token", response.data.accessToken);
+		console.log("session");
+		console.log(response.data.user);
+		console.log("session");
 		return response.data.user;
 	} catch (error) {
 		console.log((error as any).response?.data?.message);

@@ -55,6 +55,9 @@ const RegistrationForm: FC = () => {
 
 		sessionDispatch(
 			sessionModel.registration({
+				name: state.nameInput.value,
+				surname: state.surnameInput.value,
+				address: state.addressInput.value,
 				email: state.emailInput.value,
 				password: state.passwordInput.value,
 			}),

@@ -2,16 +2,21 @@ import { AxiosResponse } from "axios";
 
 import { authApi, AuthResponse } from "shared/api";
 
+import { LoginParams, RegistrationParams } from "./types";
+
 class AuthService {
-	static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-		return authApi.auth.userLogin(email, password);
+	static async login({ email, password }: LoginParams): Promise<AxiosResponse<AuthResponse>> {
+		return authApi.auth.userLogin({ email, password });
 	}
 
-	static async registration(
-		email: string,
-		password: string,
-	): Promise<AxiosResponse<AuthResponse>> {
-		return authApi.auth.userRegistration(email, password);
+	static async registration({
+		name,
+		surname,
+		address,
+		email,
+		password,
+	}: RegistrationParams): Promise<AxiosResponse<AuthResponse>> {
+		return authApi.auth.userRegistration({ name, surname, address, email, password });
 	}
 
 	static async logout(): Promise<void> {

@@ -9,4 +9,15 @@ export type RootState = {
 	};
 };
 
-export type Credentials = { email: string; password: string };
+export type Credentials = {
+	email: string;
+	password: string;
+};
+
+export type RegistrationCredentials = {
+	name: string;
+	surname: string;
+	address: string;
+	email: string;
+	password: string;
+};

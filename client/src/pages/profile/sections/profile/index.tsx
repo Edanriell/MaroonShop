@@ -26,12 +26,12 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log(user);
-		console.log(`${isAuthorized} isAuthorized`);
+		// console.log(user);
+		// console.log(`${isAuthorized} isAuthorized`);
 	});
 
 	function logoutTest() {
-		console.log("clicked");
+		// console.log("clicked");
 		dispatch(sessionModel.logout());
 	}
 
@@ -79,6 +79,9 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 					? "Аккаунт подтвержден по почте"
 					: "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
 			</p>
+			<p>User Name: {(user as User)?.name}</p>
+			<p>User Surname: {(user as User)?.surname}</p>
+			<p>User Address: {(user as User)?.address}</p>
 			<button onClick={() => logoutTest()}>Выйти</button>
 			<div>
 				<button onClick={getUsers}>Получить пользователей</button>
