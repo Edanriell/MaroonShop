@@ -8,10 +8,16 @@ export const checkInputPattern = (value: string, pattern: RegExp): boolean => pa
 const isInputValid = (input: FormInput): boolean =>
 	Boolean(input.validLength) && Boolean(input.validPattern);
 
-const isPasswordInputValid = (input: FormPasswordInput): boolean => Boolean(input.validLength);
+const isInputLengthValid = (input: FormPasswordInput): boolean => Boolean(input.validLength);
 
 export const isFormValid = (formState: FormState): boolean => {
-	const { emailInput, passwordInput } = formState;
+	const { nameInput, surnameInput, addressInput, emailInput, passwordInput } = formState;
 
-	return isInputValid(emailInput) && isPasswordInputValid(passwordInput);
+	return (
+		isInputValid(nameInput) &&
+		isInputValid(surnameInput) &&
+		isInputLengthValid(addressInput) &&
+		isInputValid(emailInput) &&
+		isInputLengthValid(passwordInput)
+	);
 };

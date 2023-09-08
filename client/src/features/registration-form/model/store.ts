@@ -1,10 +1,30 @@
-import { CHANGEDEMAIL, CHANGEDPASSWORD } from "./actions";
+import {
+	CHANGEDNAME,
+	CHANGEDSURNAME,
+	CHANGEDADDRESS,
+	CHANGEDEMAIL,
+	CHANGEDPASSWORD,
+} from "./actions";
 
 import { FormState, FormActions } from "./types";
 
 import { checkInputLength, checkInputPattern } from "./index";
 
 export const initialFormState: FormState = {
+	nameInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	surnameInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	addressInput: {
+		value: "",
+		validLength: null,
+	},
 	emailInput: {
 		value: "",
 		validLength: null,
@@ -18,6 +38,32 @@ export const initialFormState: FormState = {
 
 export const reducer = (state: FormState, action: FormActions) => {
 	switch (action.type) {
+		case CHANGEDNAME:
+			return {
+				...state,
+				nameInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 2),
+					validPattern: checkInputPattern(action.value, /^[a-zа-яё\s]+$/iu),
+				},
+			};
+		case CHANGEDSURNAME:
+			return {
+				...state,
+				surnameInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 2),
+					validPattern: checkInputPattern(action.value, /^[a-zа-яё\s]+$/iu),
+				},
+			};
+		case CHANGEDADDRESS:
+			return {
+				...state,
+				addressInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 12),
+				},
+			};
 		case CHANGEDEMAIL:
 			return {
 				...state,

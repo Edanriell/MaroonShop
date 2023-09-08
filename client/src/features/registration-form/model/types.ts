@@ -1,4 +1,10 @@
-import { changingEmailAction, changingPasswordAction } from "./actions";
+import {
+	changingNameAction,
+	changingSurnameAction,
+	changingAddressAction,
+	changingEmailAction,
+	changingPasswordAction,
+} from "./actions";
 
 export type FormInput = {
 	value: "" | string;
@@ -11,17 +17,22 @@ export type FormPasswordInput = {
 	validLength: null | boolean;
 };
 
+export type FormAddressInput = {
+	value: "" | string;
+	validLength: null | boolean;
+};
+
 export type FormState = {
+	nameInput: FormInput;
+	surnameInput: FormInput;
+	addressInput: FormAddressInput;
 	emailInput: FormInput;
 	passwordInput: FormPasswordInput;
 };
 
 export type FormActions =
+	| ReturnType<typeof changingNameAction>
+	| ReturnType<typeof changingSurnameAction>
+	| ReturnType<typeof changingAddressAction>
 	| ReturnType<typeof changingEmailAction>
 	| ReturnType<typeof changingPasswordAction>;
-
-export type IsFormValidParameters = {
-	emailValidLength: null | boolean;
-	emailValidPattern: null | boolean;
-	passwordValidLength: null | boolean;
-};
