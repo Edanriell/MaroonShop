@@ -79,8 +79,10 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(logout.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
-			state.isAuthorized = false;
+			if ("user" in payload) {
+				state.user = payload.user as User;
+				state.isAuthorized = false;
+			}
 			state.dataLoading = false;
 		});
 		builder.addCase(logout.rejected, (state) => {
@@ -91,8 +93,12 @@ export const sessionModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
-			state.user = payload as User;
-			state.isAuthorized = true;
+			if ("error" in payload) {
+				state.isAuthorized = false;
+			} else if ("user" in payload) {
+				state.user = payload.user as User;
+				state.isAuthorized = true;
+			}
 			state.dataLoading = false;
 		});
 		builder.addCase(checkAuth.rejected, (state) => {
@@ -127,9 +133,6 @@ export const registration = createAsyncThunk(
 				password: credentials.password,
 			});
 			localStorage.setItem("token", response.data.accessToken);
-			console.log("session");
-			console.log(response.data.user);
-			console.log("session");
 			return { user: response.data.user };
 		} catch (error) {
 			const errorMessage = (error as any).response?.data?.message;
@@ -140,13 +143,12 @@ export const registration = createAsyncThunk(
 
 export const logout = createAsyncThunk("session/logout", async () => {
 	try {
-		console.log("logout clicked");
-		const response = await AuthService.logout();
+		await AuthService.logout();
 		localStorage.removeItem("token");
-		console.log(response);
-		return {};
+		return { user: {} };
 	} catch (error) {
-		console.log((error as any).response?.data?.message);
+		const errorMessage = (error as any).response?.data?.message;
+		return { error: errorMessage };
 	}
 });
 
@@ -155,16 +157,11 @@ export const checkAuth = createAsyncThunk("session/checkAuth", async () => {
 		const response = await axios.get<AuthResponse>(`http://localhost:4020/api/refresh`, {
 			withCredentials: true,
 		});
-		// console.log("Response from checkAuth");
-		// console.log(response);
-		// console.log("Response from checkAuth");
 		localStorage.setItem("token", response.data.accessToken);
-		console.log("session");
-		console.log(response.data.user);
-		console.log("session");
-		return response.data.user;
+		return { user: response.data.user };
 	} catch (error) {
-		console.log((error as any).response?.data?.message);
+		const errorMessage = (error as any).response?.data?.message;
+		return { error: errorMessage };
 	}
 });
 

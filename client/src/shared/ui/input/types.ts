@@ -5,5 +5,6 @@ export type InputProps = {
 	labelContent: string;
 	labelFor: string;
 	className?: string;
+	readOnly?: boolean;
 	[x: string]: any;
 };

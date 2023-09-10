@@ -11,10 +11,11 @@ const Input: FC<InputProps> = ({
 	inputName,
 	labelContent,
 	labelFor,
+	readOnly = false,
 	className = "",
 	...rest
 }) => {
-	const { inputValue, onInputChange } = rest;
+	const { inputValue, onInputChange = () => {} } = rest;
 
 	const inputClasses = classNames({
 		"input-number": type === "number",
@@ -42,6 +43,7 @@ const Input: FC<InputProps> = ({
 				id={inputId}
 				value={inputValue}
 				onChange={onInputChange}
+				readOnly={readOnly}
 			/>
 		</div>
 	);

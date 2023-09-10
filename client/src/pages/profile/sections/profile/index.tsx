@@ -1,14 +1,17 @@
-import { FC, useEffect, useState, useLayoutEffect } from "react";
+import { FC, useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { sessionModel } from "entities/session";
 
+import { Button, Input } from "shared/ui";
 import { UserService } from "shared/services";
 import { User } from "shared/api";
 
 import { ProfileProps } from "./types";
+
+import styles from "./styles.module.scss";
 
 const Profile: FC<ProfileProps> = ({ title }) => {
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
@@ -18,17 +21,11 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 
 	const [users, setUsers] = useState<User[]>([]);
 
-	// Not sure about layout effect here....
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
 			dispatch(sessionModel.checkAuth());
 		}
 	}, [dispatch]);
-
-	useEffect(() => {
-		// console.log(user);
-		// console.log(`${isAuthorized} isAuthorized`);
-	});
 
 	function logoutTest() {
 		// console.log("clicked");
@@ -38,18 +35,15 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 	async function getUsers() {
 		try {
 			const response = await UserService.fetchUsers();
-			console.log("=====getUsersResponse=====");
-			console.log(response);
-			console.log("=====getUsersResponse=====");
 			setUsers(response.data);
 		} catch (e) {
-			console.log(e);
+			console.error(e);
 		}
 	}
 
 	const renderUnauthorizedUser = () => (
 		<div>
-			<p className={"font-raleway text-center"}>
+			<p className={"font-raleway text-center text-sm-16px ml-[2rem] mr-[2rem]"}>
 				Только автаризованные пользователи могут видеть эту страницу.
 			</p>
 			<div className={"mt-[6rem] flex flex-row items-center justify-center w-full"}>
@@ -68,8 +62,8 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 	);
 
 	const renderAuthorizedUser = () => (
-		<div>
-			<p>
+		<div className={"flex flex-col items-center gap-y-[1rem] w-[42rem]"}>
+			{/* <p>
 				{isAuthorized
 					? `Пользователь авторизован ${(user as User)?.email}`
 					: "АВТОРИЗУЙТЕСЬ"}
@@ -89,11 +83,67 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 			{users.map((user) => (
 				<div key={user.email}>{user.email}</div>
 			))}
+			{errorMessage &&
+				createPortal(
+					<Snackbar type={"error"} message={errorMessage} autoCloseDuration={"4000"} />,
+					document.getElementById("snackbars-container") as Element,
+				)} */}
+			<Input
+				type="text"
+				inputId="name"
+				inputName="name"
+				labelContent="Имя"
+				labelFor="name"
+				inputValue={(user as User)?.name}
+				readOnly={true}
+				className={styles.input}
+			/>
+			<Input
+				type="text"
+				inputId="surname"
+				inputName="surname"
+				labelContent="Фамилия"
+				labelFor="surname"
+				inputValue={(user as User)?.surname}
+				readOnly={true}
+				className={styles.input}
+			/>
+			<Input
+				type="text"
+				inputId="address"
+				inputName="address"
+				labelContent="Адрес"
+				labelFor="address"
+				inputValue={(user as User)?.address}
+				readOnly={true}
+				className={styles.input}
+			/>
+			<div className={"flex flex-col w-[42rem] gap-y-[0.5rem]"}>
+				<Input
+					type="email"
+					inputId="email"
+					inputName="email"
+					labelContent="Адрес электронной почты"
+					labelFor="email"
+					inputValue={(user as User)?.email}
+					readOnly={true}
+					className={styles.input}
+				/>
+				{(user as User)?.isActivated
+					? "Аккаунт подтвержден по почте"
+					: "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
+			</div>
+			<Button
+				className={"mt-[5rem]"}
+				type="button"
+				text={"Выйти"}
+				onClick={() => logoutTest()}
+			/>
 		</div>
 	);
 
 	return (
-		<section className="flex flex-col items-center mt-[6rem] mb-[12rem]">
+		<section className="flex flex-col items-center mt-[30vh] mb-[40vh]">
 			<h2
 				className={
 					"font-raleway font-normal text-sm-28px text-center text-blue-zodiac-950 " +
