@@ -22,6 +22,10 @@ class AuthService {
 	static async logout(): Promise<void> {
 		return authApi.auth.userLogout();
 	}
+
+	static async checkAuth(): Promise<AxiosResponse<AuthResponse>> {
+		return authApi.auth.userCheckAuth();
+	}
 }
 
 export default AuthService;

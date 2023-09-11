@@ -6,7 +6,7 @@ import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { sessionModel } from "entities/session";
 
 import { Button, Input } from "shared/ui";
-import { UserService } from "shared/services";
+// import { UserService } from "shared/services";
 import { User } from "shared/api";
 
 import { ProfileProps } from "./types";
@@ -14,12 +14,14 @@ import { ProfileProps } from "./types";
 import styles from "./styles.module.scss";
 
 const Profile: FC<ProfileProps> = ({ title }) => {
+	const [isProfileDataEditable, setIsProfileDataEditable] = useState<boolean>(false);
+
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
 	const user = sessionModel.useUser();
 	const isAuthorized = sessionModel.useIsAuthorized();
 
-	const [users, setUsers] = useState<User[]>([]);
+	// const [users, setUsers] = useState<User[]>([]);
 
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
@@ -27,19 +29,22 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 		}
 	}, [dispatch]);
 
-	function logoutTest() {
-		// console.log("clicked");
+	const handleLogoutClick = () => {
 		dispatch(sessionModel.logout());
-	}
+	};
 
-	async function getUsers() {
-		try {
-			const response = await UserService.fetchUsers();
-			setUsers(response.data);
-		} catch (e) {
-			console.error(e);
-		}
-	}
+	const handleProfileEditClick = () => {
+		setIsProfileDataEditable(!isProfileDataEditable);
+	};
+
+	// async function getUsers() {
+	// 	try {
+	// 		const response = await UserService.fetchUsers();
+	// 		setUsers(response.data);
+	// 	} catch (e) {
+	// 		console.error(e);
+	// 	}
+	// }
 
 	const renderUnauthorizedUser = () => (
 		<div>
@@ -95,7 +100,7 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 				labelContent="Имя"
 				labelFor="name"
 				inputValue={(user as User)?.name}
-				readOnly={true}
+				readOnly={!isProfileDataEditable}
 				className={styles.input}
 			/>
 			<Input
@@ -105,7 +110,7 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 				labelContent="Фамилия"
 				labelFor="surname"
 				inputValue={(user as User)?.surname}
-				readOnly={true}
+				readOnly={!isProfileDataEditable}
 				className={styles.input}
 			/>
 			<Input
@@ -115,7 +120,7 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 				labelContent="Адрес"
 				labelFor="address"
 				inputValue={(user as User)?.address}
-				readOnly={true}
+				readOnly={!isProfileDataEditable}
 				className={styles.input}
 			/>
 			<div className={"flex flex-col w-[42rem] gap-y-[0.5rem]"}>
@@ -126,19 +131,27 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 					labelContent="Адрес электронной почты"
 					labelFor="email"
 					inputValue={(user as User)?.email}
-					readOnly={true}
+					readOnly={!isProfileDataEditable}
 					className={styles.input}
 				/>
 				{(user as User)?.isActivated
 					? "Аккаунт подтвержден по почте"
 					: "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
 			</div>
-			<Button
-				className={"mt-[5rem]"}
-				type="button"
-				text={"Выйти"}
-				onClick={() => logoutTest()}
-			/>
+			<div className={"flex flex-row items gap-x-[1rem]"}>
+				<Button
+					className={"mt-[5rem]"}
+					type="button"
+					text={isProfileDataEditable ? "Сохранить" : "Редактировать"}
+					onClick={handleProfileEditClick}
+				/>
+				<Button
+					className={"mt-[5rem]"}
+					type="button"
+					text={"Выйти"}
+					onClick={handleLogoutClick}
+				/>
+			</div>
 		</div>
 	);
 

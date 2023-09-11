@@ -3,10 +3,8 @@ export type LoginParams = {
 	password: string;
 };
 
-export type RegistrationParams = {
+export type RegistrationParams = LoginParams & {
 	name: string;
 	surname: string;
 	address: string;
-	email: string;
-	password: string;
 };

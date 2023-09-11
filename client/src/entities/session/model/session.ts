@@ -5,23 +5,22 @@ import {
 	createSelector,
 	createAction,
 } from "@reduxjs/toolkit";
-import axios from "axios";
 import { useSelector } from "react-redux";
 
 import { AuthService } from "shared/services";
-import { User, AuthResponse } from "shared/api";
+import { User } from "shared/api";
 
 import { Credentials, RegistrationCredentials, RootState } from "./types";
 
 export const initialState: {
 	user: User | {};
 	isAuthorized: boolean;
-	dataLoading: boolean;
+	isDataLoading: boolean;
 	errorMessage: string | null;
 } = {
 	user: {},
 	isAuthorized: false,
-	dataLoading: false,
+	isDataLoading: false,
 	errorMessage: null,
 };
 
@@ -36,7 +35,7 @@ export const sessionModel = createSlice({
 			state.isAuthorized = payload;
 		},
 		setDataLoading: (state, { payload }: PayloadAction<boolean>) => {
-			state.dataLoading = payload;
+			state.isDataLoading = payload;
 		},
 		setErrorMessage: (state, { payload }: PayloadAction<string | null>) => {
 			state.errorMessage = payload;
@@ -44,7 +43,7 @@ export const sessionModel = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(login.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(login.fulfilled, (state, { payload }) => {
 			if ("error" in payload) {
@@ -53,14 +52,14 @@ export const sessionModel = createSlice({
 				state.user = payload.user as User;
 				state.isAuthorized = true;
 			}
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 		builder.addCase(login.rejected, (state, { payload }) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 
 		builder.addCase(registration.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(registration.fulfilled, (state, { payload }) => {
 			if ("error" in payload) {
@@ -69,28 +68,28 @@ export const sessionModel = createSlice({
 				state.user = payload.user as User;
 				state.isAuthorized = true;
 			}
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 		builder.addCase(registration.rejected, (state) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 
 		builder.addCase(logout.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(logout.fulfilled, (state, { payload }) => {
 			if ("user" in payload) {
 				state.user = payload.user as User;
 				state.isAuthorized = false;
 			}
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 		builder.addCase(logout.rejected, (state) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 
 		builder.addCase(checkAuth.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
 			if ("error" in payload) {
@@ -99,10 +98,10 @@ export const sessionModel = createSlice({
 				state.user = payload.user as User;
 				state.isAuthorized = true;
 			}
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 		builder.addCase(checkAuth.rejected, (state) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 	},
 });
@@ -154,9 +153,7 @@ export const logout = createAsyncThunk("session/logout", async () => {
 
 export const checkAuth = createAsyncThunk("session/checkAuth", async () => {
 	try {
-		const response = await axios.get<AuthResponse>(`http://localhost:4020/api/refresh`, {
-			withCredentials: true,
-		});
+		const response = await AuthService.checkAuth();
 		localStorage.setItem("token", response.data.accessToken);
 		return { user: response.data.user };
 	} catch (error) {
@@ -192,8 +189,8 @@ export const useIsAuthorized = () =>
 export const useDataLoading = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.session.dataLoading,
-			(dataLoading: boolean) => dataLoading,
+			(state: RootState) => state.session.isDataLoading,
+			(isDataLoading: boolean) => isDataLoading,
 		),
 	);
 
@@ -201,10 +198,8 @@ export const setUser = createAction<string | null>("session/setUser");
 
 export const setIsAuthorized = createAction<string | null>("session/setIsAuthorized");
 
-export const setDataLoading = createAction<string | null>("session/setDataLoading");
+export const setIsDataLoading = createAction<string | null>("session/setDataLoading");
 
 export const setErrorMessage = createAction<string | null>("session/setErrorMessage");
 
 export const reducer = sessionModel.reducer;
-
-// http://localhost:4020 needs to be pulled out.

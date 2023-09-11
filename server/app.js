@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -6,16 +5,20 @@ const logger = require("morgan");
 const helmet = require("helmet");
 const path = require("path");
 const mongoose = require("mongoose");
+require("dotenv").config();
+
 const router = require("./router/index");
 const errorMiddleware = require("./middlewares/error-middleware");
 
 const PORT = process.env.PORT || 4020;
 
+// REFACTOR
 const productsRouter = require("./routes/products");
 const questionnaireRouter = require("./routes/questionnaire");
 const galleryRouter = require("./routes/gallery");
 const filteredProductsRouter = require("./routes/filteredProducts");
 const filteredProductByIdRouter = require("./routes/filteredProductById");
+// REFACTOR
 
 const app = express();
 
@@ -25,25 +28,25 @@ app.use(
 		crossOriginResourcePolicy: false,
 	}),
 );
-// CHANGE TO CLIENT_URL
+// CHANGE TO CLIENT_URL .ENV
 app.use(cors({ credentials: true, origin: "http://localhost:3001" }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(cors());
 
 // Static files
 app.use("/images", express.static(path.join(__dirname, "public", "products-images")));
 app.use("/gallery-images", express.static(path.join(__dirname, "public", "gallery-images")));
 
-// Routes
+// REFACTOR
 app.use("/products", productsRouter);
 app.use("/questionnaire", questionnaireRouter);
 app.use("/gallery", galleryRouter);
 app.use("/products/filtered", filteredProductsRouter);
 app.use("/products", filteredProductByIdRouter);
-app.use("/api", router); // FIX !!!
+// REFACTOR
+app.use("/api", router);
 app.use(errorMiddleware);
 
 const startServer = async () => {
