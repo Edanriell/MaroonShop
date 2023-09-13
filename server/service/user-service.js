@@ -94,6 +94,29 @@ class UserService {
 		const users = await UserModel.find();
 		return users;
 	}
+
+	async updateUserData(name, surname, address, email) {
+		const user = await UserModel.findOne({ email });
+
+		// if (user) {
+		// 	throw ApiError.BadRequest("Вами выбронная электронная почта уже зарегистрирована.");
+		// }
+		// if (user.address === address) {
+		// 	throw ApiError.BadRequest("Данный адрес уже зарегистрирован.");
+		// }
+
+		await UserModel.updateOne(
+			{ email },
+			{ $set: { name, surname, address, email } },
+		);
+
+		const updatedUser = await UserModel.findOne({ email });
+		const userDto = new UserDto(updatedUser);
+
+		return {
+			user: userDto,
+		};
+	}
 }
 
 module.exports = new UserService();

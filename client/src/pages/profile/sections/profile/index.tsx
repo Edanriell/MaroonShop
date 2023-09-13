@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { sessionModel } from "entities/session";
 
 import { Button, Input, Snackbar } from "shared/ui";
-// import { UserService } from "shared/services";
+import { UserService } from "shared/services";
 import { useDebounce } from "shared/lib/hooks";
 import { User } from "shared/api";
 
@@ -88,7 +88,13 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 
 	const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log("Kinda can send data");
+
+		UserService.updateUserData({
+			name: state.nameInput.value,
+			surname: state.surnameInput.value,
+			address: state.addressInput.value,
+			email: state.emailInput.value,
+		});
 		// sessionDispatch(
 		// 	sessionModel.registration({
 		// 		name: state.nameInput.value,

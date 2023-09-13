@@ -84,6 +84,21 @@ class UserController {
 			next(err);
 		}
 	}
+
+	async updateUserData(req, res, next) {
+		try {
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
+			}
+			const { name, surname, address, email } = req.body;
+			console.log(req.body);
+			const userData = await userService.updateUserData(name, surname, address, email);
+			return res.json(userData);
+		} catch (err) {
+			next(err);
+		}
+	}
 }
 
 module.exports = new UserController();
