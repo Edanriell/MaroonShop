@@ -3,7 +3,6 @@ import {
 	changingSurnameAction,
 	changingAddressAction,
 	changingEmailAction,
-	changingPasswordAction,
 } from "./actions";
 
 export type FormInput = {
@@ -12,12 +11,7 @@ export type FormInput = {
 	validPattern: null | boolean;
 };
 
-export type FormPasswordInput = {
-	value: "" | string;
-	validLength: null | boolean;
-};
-
-export type FormAddressInput = {
+export type FormInputSimplified = {
 	value: "" | string;
 	validLength: null | boolean;
 };
@@ -25,14 +19,12 @@ export type FormAddressInput = {
 export type FormState = {
 	nameInput: FormInput;
 	surnameInput: FormInput;
-	addressInput: FormAddressInput;
+	addressInput: FormInputSimplified;
 	emailInput: FormInput;
-	passwordInput: FormPasswordInput;
 };
 
 export type FormActions =
 	| ReturnType<typeof changingNameAction>
 	| ReturnType<typeof changingSurnameAction>
 	| ReturnType<typeof changingAddressAction>
-	| ReturnType<typeof changingEmailAction>
-	| ReturnType<typeof changingPasswordAction>;
+	| ReturnType<typeof changingEmailAction>;

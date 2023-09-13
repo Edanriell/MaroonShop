@@ -42,16 +42,3 @@ export type FormActions =
 	| ReturnType<typeof selectingLifestyleAction>
 	| ReturnType<typeof selectingSkintypeAction>
 	| ReturnType<typeof selectingLocationAction>;
-
-export type IsFormValidParameters = {
-	nameValidLength: null | boolean;
-	nameValidPattern: null | boolean;
-	surnameValidLength: null | boolean;
-	surnameValidPattern: null | boolean;
-	emailValidLength: null | boolean;
-	emailValidPattern: null | boolean;
-	ageValidRange: null | boolean;
-	lifeStyleValidOption: null | boolean;
-	skinTypeValidOption: null | boolean;
-	locationValidOption: null | boolean;
-};

@@ -1,10 +1,4 @@
-import {
-	CHANGEDNAME,
-	CHANGEDSURNAME,
-	CHANGEDADDRESS,
-	CHANGEDEMAIL,
-	CHANGEDPASSWORD,
-} from "./actions";
+import { CHANGEDNAME, CHANGEDSURNAME, CHANGEDADDRESS, CHANGEDEMAIL } from "./actions";
 
 import { FormState, FormActions } from "./types";
 
@@ -29,10 +23,6 @@ export const initialFormState: FormState = {
 		value: "",
 		validLength: null,
 		validPattern: null,
-	},
-	passwordInput: {
-		value: "",
-		validLength: null,
 	},
 };
 
@@ -75,14 +65,6 @@ export const reducer = (state: FormState, action: FormActions) => {
 						// eslint-disable-next-line max-len
 						/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
 					),
-				},
-			};
-		case CHANGEDPASSWORD:
-			return {
-				...state,
-				passwordInput: {
-					value: action.value,
-					validLength: checkInputLength(action.value, 3),
 				},
 			};
 		default:

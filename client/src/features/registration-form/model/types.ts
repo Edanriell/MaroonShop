@@ -12,12 +12,7 @@ export type FormInput = {
 	validPattern: null | boolean;
 };
 
-export type FormPasswordInput = {
-	value: "" | string;
-	validLength: null | boolean;
-};
-
-export type FormAddressInput = {
+export type FormInputSimplified = {
 	value: "" | string;
 	validLength: null | boolean;
 };
@@ -25,9 +20,9 @@ export type FormAddressInput = {
 export type FormState = {
 	nameInput: FormInput;
 	surnameInput: FormInput;
-	addressInput: FormAddressInput;
+	addressInput: FormInputSimplified;
 	emailInput: FormInput;
-	passwordInput: FormPasswordInput;
+	passwordInput: FormInputSimplified;
 };
 
 export type FormActions =

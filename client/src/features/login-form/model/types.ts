@@ -6,22 +6,16 @@ export type FormInput = {
 	validPattern: null | boolean;
 };
 
-export type FormPasswordInput = {
+export type FormInputSimplified = {
 	value: "" | string;
 	validLength: null | boolean;
 };
 
 export type FormState = {
 	emailInput: FormInput;
-	passwordInput: FormPasswordInput;
+	passwordInput: FormInputSimplified;
 };
 
 export type FormActions =
 	| ReturnType<typeof changingEmailAction>
 	| ReturnType<typeof changingPasswordAction>;
-
-export type IsFormValidParameters = {
-	emailValidLength: null | boolean;
-	emailValidPattern: null | boolean;
-	passwordValidLength: null | boolean;
-};
