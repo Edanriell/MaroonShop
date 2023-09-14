@@ -13,10 +13,11 @@ export const getAllUsers = (): Promise<AxiosResponse<User[]>> => {
 };
 
 export const userDataUpdate = ({
+	id,
 	name,
 	surname,
 	address,
 	email,
 }: UserDataUpdateParams): Promise<AxiosResponse<any>> => {
-	return apiInstance.put<UserData>(BASE_USER_UPDATE_URL, { name, surname, address, email });
+	return apiInstance.put<UserData>(BASE_USER_UPDATE_URL, { id, name, surname, address, email });
 };

@@ -1,6 +1,7 @@
 export type UpdateUserDataParams = {
-	name: string;
-	surname: string;
-	address: string;
-	email: string;
+	id: string;
+	name?: string;
+	surname?: string;
+	address?: string;
+	email?: string;
 };

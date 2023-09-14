@@ -91,9 +91,24 @@ class UserController {
 			if (!errors.isEmpty()) {
 				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
 			}
-			const { name, surname, address, email } = req.body;
+			const { id, name, surname, address, email } = req.body;
 			console.log(req.body);
-			const userData = await userService.updateUserData(name, surname, address, email);
+			const updatedUserData = {
+				id,
+			};
+			if (name) {
+				updatedUserData.name = name;
+			}
+			if (surname) {
+				updatedUserData.surname = surname;
+			}
+			if (address) {
+				updatedUserData.address = address;
+			}
+			if (email) {
+				updatedUserData.email = email;
+			}
+			const userData = await userService.updateUserData(updatedUserData);
 			return res.json(userData);
 		} catch (err) {
 			next(err);

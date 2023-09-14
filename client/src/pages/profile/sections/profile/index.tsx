@@ -6,9 +6,9 @@ import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import classNames from "classnames";
 
 import { sessionModel } from "entities/session";
+import { userModel } from "entities/user";
 
 import { Button, Input, Snackbar } from "shared/ui";
-import { UserService } from "shared/services";
 import { useDebounce } from "shared/lib/hooks";
 import { User } from "shared/api";
 
@@ -29,22 +29,20 @@ import "./styles.scss";
 const Profile: FC<ProfileProps> = ({ title }) => {
 	const [isProfileDataEditable, setIsProfileDataEditable] = useState<boolean>(false);
 
-	const sessionDispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
+	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
 	const [state, formDispatch] = useReducer(reducer, initialFormState);
 	const [debouncedState] = useDebounce(state, 2000);
 
 	const user = sessionModel.useUser();
 	const isAuthorized = sessionModel.useIsAuthorized();
-
-	// formDispatch(changingNameAction((user as User)?.surname));
-	// const [users, setUsers] = useState<User[]>([]);
+	const operationResultMessage = userModel.useOperationResultMessage();
 
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
-			sessionDispatch(sessionModel.checkAuth());
+			dispatch(sessionModel.checkAuth());
 		}
-	}, [sessionDispatch]);
+	}, [dispatch]);
 
 	useLayoutEffect(() => {
 		formDispatch(changingNameAction((user as User)?.name || ""));
@@ -70,7 +68,7 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 	};
 
 	const handleLogoutClick = () => {
-		sessionDispatch(sessionModel.logout());
+		dispatch(sessionModel.logout());
 	};
 
 	const handleResetClick = () => {
@@ -84,36 +82,54 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 
 	const handleProfileEditClick = () => {
 		setIsProfileDataEditable(!isProfileDataEditable);
+
+		// formDispatch(changingNameAction((user as User)?.name || ""));
+		// formDispatch(changingSurnameAction((user as User)?.surname || ""));
+		// formDispatch(changingAddressAction((user as User)?.address || ""));
+		// formDispatch(changingEmailAction((user as User)?.email || ""));
 	};
 
 	const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		UserService.updateUserData({
-			name: state.nameInput.value,
-			surname: state.surnameInput.value,
-			address: state.addressInput.value,
-			email: state.emailInput.value,
-		});
-		// sessionDispatch(
-		// 	sessionModel.registration({
-		// 		name: state.nameInput.value,
-		// 		surname: state.surnameInput.value,
-		// 		address: state.addressInput.value,
-		// 		email: state.emailInput.value,
-		// 	}),
-		// );
-		// sessionDispatch(sessionModel.setErrorMessage(null));
-	};
+		if ((user as User).name !== state.nameInput.value) {
+			dispatch(
+				userModel.updateUserData({
+					id: (user as User).id,
+					name: state.nameInput.value,
+				}),
+			);
+		}
 
-	// async function getUsers() {
-	// 	try {
-	// 		const response = await UserService.fetchUsers();
-	// 		setUsers(response.data);
-	// 	} catch (e) {
-	// 		console.error(e);
-	// 	}
-	// }
+		if ((user as User).surname !== state.surnameInput.value) {
+			dispatch(
+				userModel.updateUserData({
+					id: (user as User).id,
+					surname: state.surnameInput.value,
+				}),
+			);
+		}
+
+		if ((user as User).address !== state.addressInput.value) {
+			dispatch(
+				userModel.updateUserData({
+					id: (user as User).id,
+					address: state.addressInput.value,
+				}),
+			);
+		}
+
+		if ((user as User).email !== state.emailInput.value) {
+			dispatch(
+				userModel.updateUserData({
+					id: (user as User).id,
+					email: state.emailInput.value,
+				}),
+			);
+		}
+
+		dispatch(userModel.clearOperationResultMessage(null));
+	};
 
 	const nameInputClasses = classNames({
 		inputInvalid:
@@ -165,31 +181,6 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 					"flex flex-col items-center gap-y-[1rem] sm:w-[24rem] md:w-[32rem] lg:w-[42rem]"
 				}
 			>
-				{/* <p>
-				{isAuthorized
-					? `Пользователь авторизован ${(user as User)?.email}`
-					: "АВТОРИЗУЙТЕСЬ"}
-			</p>
-			<p>
-				{(user as User)?.isActivated
-					? "Аккаунт подтвержден по почте"
-					: "ПОДТВЕРДИТЕ АККАУНТ!!!!"}
-			</p>
-			<p>User Name: {(user as User)?.name}</p>
-			<p>User Surname: {(user as User)?.surname}</p>
-			<p>User Address: {(user as User)?.address}</p>
-			<button onClick={() => logoutTest()}>Выйти</button>
-			<div>
-				<button onClick={getUsers}>Получить пользователей</button>
-			</div>
-			{users.map((user) => (
-				<div key={user.email}>{user.email}</div>
-			))}
-			{errorMessage &&
-				createPortal(
-					<Snackbar type={"error"} message={errorMessage} autoCloseDuration={"4000"} />,
-					document.getElementById("snackbars-container") as Element,
-				)} */}
 				<Input
 					type="text"
 					inputId="name"
@@ -330,6 +321,24 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 					/>
 				</div>
 			</div>
+			{operationResultMessage.success &&
+				createPortal(
+					<Snackbar
+						type={"success"}
+						message={operationResultMessage.success}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)}
+			{operationResultMessage.error &&
+				createPortal(
+					<Snackbar
+						type={"error"}
+						message={operationResultMessage.error}
+						autoCloseDuration={"4000"}
+					/>,
+					document.getElementById("snackbars-container") as Element,
+				)}
 		</form>
 	);
 

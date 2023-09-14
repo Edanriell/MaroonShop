@@ -14,8 +14,9 @@ class UserService {
 		surname,
 		address,
 		email,
+		id,
 	}: UpdateUserDataParams): Promise<AxiosResponse<any>> {
-		return usersApi.users.userDataUpdate({ name, surname, address, email });
+		return usersApi.users.userDataUpdate({ id, name, surname, address, email });
 	}
 }
 

@@ -6,8 +6,9 @@ export type UserData = {
 };
 
 export type UserDataUpdateParams = {
-	name: string;
-	surname: string;
-	address: string;
-	email: string;
+	id: string;
+	name?: string;
+	surname?: string;
+	address?: string;
+	email?: string;
 };

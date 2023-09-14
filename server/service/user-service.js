@@ -95,22 +95,33 @@ class UserService {
 		return users;
 	}
 
-	async updateUserData(name, surname, address, email) {
-		const user = await UserModel.findOne({ email });
+	async updateUserData(updatedUserData) {
+		const { id, email, address } = updatedUserData;
 
-		// if (user) {
-		// 	throw ApiError.BadRequest("Вами выбронная электронная почта уже зарегистрирована.");
-		// }
-		// if (user.address === address) {
-		// 	throw ApiError.BadRequest("Данный адрес уже зарегистрирован.");
-		// }
+		const isEmailRegistered = !!(await UserModel.findOne({ email }));
+		const isAddressRegistered = !!(await UserModel.findOne({ address }));
 
-		await UserModel.updateOne(
-			{ email },
-			{ $set: { name, surname, address, email } },
+		if (isEmailRegistered) {
+			throw ApiError.BadRequest(
+				"Электронная почта которую вы указали уже используется другим пользователем.",
+			);
+		}
+		if (isAddressRegistered) {
+			throw ApiError.BadRequest(
+				"Вами указанный адрес уже зарегистрирован другим пользовательем.",
+			);
+		}
+
+		const updatedUser = await UserModel.findOneAndUpdate(
+			{ _id: id },
+			{ $set: updatedUserData },
+			{ new: true },
 		);
 
-		const updatedUser = await UserModel.findOne({ email });
+		if (!updatedUser) {
+			throw ApiError.InternalServerError("Не удалось обновить данные пользователя.");
+		}
+
 		const userDto = new UserDto(updatedUser);
 
 		return {
