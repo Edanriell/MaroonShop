@@ -2,6 +2,7 @@ const Router = require("express").Router;
 const { body } = require("express-validator");
 
 const userController = require("../controllers/user-controller");
+const productsController = require("../controllers/products-controller");
 const authMiddleware = require("../middlewares/auth-middleware");
 
 const router = new Router();
@@ -23,11 +24,14 @@ router.put(
 	body("surname").optional().isLength({ min: 2 }),
 	body("address").optional().isLength({ min: 12 }),
 	body("email").optional().isEmail(),
+	authMiddleware,
 	userController.updateUserData,
 );
 router.post("/logout", userController.logout);
 router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
+router.get("/products", productsController.getProducts);
+
 
 module.exports = router;

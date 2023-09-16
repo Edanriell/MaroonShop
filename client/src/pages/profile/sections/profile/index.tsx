@@ -49,7 +49,7 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 		formDispatch(changingSurnameAction((user as User)?.surname || ""));
 		formDispatch(changingAddressAction((user as User)?.address || ""));
 		formDispatch(changingEmailAction((user as User)?.email || ""));
-	}, [user]);
+	}, [operationResultMessage.error, user]);
 
 	const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
 		formDispatch(changingNameAction(event.target.value));
@@ -72,21 +72,16 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 	};
 
 	const handleResetClick = () => {
+		setIsProfileDataEditable(!isProfileDataEditable);
+
 		formDispatch(changingNameAction((user as User)?.name || ""));
 		formDispatch(changingSurnameAction((user as User)?.surname || ""));
 		formDispatch(changingAddressAction((user as User)?.address || ""));
 		formDispatch(changingEmailAction((user as User)?.email || ""));
-
-		setIsProfileDataEditable(!isProfileDataEditable);
 	};
 
 	const handleProfileEditClick = () => {
 		setIsProfileDataEditable(!isProfileDataEditable);
-
-		// formDispatch(changingNameAction((user as User)?.name || ""));
-		// formDispatch(changingSurnameAction((user as User)?.surname || ""));
-		// formDispatch(changingAddressAction((user as User)?.address || ""));
-		// formDispatch(changingEmailAction((user as User)?.email || ""));
 	};
 
 	const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
