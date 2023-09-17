@@ -33,5 +33,4 @@ router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
 router.get("/products", productsController.getProducts);
 
-
 module.exports = router;

@@ -11,4 +11,4 @@ class ProductsController {
 	}
 }
 
-model.exports = new ProductsController();
+module.exports = new ProductsController();

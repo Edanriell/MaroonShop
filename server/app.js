@@ -7,6 +7,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const productsService = require("./service/products-service");
+
 const router = require("./router/index");
 const errorMiddleware = require("./middlewares/error-middleware");
 
@@ -55,6 +57,7 @@ const startServer = async () => {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
+		productsService.initializeProducts();
 		app.listen(PORT, () => {
 			console.log(`Server listening on port ${PORT}`);
 		});

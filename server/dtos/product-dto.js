@@ -1,4 +1,4 @@
-module.exports = class UserDto {
+module.exports = class ProductDto {
 	id;
 	name;
 	description;

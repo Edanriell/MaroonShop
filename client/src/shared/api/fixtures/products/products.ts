@@ -9,7 +9,7 @@ export type GetFilteredProductsParams = {
 	};
 };
 
-const BASE_URL = "/products";
+const BASE_URL = "api/products";
 const BASE_FILTER_URL = "/products/filtered";
 const BASE_FILTER_BY_ID_URL = "/products/";
 

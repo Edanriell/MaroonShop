@@ -61,6 +61,7 @@ export const productModel = createSlice({
 		builder.addCase(getProductsAsync.rejected, (state) => {
 			state.dataLoading = false;
 		});
+
 		builder.addCase(getFilteredProductsAsync.pending, (state) => {
 			state.dataLoading = true;
 		});
@@ -76,6 +77,7 @@ export const productModel = createSlice({
 		builder.addCase(getFilteredProductsAsync.rejected, (state) => {
 			state.dataLoading = false;
 		});
+
 		builder.addCase(getProductByIdAsync.pending, (state) => {
 			state.dataLoading = true;
 		});
@@ -90,11 +92,12 @@ export const productModel = createSlice({
 });
 
 export const getProductsAsync = createAsyncThunk(
-	"products/fetchProducts",
+	"products/getProductsAsync",
 	async (_, { rejectWithValue }) => {
 		try {
 			const response = await productsApi.products.getProducts();
 			const { data } = response;
+			// console.log(data);
 			return data;
 		} catch (err) {
 			// eslint-disable-next-line no-console
@@ -103,7 +106,7 @@ export const getProductsAsync = createAsyncThunk(
 		}
 	},
 );
-// getFilteredProductsByParameters!!!
+// getFilteredProductsByParametersAsync!!!
 export const getFilteredProductsAsync = createAsyncThunk(
 	"products/fetchFilteredProducts",
 	async (parameters: any, { rejectWithValue }) => {

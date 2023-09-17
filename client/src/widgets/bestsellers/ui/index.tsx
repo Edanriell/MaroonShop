@@ -25,6 +25,10 @@ const Bestsellers = () => {
 	const products = productModel.useProducts();
 	const bestsellers = productModel.useBestsellers({ maxProductsCount: 20 });
 
+	useEffect(() => {
+		console.log(products);
+	});
+
 	const isEmpty = productModel.isProductsEmpty(products);
 
 	const { width } = useScreenSize();
