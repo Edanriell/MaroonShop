@@ -16,7 +16,7 @@ class ProductsService {
 		for (const product of allProducts) {
 			products.push(new ProductDto(product));
 		}
-		
+
 		return products;
 	}
 
@@ -98,6 +98,14 @@ class ProductsService {
 		} catch (err) {
 			throw ApiError.InternalServerError("Не удалось удалить товар.");
 		}
+	}
+
+	async getFilteredProductsByParameters(filter) {
+		const lifeIsPain = ["face-cream", "face-powder"];
+		const filteredProducts = await ProductModel.find({
+			"category.secondary": { $in: lifeIsPain },
+		});
+		console.log(filteredProducts);
 	}
 
 	async initializeProducts() {

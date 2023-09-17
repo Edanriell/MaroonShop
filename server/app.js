@@ -42,7 +42,7 @@ app.use("/images", express.static(path.join(__dirname, "public", "products-image
 app.use("/gallery-images", express.static(path.join(__dirname, "public", "gallery-images")));
 
 // REFACTOR
-app.use("/products", productsRouter);
+app.use("/products", productsRouter); // refactored
 app.use("/questionnaire", questionnaireRouter);
 app.use("/gallery", galleryRouter);
 app.use("/products/filtered", filteredProductsRouter);

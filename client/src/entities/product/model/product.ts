@@ -62,10 +62,10 @@ export const productModel = createSlice({
 			state.dataLoading = false;
 		});
 
-		builder.addCase(getFilteredProductsAsync.pending, (state) => {
+		builder.addCase(getFilteredProductsByParametersAsync.pending, (state) => {
 			state.dataLoading = true;
 		});
-		builder.addCase(getFilteredProductsAsync.fulfilled, (state, { payload }) => {
+		builder.addCase(getFilteredProductsByParametersAsync.fulfilled, (state, { payload }) => {
 			if (payload.length <= 0) {
 				state.filteredData = { error: "Товары не найдены" };
 			} else {
@@ -74,7 +74,7 @@ export const productModel = createSlice({
 
 			state.dataLoading = false;
 		});
-		builder.addCase(getFilteredProductsAsync.rejected, (state) => {
+		builder.addCase(getFilteredProductsByParametersAsync.rejected, (state) => {
 			state.dataLoading = false;
 		});
 
@@ -106,12 +106,27 @@ export const getProductsAsync = createAsyncThunk(
 		}
 	},
 );
-// getFilteredProductsByParametersAsync!!!
-export const getFilteredProductsAsync = createAsyncThunk(
-	"products/fetchFilteredProducts",
-	async (parameters: any, { rejectWithValue }) => {
+
+export const getFilteredProductsByParametersAsync = createAsyncThunk(
+	"products/getFilteredProductsByParametersAsync",
+	async (
+		{
+			mainCategory,
+			secondaryCategory,
+			skinTypeCategory,
+		}: {
+			mainCategory?: string | null;
+			secondaryCategory?: String[] | null;
+			skinTypeCategory?: String[] | null;
+		},
+		{ rejectWithValue },
+	) => {
 		try {
-			const response = await productsApi.products.getFilteredProducts(parameters);
+			const response = await productsApi.products.getFilteredProductsByParameters({
+				mainCategory,
+				secondaryCategory,
+				skinTypeCategory,
+			});
 			const { data } = response;
 			console.log(data);
 			return data;
