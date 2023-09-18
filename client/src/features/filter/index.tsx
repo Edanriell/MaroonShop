@@ -144,7 +144,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	function handleFiltersSelect(event: FormEvent) {
 		event.preventDefault();
 		dispatch(
-			productModel.getFilteredProductsByParametersAsync({
+			productModel.getFilteredProductsByCategoryAsync({
 				secondaryCategory: selectedFilters.filters["secondary-category"],
 				skinTypeCategory: selectedFilters.filters["skin-type-category"],
 			}),

@@ -100,12 +100,22 @@ class ProductsService {
 		}
 	}
 
-	async getFilteredProductsByParameters(filter) {
-		const lifeIsPain = ["face-cream", "face-powder"];
-		const filteredProducts = await ProductModel.find({
-			"category.secondary": { $in: lifeIsPain },
-		});
-		console.log(filteredProducts);
+	async getFilteredProductsByCategory(filter) {
+		const filteredProducts = await ProductModel.find(filter);
+
+		const products = [];
+
+		for (const product of filteredProducts) {
+			products.push(new ProductDto(product));
+		}
+
+		if (products.length === 0) {
+			throw ApiError.NotFound(
+				"По полученным критериям не удалось отфильтровать не один товар.",
+			);
+		}
+
+		return products;
 	}
 
 	async initializeProducts() {

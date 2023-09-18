@@ -11,10 +11,7 @@ export type RootState = {
 	};
 };
 
-export type ProductsNotFound = {
-	error: string;
-};
-
-export type ProductNotFound = {
-	error: string;
+export type OperationResultMessage = {
+	error: string | null;
+	success: string | null;
 };

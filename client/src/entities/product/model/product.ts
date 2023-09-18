@@ -10,7 +10,7 @@ import { schema, normalize } from "normalizr";
 
 import { Product, productsApi } from "shared/api";
 
-import { NormalizedProducts, ProductsNotFound, ProductNotFound, RootState } from "./types";
+import { NormalizedProducts, OperationResultMessage, RootState } from "./types";
 
 export const productSchema = new schema.Entity<Product>("products");
 
@@ -20,18 +20,15 @@ export const normalizeProduct = (data: Product) =>
 export const normalizeProducts = (data: Product[]) =>
 	normalize<Product, { products: NormalizedProducts }>(data, [productSchema]);
 
-// Get rid of filteredData and filteredDataById
 export const initialState: {
 	data: NormalizedProducts;
-
-	filteredData: NormalizedProducts | ProductsNotFound | null;
-	filteredDataById: NormalizedProducts | ProductNotFound | null;
-
+	filteredData: NormalizedProducts | null;
+	operationResultMessage: OperationResultMessage;
 	dataLoading: boolean;
 } = {
 	data: {},
 	filteredData: null,
-	filteredDataById: null,
+	operationResultMessage: { error: null, success: null },
 	dataLoading: false,
 };
 
@@ -42,12 +39,30 @@ export const productModel = createSlice({
 		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
 			state.data = normalizeProducts(payload).entities.products;
 		},
-		setFilteredData: (state, { payload }: PayloadAction<Product[]>) => {
+		setFilteredData: (state, { payload }: PayloadAction<Product[] | Product>) => {
 			if (payload === null) {
 				state.filteredData = payload;
-			} else {
+			} else if (Array.isArray(payload)) {
 				state.filteredData = normalizeProducts(payload).entities.products;
+			} else {
+				state.filteredData = normalizeProduct(payload).entities.products;
 			}
+		},
+		setOperationResultMessage: (
+			state,
+			{ payload }: PayloadAction<OperationResultMessage | null>,
+		) => {
+			if (payload === null) {
+				state.operationResultMessage.error = null;
+				state.operationResultMessage.success = null;
+			} else if (payload.error) {
+				state.operationResultMessage.error = payload.error;
+			} else if (payload.success) {
+				state.operationResultMessage.success = payload.success;
+			}
+		},
+		setDataLoading: (state, { payload }: PayloadAction<boolean>) => {
+			state.dataLoading = payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -62,19 +77,19 @@ export const productModel = createSlice({
 			state.dataLoading = false;
 		});
 
-		builder.addCase(getFilteredProductsByParametersAsync.pending, (state) => {
+		builder.addCase(getFilteredProductsByCategoryAsync.pending, (state) => {
 			state.dataLoading = true;
 		});
-		builder.addCase(getFilteredProductsByParametersAsync.fulfilled, (state, { payload }) => {
+		builder.addCase(getFilteredProductsByCategoryAsync.fulfilled, (state, { payload }) => {
 			if (payload.length <= 0) {
-				state.filteredData = { error: "Товары не найдены" };
+				state.operationResultMessage.error = "Товары не найдены.";
 			} else {
 				state.filteredData = normalizeProducts(payload).entities.products;
 			}
 
 			state.dataLoading = false;
 		});
-		builder.addCase(getFilteredProductsByParametersAsync.rejected, (state) => {
+		builder.addCase(getFilteredProductsByCategoryAsync.rejected, (state) => {
 			state.dataLoading = false;
 		});
 
@@ -82,7 +97,7 @@ export const productModel = createSlice({
 			state.dataLoading = true;
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
-			state.filteredDataById = normalizeProduct(payload).entities.products;
+			state.filteredData = normalizeProduct(payload).entities.products;
 			state.dataLoading = false;
 		});
 		builder.addCase(getProductByIdAsync.rejected, (state) => {
@@ -97,7 +112,6 @@ export const getProductsAsync = createAsyncThunk(
 		try {
 			const response = await productsApi.products.getProducts();
 			const { data } = response;
-			// console.log(data);
 			return data;
 		} catch (err) {
 			// eslint-disable-next-line no-console
@@ -107,28 +121,27 @@ export const getProductsAsync = createAsyncThunk(
 	},
 );
 
-export const getFilteredProductsByParametersAsync = createAsyncThunk(
-	"products/getFilteredProductsByParametersAsync",
+export const getFilteredProductsByCategoryAsync = createAsyncThunk(
+	"products/getFilteredProductsByCategoryAsync",
 	async (
 		{
 			mainCategory,
 			secondaryCategory,
 			skinTypeCategory,
 		}: {
-			mainCategory?: string | null;
+			mainCategory?: String[] | null;
 			secondaryCategory?: String[] | null;
 			skinTypeCategory?: String[] | null;
 		},
 		{ rejectWithValue },
 	) => {
 		try {
-			const response = await productsApi.products.getFilteredProductsByParameters({
+			const response = await productsApi.products.getFilteredProductsByCategory({
 				mainCategory,
 				secondaryCategory,
 				skinTypeCategory,
 			});
 			const { data } = response;
-			console.log(data);
 			return data;
 		} catch (err) {
 			// eslint-disable-next-line no-console
@@ -139,7 +152,7 @@ export const getFilteredProductsByParametersAsync = createAsyncThunk(
 );
 
 export const getProductByIdAsync = createAsyncThunk(
-	"products/fetchProductById",
+	"products/getProductByIdAsync",
 	async (productId: number, { rejectWithValue }) => {
 		try {
 			const response = await productsApi.products.getProductById(productId);
@@ -154,28 +167,12 @@ export const getProductByIdAsync = createAsyncThunk(
 	},
 );
 
-export const setProducts = createAction<NormalizedProducts | {}>("products/setProducts");
-
-export const setFilteredProducts = createAction<NormalizedProducts | ProductsNotFound | null>(
-	"products/setFilteredData",
-);
-
 export const useProducts = () =>
 	useSelector(
 		createSelector(
 			(state: RootState) => state.products.data,
 			(products) => {
 				return products;
-			},
-		),
-	);
-
-export const useProduct = (productId: number) =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.filteredDataById,
-			(products) => {
-				if (products) return products[productId];
 			},
 		),
 	);
@@ -190,6 +187,20 @@ export const useFilteredProducts = () =>
 		),
 	);
 
+// SHIT AFTER ALL THIS, NEED TO REFACTOR
+export const useProduct = (productId: number) =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.filteredDataById,
+			(products) => {
+				if (products) return products[productId];
+			},
+		),
+	);
+
+// useBestsellers, useMostViewedProducts also useUsersMostViewedProducts must be
+// returned by the server and saved into the state.filteredData
+// hooks useBestsellers also useMostViewedProducts must be deleted
 export const useBestsellers = ({ maxProductsCount }: { maxProductsCount: number }) =>
 	useSelector(
 		createSelector(
@@ -214,6 +225,18 @@ export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: 
 		),
 	);
 
+export const setProducts = createAction<NormalizedProducts | {}>("products/setProducts");
+
+export const setFilteredProducts = createAction<NormalizedProducts | null>(
+	"products/setFilteredData",
+);
+
+export const setOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/setOperationResultMessage",
+);
+
+export const setDataLoading = createAction<boolean>("products/setDataLoading");
+// All this below must be refactored or deleted.
 export const isProductsEmpty = (products: NormalizedProducts): boolean => {
 	return Object.keys(products).length === 0;
 };

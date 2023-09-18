@@ -1,5 +1,7 @@
 const productsService = require("../service/products-service");
 
+const ApiError = require("../exceptions/api-error");
+
 class ProductsController {
 	async getProducts(req, res, next) {
 		try {
@@ -10,24 +12,43 @@ class ProductsController {
 		}
 	}
 
-	async getFilteredProductsByParameters(req, res, next) {
+	async getFilteredProductsByCategory(req, res, next) {
 		try {
 			const { mainCategory, secondaryCategory, skinTypeCategory } = req.query;
 			const filter = {};
+
 			if (mainCategory) {
-				filter["category.main"] = mainCategory;
+				filter["category.main"] = { $in: mainCategory };
 			}
-
-			// Conditionally add the secondaryCategory filter if it exists and is not empty
 			if (secondaryCategory) {
-				filter["category.secondary"] = secondaryCategory;
+				filter["category.secondary"] = { $in: secondaryCategory };
+			}
+			if (skinTypeCategory) {
+				filter["category.skinType"] = { $in: skinTypeCategory };
 			}
 
-			console.log(filter);
-			console.log("filter passing");
+			if (Object.keys(filter).length === 0) {
+				throw ApiError.BadRequest(
+					"Не получены критерии по которым нужно проводить фильтрацию товаров.",
+				);
+			}
 
-			const filteredData = await productsService.getFilteredProductsByParameters(filter);
+			const filteredData = await productsService.getFilteredProductsByCategory(filter);
 			return res.json(filteredData);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async getBestSellingProducts(req, res, next) {
+		try {
+			const { sells, productsCount } = req.query;
+
+			const bestSellingProducts = await productsService.getBestSellingProducts({
+				sells,
+				productsCount,
+			});
+			return res.json(bestSellingProducts);
 		} catch (err) {
 			next(err);
 		}

@@ -32,6 +32,7 @@ router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
 router.get("/products", productsController.getProducts);
-router.get("/products/filtered-by-parameters", productsController.getFilteredProductsByParameters);
+router.get("/products/filtered-by-parameters", productsController.getFilteredProductsByCategory);
+router.get("/products/best-selling-products", productsController.getBestSellingProducts);
 
 module.exports = router;
