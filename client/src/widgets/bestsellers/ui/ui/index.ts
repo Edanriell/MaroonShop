@@ -1,5 +1,4 @@
-export { default as MobileSlider } from "./mobile-slider";
-export { default as UniversalSlider } from "./universal-slider";
-export { default as BestsellersLoading } from "./bestsellers-loading";
-export { default as BestsellersError } from "./bestsellers-error";
-export { default as BestsellersNotFound } from "./bestsellers-not-found";
+export { default as BestSellingProductsSliderMobile } from "./best-selling-products-slider-mobile";
+export { default as BestSellingProductsSliderUniversal } from "./best-selling-products-slider-universal";
+export { default as BestSellingProductsLoading } from "./best-selling-products-loading";
+export { default as BestSellingProductsError } from "./best-selling-products-error";

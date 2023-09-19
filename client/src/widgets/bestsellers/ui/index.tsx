@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { productModel } from "entities/product";
@@ -7,44 +7,44 @@ import { productModel } from "entities/product";
 import { useScreenSize } from "shared/lib/hooks";
 
 import {
-	MobileSlider,
-	UniversalSlider,
-	BestsellersLoading,
-	BestsellersError,
-	BestsellersNotFound,
+	BestSellingProductsSliderMobile,
+	BestSellingProductsSliderUniversal,
+	BestSellingProductsLoading,
+	BestSellingProductsError,
 } from "./ui";
 
-const Bestsellers = () => {
+const BestSellingProducts = () => {
 	const [reload, setReload] = useState<number>(Math.random());
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
-	const store = useSelector((state: productModel.RootState) => state.products);
-	const { dataLoading } = store;
+	const bestSellingProducts = productModel.useFilteredProducts();
 
-	const products = productModel.useProducts();
-	const bestsellers = productModel.useBestsellers({ maxProductsCount: 20 });
-
-	const isEmpty = productModel.isProductsEmpty(products);
+	const isDataLoading = productModel.useIsDataLoading();
+	const operationResultMessage = productModel.useOperationResultMessage();
 
 	const { width } = useScreenSize();
 
 	useEffect(() => {
-		dispatch(productModel.getProductsAsync());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [reload]);
+		dispatch(productModel.getBestSellingProductsAsync({ sells: 400, productsCount: 20 }));
+	}, [reload, dispatch]);
 
 	function handleReloadButtonClick() {
 		setReload(Math.random());
 	}
 
-	if (dataLoading) return <BestsellersLoading />;
-	if (isEmpty) return <BestsellersError onReloadButtonClick={handleReloadButtonClick} />;
-	if (bestsellers.length === 0) return <BestsellersNotFound />;
+	if (isDataLoading) return <BestSellingProductsLoading />;
+	if (operationResultMessage.error)
+		return (
+			<BestSellingProductsError
+				onReloadButtonClick={handleReloadButtonClick}
+				errorMessage={operationResultMessage.error}
+			/>
+		);
 
-	if (width >= 768) return <UniversalSlider bestSellers={bestsellers} className={""} />;
-
-	return <MobileSlider bestSellers={bestsellers} className={""} />;
+	if (width >= 768)
+		return <BestSellingProductsSliderUniversal bestSellingProducts={bestSellingProducts} />;
+	return <BestSellingProductsSliderMobile bestSellingProducts={bestSellingProducts} />;
 };
 
-export default Bestsellers;
+export default BestSellingProducts;

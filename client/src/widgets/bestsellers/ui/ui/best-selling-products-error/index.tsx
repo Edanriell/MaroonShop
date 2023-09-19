@@ -2,9 +2,12 @@ import { FC } from "react";
 
 import { Button } from "shared/ui";
 
-import { BestsellersErrorProps } from "./types";
+import { BestSellingProductsErrorProps } from "./types";
 
-const BestsellersError: FC<BestsellersErrorProps> = ({ onReloadButtonClick }) => {
+const BestSellingProductsError: FC<BestSellingProductsErrorProps> = ({
+	onReloadButtonClick,
+	errorMessage,
+}) => {
 	return (
 		<div
 			className={
@@ -14,7 +17,7 @@ const BestsellersError: FC<BestsellersErrorProps> = ({ onReloadButtonClick }) =>
 			}
 		>
 			<p className={"font-raleway text-sm-14px mb-[1rem] md:text-md-18px font-medium"}>
-				Не удалось загрузить товары.
+				{errorMessage}
 			</p>
 			<Button
 				text={"Обновить"}
@@ -27,4 +30,4 @@ const BestsellersError: FC<BestsellersErrorProps> = ({ onReloadButtonClick }) =>
 	);
 };
 
-export default BestsellersError;
+export default BestSellingProductsError;

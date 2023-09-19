@@ -13,11 +13,15 @@ class ProductsService {
 		const allProducts = await ProductModel.find();
 		const products = [];
 
+		if (allProducts.length === 0) {
+			throw new ApiError.NotFound("В базе данных не найдено ни одного товара.")
+		}
+
 		for (const product of allProducts) {
 			products.push(new ProductDto(product));
 		}
 
-		return products;
+		return { products };
 	}
 
 	async createNewProduct({
@@ -116,6 +120,26 @@ class ProductsService {
 		}
 
 		return products;
+	}
+
+	async getBestSellingProducts({ sells, productsCount }) {
+		const filteredProducts = await ProductModel.find({ sells: { $gte: sells } });
+
+		if (filteredProducts.length === 0) {
+			throw ApiError.NotFound("Не найдено не одного бестселлера.");
+		}
+
+		const bestSellingProducts = [];
+
+		for (const product of filteredProducts) {
+			bestSellingProducts.push(new ProductDto(product));
+		}
+
+		const bestSellingProductsSortedSliced = bestSellingProducts
+			.sort((a, b) => b.sells - a.sells)
+			.slice(0, productsCount);
+
+		return { bestSellingProducts: bestSellingProductsSortedSliced };
 	}
 
 	async initializeProducts() {

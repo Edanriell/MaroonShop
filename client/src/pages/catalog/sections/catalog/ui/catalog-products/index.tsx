@@ -27,7 +27,8 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 	dataLoading,
 }) => {
 	function getProducts() {
-		if (filteredProducts) return Object.values(filteredProducts);
+		if (filteredProducts && !(JSON.stringify(filteredProducts) === "{}"))
+			return Object.values(filteredProducts);
 		return Object.values(products);
 	}
 
@@ -37,7 +38,7 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 		const endIndex = startIndex + productsPerPage;
 		return products.slice(startIndex, endIndex);
 	}
-
+	// A LOT OF PROBLEMS HERE.
 	return (
 		<>
 			{!dataLoading && filteredProducts && "error" in filteredProducts && (

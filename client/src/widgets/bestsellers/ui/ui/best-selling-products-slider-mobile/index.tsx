@@ -5,13 +5,16 @@ import { ProductCard } from "entities/product";
 
 import { useScreenSize } from "shared/lib/hooks";
 
-import { MobileSliderProps } from "./types";
+import { BestSellingProductsSliderMobileProps } from "./types";
 
 import styles from "./styles.module.scss";
 
 register();
 
-const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, className = "" }) => {
+const BestSellingProductsSliderMobile: FC<BestSellingProductsSliderMobileProps> = ({
+	bestSellingProducts,
+	className = "",
+}) => {
 	const [slidesCount, setSlidesCount] = useState<number>(0);
 	const { width } = useScreenSize();
 
@@ -35,7 +38,7 @@ const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, className = "" }) =>
 			autoplay-pause-on-mouse-enter="true"
 			class={className + " " + styles.sliderContainer}
 		>
-			{bestSellers.map((bestSeller, id) => (
+			{Object.values(bestSellingProducts).map((bestSeller, id) => (
 				<swiper-slide key={id}>
 					<ProductCard data={bestSeller} cardType="basic" />
 				</swiper-slide>
@@ -44,4 +47,4 @@ const MobileSlider: FC<MobileSliderProps> = ({ bestSellers, className = "" }) =>
 	);
 };
 
-export default MobileSlider;
+export default BestSellingProductsSliderMobile;

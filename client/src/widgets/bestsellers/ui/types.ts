@@ -1,4 +1,4 @@
-export type BestsellersSliderProps = {
-	bestSellers: Array<import("shared/api").Product>;
-	className?: string;
-};
+// export type BestSellingProductsProps = {
+// 	bestSellingProducts: Array<import("shared/api").Product>;
+// 	className?: string;
+// };

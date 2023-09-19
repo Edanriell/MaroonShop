@@ -16,3 +16,8 @@ export type UserData = {
 	address?: string;
 	email?: string;
 };
+
+export type OperationResultMessage = {
+	error: string | null;
+	success: string | null;
+};

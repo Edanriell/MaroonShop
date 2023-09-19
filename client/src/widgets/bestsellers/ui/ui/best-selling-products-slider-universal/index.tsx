@@ -6,13 +6,16 @@ import { ProductCard } from "entities/product";
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
 
-import { UniversalSliderProps } from "./types";
+import { BestSellingProductsSliderUniversalProps } from "./types";
 
 import styles from "./styles.module.scss";
 
 register();
 
-const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, className }) => {
+const BestSellingProductsSliderUniversal: FC<BestSellingProductsSliderUniversalProps> = ({
+	bestSellingProducts,
+	className = "",
+}) => {
 	const sliderRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
@@ -109,7 +112,7 @@ const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, className }) =
 			autoplay-pause-on-mouse-enter="true"
 			class={className + " relative pb-[3.7rem]"}
 		>
-			{bestSellers.map((bestSeller, id) => (
+			{Object.values(bestSellingProducts).map((bestSeller, id) => (
 				<swiper-slide key={id}>
 					<ProductCard data={bestSeller} cardType="basic" />
 				</swiper-slide>
@@ -125,4 +128,4 @@ const UniversalSlider: FC<UniversalSliderProps> = ({ bestSellers, className }) =
 	);
 };
 
-export default UniversalSlider;
+export default BestSellingProductsSliderUniversal;

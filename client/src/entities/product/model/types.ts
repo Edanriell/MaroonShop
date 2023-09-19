@@ -5,9 +5,9 @@ export type NormalizedProducts = Record<number, Product>;
 export type RootState = {
 	products: {
 		data: NormalizedProducts;
-		filteredData: NormalizedProducts | null;
-		filteredDataById: NormalizedProducts | null;
-		dataLoading: boolean;
+		filteredData: NormalizedProducts;
+		operationResultMessage: OperationResultMessage;
+		isDataLoading: boolean;
 	};
 };
 

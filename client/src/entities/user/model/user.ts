@@ -10,12 +10,12 @@ import { useSelector } from "react-redux";
 import { User, Product } from "shared/api";
 import { UserService } from "shared/services";
 
-import { RootState, UserData } from "./types";
+import { RootState, UserData, OperationResultMessage } from "./types";
 
 export const initialState: {
 	data: User[] | User;
 	cart: Product[];
-	operationResultMessage: { error: string | null; success: string | null };
+	operationResultMessage: OperationResultMessage;
 	isDataLoading: boolean;
 } = {
 	data: [],
@@ -135,11 +135,11 @@ export const removeProductFromCart = createAction<string | null>("user/removePro
 
 export const clearCart = createAction<string | null>("user/clearCart");
 
-export const setOperationResultMessage = createAction<string | null>(
+export const setOperationResultMessage = createAction<OperationResultMessage | null>(
 	"user/setOperationResultMessage",
 );
 
-export const clearOperationResultMessage = createAction<string | null>(
+export const clearOperationResultMessage = createAction<OperationResultMessage | null>(
 	"user/clearOperationResultMessage",
 );
 

@@ -22,14 +22,14 @@ export const normalizeProducts = (data: Product[]) =>
 
 export const initialState: {
 	data: NormalizedProducts;
-	filteredData: NormalizedProducts | null;
+	filteredData: NormalizedProducts;
 	operationResultMessage: OperationResultMessage;
-	dataLoading: boolean;
+	isDataLoading: boolean;
 } = {
 	data: {},
-	filteredData: null,
+	filteredData: {},
 	operationResultMessage: { error: null, success: null },
-	dataLoading: false,
+	isDataLoading: false,
 };
 
 export const productModel = createSlice({
@@ -50,35 +50,39 @@ export const productModel = createSlice({
 		},
 		setOperationResultMessage: (
 			state,
-			{ payload }: PayloadAction<OperationResultMessage | null>,
+			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
 		) => {
-			if (payload === null) {
-				state.operationResultMessage.error = null;
-				state.operationResultMessage.success = null;
-			} else if (payload.error) {
+			if (payload.error) {
 				state.operationResultMessage.error = payload.error;
 			} else if (payload.success) {
 				state.operationResultMessage.success = payload.success;
 			}
 		},
+		clearOperationResultMessage: (state, { payload = null }: PayloadAction<null>) => {
+			state.operationResultMessage = { error: null, success: null };
+		},
 		setDataLoading: (state, { payload }: PayloadAction<boolean>) => {
-			state.dataLoading = payload;
+			state.isDataLoading = payload;
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getProductsAsync.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
-			state.data = normalizeProducts(payload).entities.products;
-			state.dataLoading = false;
+			if ("error" in payload) {
+				state.operationResultMessage.error = payload.error;
+			} else if ("products" in payload) {
+				state.data = normalizeProducts(payload.products).entities.products;
+			}
+			state.isDataLoading = false;
 		});
 		builder.addCase(getProductsAsync.rejected, (state) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 
 		builder.addCase(getFilteredProductsByCategoryAsync.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(getFilteredProductsByCategoryAsync.fulfilled, (state, { payload }) => {
 			if (payload.length <= 0) {
@@ -87,39 +91,49 @@ export const productModel = createSlice({
 				state.filteredData = normalizeProducts(payload).entities.products;
 			}
 
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 		builder.addCase(getFilteredProductsByCategoryAsync.rejected, (state) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 
 		builder.addCase(getProductByIdAsync.pending, (state) => {
-			state.dataLoading = true;
+			state.isDataLoading = true;
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
 			state.filteredData = normalizeProduct(payload).entities.products;
-			state.dataLoading = false;
+			state.isDataLoading = false;
 		});
 		builder.addCase(getProductByIdAsync.rejected, (state) => {
-			state.dataLoading = false;
+			state.isDataLoading = false;
+		});
+
+		builder.addCase(getBestSellingProductsAsync.pending, (state) => {
+			state.isDataLoading = true;
+		});
+		builder.addCase(getBestSellingProductsAsync.fulfilled, (state, { payload }) => {
+			if ("error" in payload) {
+				state.operationResultMessage.error = payload.error;
+			} else if ("bestSellingProducts" in payload) {
+				state.filteredData = payload.bestSellingProducts;
+			}
+			state.isDataLoading = false;
+		});
+		builder.addCase(getBestSellingProductsAsync.rejected, (state) => {
+			state.isDataLoading = false;
 		});
 	},
 });
 
-export const getProductsAsync = createAsyncThunk(
-	"products/getProductsAsync",
-	async (_, { rejectWithValue }) => {
-		try {
-			const response = await productsApi.products.getProducts();
-			const { data } = response;
-			return data;
-		} catch (err) {
-			// eslint-disable-next-line no-console
-			console.error("Failed to fetch products:", err);
-			return rejectWithValue((err as any).message);
-		}
-	},
-);
+export const getProductsAsync = createAsyncThunk("products/getProductsAsync", async () => {
+	try {
+		const response = await productsApi.products.getProducts();
+		return { products: response.data.products };
+	} catch (error) {
+		const errorMessage = (error as any).response?.data?.message;
+		return { error: errorMessage };
+	}
+});
 
 export const getFilteredProductsByCategoryAsync = createAsyncThunk(
 	"products/getFilteredProductsByCategoryAsync",
@@ -157,7 +171,7 @@ export const getProductByIdAsync = createAsyncThunk(
 		try {
 			const response = await productsApi.products.getProductById(productId);
 			const { data } = response;
-			console.log(data);
+			// console.log(data);
 			return data;
 		} catch (err) {
 			// eslint-disable-next-line no-console
@@ -167,13 +181,27 @@ export const getProductByIdAsync = createAsyncThunk(
 	},
 );
 
+export const getBestSellingProductsAsync = createAsyncThunk(
+	"products/getBestSellingProductsAsync",
+	async ({ sells, productsCount }: { sells: number; productsCount: number }) => {
+		try {
+			const response = await productsApi.products.getBestSellingProducts({
+				sells,
+				productsCount,
+			});
+			return { bestSellingProducts: response.data.bestSellingProducts };
+		} catch (error) {
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
+		}
+	},
+);
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(
 			(state: RootState) => state.products.data,
-			(products) => {
-				return products;
-			},
+			(products) => products,
 		),
 	);
 
@@ -181,9 +209,23 @@ export const useFilteredProducts = () =>
 	useSelector(
 		createSelector(
 			(state: RootState) => state.products.filteredData,
-			(products) => {
-				return products;
-			},
+			(filteredProducts) => filteredProducts,
+		),
+	);
+
+export const useIsDataLoading = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.isDataLoading,
+			(isDataLoading) => isDataLoading,
+		),
+	);
+
+export const useOperationResultMessage = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.operationResultMessage,
+			(operationResultMessage) => operationResultMessage,
 		),
 	);
 
@@ -191,7 +233,7 @@ export const useFilteredProducts = () =>
 export const useProduct = (productId: number) =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.filteredDataById,
+			(state: RootState) => state.products.filteredData,
 			(products) => {
 				if (products) return products[productId];
 			},
@@ -235,7 +277,12 @@ export const setOperationResultMessage = createAction<OperationResultMessage | n
 	"products/setOperationResultMessage",
 );
 
+export const clearOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/clearOperationResultMessage",
+);
+
 export const setDataLoading = createAction<boolean>("products/setDataLoading");
+
 // All this below must be refactored or deleted.
 export const isProductsEmpty = (products: NormalizedProducts): boolean => {
 	return Object.keys(products).length === 0;

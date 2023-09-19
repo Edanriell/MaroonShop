@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -23,9 +23,6 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const pageParam = searchParams.get("page");
 	const initialPage = pageParam ? parseInt(pageParam, 10) : 1;
 
-	const store = useSelector((state: productModel.RootState) => state.products);
-	const { dataLoading } = store;
-
 	const products = productModel.useProducts();
 	const filteredProducts = productModel.useFilteredProducts();
 
@@ -34,6 +31,7 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 
 	const productsPerPage: 12 = 12;
 
+	const isDataLoading = productModel.useIsDataLoading();
 	const isProductsEmpty = productModel.isProductsEmpty(products);
 	const isFilteredProductsEmpty = productModel.isFilteredProductsEmpty(filteredProducts);
 
@@ -102,9 +100,9 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					"lg:pl-[2.3rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
 				}
 			>
-				<CatalogLoading dataLoading={dataLoading} />
+				<CatalogLoading dataLoading={isDataLoading} />
 				<CatalogError
-					dataLoading={dataLoading}
+					dataLoading={isDataLoading}
 					isProductsEmpty={isProductsEmpty}
 					isFilteredProductsEmpty={isFilteredProductsEmpty}
 					onReloadButtonClick={handleReloadButtonClick}
@@ -114,10 +112,10 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					products={products}
 					currentPage={currentPage}
 					productsPerPage={productsPerPage}
-					dataLoading={dataLoading}
+					dataLoading={isDataLoading}
 				/>
 				<CatalogPagination
-					dataLoading={dataLoading}
+					dataLoading={isDataLoading}
 					isProductsEmpty={isProductsEmpty}
 					filteredProducts={filteredProducts}
 					currentPage={currentPage}
