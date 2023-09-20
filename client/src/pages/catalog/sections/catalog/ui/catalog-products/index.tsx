@@ -3,21 +3,9 @@ import { FC } from "react";
 import { ProductCard } from "entities/product";
 
 import { Card3dFlip } from "shared/ui";
+import { Product } from "shared/api";
 
-import { CatalogProductsProps, CatalogProductsWrapperProps } from "./types";
-
-const CatalogProductsWrapper: FC<CatalogProductsWrapperProps> = ({ children }) => {
-	return (
-		<ul
-			className={
-				"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
-				"justify-center md:grid md:grid-cols-two lg:grid-cols-4"
-			}
-		>
-			{children}
-		</ul>
-	);
-};
+import { CatalogProductsProps } from "./types";
 
 const CatalogProducts: FC<CatalogProductsProps> = ({
 	filteredProducts,
@@ -26,34 +14,36 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 	productsPerPage,
 	dataLoading,
 }) => {
-	function getProducts() {
-		if (filteredProducts && !(JSON.stringify(filteredProducts) === "{}"))
-			return Object.values(filteredProducts);
-		return Object.values(products);
-	}
+	const getProducts = () => {
+		if (filteredProducts && JSON.stringify(filteredProducts) !== "{}")
+			return { filteredProducts: Object.values(filteredProducts) };
+		return { products: Object.values(products) };
+	};
 
-	function getPageProducts() {
+	const getPageProducts = () => {
 		const products = getProducts();
 		const startIndex = (currentPage - 1) * productsPerPage;
 		const endIndex = startIndex + productsPerPage;
-		return products.slice(startIndex, endIndex);
-	}
-	// A LOT OF PROBLEMS HERE.
+		let pageProducts: Product[] = [];
+		if (products.filteredProducts) {
+			pageProducts = products.filteredProducts.slice(startIndex, endIndex);
+		} else if (products.products) {
+			pageProducts = products.products.slice(startIndex, endIndex);
+		}
+		return pageProducts;
+	};
+
+	const canDisplayCatalogProducts = () => !dataLoading && getPageProducts();
+
 	return (
 		<>
-			{!dataLoading && filteredProducts && "error" in filteredProducts && (
-				<div
+			{canDisplayCatalogProducts() && (
+				<ul
 					className={
-						"col-start-1 col-end-[-1] items-center justify-center " +
-						"font-raleway font-medium text-sm-18px text-blue-zodiac-950 " +
-						"text-center mt-[12rem] md:mt-[14rem] md:text-[2rem] lg:text-[2.4rem]"
+						"flex flex-row flex-wrap items-center gap-y-[3rem] gap-x-[3rem] " +
+						"justify-center md:grid md:grid-cols-two lg:grid-cols-4"
 					}
 				>
-					По вашему запросу не найдено не одного товара.
-				</div>
-			)}
-			{!dataLoading && products && !(filteredProducts && "error" in filteredProducts) && (
-				<CatalogProductsWrapper>
 					{getPageProducts().map((product) => (
 						<li className="w-full" key={product.id}>
 							<Card3dFlip data={product}>
@@ -61,7 +51,7 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 							</Card3dFlip>
 						</li>
 					))}
-				</CatalogProductsWrapper>
+				</ul>
 			)}
 		</>
 	);

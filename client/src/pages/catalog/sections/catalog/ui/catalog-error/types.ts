@@ -1,6 +1,5 @@
 export type CatalogErrorProps = {
 	dataLoading: boolean;
-	isProductsEmpty: boolean;
-	isFilteredProductsEmpty: boolean;
+	operationResultMessage: { error: string | null; success: string | null };
 	onReloadButtonClick: () => void;
 };

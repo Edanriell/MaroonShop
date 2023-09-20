@@ -5,9 +5,11 @@ import { Spinner } from "shared/ui";
 import { CatalogLoadingProps } from "./types";
 
 const CatalogLoading: FC<CatalogLoadingProps> = ({ dataLoading }) => {
+	const canDisplayCatalogLoading = () => dataLoading;
+
 	return (
 		<>
-			{dataLoading && (
+			{canDisplayCatalogLoading() && (
 				<div className="flex flex-col items-center justify-center mt-[12rem] md:mt-[14rem]">
 					<p className="font-raleway font-medium text-sm-18px mb-[1rem] md:text-[2.2rem]">
 						Загрузка товаров

@@ -2,7 +2,7 @@ import type { AxiosPromise } from "axios";
 
 import { apiInstance } from "./base";
 import type { Product } from "./model";
-import { BestSellingProducts } from "./types";
+import { BestSellingProducts, Products, FilteredProducts } from "./types";
 
 export type GetFilteredProductsParams = {
 	filters: {
@@ -15,7 +15,7 @@ const BASE_FILTER_URL = "api/products/filtered-by-parameters";
 const BASE_FILTER_BY_ID_URL = "/products/";
 const BASE_BEST_SELLING_PRODUCTS_URL = "api/products/best-selling-products";
 
-export const getProducts = (): AxiosPromise<Product[]> => {
+export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
 };
 
@@ -27,7 +27,7 @@ export const getFilteredProductsByCategory = ({
 	mainCategory?: String[] | null;
 	secondaryCategory?: String[] | null;
 	skinTypeCategory?: String[] | null;
-}): AxiosPromise<Product[]> => {
+}): AxiosPromise<FilteredProducts> => {
 	return apiInstance.get(BASE_FILTER_URL, {
 		params: { mainCategory, secondaryCategory, skinTypeCategory },
 	});

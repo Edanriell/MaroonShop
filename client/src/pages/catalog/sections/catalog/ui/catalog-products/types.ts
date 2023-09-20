@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { productModel } from "entities/product";
 
 export type CatalogProductsProps = {
@@ -7,8 +6,4 @@ export type CatalogProductsProps = {
 	currentPage: number;
 	productsPerPage: 12;
 	dataLoading: boolean;
-};
-
-export type CatalogProductsWrapperProps = {
-	children: ReactNode;
 };

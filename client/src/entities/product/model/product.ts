@@ -39,13 +39,13 @@ export const productModel = createSlice({
 		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
 			state.data = normalizeProducts(payload).entities.products;
 		},
-		setFilteredData: (state, { payload }: PayloadAction<Product[] | Product>) => {
-			if (payload === null) {
+		setFilteredData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
+			if (JSON.stringify(payload) === "{}") {
 				state.filteredData = payload;
 			} else if (Array.isArray(payload)) {
-				state.filteredData = normalizeProducts(payload).entities.products;
+				state.filteredData = normalizeProducts(payload as Product[]).entities.products;
 			} else {
-				state.filteredData = normalizeProduct(payload).entities.products;
+				state.filteredData = normalizeProduct(payload as Product).entities.products;
 			}
 		},
 		setOperationResultMessage: (
@@ -70,9 +70,14 @@ export const productModel = createSlice({
 			state.isDataLoading = true;
 		});
 		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
-			if ("error" in payload) {
+			if ("error" in payload && payload.error === undefined) {
+				state.operationResultMessage.error = "Неудалось загрузить товары.";
+				state.data = {};
+			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
-			} else if ("products" in payload) {
+				state.data = {};
+			} else if ("products" in payload && payload.products) {
+				state.operationResultMessage = { error: null, success: null };
 				state.data = normalizeProducts(payload.products).entities.products;
 			}
 			state.isDataLoading = false;
@@ -85,12 +90,18 @@ export const productModel = createSlice({
 			state.isDataLoading = true;
 		});
 		builder.addCase(getFilteredProductsByCategoryAsync.fulfilled, (state, { payload }) => {
-			if (payload.length <= 0) {
-				state.operationResultMessage.error = "Товары не найдены.";
-			} else {
-				state.filteredData = normalizeProducts(payload).entities.products;
+			if ("error" in payload && payload.error === undefined) {
+				state.operationResultMessage.error = "Неудалось загрузить товары.";
+				state.filteredData = {};
+				state.data = {};
+			} else if ("error" in payload && payload.error) {
+				state.operationResultMessage.error = payload.error;
+				state.filteredData = {};
+				state.data = {};
+			} else if ("filteredProducts" in payload && payload.filteredProducts) {
+				state.operationResultMessage = { error: null, success: null };
+				state.filteredData = normalizeProducts(payload.filteredProducts).entities.products;
 			}
-
 			state.isDataLoading = false;
 		});
 		builder.addCase(getFilteredProductsByCategoryAsync.rejected, (state) => {
@@ -112,10 +123,17 @@ export const productModel = createSlice({
 			state.isDataLoading = true;
 		});
 		builder.addCase(getBestSellingProductsAsync.fulfilled, (state, { payload }) => {
-			if ("error" in payload) {
+			if ("error" in payload && payload.error === undefined) {
+				state.operationResultMessage.error = "Неудалось загрузить бестселлеры.";
+				state.filteredData = {};
+			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
-			} else if ("bestSellingProducts" in payload) {
-				state.filteredData = payload.bestSellingProducts;
+				state.filteredData = {};
+			} else if ("bestSellingProducts" in payload && payload.bestSellingProducts) {
+				state.operationResultMessage = { error: null, success: null };
+				state.filteredData = normalizeProducts(
+					payload.bestSellingProducts,
+				).entities.products;
 			}
 			state.isDataLoading = false;
 		});
@@ -137,30 +155,25 @@ export const getProductsAsync = createAsyncThunk("products/getProductsAsync", as
 
 export const getFilteredProductsByCategoryAsync = createAsyncThunk(
 	"products/getFilteredProductsByCategoryAsync",
-	async (
-		{
-			mainCategory,
-			secondaryCategory,
-			skinTypeCategory,
-		}: {
-			mainCategory?: String[] | null;
-			secondaryCategory?: String[] | null;
-			skinTypeCategory?: String[] | null;
-		},
-		{ rejectWithValue },
-	) => {
+	async ({
+		mainCategory,
+		secondaryCategory,
+		skinTypeCategory,
+	}: {
+		mainCategory?: String[] | null;
+		secondaryCategory?: String[] | null;
+		skinTypeCategory?: String[] | null;
+	}) => {
 		try {
 			const response = await productsApi.products.getFilteredProductsByCategory({
 				mainCategory,
 				secondaryCategory,
 				skinTypeCategory,
 			});
-			const { data } = response;
-			return data;
-		} catch (err) {
-			// eslint-disable-next-line no-console
-			console.error("Failed to fetch products:", err);
-			return rejectWithValue((err as any).message);
+			return { filteredProducts: response.data.filteredProducts };
+		} catch (error) {
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
 		}
 	},
 );
@@ -243,17 +256,18 @@ export const useProduct = (productId: number) =>
 // useBestsellers, useMostViewedProducts also useUsersMostViewedProducts must be
 // returned by the server and saved into the state.filteredData
 // hooks useBestsellers also useMostViewedProducts must be deleted
-export const useBestsellers = ({ maxProductsCount }: { maxProductsCount: number }) =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.data,
-			(products) => {
-				return Object.values(products)
-					.sort((a, b) => b.sells - a.sells)
-					.slice(0, maxProductsCount);
-			},
-		),
-	);
+
+// export const useBestsellers = ({ maxProductsCount }: { maxProductsCount: number }) =>
+// 	useSelector(
+// 		createSelector(
+// 			(state: RootState) => state.products.data,
+// 			(products) => {
+// 				return Object.values(products)
+// 					.sort((a, b) => b.sells - a.sells)
+// 					.slice(0, maxProductsCount);
+// 			},
+// 		),
+// 	);
 
 export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: number }) =>
 	useSelector(

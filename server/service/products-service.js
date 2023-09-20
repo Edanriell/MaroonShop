@@ -14,7 +14,7 @@ class ProductsService {
 		const products = [];
 
 		if (allProducts.length === 0) {
-			throw new ApiError.NotFound("В базе данных не найдено ни одного товара.")
+			throw new ApiError.NotFound("В базе данных не найдено ни одного товара.");
 		}
 
 		for (const product of allProducts) {
@@ -119,7 +119,9 @@ class ProductsService {
 			);
 		}
 
-		return products;
+		return {
+			filteredProducts: products,
+		};
 	}
 
 	async getBestSellingProducts({ sells, productsCount }) {

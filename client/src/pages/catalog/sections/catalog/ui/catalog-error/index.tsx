@@ -6,13 +6,15 @@ import { CatalogErrorProps } from "./types";
 
 const CatalogError: FC<CatalogErrorProps> = ({
 	dataLoading,
-	isProductsEmpty,
-	isFilteredProductsEmpty,
+	operationResultMessage,
 	onReloadButtonClick,
 }) => {
+	const canDisplayCatalogError = () => !dataLoading && operationResultMessage.error;
+	// TWO ERRORS SHOWING NEED TO FIX
+	
 	return (
 		<>
-			{!dataLoading && isProductsEmpty && isFilteredProductsEmpty && (
+			{canDisplayCatalogError() && (
 				<div
 					className={
 						"flex flex-col items-center justify-center col-start-1 " +
@@ -25,7 +27,7 @@ const CatalogError: FC<CatalogErrorProps> = ({
 							"font-medium text-center"
 						}
 					>
-						Не удалось загрузить товары.
+						{operationResultMessage.error}
 					</p>
 					<Button
 						text={"Обновить"}

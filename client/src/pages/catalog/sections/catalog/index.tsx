@@ -32,13 +32,15 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	const productsPerPage: 12 = 12;
 
 	const isDataLoading = productModel.useIsDataLoading();
-	const isProductsEmpty = productModel.isProductsEmpty(products);
-	const isFilteredProductsEmpty = productModel.isFilteredProductsEmpty(filteredProducts);
+	const operationResultMessage = productModel.useOperationResultMessage();
+
+	useEffect(() => {
+		dispatch(productModel.setFilteredProducts({}));
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(productModel.getProductsAsync());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [reload]);
+	}, [reload, dispatch]);
 
 	useEffect(() => {
 		if (initialPage <= 0 || (initialPage > totalPages && totalPages !== 0)) {
@@ -50,21 +52,21 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 	}, [totalPages, initialPage, currentPage, navigate]);
 
 	useEffect(() => {
-		if (filteredProducts) {
+		if (filteredProducts && JSON.stringify(filteredProducts) !== "{}") {
 			setTotalPages(Math.ceil(Object.values(filteredProducts).length / productsPerPage));
 		} else {
 			setTotalPages(Math.ceil(Object.values(products).length / productsPerPage));
 		}
 	}, [filteredProducts, products]);
 
-	function handlePageChange(page: number) {
+	const handlePageChange = (page: number) => {
 		setCurrentPage(page);
 		navigate(`?page=${page}`);
-	}
+	};
 
-	function handleReloadButtonClick() {
+	const handleReloadButtonClick = () => {
 		setReload(Math.random());
-	}
+	};
 
 	return (
 		<div
@@ -103,8 +105,7 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 				<CatalogLoading dataLoading={isDataLoading} />
 				<CatalogError
 					dataLoading={isDataLoading}
-					isProductsEmpty={isProductsEmpty}
-					isFilteredProductsEmpty={isFilteredProductsEmpty}
+					operationResultMessage={operationResultMessage}
 					onReloadButtonClick={handleReloadButtonClick}
 				/>
 				<CatalogProducts
@@ -114,14 +115,14 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					productsPerPage={productsPerPage}
 					dataLoading={isDataLoading}
 				/>
-				<CatalogPagination
+				{/* <CatalogPagination
 					dataLoading={isDataLoading}
 					isProductsEmpty={isProductsEmpty}
 					filteredProducts={filteredProducts}
 					currentPage={currentPage}
 					totalPages={totalPages}
 					onPageChange={handlePageChange}
-				/>
+				/> */}
 			</div>
 		</div>
 	);
