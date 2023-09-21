@@ -10,8 +10,7 @@ const CatalogError: FC<CatalogErrorProps> = ({
 	onReloadButtonClick,
 }) => {
 	const canDisplayCatalogError = () => !dataLoading && operationResultMessage.error;
-	// TWO ERRORS SHOWING NEED TO FIX
-	
+
 	return (
 		<>
 			{canDisplayCatalogError() && (

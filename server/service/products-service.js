@@ -11,10 +11,11 @@ const productsDataFilePath = `${appDir}/data/products.json`;
 class ProductsService {
 	async getAllProducts() {
 		const allProducts = await ProductModel.find();
+		console.log(allProducts);
 		const products = [];
 
 		if (allProducts.length === 0) {
-			throw new ApiError.NotFound("В базе данных не найдено ни одного товара.");
+			throw ApiError.NotFound("В базе данных не найдено ни одного товара.");
 		}
 
 		for (const product of allProducts) {
@@ -115,7 +116,7 @@ class ProductsService {
 
 		if (products.length === 0) {
 			throw ApiError.NotFound(
-				"По полученным критериям не удалось отфильтровать не один товар.",
+				"По полученным критериям не удалось найти ни одного подходящего товара.",
 			);
 		}
 

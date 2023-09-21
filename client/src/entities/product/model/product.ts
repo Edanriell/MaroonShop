@@ -72,10 +72,8 @@ export const productModel = createSlice({
 		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
 				state.operationResultMessage.error = "Неудалось загрузить товары.";
-				state.data = {};
 			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
-				state.data = {};
 			} else if ("products" in payload && payload.products) {
 				state.operationResultMessage = { error: null, success: null };
 				state.data = normalizeProducts(payload.products).entities.products;
@@ -92,12 +90,8 @@ export const productModel = createSlice({
 		builder.addCase(getFilteredProductsByCategoryAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
 				state.operationResultMessage.error = "Неудалось загрузить товары.";
-				state.filteredData = {};
-				state.data = {};
 			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
-				state.filteredData = {};
-				state.data = {};
 			} else if ("filteredProducts" in payload && payload.filteredProducts) {
 				state.operationResultMessage = { error: null, success: null };
 				state.filteredData = normalizeProducts(payload.filteredProducts).entities.products;
@@ -125,10 +119,8 @@ export const productModel = createSlice({
 		builder.addCase(getBestSellingProductsAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
 				state.operationResultMessage.error = "Неудалось загрузить бестселлеры.";
-				state.filteredData = {};
 			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
-				state.filteredData = {};
 			} else if ("bestSellingProducts" in payload && payload.bestSellingProducts) {
 				state.operationResultMessage = { error: null, success: null };
 				state.filteredData = normalizeProducts(

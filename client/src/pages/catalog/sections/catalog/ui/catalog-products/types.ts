@@ -6,4 +6,5 @@ export type CatalogProductsProps = {
 	currentPage: number;
 	productsPerPage: 12;
 	dataLoading: boolean;
+	operationResultMessage: { error: string | null; success: string | null };
 };

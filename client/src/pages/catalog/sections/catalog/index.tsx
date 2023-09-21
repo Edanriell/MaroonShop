@@ -114,15 +114,15 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					currentPage={currentPage}
 					productsPerPage={productsPerPage}
 					dataLoading={isDataLoading}
+					operationResultMessage={operationResultMessage}
 				/>
-				{/* <CatalogPagination
+				<CatalogPagination
 					dataLoading={isDataLoading}
-					isProductsEmpty={isProductsEmpty}
-					filteredProducts={filteredProducts}
+					operationResultMessage={operationResultMessage}
 					currentPage={currentPage}
 					totalPages={totalPages}
 					onPageChange={handlePageChange}
-				/> */}
+				/>
 			</div>
 		</div>
 	);

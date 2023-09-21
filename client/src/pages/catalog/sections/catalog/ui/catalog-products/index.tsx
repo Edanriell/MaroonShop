@@ -13,6 +13,7 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 	currentPage,
 	productsPerPage,
 	dataLoading,
+	operationResultMessage,
 }) => {
 	const getProducts = () => {
 		if (filteredProducts && JSON.stringify(filteredProducts) !== "{}")
@@ -33,7 +34,8 @@ const CatalogProducts: FC<CatalogProductsProps> = ({
 		return pageProducts;
 	};
 
-	const canDisplayCatalogProducts = () => !dataLoading && getPageProducts();
+	const canDisplayCatalogProducts = () =>
+		!dataLoading && !operationResultMessage.error && getPageProducts();
 
 	return (
 		<>
