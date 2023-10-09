@@ -4,8 +4,12 @@ export type NormalizedProducts = Record<number, Product>;
 
 export type RootState = {
 	products: {
-		data: NormalizedProducts;
-		filteredData: NormalizedProducts;
+		data: {
+			fetchedData: NormalizedProducts;
+			filteredData: NormalizedProducts;
+			mostViewedData: NormalizedProducts;
+			userMostViewedData: NormalizedProducts;
+		};
 		operationResultMessage: OperationResultMessage;
 		isDataLoading: boolean;
 	};

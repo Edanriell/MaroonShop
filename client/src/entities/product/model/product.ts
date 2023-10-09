@@ -21,13 +21,21 @@ export const normalizeProducts = (data: Product[]) =>
 	normalize<Product, { products: NormalizedProducts }>(data, [productSchema]);
 
 export const initialState: {
-	data: NormalizedProducts;
-	filteredData: NormalizedProducts;
+	data: {
+		fetchedData: NormalizedProducts;
+		filteredData: NormalizedProducts;
+		mostViewedData: NormalizedProducts;
+		userMostViewedData: NormalizedProducts;
+	};
 	operationResultMessage: OperationResultMessage;
 	isDataLoading: boolean;
 } = {
-	data: {},
-	filteredData: {},
+	data: {
+		fetchedData: {},
+		filteredData: {},
+		mostViewedData: {},
+		userMostViewedData: {},
+	},
 	operationResultMessage: { error: null, success: null },
 	isDataLoading: false,
 };
@@ -37,15 +45,15 @@ export const productModel = createSlice({
 	initialState,
 	reducers: {
 		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
-			state.data = normalizeProducts(payload).entities.products;
+			state.data.fetchedData = normalizeProducts(payload).entities.products;
 		},
 		setFilteredData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
 			if (JSON.stringify(payload) === "{}") {
-				state.filteredData = payload;
+				state.data.filteredData = payload;
 			} else if (Array.isArray(payload)) {
-				state.filteredData = normalizeProducts(payload as Product[]).entities.products;
+				state.data.filteredData = normalizeProducts(payload as Product[]).entities.products;
 			} else {
-				state.filteredData = normalizeProduct(payload as Product).entities.products;
+				state.data.filteredData = normalizeProduct(payload as Product).entities.products;
 			}
 		},
 		setOperationResultMessage: (
@@ -76,7 +84,7 @@ export const productModel = createSlice({
 				state.operationResultMessage.error = payload.error;
 			} else if ("products" in payload && payload.products) {
 				state.operationResultMessage = { error: null, success: null };
-				state.data = normalizeProducts(payload.products).entities.products;
+				state.data.fetchedData = normalizeProducts(payload.products).entities.products;
 			}
 			state.isDataLoading = false;
 		});
@@ -94,7 +102,9 @@ export const productModel = createSlice({
 				state.operationResultMessage.error = payload.error;
 			} else if ("filteredProducts" in payload && payload.filteredProducts) {
 				state.operationResultMessage = { error: null, success: null };
-				state.filteredData = normalizeProducts(payload.filteredProducts).entities.products;
+				state.data.filteredData = normalizeProducts(
+					payload.filteredProducts,
+				).entities.products;
 			}
 			state.isDataLoading = false;
 		});
@@ -106,7 +116,7 @@ export const productModel = createSlice({
 			state.isDataLoading = true;
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
-			state.filteredData = normalizeProduct(payload).entities.products;
+			state.data.filteredData = normalizeProduct(payload).entities.products;
 			state.isDataLoading = false;
 		});
 		builder.addCase(getProductByIdAsync.rejected, (state) => {
@@ -123,7 +133,7 @@ export const productModel = createSlice({
 				state.operationResultMessage.error = payload.error;
 			} else if ("bestSellingProducts" in payload && payload.bestSellingProducts) {
 				state.operationResultMessage = { error: null, success: null };
-				state.filteredData = normalizeProducts(
+				state.data.filteredData = normalizeProducts(
 					payload.bestSellingProducts,
 				).entities.products;
 			}
@@ -169,7 +179,7 @@ export const getFilteredProductsByCategoryAsync = createAsyncThunk(
 		}
 	},
 );
-
+// By id not working
 export const getProductByIdAsync = createAsyncThunk(
 	"products/getProductByIdAsync",
 	async (productId: number, { rejectWithValue }) => {
@@ -205,7 +215,7 @@ export const getBestSellingProductsAsync = createAsyncThunk(
 export const useProducts = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data,
+			(state: RootState) => state.products.data.fetchedData,
 			(products) => products,
 		),
 	);
@@ -213,7 +223,7 @@ export const useProducts = () =>
 export const useFilteredProducts = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.filteredData,
+			(state: RootState) => state.products.data.filteredData,
 			(filteredProducts) => filteredProducts,
 		),
 	);
@@ -238,7 +248,7 @@ export const useOperationResultMessage = () =>
 export const useProduct = (productId: number) =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.filteredData,
+			(state: RootState) => state.products.data.filteredData,
 			(products) => {
 				if (products) return products[productId];
 			},
@@ -264,7 +274,7 @@ export const useProduct = (productId: number) =>
 export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: number }) =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data,
+			(state: RootState) => state.products.data.mostViewedData,
 			(products) => {
 				return Object.values(products)
 					.sort((a, b) => b.views - a.views)

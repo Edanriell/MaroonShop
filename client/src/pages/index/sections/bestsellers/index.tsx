@@ -1,12 +1,12 @@
 import { FC } from "react";
 
-import { Bestsellers } from "widgets/bestsellers";
+import { BestSellingProducts } from "widgets/best-selling-products";
 
 import { Button } from "shared/ui";
 
-import { BestSellingProductsProps } from "./types";
+import { BestsellersProps } from "./types";
 
-const BestSellingProducts: FC<BestSellingProductsProps> = ({ title }) => {
+const Bestsellers: FC<BestsellersProps> = ({ title }) => {
 	return (
 		<div
 			className={
@@ -42,7 +42,7 @@ const BestSellingProducts: FC<BestSellingProductsProps> = ({ title }) => {
 				</p>
 			</header>
 			<div className={"md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-6 relative"}>
-				<Bestsellers />
+				<BestSellingProducts />
 			</div>
 			<div
 				className={
@@ -61,4 +61,4 @@ const BestSellingProducts: FC<BestSellingProductsProps> = ({ title }) => {
 	);
 };
 
-export default BestSellingProducts;
+export default Bestsellers;
