@@ -244,7 +244,7 @@ export const useOperationResultMessage = () =>
 		),
 	);
 
-// SHIT AFTER ALL THIS, NEED TO REFACTOR
+// NEED TO REFACTOR
 export const useProduct = (productId: number) =>
 	useSelector(
 		createSelector(
