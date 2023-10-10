@@ -105,7 +105,7 @@ class ProductsService {
 		}
 	}
 
-	async getFilteredProductsByCategory(filter) {
+	async getFilteredProductsByCategories(filter) {
 		const filteredProducts = await ProductModel.find(filter);
 
 		const products = [];
@@ -123,6 +123,10 @@ class ProductsService {
 		return {
 			filteredProducts: products,
 		};
+	}
+
+	async getProductById(productId) {
+		// Implementation
 	}
 
 	async getBestSellingProducts({ sells, productsCount }) {

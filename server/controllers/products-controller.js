@@ -12,7 +12,7 @@ class ProductsController {
 		}
 	}
 
-	async getFilteredProductsByCategory(req, res, next) {
+	async getFilteredProductsByCategories(req, res, next) {
 		try {
 			const { mainCategory, secondaryCategory, skinTypeCategory } = req.query;
 			const filter = {};
@@ -33,7 +33,7 @@ class ProductsController {
 				);
 			}
 
-			const filteredData = await productsService.getFilteredProductsByCategory(filter);
+			const filteredData = await productsService.getFilteredProductsByCategories(filter);
 			return res.json(filteredData);
 		} catch (err) {
 			next(err);
@@ -49,6 +49,22 @@ class ProductsController {
 				productsCount,
 			});
 			return res.json(bestSellingProducts);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async getProductById(req, res, next) {
+		try {
+			const { productId } = req.query;
+
+			if (productId.length === 0 || !productId) {
+				throw ApiError.BadRequest("Неверный Id товара.");
+			}
+
+			const product = await productsService.getProductById({ productId });
+
+			return res.json(product);
 		} catch (err) {
 			next(err);
 		}

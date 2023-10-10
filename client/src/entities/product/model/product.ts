@@ -179,19 +179,18 @@ export const getFilteredProductsByCategoryAsync = createAsyncThunk(
 		}
 	},
 );
-// By id not working
+
 export const getProductByIdAsync = createAsyncThunk(
 	"products/getProductByIdAsync",
-	async (productId: number, { rejectWithValue }) => {
+	async (productId: number) => {
 		try {
 			const response = await productsApi.products.getProductById(productId);
 			const { data } = response;
 			// console.log(data);
 			return data;
-		} catch (err) {
-			// eslint-disable-next-line no-console
-			console.error("Failed to fetch product:", err);
-			return rejectWithValue((err as any).message);
+		} catch (error) {
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
 		}
 	},
 );

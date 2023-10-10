@@ -11,14 +11,14 @@ export type GetFilteredProductsParams = {
 };
 
 const BASE_URL = "api/products";
-const BASE_FILTER_URL = "api/products/filtered-by-parameters";
-const BASE_FILTER_BY_ID_URL = "/products/";
-const BASE_BEST_SELLING_PRODUCTS_URL = "api/products/best-selling-products";
+const BASE_FILTER_URL = "api/products/filtered-by-categories";
+const BASE_FILTER_BY_ID_URL = "/product/filtered-by-id";
+const BASE_BEST_SELLING_PRODUCTS_URL = "api/products/best-selling";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
 };
-
+// Categories not Category
 export const getFilteredProductsByCategory = ({
 	mainCategory,
 	secondaryCategory,
@@ -33,8 +33,10 @@ export const getFilteredProductsByCategory = ({
 	});
 };
 
-export const getProductById = (productId: number): AxiosPromise<Product> => {
-	return apiInstance.get(BASE_FILTER_BY_ID_URL + productId);
+export const getProductById = ({ productId }: { productId: number }): AxiosPromise<Product> => {
+	return apiInstance.get(BASE_FILTER_BY_ID_URL, {
+		params: { productId },
+	});
 };
 
 export const getBestSellingProducts = ({

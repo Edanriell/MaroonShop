@@ -45,7 +45,7 @@ app.use("/gallery-images", express.static(path.join(__dirname, "public", "galler
 app.use("/products", productsRouter); // refactored
 app.use("/questionnaire", questionnaireRouter);
 app.use("/gallery", galleryRouter);
-app.use("/products/filtered", filteredProductsRouter);
+app.use("/products/filtered", filteredProductsRouter); // refactored
 app.use("/products", filteredProductByIdRouter);
 // REFACTOR
 app.use("/api", router);
