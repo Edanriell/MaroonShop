@@ -116,7 +116,15 @@ export const productModel = createSlice({
 			state.isDataLoading = true;
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
-			state.data.filteredData = normalizeProduct(payload).entities.products;
+			if ("error" in payload && payload.error === undefined) {
+				state.operationResultMessage.error = "Неудалось загрузить товар.";
+			} else if ("error" in payload && payload.error) {
+				state.operationResultMessage.error = payload.error;
+			} else if ("product" in payload && payload.product) {
+				state.operationResultMessage = { error: null, success: null };
+				// Probably problem here.
+				state.data.filteredData = normalizeProduct(payload.product).entities.products;
+			}
 			state.isDataLoading = false;
 		});
 		builder.addCase(getProductByIdAsync.rejected, (state) => {
@@ -184,10 +192,11 @@ export const getProductByIdAsync = createAsyncThunk(
 	"products/getProductByIdAsync",
 	async (productId: number) => {
 		try {
-			const response = await productsApi.products.getProductById(productId);
+			const response = await productsApi.products.getProductById({ productId });
 			const { data } = response;
-			// console.log(data);
-			return data;
+			console.log(data);
+			// Probably problem here.
+			return { product: data };
 		} catch (error) {
 			const errorMessage = (error as any).response?.data?.message;
 			return { error: errorMessage };

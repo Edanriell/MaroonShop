@@ -126,7 +126,17 @@ class ProductsService {
 	}
 
 	async getProductById(productId) {
-		// Implementation productId
+		const product = await ProductModel.find({ _id: productId });
+
+		if (!product) {
+			throw ApiError.NotFound(`Товар с уникальным идентификатором ${productId} не найден.`);
+		}
+
+		const productDto = new ProductDto(product);
+
+		return {
+			product: productDto,
+		};
 	}
 
 	async getBestSellingProducts({ sells, productsCount }) {
