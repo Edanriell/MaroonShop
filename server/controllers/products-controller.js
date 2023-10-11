@@ -62,7 +62,7 @@ class ProductsController {
 				throw ApiError.BadRequest("Неверный Id товара.");
 			}
 
-			const product = await productsService.getProductById({ productId });
+			const product = await productsService.getProductById(productId);
 
 			return res.json(product);
 		} catch (err) {
