@@ -126,7 +126,7 @@ class ProductsService {
 	}
 
 	async getProductById(productId) {
-		// Implementation
+		// Implementation productId
 	}
 
 	async getBestSellingProducts({ sells, productsCount }) {
