@@ -124,7 +124,7 @@ class ProductsService {
 			filteredProducts: products,
 		};
 	}
-//// REFACTOR
+
 	async getProductById(productId) {
 		const product = await ProductModel.find({ _id: productId });
 
@@ -133,7 +133,7 @@ class ProductsService {
 		}
 
 		const productDto = new ProductDto(product);
-
+		console.log(productDto);
 		return {
 			product: productDto,
 		};
