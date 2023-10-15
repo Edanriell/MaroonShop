@@ -11,7 +11,7 @@ const productsDataFilePath = `${appDir}/data/products.json`;
 class ProductsService {
 	async getAllProducts() {
 		const allProducts = await ProductModel.find();
-		console.log(allProducts);
+		// console.log(allProducts);
 		const products = [];
 
 		if (allProducts.length === 0) {
@@ -126,14 +126,14 @@ class ProductsService {
 	}
 
 	async getProductById(productId) {
-		const product = await ProductModel.find({ _id: productId });
+		const [ product ] = await ProductModel.find({ _id: productId });
 
 		if (!product) {
 			throw ApiError.NotFound(`Товар с уникальным идентификатором ${productId} не найден.`);
 		}
 
 		const productDto = new ProductDto(product);
-		console.log(productDto);
+
 		return {
 			product: productDto,
 		};

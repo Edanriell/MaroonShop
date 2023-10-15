@@ -8,6 +8,10 @@ export type Products = {
 	products: Product[];
 };
 
+export type SingleProduct = {
+	product: Product;
+};
+
 export type FilteredProducts = {
 	filteredProducts: Product[];
 };

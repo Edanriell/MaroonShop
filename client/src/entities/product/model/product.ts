@@ -12,13 +12,14 @@ import { Product, productsApi } from "shared/api";
 
 import { NormalizedProducts, OperationResultMessage, RootState } from "./types";
 
-export const productSchema = new schema.Entity<Product>("products");
+export const productsSchema = new schema.Entity<Product>("products");
+export const productSchema = new schema.Entity<Product>("product");
 
 export const normalizeProduct = (data: Product) =>
-	normalize<Product, { products: NormalizedProducts }>(data, productSchema);
+	normalize<Product, { product: NormalizedProducts }>(data, productSchema);
 
 export const normalizeProducts = (data: Product[]) =>
-	normalize<Product, { products: NormalizedProducts }>(data, [productSchema]);
+	normalize<Product, { products: NormalizedProducts }>(data, [productsSchema]);
 
 export const initialState: {
 	data: {
@@ -53,7 +54,7 @@ export const productModel = createSlice({
 			} else if (Array.isArray(payload)) {
 				state.data.filteredData = normalizeProducts(payload as Product[]).entities.products;
 			} else {
-				state.data.filteredData = normalizeProduct(payload as Product).entities.products;
+				state.data.filteredData = normalizeProduct(payload as Product).entities.product;
 			}
 		},
 		setOperationResultMessage: (
@@ -92,10 +93,10 @@ export const productModel = createSlice({
 			state.isDataLoading = false;
 		});
 
-		builder.addCase(getFilteredProductsByCategoryAsync.pending, (state) => {
+		builder.addCase(getFilteredProductsByCategoriesAsync.pending, (state) => {
 			state.isDataLoading = true;
 		});
-		builder.addCase(getFilteredProductsByCategoryAsync.fulfilled, (state, { payload }) => {
+		builder.addCase(getFilteredProductsByCategoriesAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
 				state.operationResultMessage.error = "Неудалось загрузить товары.";
 			} else if ("error" in payload && payload.error) {
@@ -108,7 +109,7 @@ export const productModel = createSlice({
 			}
 			state.isDataLoading = false;
 		});
-		builder.addCase(getFilteredProductsByCategoryAsync.rejected, (state) => {
+		builder.addCase(getFilteredProductsByCategoriesAsync.rejected, (state) => {
 			state.isDataLoading = false;
 		});
 
@@ -120,10 +121,11 @@ export const productModel = createSlice({
 				state.operationResultMessage.error = "Неудалось загрузить товар.";
 			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
+				console.log("fail");
 			} else if ("product" in payload && payload.product) {
+				console.log("suc");
 				state.operationResultMessage = { error: null, success: null };
-				// Probably problem here.
-				state.data.filteredData = normalizeProduct(payload.product).entities.products;
+				state.data.filteredData = normalizeProduct(payload.product).entities.product;
 			}
 			state.isDataLoading = false;
 		});
@@ -163,8 +165,8 @@ export const getProductsAsync = createAsyncThunk("products/getProductsAsync", as
 	}
 });
 
-export const getFilteredProductsByCategoryAsync = createAsyncThunk(
-	"products/getFilteredProductsByCategoryAsync",
+export const getFilteredProductsByCategoriesAsync = createAsyncThunk(
+	"products/getFilteredProductsByCategoriesAsync",
 	async ({
 		mainCategory,
 		secondaryCategory,
@@ -175,7 +177,7 @@ export const getFilteredProductsByCategoryAsync = createAsyncThunk(
 		skinTypeCategory?: String[] | null;
 	}) => {
 		try {
-			const response = await productsApi.products.getFilteredProductsByCategory({
+			const response = await productsApi.products.getFilteredProductsByCategories({
 				mainCategory,
 				secondaryCategory,
 				skinTypeCategory,
@@ -190,13 +192,10 @@ export const getFilteredProductsByCategoryAsync = createAsyncThunk(
 
 export const getProductByIdAsync = createAsyncThunk(
 	"products/getProductByIdAsync",
-	async (productId: number) => {
+	async (productId: string) => {
 		try {
 			const response = await productsApi.products.getProductById({ productId });
-			const { data } = response;
-			console.log(data);
-			// Probably problem here.
-			return { product: data };
+			return { product: response.data.product };
 		} catch (error) {
 			const errorMessage = (error as any).response?.data?.message;
 			return { error: errorMessage };
@@ -228,6 +227,14 @@ export const useProducts = () =>
 		),
 	);
 
+export const useProduct = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.filteredData,
+			(product) => product,
+		),
+	);
+
 export const useFilteredProducts = () =>
 	useSelector(
 		createSelector(
@@ -253,15 +260,15 @@ export const useOperationResultMessage = () =>
 	);
 
 // NEED TO REFACTOR
-export const useProduct = (productId: number) =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.data.filteredData,
-			(products) => {
-				if (products) return products[productId];
-			},
-		),
-	);
+// export const useProduct = (productId: number) =>
+// 	useSelector(
+// 		createSelector(
+// 			(state: RootState) => state.products.data.filteredData,
+// 			(products) => {
+// 				if (products) return products[productId];
+// 			},
+// 		),
+// 	);
 
 // useBestsellers, useMostViewedProducts also useUsersMostViewedProducts must be
 // returned by the server and saved into the state.filteredData

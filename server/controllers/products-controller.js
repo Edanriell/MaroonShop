@@ -59,7 +59,7 @@ class ProductsController {
 			const { productId } = req.query;
 
 			if (productId.length === 0 || !productId) {
-				throw ApiError.BadRequest("Неверный Id товара.");
+				throw ApiError.BadRequest("Передан неверный уникальный идентификатор товара.");
 			}
 
 			const product = await productsService.getProductById(productId);

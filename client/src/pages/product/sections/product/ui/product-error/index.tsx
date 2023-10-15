@@ -1,10 +1,14 @@
+import { FC } from "react";
+
 import { Button } from "shared/ui";
 
-const ProductNotFound = () => {
+import { ProductErrorProps } from "./types";
+
+const ProductError: FC<ProductErrorProps> = ({ errorMessage }) => {
 	return (
 		<div className="flex flex-col items-center justify-center mt-[26rem] mb-[26rem]">
 			<p className="font-raleway font-medium text-sm-18px mb-[1rem] md:text-[2.2rem]">
-				Товар не найден.
+				{errorMessage}
 			</p>
 			<Button
 				type={"link-internal"}
@@ -18,4 +22,4 @@ const ProductNotFound = () => {
 	);
 };
 
-export default ProductNotFound;
+export default ProductError;

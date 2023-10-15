@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
@@ -9,32 +9,39 @@ import { Accordion, Button, Radio } from "shared/ui";
 
 import { getProductType } from "shared/lib/functions";
 
-import { ProductLoading, ProductNotFound } from "./ui";
+import { ProductLoading, ProductError } from "./ui";
 
 import styles from "./styles.module.scss";
 
 const Product = () => {
-	const store = useSelector((state: productModel.RootState) => state.products);
-	const { dataLoading } = store;
+	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
 	const { productId } = useParams();
 
-	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
+	const isDataLoading = productModel.useIsDataLoading();
 
-	const product = productModel.useProduct(+productId!);
+	const operationResultMessage = productModel.useOperationResultMessage();
+
+	const [product] = Object.values(productModel.useProduct());
 
 	useEffect(() => {
-		dispatch(productModel.getProductByIdAsync(+productId!));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productId]);
+		dispatch(productModel.getProductByIdAsync(productId!));
+	}, [productId, dispatch]);
 
+	useEffect(() => {
+		console.log(operationResultMessage.error);
+	}, [operationResultMessage, product]);
+	// ERROR MESSAGE NOT DISPLAYING
 	const priceContainerRef = useRef(null);
 
-	if (dataLoading) {
+	if (isDataLoading) {
 		return <ProductLoading />;
 	}
 
-	if (!product) return <ProductNotFound />;
+	if (operationResultMessage.error || !product)
+		return <ProductError errorMessage={operationResultMessage.error} />;
+
+	if (!product) return null;
 
 	return (
 		<>
