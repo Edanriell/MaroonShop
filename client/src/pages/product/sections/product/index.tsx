@@ -38,7 +38,7 @@ const Product = () => {
 		return <ProductLoading />;
 	}
 
-	if (operationResultMessage.error || !product)
+	if (operationResultMessage.error)
 		return <ProductError errorMessage={operationResultMessage.error} />;
 
 	if (!product) return null;

@@ -23,22 +23,63 @@ export const normalizeProducts = (data: Product[]) =>
 
 export const initialState: {
 	data: {
-		fetchedData: NormalizedProducts;
-		filteredData: NormalizedProducts;
-		mostViewedData: NormalizedProducts;
-		userMostViewedData: NormalizedProducts;
+		fetchedData: {
+			data: NormalizedProducts;
+			operationResultMessage: OperationResultMessage;
+			isLoading: boolean;
+		};
+		filteredData: {
+			data: NormalizedProducts;
+			operationResultMessage: OperationResultMessage;
+			isLoading: boolean;
+		};
+		mostViewedData: {
+			data: NormalizedProducts;
+			operationResultMessage: OperationResultMessage;
+			isLoading: boolean;
+		};
+		userLastViewedData: {
+			data: NormalizedProducts;
+			operationResultMessage: OperationResultMessage;
+			isLoading: boolean;
+		};
 	};
-	operationResultMessage: OperationResultMessage;
-	isDataLoading: boolean;
+	// fetchOperationResultMessage: OperationResultMessage;
+	// filterOperationResultMessage: OperationResultMessage;
+	// mostViewedDataOperationResultMessage: OperationResultMessage;
+	// userLastViewedDataOperationResultMessage: OperationResultMessage;
+	// isFetchedDataLoading: boolean;
+	// isFilteredDataLoading: boolean;
+	// isMostViewedDataLoading: boolean;
+	// isUserLastViewedDataLoading: boolean;
 } = {
 	data: {
-		fetchedData: {},
-		filteredData: {},
-		mostViewedData: {},
-		userMostViewedData: {},
+		fetchedData: {
+			data: {},
+			operationResultMessage: { error: null, success: null },
+			isLoading: false,
+		},
+		filteredData: {
+			data: {},
+			operationResultMessage: { error: null, success: null },
+			isLoading: false,
+		},
+		mostViewedData: {
+			data: {},
+			operationResultMessage: { error: null, success: null },
+			isLoading: false,
+		},
+		userLastViewedData: {
+			data: {},
+			operationResultMessage: { error: null, success: null },
+			isLoading: false,
+		},
 	},
-	operationResultMessage: { error: null, success: null },
-	isDataLoading: false,
+	// fetchOperationResultMessage: { error: null, success: null },
+	// filterOperationResultMessage: { error: null, success: null },
+	// mostViewedDataOperationResultMessage: { error: null, success: null },
+	// userLastViewedDataOperationResultMessage: { error: null, success: null },
+	// isDataLoading: false,
 };
 
 export const productModel = createSlice({
@@ -46,29 +87,78 @@ export const productModel = createSlice({
 	initialState,
 	reducers: {
 		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
-			state.data.fetchedData = normalizeProducts(payload).entities.products;
+			state.data.fetchedData.data = normalizeProducts(payload).entities.products;
 		},
 		setFilteredData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
 			if (JSON.stringify(payload) === "{}") {
-				state.data.filteredData = payload;
+				state.data.filteredData.data = payload;
 			} else if (Array.isArray(payload)) {
-				state.data.filteredData = normalizeProducts(payload as Product[]).entities.products;
+				state.data.filteredData.data = normalizeProducts(
+					payload as Product[],
+				).entities.products;
 			} else {
-				state.data.filteredData = normalizeProduct(payload as Product).entities.product;
+				state.data.filteredData.data = normalizeProduct(
+					payload as Product,
+				).entities.product;
 			}
 		},
-		setOperationResultMessage: (
+		setFetchOperationResultMessage: (
 			state,
 			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
 		) => {
 			if (payload.error) {
-				state.operationResultMessage.error = payload.error;
+				state.data.fetchedData.operationResultMessage.error = payload.error;
 			} else if (payload.success) {
-				state.operationResultMessage.success = payload.success;
+				state.data.fetchedData.operationResultMessage.success = payload.success;
 			}
 		},
-		clearOperationResultMessage: (state, { payload = null }: PayloadAction<null>) => {
-			state.operationResultMessage = { error: null, success: null };
+		setFilterOperationResultMessage: (
+			state,
+			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
+		) => {
+			if (payload.error) {
+				state.filterOperationResultMessage.error = payload.error;
+			} else if (payload.success) {
+				state.filterOperationResultMessage.success = payload.success;
+			}
+		},
+		setMostViewedDataOperationResultMessage: (
+			state,
+			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
+		) => {
+			if (payload.error) {
+				state.mostViewedDataOperationResultMessage.error = payload.error;
+			} else if (payload.success) {
+				state.mostViewedDataOperationResultMessage.success = payload.success;
+			}
+		},
+		setUserLastViewedDataOperationResultMessage: (
+			state,
+			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
+		) => {
+			if (payload.error) {
+				state.userLastViewedDataOperationResultMessage.error = payload.error;
+			} else if (payload.success) {
+				state.userLastViewedDataOperationResultMessage.success = payload.success;
+			}
+		},
+		clearFetchOperationResultMessage: (state, { payload = null }: PayloadAction<null>) => {
+			state.fetchOperationResultMessage = { error: null, success: null };
+		},
+		clearFilterOperationResultMessage: (state, { payload = null }: PayloadAction<null>) => {
+			state.filterOperationResultMessage = { error: null, success: null };
+		},
+		clearMostViewedDataOperationResultMessage: (
+			state,
+			{ payload = null }: PayloadAction<null>,
+		) => {
+			state.mostViewedDataOperationResultMessage = { error: null, success: null };
+		},
+		clearUserLastViewedDataOperationResultMessage: (
+			state,
+			{ payload = null }: PayloadAction<null>,
+		) => {
+			state.userLastViewedDataOperationResultMessage = { error: null, success: null };
 		},
 		setDataLoading: (state, { payload }: PayloadAction<boolean>) => {
 			state.isDataLoading = payload;
@@ -117,13 +207,12 @@ export const productModel = createSlice({
 			state.isDataLoading = true;
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
+			//
 			if ("error" in payload && payload.error === undefined) {
 				state.operationResultMessage.error = "Неудалось загрузить товар.";
 			} else if ("error" in payload && payload.error) {
 				state.operationResultMessage.error = payload.error;
-				console.log("fail");
 			} else if ("product" in payload && payload.product) {
-				console.log("suc");
 				state.operationResultMessage = { error: null, success: null };
 				state.data.filteredData = normalizeProduct(payload.product).entities.product;
 			}
