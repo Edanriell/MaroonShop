@@ -44,14 +44,6 @@ export const initialState: {
 			isLoading: boolean;
 		};
 	};
-	// fetchOperationResultMessage: OperationResultMessage;
-	// filterOperationResultMessage: OperationResultMessage;
-	// mostViewedDataOperationResultMessage: OperationResultMessage;
-	// userLastViewedDataOperationResultMessage: OperationResultMessage;
-	// isFetchedDataLoading: boolean;
-	// isFilteredDataLoading: boolean;
-	// isMostViewedDataLoading: boolean;
-	// isUserLastViewedDataLoading: boolean;
 } = {
 	data: {
 		fetchedData: {
@@ -75,19 +67,22 @@ export const initialState: {
 			isLoading: false,
 		},
 	},
-	// fetchOperationResultMessage: { error: null, success: null },
-	// filterOperationResultMessage: { error: null, success: null },
-	// mostViewedDataOperationResultMessage: { error: null, success: null },
-	// userLastViewedDataOperationResultMessage: { error: null, success: null },
-	// isDataLoading: false,
 };
 
 export const productModel = createSlice({
 	name: "products",
 	initialState,
 	reducers: {
-		setProducts: (state, { payload }: PayloadAction<Product[]>) => {
-			state.data.fetchedData.data = normalizeProducts(payload).entities.products;
+		setFetchedData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
+			if (JSON.stringify(payload) === "{}") {
+				state.data.fetchedData.data = payload;
+			} else if (Array.isArray(payload)) {
+				state.data.fetchedData.data = normalizeProducts(
+					payload as Product[],
+				).entities.products;
+			} else {
+				state.data.fetchedData.data = normalizeProduct(payload as Product).entities.product;
+			}
 		},
 		setFilteredData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
 			if (JSON.stringify(payload) === "{}") {
@@ -98,6 +93,32 @@ export const productModel = createSlice({
 				).entities.products;
 			} else {
 				state.data.filteredData.data = normalizeProduct(
+					payload as Product,
+				).entities.product;
+			}
+		},
+		setMostViewedData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
+			if (JSON.stringify(payload) === "{}") {
+				state.data.mostViewedData.data = payload;
+			} else if (Array.isArray(payload)) {
+				state.data.mostViewedData.data = normalizeProducts(
+					payload as Product[],
+				).entities.products;
+			} else {
+				state.data.mostViewedData.data = normalizeProduct(
+					payload as Product,
+				).entities.product;
+			}
+		},
+		setUserLastViewedData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
+			if (JSON.stringify(payload) === "{}") {
+				state.data.userLastViewedData.data = payload;
+			} else if (Array.isArray(payload)) {
+				state.data.userLastViewedData.data = normalizeProducts(
+					payload as Product[],
+				).entities.products;
+			} else {
+				state.data.userLastViewedData.data = normalizeProduct(
 					payload as Product,
 				).entities.product;
 			}
@@ -117,9 +138,9 @@ export const productModel = createSlice({
 			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
 		) => {
 			if (payload.error) {
-				state.filterOperationResultMessage.error = payload.error;
+				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if (payload.success) {
-				state.filterOperationResultMessage.success = payload.success;
+				state.data.filteredData.operationResultMessage.success = payload.success;
 			}
 		},
 		setMostViewedDataOperationResultMessage: (
@@ -127,9 +148,9 @@ export const productModel = createSlice({
 			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
 		) => {
 			if (payload.error) {
-				state.mostViewedDataOperationResultMessage.error = payload.error;
+				state.data.mostViewedData.operationResultMessage.error = payload.error;
 			} else if (payload.success) {
-				state.mostViewedDataOperationResultMessage.success = payload.success;
+				state.data.mostViewedData.operationResultMessage.success = payload.success;
 			}
 		},
 		setUserLastViewedDataOperationResultMessage: (
@@ -137,109 +158,119 @@ export const productModel = createSlice({
 			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
 		) => {
 			if (payload.error) {
-				state.userLastViewedDataOperationResultMessage.error = payload.error;
+				state.data.userLastViewedData.operationResultMessage.error = payload.error;
 			} else if (payload.success) {
-				state.userLastViewedDataOperationResultMessage.success = payload.success;
+				state.data.userLastViewedData.operationResultMessage.success = payload.success;
 			}
 		},
 		clearFetchOperationResultMessage: (state, { payload = null }: PayloadAction<null>) => {
-			state.fetchOperationResultMessage = { error: null, success: null };
+			state.data.fetchedData.operationResultMessage = { error: null, success: null };
 		},
 		clearFilterOperationResultMessage: (state, { payload = null }: PayloadAction<null>) => {
-			state.filterOperationResultMessage = { error: null, success: null };
+			state.data.filteredData.operationResultMessage = { error: null, success: null };
 		},
 		clearMostViewedDataOperationResultMessage: (
 			state,
 			{ payload = null }: PayloadAction<null>,
 		) => {
-			state.mostViewedDataOperationResultMessage = { error: null, success: null };
+			state.data.mostViewedData.operationResultMessage = { error: null, success: null };
 		},
 		clearUserLastViewedDataOperationResultMessage: (
 			state,
 			{ payload = null }: PayloadAction<null>,
 		) => {
-			state.userLastViewedDataOperationResultMessage = { error: null, success: null };
+			state.data.userLastViewedData.operationResultMessage = { error: null, success: null };
 		},
-		setDataLoading: (state, { payload }: PayloadAction<boolean>) => {
-			state.isDataLoading = payload;
+		setFetchedDataLoading: (state, { payload }: PayloadAction<boolean>) => {
+			state.data.fetchedData.isLoading = payload;
+		},
+		setFilteredDataLoading: (state, { payload }: PayloadAction<boolean>) => {
+			state.data.filteredData.isLoading = payload;
+		},
+		setMostViewedDataLoading: (state, { payload }: PayloadAction<boolean>) => {
+			state.data.mostViewedData.isLoading = payload;
+		},
+		setUserLastViewedDataLoading: (state, { payload }: PayloadAction<boolean>) => {
+			state.data.userLastViewedData.isLoading = payload;
 		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getProductsAsync.pending, (state) => {
-			state.isDataLoading = true;
+			state.data.fetchedData.isLoading = true;
 		});
 		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
-				state.operationResultMessage.error = "Неудалось загрузить товары.";
+				state.data.fetchedData.operationResultMessage.error = "Неудалось загрузить товары.";
 			} else if ("error" in payload && payload.error) {
-				state.operationResultMessage.error = payload.error;
+				state.data.fetchedData.operationResultMessage.error = payload.error;
 			} else if ("products" in payload && payload.products) {
-				state.operationResultMessage = { error: null, success: null };
-				state.data.fetchedData = normalizeProducts(payload.products).entities.products;
+				state.data.fetchedData.operationResultMessage = { error: null, success: null };
+				state.data.fetchedData.data = normalizeProducts(payload.products).entities.products;
 			}
-			state.isDataLoading = false;
+			state.data.fetchedData.isLoading = false;
 		});
 		builder.addCase(getProductsAsync.rejected, (state) => {
-			state.isDataLoading = false;
+			state.data.fetchedData.isLoading = false;
 		});
 
 		builder.addCase(getFilteredProductsByCategoriesAsync.pending, (state) => {
-			state.isDataLoading = true;
+			state.data.filteredData.isLoading = true;
 		});
 		builder.addCase(getFilteredProductsByCategoriesAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
-				state.operationResultMessage.error = "Неудалось загрузить товары.";
+				state.data.filteredData.operationResultMessage.error =
+					"Неудалось загрузить товары.";
 			} else if ("error" in payload && payload.error) {
-				state.operationResultMessage.error = payload.error;
+				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if ("filteredProducts" in payload && payload.filteredProducts) {
-				state.operationResultMessage = { error: null, success: null };
-				state.data.filteredData = normalizeProducts(
+				state.data.filteredData.operationResultMessage = { error: null, success: null };
+				state.data.filteredData.data = normalizeProducts(
 					payload.filteredProducts,
 				).entities.products;
 			}
-			state.isDataLoading = false;
+			state.data.filteredData.isLoading = false;
 		});
 		builder.addCase(getFilteredProductsByCategoriesAsync.rejected, (state) => {
-			state.isDataLoading = false;
+			state.data.filteredData.isLoading = false;
 		});
 
 		builder.addCase(getProductByIdAsync.pending, (state) => {
-			state.isDataLoading = true;
+			state.data.filteredData.isLoading = true;
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
-			//
 			if ("error" in payload && payload.error === undefined) {
-				state.operationResultMessage.error = "Неудалось загрузить товар.";
+				state.data.filteredData.operationResultMessage.error = "Неудалось загрузить товар.";
 			} else if ("error" in payload && payload.error) {
-				state.operationResultMessage.error = payload.error;
+				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if ("product" in payload && payload.product) {
-				state.operationResultMessage = { error: null, success: null };
-				state.data.filteredData = normalizeProduct(payload.product).entities.product;
+				state.data.filteredData.operationResultMessage = { error: null, success: null };
+				state.data.filteredData.data = normalizeProduct(payload.product).entities.product;
 			}
-			state.isDataLoading = false;
+			state.data.filteredData.isLoading = false;
 		});
 		builder.addCase(getProductByIdAsync.rejected, (state) => {
-			state.isDataLoading = false;
+			state.data.filteredData.isLoading = false;
 		});
 
 		builder.addCase(getBestSellingProductsAsync.pending, (state) => {
-			state.isDataLoading = true;
+			state.data.filteredData.isLoading = true;
 		});
 		builder.addCase(getBestSellingProductsAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
-				state.operationResultMessage.error = "Неудалось загрузить бестселлеры.";
+				state.data.filteredData.operationResultMessage.error =
+					"Неудалось загрузить бестселлеры.";
 			} else if ("error" in payload && payload.error) {
-				state.operationResultMessage.error = payload.error;
+				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if ("bestSellingProducts" in payload && payload.bestSellingProducts) {
-				state.operationResultMessage = { error: null, success: null };
-				state.data.filteredData = normalizeProducts(
+				state.data.filteredData.operationResultMessage = { error: null, success: null };
+				state.data.filteredData.data = normalizeProducts(
 					payload.bestSellingProducts,
 				).entities.products;
 			}
-			state.isDataLoading = false;
+			state.data.filteredData.isLoading = false;
 		});
 		builder.addCase(getBestSellingProductsAsync.rejected, (state) => {
-			state.isDataLoading = false;
+			state.data.filteredData.isLoading = false;
 		});
 	},
 });
@@ -311,7 +342,7 @@ export const getBestSellingProductsAsync = createAsyncThunk(
 export const useProducts = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.fetchedData,
+			(state: RootState) => state.products.data.fetchedData.data,
 			(products) => products,
 		),
 	);
@@ -319,7 +350,7 @@ export const useProducts = () =>
 export const useProduct = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.filteredData,
+			(state: RootState) => state.products.data.filteredData.data,
 			(product) => product,
 		),
 	);
@@ -327,23 +358,71 @@ export const useProduct = () =>
 export const useFilteredProducts = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.filteredData,
+			(state: RootState) => state.products.data.filteredData.data,
 			(filteredProducts) => filteredProducts,
 		),
 	);
 
-export const useIsDataLoading = () =>
+export const useIsFetchedDataLoading = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.isDataLoading,
+			(state: RootState) => state.products.data.fetchedData.isLoading,
 			(isDataLoading) => isDataLoading,
 		),
 	);
 
-export const useOperationResultMessage = () =>
+export const useIsFilteredDataLoading = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.operationResultMessage,
+			(state: RootState) => state.products.data.filteredData.isLoading,
+			(isDataLoading) => isDataLoading,
+		),
+	);
+
+export const useIsMostViewedDataLoading = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.mostViewedData.isLoading,
+			(isDataLoading) => isDataLoading,
+		),
+	);
+
+export const useIsUserLastViewedDataLoading = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.userLastViewedData.isLoading,
+			(isDataLoading) => isDataLoading,
+		),
+	);
+
+export const useFetchedDataOperationResultMessage = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.fetchedData.operationResultMessage,
+			(operationResultMessage) => operationResultMessage,
+		),
+	);
+
+export const useFilteredDataOperationResultMessage = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.filteredData.operationResultMessage,
+			(operationResultMessage) => operationResultMessage,
+		),
+	);
+
+export const useMostViewedDataOperationResultMessage = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.mostViewedData.operationResultMessage,
+			(operationResultMessage) => operationResultMessage,
+		),
+	);
+
+export const useUserLastViewedDataOperationResultMessage = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.userLastViewedData.operationResultMessage,
 			(operationResultMessage) => operationResultMessage,
 		),
 	);
@@ -375,17 +454,17 @@ export const useOperationResultMessage = () =>
 // 		),
 // 	);
 
-export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: number }) =>
-	useSelector(
-		createSelector(
-			(state: RootState) => state.products.data.mostViewedData,
-			(products) => {
-				return Object.values(products)
-					.sort((a, b) => b.views - a.views)
-					.slice(0, maxProductsCount);
-			},
-		),
-	);
+// export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: number }) =>
+// 	useSelector(
+// 		createSelector(
+// 			(state: RootState) => state.products.data.mostViewedData,
+// 			(products) => {
+// 				return Object.values(products)
+// 					.sort((a, b) => b.views - a.views)
+// 					.slice(0, maxProductsCount);
+// 			},
+// 		),
+// 	);
 
 export const setProducts = createAction<NormalizedProducts | {}>("products/setProducts");
 
@@ -404,18 +483,18 @@ export const clearOperationResultMessage = createAction<OperationResultMessage |
 export const setDataLoading = createAction<boolean>("products/setDataLoading");
 
 // All this below must be refactored or deleted.
-export const isProductsEmpty = (products: NormalizedProducts): boolean => {
-	return Object.keys(products).length === 0;
-};
+// export const isProductsEmpty = (products: NormalizedProducts): boolean => {
+// 	return Object.keys(products).length === 0;
+// };
 
-export const isFilteredProductsEmpty = (filteredProducts: any): boolean => {
-	if (!filteredProducts) return true;
-	return Object.keys(filteredProducts).length === 0;
-};
+// export const isFilteredProductsEmpty = (filteredProducts: any): boolean => {
+// 	if (!filteredProducts) return true;
+// 	return Object.keys(filteredProducts).length === 0;
+// };
 
-export const isMostViewedProductsEmpty = (mostViewedProducts: NormalizedProducts): boolean => {
-	if (!mostViewedProducts) return true;
-	return Object.keys(mostViewedProducts).length === 0;
-};
+// export const isMostViewedProductsEmpty = (mostViewedProducts: NormalizedProducts): boolean => {
+// 	if (!mostViewedProducts) return true;
+// 	return Object.keys(mostViewedProducts).length === 0;
+// };
 
 export const reducer = productModel.reducer;
