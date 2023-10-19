@@ -427,7 +427,6 @@ export const useUserLastViewedDataOperationResultMessage = () =>
 		),
 	);
 
-// NEED TO REFACTOR
 // export const useProduct = (productId: number) =>
 // 	useSelector(
 // 		createSelector(
@@ -437,10 +436,6 @@ export const useUserLastViewedDataOperationResultMessage = () =>
 // 			},
 // 		),
 // 	);
-
-// useBestsellers, useMostViewedProducts also useUsersMostViewedProducts must be
-// returned by the server and saved into the state.filteredData
-// hooks useBestsellers also useMostViewedProducts must be deleted
 
 // export const useBestsellers = ({ maxProductsCount }: { maxProductsCount: number }) =>
 // 	useSelector(
@@ -466,23 +461,67 @@ export const useUserLastViewedDataOperationResultMessage = () =>
 // 		),
 // 	);
 
-export const setProducts = createAction<NormalizedProducts | {}>("products/setProducts");
+export const setFetchedData = createAction<NormalizedProducts | {}>("products/setFetchedData");
 
-export const setFilteredProducts = createAction<NormalizedProducts | null>(
-	"products/setFilteredData",
+export const setFilteredData = createAction<NormalizedProducts | null>("products/setFilteredData");
+
+export const setMostViewedData = createAction<NormalizedProducts | null>(
+	"products/setMostViewedData",
 );
 
-export const setOperationResultMessage = createAction<OperationResultMessage | null>(
-	"products/setOperationResultMessage",
+export const setUserLastViewedData = createAction<NormalizedProducts | null>(
+	"products/setUserLastViewedData",
+);
+
+export const setFetchOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/setFetchOperationResultMessage",
 );
 
 export const clearOperationResultMessage = createAction<OperationResultMessage | null>(
 	"products/clearOperationResultMessage",
 );
 
-export const setDataLoading = createAction<boolean>("products/setDataLoading");
+export const setFilterOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/setFilterOperationResultMessage",
+);
 
-// All this below must be refactored or deleted.
+export const setMostViewedDataOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/setMostViewedDataOperationResultMessage",
+);
+
+export const setUserLastViewedDataOperationResultMessage =
+	createAction<OperationResultMessage | null>(
+		"products/setUserLastViewedDataOperationResultMessage",
+	);
+
+export const clearFetchOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/clearFetchOperationResultMessage",
+);
+
+export const clearFilterOperationResultMessage = createAction<OperationResultMessage | null>(
+	"products/clearFilterOperationResultMessage",
+);
+
+export const clearMostViewedDataOperationResultMessage =
+	createAction<OperationResultMessage | null>(
+		"products/clearMostViewedDataOperationResultMessage",
+	);
+
+export const clearUserLastViewedDataOperationResultMessage =
+	createAction<OperationResultMessage | null>(
+		"products/clearUserLastViewedDataOperationResultMessage",
+	);
+
+export const setFetchedDataLoading = createAction<boolean>("products/setFetchedDataLoading");
+
+export const setFilteredDataLoading = createAction<boolean>("products/setFilteredDataLoading");
+
+export const setMostViewedDataLoading = createAction<boolean>("products/setMostViewedDataLoading");
+
+export const setUserLastViewedDataLoading = createAction<boolean>(
+	"products/setUserLastViewedDataLoading",
+);
+
 // export const isProductsEmpty = (products: NormalizedProducts): boolean => {
 // 	return Object.keys(products).length === 0;
 // };

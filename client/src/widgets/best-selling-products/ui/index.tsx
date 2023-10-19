@@ -20,8 +20,8 @@ const BestSellingProducts = () => {
 
 	const bestSellingProducts = productModel.useFilteredProducts();
 
-	const isDataLoading = productModel.useIsDataLoading();
-	const operationResultMessage = productModel.useOperationResultMessage();
+	const isDataLoading = productModel.useIsFilteredDataLoading();
+	const operationResultMessage = productModel.useFilteredDataOperationResultMessage();
 
 	const { width } = useScreenSize();
 

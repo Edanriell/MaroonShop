@@ -18,9 +18,9 @@ const Product = () => {
 
 	const { productId } = useParams();
 
-	const isDataLoading = productModel.useIsDataLoading();
+	const isDataLoading = productModel.useIsFilteredDataLoading();
 
-	const operationResultMessage = productModel.useOperationResultMessage();
+	const operationResultMessage = productModel.useFilteredDataOperationResultMessage();
 
 	const [product] = Object.values(productModel.useProduct());
 

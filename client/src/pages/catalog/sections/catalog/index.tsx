@@ -31,11 +31,13 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 
 	const productsPerPage: 12 = 12;
 
-	const isDataLoading = productModel.useIsDataLoading();
-	const operationResultMessage = productModel.useOperationResultMessage();
+	const isFetchedDataLoading = productModel.useIsFetchedDataLoading();
+	const isFilteredDataLoadingLoading = productModel.useIsFilteredDataLoading();
+	const fetchedDataOperationResultMessage = productModel.useFetchedDataOperationResultMessage();
+	const filteredDataOperationResultMessage = productModel.useFilteredDataOperationResultMessage();
 
 	useEffect(() => {
-		dispatch(productModel.setFilteredProducts({}));
+		dispatch(productModel.setFilteredData({}));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -102,10 +104,14 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					"lg:pl-[2.3rem] lg:mr-auto lg:ml-auto lg:max-w-[120rem]"
 				}
 			>
-				<CatalogLoading dataLoading={isDataLoading} />
+				<CatalogLoading
+					dataLoading={isFetchedDataLoading && isFilteredDataLoadingLoading}
+				/>
 				<CatalogError
-					dataLoading={isDataLoading}
-					operationResultMessage={operationResultMessage}
+					dataLoading={isFetchedDataLoading && isFilteredDataLoadingLoading}
+					operationResultMessage={
+						fetchedDataOperationResultMessage && filteredDataOperationResultMessage
+					}
 					onReloadButtonClick={handleReloadButtonClick}
 				/>
 				<CatalogProducts
@@ -113,12 +119,16 @@ const Catalog: FC<CatalogProps> = ({ title }) => {
 					products={products}
 					currentPage={currentPage}
 					productsPerPage={productsPerPage}
-					dataLoading={isDataLoading}
-					operationResultMessage={operationResultMessage}
+					dataLoading={isFetchedDataLoading && isFilteredDataLoadingLoading}
+					operationResultMessage={
+						fetchedDataOperationResultMessage && filteredDataOperationResultMessage
+					}
 				/>
 				<CatalogPagination
-					dataLoading={isDataLoading}
-					operationResultMessage={operationResultMessage}
+					dataLoading={isFetchedDataLoading && isFilteredDataLoadingLoading}
+					operationResultMessage={
+						fetchedDataOperationResultMessage && filteredDataOperationResultMessage
+					}
 					currentPage={currentPage}
 					totalPages={totalPages}
 					onPageChange={handlePageChange}
