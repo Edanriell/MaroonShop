@@ -29,7 +29,7 @@ class ProductsController {
 
 			if (Object.keys(filter).length === 0) {
 				throw ApiError.BadRequest(
-					"Не получены критерии по которым нужно проводить фильтрацию товаров.",
+					"Не получены критерии фильтрации товаров.",
 				);
 			}
 

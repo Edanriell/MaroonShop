@@ -153,7 +153,8 @@ const Filter: FC<FilterProps> = ({ className }) => {
 	}
 
 	function handleFiltersReset() {
-		dispatch(productModel.setFilteredProducts({}));
+		dispatch(productModel.setFilteredData({}));
+		dispatch(productModel.clearFilterOperationResultMessage(null));
 		setSelectedFilters(initialFilters);
 		setIsFiltersReset(true);
 	}

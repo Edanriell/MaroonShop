@@ -13,12 +13,12 @@ const sections: CatalogPageSections = [
 		Section: Product,
 		classes: "bg-desert-storm-50",
 	},
-	{
-		id: uuidv4(),
-		Section: ProductsSuggestions,
-		title: "Вам также может понравиться",
-		classes: "bg-desert-storm-50",
-	},
+	// {
+	// 	id: uuidv4(),
+	// 	Section: ProductsSuggestions,
+	// 	title: "Вам также может понравиться",
+	// 	classes: "bg-desert-storm-50",
+	// },
 ];
 
 const SectionWrapper: FC<SectionWrapperProps> = ({ srTitle, children, classes }) => (

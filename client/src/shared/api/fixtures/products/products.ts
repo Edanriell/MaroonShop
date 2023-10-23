@@ -1,7 +1,6 @@
 import type { AxiosPromise } from "axios";
 
 import { apiInstance } from "./base";
-import type { Product } from "./model";
 import { BestSellingProducts, Products, SingleProduct, FilteredProducts } from "./types";
 
 export type GetFilteredProductsParams = {
