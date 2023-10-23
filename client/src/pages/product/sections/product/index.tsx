@@ -31,7 +31,7 @@ const Product = () => {
 	useEffect(() => {
 		console.log(operationResultMessage.error);
 	}, [operationResultMessage, product]);
-	// ERROR MESSAGE NOT DISPLAYING
+	
 	const priceContainerRef = useRef(null);
 
 	if (isDataLoading) {
