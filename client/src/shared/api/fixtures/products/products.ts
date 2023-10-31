@@ -13,6 +13,7 @@ const BASE_URL = "api/products";
 const BASE_FILTER_URL = "api/products/filtered-by-categories";
 const BASE_FILTER_BY_ID_URL = "api/product/filtered-by-id";
 const BASE_BEST_SELLING_PRODUCTS_URL = "api/products/best-selling";
+const BASE_MOST_VIEWED_PRODUCTS_URL = "api/products/most-viewed";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
@@ -51,5 +52,17 @@ export const getBestSellingProducts = ({
 }): AxiosPromise<BestSellingProducts> => {
 	return apiInstance.get(BASE_BEST_SELLING_PRODUCTS_URL, {
 		params: { sells, productsCount },
+	});
+};
+
+export const getMostViewedProducts = ({
+	views,
+	productsCount,
+}: {
+	views: number;
+	productsCount: number;
+}): AxiosPromise<BestSellingProducts> => {
+	return apiInstance.get(BASE_MOST_VIEWED_PRODUCTS_URL, {
+		params: { views, productsCount },
 	});
 };

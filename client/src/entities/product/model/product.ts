@@ -339,6 +339,22 @@ export const getBestSellingProductsAsync = createAsyncThunk(
 	},
 );
 
+export const getMostViewedProductsAsync = createAsyncThunk(
+	"products/getMostViewedProductsAsync",
+	async ({ views, productsCount }: { views: number; productsCount: number }) => {
+		try {
+			const response = await productsApi.products.getMostViewedProducts({
+				views,
+				productsCount,
+			});
+			return { mostViewedProducts: response.data.mostViewedProducts };
+		} catch (error) {
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
+		}
+	},
+);
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(
