@@ -1,7 +1,13 @@
 import type { AxiosPromise } from "axios";
 
 import { apiInstance } from "./base";
-import { BestSellingProducts, Products, SingleProduct, FilteredProducts } from "./types";
+import {
+	BestSellingProducts,
+	MostViewedProducts,
+	Products,
+	SingleProduct,
+	FilteredProducts,
+} from "./types";
 
 export type GetFilteredProductsParams = {
 	filters: {
@@ -61,7 +67,7 @@ export const getMostViewedProducts = ({
 }: {
 	views: number;
 	productsCount: number;
-}): AxiosPromise<BestSellingProducts> => {
+}): AxiosPromise<MostViewedProducts> => {
 	return apiInstance.get(BASE_MOST_VIEWED_PRODUCTS_URL, {
 		params: { views, productsCount },
 	});

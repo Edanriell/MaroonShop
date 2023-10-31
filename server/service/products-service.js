@@ -163,7 +163,7 @@ class ProductsService {
 		const filteredProducts = await ProductModel.find({ views: { $gte: views } });
 
 		if (filteredProducts.length === 0) {
-			throw ApiError.NotFound("Не найдено не одного популярного товара.");
+			throw ApiError.NotFound("Не найдено не одного самого просматриваемого товара.");
 		}
 
 		const mostViewedProducts = [];

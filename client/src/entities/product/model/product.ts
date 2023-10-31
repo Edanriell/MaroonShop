@@ -200,7 +200,8 @@ export const productModel = createSlice({
 		});
 		builder.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
-				state.data.fetchedData.operationResultMessage.error = "Неудалось загрузить товары.";
+				state.data.fetchedData.operationResultMessage.error =
+					"Не удалось загрузить товары.";
 			} else if ("error" in payload && payload.error) {
 				state.data.fetchedData.operationResultMessage.error = payload.error;
 			} else if ("products" in payload && payload.products) {
@@ -219,7 +220,7 @@ export const productModel = createSlice({
 		builder.addCase(getFilteredProductsByCategoriesAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
 				state.data.filteredData.operationResultMessage.error =
-					"Неудалось загрузить товары.";
+					"Не удалось загрузить товары.";
 			} else if ("error" in payload && payload.error) {
 				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if ("filteredProducts" in payload && payload.filteredProducts) {
@@ -239,7 +240,8 @@ export const productModel = createSlice({
 		});
 		builder.addCase(getProductByIdAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
-				state.data.filteredData.operationResultMessage.error = "Неудалось загрузить товар.";
+				state.data.filteredData.operationResultMessage.error =
+					"Не удалось загрузить товар.";
 			} else if ("error" in payload && payload.error) {
 				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if ("product" in payload && payload.product) {
@@ -258,7 +260,7 @@ export const productModel = createSlice({
 		builder.addCase(getBestSellingProductsAsync.fulfilled, (state, { payload }) => {
 			if ("error" in payload && payload.error === undefined) {
 				state.data.filteredData.operationResultMessage.error =
-					"Неудалось загрузить бестселлеры.";
+					"Не удалось загрузить бестселлеры.";
 			} else if ("error" in payload && payload.error) {
 				state.data.filteredData.operationResultMessage.error = payload.error;
 			} else if ("bestSellingProducts" in payload && payload.bestSellingProducts) {
@@ -271,6 +273,27 @@ export const productModel = createSlice({
 		});
 		builder.addCase(getBestSellingProductsAsync.rejected, (state) => {
 			state.data.filteredData.isLoading = false;
+		});
+
+		builder.addCase(getMostViewedProductsAsync.pending, (state) => {
+			state.data.mostViewedData.isLoading = true;
+		});
+		builder.addCase(getMostViewedProductsAsync.fulfilled, (state, { payload }) => {
+			if ("error" in payload && payload.error === undefined) {
+				state.data.mostViewedData.operationResultMessage.error =
+					"Не удалось загрузить самые просматриваемые товары.";
+			} else if ("error" in payload && payload.error) {
+				state.data.mostViewedData.operationResultMessage.error = payload.error;
+			} else if ("mostViewedProducts" in payload && payload.mostViewedProducts) {
+				state.data.mostViewedData.operationResultMessage = { error: null, success: null };
+				state.data.mostViewedData.data = normalizeProducts(
+					payload.mostViewedProducts,
+				).entities.products;
+			}
+			state.data.mostViewedData.isLoading = false;
+		});
+		builder.addCase(getMostViewedProductsAsync.rejected, (state) => {
+			state.data.mostViewedData.isLoading = false;
 		});
 	},
 });
