@@ -28,9 +28,7 @@ class ProductsController {
 			}
 
 			if (Object.keys(filter).length === 0) {
-				throw ApiError.BadRequest(
-					"Не получены критерии фильтрации товаров.",
-				);
+				throw ApiError.BadRequest("Не получены критерии фильтрации товаров.");
 			}
 
 			const filteredData = await productsService.getFilteredProductsByCategories(filter);
@@ -48,7 +46,23 @@ class ProductsController {
 				sells,
 				productsCount,
 			});
+
 			return res.json(bestSellingProducts);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async getMostViewedProducts(req, res, next) {
+		try {
+			const { views, productsCount } = req.query;
+
+			const mostViewedProducts = await productsService.getMostViewedProducts({
+				views,
+				productsCount,
+			});
+
+			return res.json(mostViewedProducts);
 		} catch (err) {
 			next(err);
 		}

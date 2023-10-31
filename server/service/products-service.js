@@ -126,7 +126,7 @@ class ProductsService {
 	}
 
 	async getProductById(productId) {
-		const [ product ] = await ProductModel.find({ _id: productId });
+		const [product] = await ProductModel.find({ _id: productId });
 
 		if (!product) {
 			throw ApiError.NotFound(`Товар с уникальным идентификатором ${productId} не найден.`);
@@ -157,6 +157,26 @@ class ProductsService {
 			.slice(0, productsCount);
 
 		return { bestSellingProducts: bestSellingProductsSortedSliced };
+	}
+
+	async getMostViewedProducts({ views, productsCount }) {
+		const filteredProducts = await ProductModel.find({ views: { $gte: views } });
+
+		if (filteredProducts.length === 0) {
+			throw ApiError.NotFound("Не найдено не одного популярного товара.");
+		}
+
+		const mostViewedProducts = [];
+
+		for (const product of filteredProducts) {
+			mostViewedProducts.push(new ProductDto(product));
+		}
+
+		const mostViewedProductsSortedSliced = mostViewedProducts
+			.sort((a, b) => b.views - a.views)
+			.slice(0, productsCount);
+
+		return { mostViewedProducts: mostViewedProductsSortedSliced };
 	}
 
 	async initializeProducts() {

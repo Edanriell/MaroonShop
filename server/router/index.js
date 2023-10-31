@@ -35,5 +35,6 @@ router.get("/products", productsController.getProducts);
 router.get("/products/filtered-by-categories", productsController.getFilteredProductsByCategories);
 router.get("/product/filtered-by-id", productsController.getProductById);
 router.get("/products/best-selling", productsController.getBestSellingProducts);
+router.get("/products/most-viewed", productsController.getMostViewedProducts);
 
 module.exports = router;
