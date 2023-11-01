@@ -20,7 +20,7 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 	const [reload, setReload] = useState<number>(Math.random());
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
-
+	// code 
 	const store = useSelector((state: productModel.RootState) => state.products);
 	const { dataLoading } = store;
 

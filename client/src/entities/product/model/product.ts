@@ -402,6 +402,14 @@ export const useFilteredProducts = () =>
 		),
 	);
 
+export const useMostViewedProducts = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.mostViewedData.data,
+			(mostViewedProducts) => mostViewedProducts,
+		),
+	);
+
 export const useIsFetchedDataLoading = () =>
 	useSelector(
 		createSelector(
