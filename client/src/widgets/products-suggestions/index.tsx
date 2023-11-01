@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { productModel } from "entities/product";
@@ -20,20 +20,17 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 	const [reload, setReload] = useState<number>(Math.random());
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
-	// code 
-	const store = useSelector((state: productModel.RootState) => state.products);
-	const { dataLoading } = store;
 
-	const mostViewedProducts = productModel.useMostViewedProducts({ maxProductsCount: 20 });
+	const mostViewedProducts = productModel.useMostViewedProducts();
 
-	const isEmpty = productModel.isMostViewedProductsEmpty(mostViewedProducts);
+	const isDataLoading = productModel.useIsMostViewedDataLoading();
+	const operationResultMessage = productModel.useMostViewedDataOperationResultMessage();
 
 	const { width } = useScreenSize();
 
 	useEffect(() => {
-		dispatch(productModel.getProductsAsync());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [reload]);
+		dispatch(productModel.getMostViewedProductsAsync({ views: 100, productsCount: 14 }));
+	}, [reload, dispatch]);
 
 	function handleReloadButtonClick() {
 		setReload(Math.random());
