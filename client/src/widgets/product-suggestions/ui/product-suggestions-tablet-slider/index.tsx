@@ -3,11 +3,11 @@ import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
 
-import { useScreenSize, useArrayGrouper } from "shared/lib/hooks";
+import { useArrayGrouper, useScreenSize } from "shared/lib/hooks";
 
 import { Card3dFlip } from "shared/ui";
 
-import { MobileSliderProps } from "./types";
+import { ProductSuggestionsTabletSliderProps } from "./types";
 
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
@@ -16,10 +16,13 @@ import styles from "./styles.module.scss";
 
 register();
 
-const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
-	const { width } = useScreenSize();
+const ProductSuggestionsTabletSlider: FC<ProductSuggestionsTabletSliderProps> = ({
+	mostViewedProducts,
+}) => {
+	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
+	const mostViewedProductsGroupedBy6 = useArrayGrouper(mostViewedProducts, 6);
 
-	const mostViewedProductsGrouped = useArrayGrouper(mostViewedProducts, 2);
+	const { width } = useScreenSize();
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -47,7 +50,7 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        left: 21.1rem;
+                        left: 59.3rem;
                         z-index: 100;
                     }
 
@@ -86,19 +89,20 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 					.swiper-pagination {
 						font-size: 0;
 						position: absolute;
-						top: 32.9rem;
-						left: 1rem;
+						top: 783px;
+						left: 50%;
+						transform: translateX(-7%);
 						display: flex;
 						flex-direction: row;
 						align-items: center;
 					}
 					  
 					.swiper-pagination span {
-						font-size: 1.4rem;
+						font-size: 1.8rem;
 						font-family: MPLUS1p;
 						font-style: normal;
 						font-weight: 500;
-						line-height: 2.03rem;
+						line-height: 2.61rem;
 					}
 
 					.swiper-pagination-current {
@@ -111,35 +115,27 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 					.swiper-pagination-current::after {
 						content: "";
 						display: flex;
-						width: 3rem;
+						width: 5rem;
 						height: 0.1rem;
 						background-color: #122947;
 						position: relative;
-						margin-left: 0.8rem;
-						margin-right: 0.8rem;
+						margin-left: 1rem;
+						margin-right: 1rem;
 					}
 
 					.swiper-pagination-total {
 						color: #9A9DA0;
 					}
 
-					@media only screen and (min-width: 337px) {
+					@media only screen and (min-width: 784px) {
 						.swiper-button-next {
 							right: 0.2rem;
 						}
-
-						.swiper-button-prev {
-							left: 21.1rem;
-						}
-
-						.swiper-pagination {
-							left: 0;
-						}
 					}
 
-					@media only screen and (min-width: 660px) {
+					@media only screen and (min-width: 1142px) {
 						.swiper-button-prev {
-							left: 53.1rem;
+							left: 94.7rem;
 						}
 					}
                 `,
@@ -150,27 +146,32 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 		(sliderContainer as any).initialize();
 	}, []);
 
-	if (width >= 660) {
-		return (
-			<swiper-container
-				ref={sliderRef}
-				init="false"
-				slides-per-view="1"
-				keyboard="true"
-				grab-cursor="true"
-				speed="500"
-				space-between="30"
-				autoplay-delay="6000"
-				autoplay-pause-on-mouse-enter="true"
-				update-on-window-resize="true"
-				navigation="true"
-				pagination="true"
-				pagination-type="fraction"
-				class={styles.sliderContainer + " relative pb-[4.6rem]"}
-			>
-				{mostViewedProductsGrouped.map((mostViewedProductsGroup, id) => (
+	return (
+		<swiper-container
+			ref={sliderRef}
+			init="false"
+			slides-per-view="1"
+			keyboard="true"
+			grab-cursor="true"
+			speed="500"
+			space-between="30"
+			autoplay-delay="6000"
+			autoplay-pause-on-mouse-enter="true"
+			update-on-window-resize="true"
+			navigation="true"
+			pagination="true"
+			pagination-type="fraction"
+			class={styles.sliderContainer + " relative pb-[6.2rem]"}
+		>
+			{width < 1142 &&
+				mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
 					<swiper-slide key={id}>
-						<div className="grid grid-cols-[29rem_29rem] gap-x-[3rem]">
+						<div
+							className={
+								"grid grid-cols-[31.6rem_31.6rem] grid-rows-[35rem_35rem] " +
+								"gap-x-[3rem] gap-y-[3rem] justify-center min-[784px]:grid-cols-[32.4rem_32.4rem]"
+							}
+						>
 							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
@@ -188,40 +189,34 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 						</div>
 					</swiper-slide>
 				))}
-			</swiper-container>
-		);
-	}
-	return (
-		<swiper-container
-			ref={sliderRef}
-			init="false"
-			slides-per-view="1"
-			keyboard="true"
-			grab-cursor="true"
-			speed="500"
-			space-between="30"
-			autoplay-delay="6000"
-			autoplay-pause-on-mouse-enter="true"
-			update-on-window-resize="true"
-			navigation="true"
-			pagination="true"
-			pagination-type="fraction"
-			class={styles.sliderContainer + " relative pb-[4.6rem]"}
-		>
-			{mostViewedProducts.map((mostViewedProduct, id) => (
-				<swiper-slide key={id}>
-					<Card3dFlip data={mostViewedProduct} className={styles.sliderSlide}>
-						<ProductCard
-							data={mostViewedProduct}
-							cardType="advanced"
-							className={styles.sliderSlide}
-							backgroundImageClassName={styles.sliderSlideBackgroundImage}
-						/>
-					</Card3dFlip>
-				</swiper-slide>
-			))}
+			{width >= 1142 &&
+				mostViewedProductsGroupedBy6.map((mostViewedProductsGroup, id) => (
+					<swiper-slide key={id}>
+						<div
+							className={
+								"grid grid-cols-[32.4rem_32.4rem_32.4rem] grid-rows-[35rem_35rem] " +
+								"gap-x-[3rem] gap-y-[3rem]"
+							}
+						>
+							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
+								<Card3dFlip
+									key={id}
+									data={mostViewedProduct}
+									className={styles.sliderSlide}
+								>
+									<ProductCard
+										data={mostViewedProduct}
+										cardType="advanced"
+										className={styles.sliderSlide}
+										backgroundImageClassName={styles.sliderSlideBackgroundImage}
+									/>
+								</Card3dFlip>
+							))}
+						</div>
+					</swiper-slide>
+				))}
 		</swiper-container>
 	);
 };
 
-export default MobileSlider;
+export default ProductSuggestionsTabletSlider;

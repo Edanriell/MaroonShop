@@ -3,21 +3,25 @@ import { register } from "swiper/element/bundle";
 
 import { ProductCard } from "entities/product";
 
-import { useArrayGrouper } from "shared/lib/hooks";
+import { useScreenSize, useArrayGrouper } from "shared/lib/hooks";
 
 import { Card3dFlip } from "shared/ui";
+
+import { ProductSuggestionsMobileSliderProps } from "./types";
 
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
 
 import styles from "./styles.module.scss";
 
-import { DesktopSliderProps } from "./types";
-
 register();
 
-const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
-	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
+const ProductSuggestionsMobileSlider: FC<ProductSuggestionsMobileSliderProps> = ({
+	mostViewedProducts,
+}) => {
+	const { width } = useScreenSize();
+
+	const mostViewedProductsGrouped = useArrayGrouper(mostViewedProducts, 2);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -45,7 +49,7 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        left: 108.5rem;
+                        left: 21.1rem;
                         z-index: 100;
                     }
 
@@ -64,7 +68,7 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
                         height: 12px;
                         top: 100%;
                         transform: translateY(-100%);
-                        right: 0.8rem;
+                        right: 1rem;
                         z-index: 100;
                     }
 
@@ -84,20 +88,19 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 					.swiper-pagination {
 						font-size: 0;
 						position: absolute;
-						top: 406px;
-						left: 50%;
-						transform: translateX(-5%);
+						top: 32.9rem;
+						left: 1rem;
 						display: flex;
 						flex-direction: row;
 						align-items: center;
 					}
 					  
 					.swiper-pagination span {
-						font-size: 1.8rem;
+						font-size: 1.4rem;
 						font-family: MPLUS1p;
 						font-style: normal;
 						font-weight: 500;
-						line-height: 2.61rem;
+						line-height: 2.03rem;
 					}
 
 					.swiper-pagination-current {
@@ -110,21 +113,35 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 					.swiper-pagination-current::after {
 						content: "";
 						display: flex;
-						width: 5rem;
+						width: 3rem;
 						height: 0.1rem;
 						background-color: #122947;
 						position: relative;
-						margin-left: 1rem;
-						margin-right: 1rem;
+						margin-left: 0.8rem;
+						margin-right: 0.8rem;
 					}
 
 					.swiper-pagination-total {
 						color: #9A9DA0;
 					}
 
-					@media only screen and (min-width: 1386px) {
+					@media only screen and (min-width: 337px) {
 						.swiper-button-next {
 							right: 0.2rem;
+						}
+
+						.swiper-button-prev {
+							left: 21.1rem;
+						}
+
+						.swiper-pagination {
+							left: 0;
+						}
+					}
+
+					@media only screen and (min-width: 660px) {
+						.swiper-button-prev {
+							left: 53.1rem;
 						}
 					}
                 `,
@@ -135,6 +152,47 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 		(sliderContainer as any).initialize();
 	}, []);
 
+	if (width >= 660) {
+		return (
+			<swiper-container
+				ref={sliderRef}
+				init="false"
+				slides-per-view="1"
+				keyboard="true"
+				grab-cursor="true"
+				speed="500"
+				space-between="30"
+				autoplay-delay="6000"
+				autoplay-pause-on-mouse-enter="true"
+				update-on-window-resize="true"
+				navigation="true"
+				pagination="true"
+				pagination-type="fraction"
+				class={styles.sliderContainer + " relative pb-[4.6rem]"}
+			>
+				{mostViewedProductsGrouped.map((mostViewedProductsGroup, id) => (
+					<swiper-slide key={id}>
+						<div className="grid grid-cols-[29rem_29rem] gap-x-[3rem]">
+							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
+								<Card3dFlip
+									key={id}
+									data={mostViewedProduct}
+									className={styles.sliderSlide}
+								>
+									<ProductCard
+										data={mostViewedProduct}
+										cardType="advanced"
+										className={styles.sliderSlide}
+										backgroundImageClassName={styles.sliderSlideBackgroundImage}
+									/>
+								</Card3dFlip>
+							))}
+						</div>
+					</swiper-slide>
+				))}
+			</swiper-container>
+		);
+	}
 	return (
 		<swiper-container
 			ref={sliderRef}
@@ -150,35 +208,22 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 			navigation="true"
 			pagination="true"
 			pagination-type="fraction"
-			class={styles.sliderContainer + " relative pb-[6.3rem]"}
+			class={styles.sliderContainer + " relative pb-[4.6rem]"}
 		>
-			{mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
+			{mostViewedProducts.map((mostViewedProduct, id) => (
 				<swiper-slide key={id}>
-					<div
-						className={
-							"grid grid-cols-[26.5rem_26.5rem_26.5rem_26.5rem] gap-x-[3rem] justify-center " +
-							"min-[1386px]:grid-cols-[27rem_27rem_27rem_27rem] "
-						}
-					>
-						{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-							<Card3dFlip
-								key={id}
-								data={mostViewedProduct}
-								className={styles.sliderSlide}
-							>
-								<ProductCard
-									data={mostViewedProduct}
-									cardType="advanced"
-									className={styles.sliderSlide}
-									backgroundImageClassName={styles.sliderSlideBackgroundImage}
-								/>
-							</Card3dFlip>
-						))}
-					</div>
+					<Card3dFlip data={mostViewedProduct} className={styles.sliderSlide}>
+						<ProductCard
+							data={mostViewedProduct}
+							cardType="advanced"
+							className={styles.sliderSlide}
+							backgroundImageClassName={styles.sliderSlideBackgroundImage}
+						/>
+					</Card3dFlip>
 				</swiper-slide>
 			))}
 		</swiper-container>
 	);
 };
 
-export default DesktopSlider;
+export default ProductSuggestionsMobileSlider;

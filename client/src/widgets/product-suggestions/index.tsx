@@ -7,11 +7,11 @@ import { productModel } from "entities/product";
 import { useScreenSize } from "shared/lib/hooks";
 
 import {
-	MobileSlider,
-	TabletSlider,
-	DesktopSlider,
-	ProductsSuggestionsError,
-	ProductsSuggestionsLoading,
+	ProductSuggestionsMobileSlider,
+	ProductSuggestionsTabletSlider,
+	ProductSuggestionsDesktopSlider,
+	ProductSuggestionsError,
+	ProductSuggestionsLoading,
 } from "./ui";
 
 import { ProductsSuggestionsProps } from "./types";
@@ -29,19 +29,22 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 	const { width } = useScreenSize();
 
 	useEffect(() => {
-		dispatch(productModel.getMostViewedProductsAsync({ views: 100, productsCount: 14 }));
+		dispatch(productModel.getMostViewedProductsAsync({ views: 1000, productsCount: 14 }));
 	}, [reload, dispatch]);
 
 	function handleReloadButtonClick() {
 		setReload(Math.random());
 	}
 
-	if (dataLoading) {
-		return <ProductsSuggestionsLoading />;
-	}
+	if (isDataLoading) return <ProductSuggestionsLoading />;
 
-	if (!dataLoading && isEmpty) {
-		return <ProductsSuggestionsError onReloadButtonClick={handleReloadButtonClick} />;
+	if (operationResultMessage.error) {
+		return (
+			<ProductSuggestionsError
+				onReloadButtonClick={handleReloadButtonClick}
+				errorMessage={operationResultMessage.error}
+			/>
+		);
 	}
 
 	return (
@@ -54,11 +57,15 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 			>
 				{title}
 			</h2>
-			{width < 768 && <MobileSlider mostViewedProducts={mostViewedProducts} />}
-			{width >= 768 && width < 1366 && (
-				<TabletSlider mostViewedProducts={mostViewedProducts} />
+			{width < 768 && (
+				<ProductSuggestionsMobileSlider mostViewedProducts={mostViewedProducts} />
 			)}
-			{width >= 1366 && <DesktopSlider mostViewedProducts={mostViewedProducts} />}
+			{width >= 768 && width < 1366 && (
+				<ProductSuggestionsTabletSlider mostViewedProducts={mostViewedProducts} />
+			)}
+			{width >= 1366 && (
+				<ProductSuggestionsDesktopSlider mostViewedProducts={mostViewedProducts} />
+			)}
 		</article>
 	);
 };

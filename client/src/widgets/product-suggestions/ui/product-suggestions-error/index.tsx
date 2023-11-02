@@ -2,9 +2,12 @@ import { FC } from "react";
 
 import { Button } from "shared/ui";
 
-import { ProductsSuggestionsErrorProps } from "./types";
+import { ProductSuggestionsErrorProps } from "./types";
 
-const ProductsSuggestionsError: FC<ProductsSuggestionsErrorProps> = ({ onReloadButtonClick }) => {
+const ProductSuggestionsError: FC<ProductSuggestionsErrorProps> = ({
+	onReloadButtonClick,
+	errorMessage,
+}) => {
 	return (
 		<div
 			className={
@@ -19,7 +22,7 @@ const ProductsSuggestionsError: FC<ProductsSuggestionsErrorProps> = ({ onReloadB
 					"font-medium text-center"
 				}
 			>
-				Не удалось загрузить товары.
+				{errorMessage}
 			</p>
 			<Button
 				text={"Обновить"}
@@ -32,4 +35,4 @@ const ProductsSuggestionsError: FC<ProductsSuggestionsErrorProps> = ({ onReloadB
 	);
 };
 
-export default ProductsSuggestionsError;
+export default ProductSuggestionsError;
