@@ -21,7 +21,7 @@ const ProductSuggestionsMobileSlider: FC<ProductSuggestionsMobileSliderProps> = 
 }) => {
 	const { width } = useScreenSize();
 
-	const mostViewedProductsGrouped = useArrayGrouper(mostViewedProducts, 2);
+	const mostViewedProductsGrouped = useArrayGrouper(Object.values(mostViewedProducts), 2);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 

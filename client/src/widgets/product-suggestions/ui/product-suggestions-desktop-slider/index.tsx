@@ -19,7 +19,7 @@ register();
 const ProductSuggestionsDesktopSlider: FC<ProductSuggestionsDesktopSliderProps> = ({
 	mostViewedProducts,
 }) => {
-	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
+	const mostViewedProductsGroupedBy4 = useArrayGrouper(Object.values(mostViewedProducts), 4);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 

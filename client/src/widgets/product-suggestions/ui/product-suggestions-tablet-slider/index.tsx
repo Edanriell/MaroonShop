@@ -19,8 +19,8 @@ register();
 const ProductSuggestionsTabletSlider: FC<ProductSuggestionsTabletSliderProps> = ({
 	mostViewedProducts,
 }) => {
-	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
-	const mostViewedProductsGroupedBy6 = useArrayGrouper(mostViewedProducts, 6);
+	const mostViewedProductsGroupedBy4 = useArrayGrouper(Object.values(mostViewedProducts), 4);
+	const mostViewedProductsGroupedBy6 = useArrayGrouper(Object.values(mostViewedProducts), 6);
 
 	const { width } = useScreenSize();
 
