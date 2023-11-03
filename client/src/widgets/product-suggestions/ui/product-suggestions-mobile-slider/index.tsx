@@ -210,7 +210,7 @@ const ProductSuggestionsMobileSlider: FC<ProductSuggestionsMobileSliderProps> = 
 			pagination-type="fraction"
 			class={styles.sliderContainer + " relative pb-[4.6rem]"}
 		>
-			{mostViewedProducts.map((mostViewedProduct, id) => (
+			{Object.values(mostViewedProducts).map((mostViewedProduct, id) => (
 				<swiper-slide key={id}>
 					<Card3dFlip data={mostViewedProduct} className={styles.sliderSlide}>
 						<ProductCard

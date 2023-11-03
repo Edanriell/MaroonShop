@@ -1,3 +1,3 @@
-export type TabletSliderProps = {
+export type RecentlyWatchedProductsTabletSliderProps = {
 	mostViewedProducts: Array<import("shared/api").Product>;
 };

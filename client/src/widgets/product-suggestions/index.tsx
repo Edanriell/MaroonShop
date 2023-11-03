@@ -16,7 +16,7 @@ import {
 
 import { ProductsSuggestionsProps } from "./types";
 
-const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
+const ProductSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 	const [reload, setReload] = useState<number>(Math.random());
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
@@ -70,4 +70,4 @@ const ProductsSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 	);
 };
 
-export default ProductsSuggestions;
+export default ProductSuggestions;

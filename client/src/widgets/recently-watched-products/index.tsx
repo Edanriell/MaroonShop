@@ -7,9 +7,9 @@ import { productModel } from "entities/product";
 import { useScreenSize } from "shared/lib/hooks";
 
 import {
-	MobileSlider,
-	TabletSlider,
-	DesktopSlider,
+	RecentlyWatchedProductsMobileSlider,
+	RecentlyWatchedProductsTabletSlider,
+	RecentlyWatchedProductsDesktopSlider,
 	RecentlyWatchedProductsError,
 	RecentlyWatchedProductsLoading,
 } from "./ui";
@@ -59,11 +59,15 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 			>
 				{title}
 			</h2>
-			{width < 768 && <MobileSlider mostViewedProducts={mostViewedProducts} />}
-			{width >= 768 && width < 1366 && (
-				<TabletSlider mostViewedProducts={mostViewedProducts} />
+			{width < 768 && (
+				<RecentlyWatchedProductsMobileSlider mostViewedProducts={mostViewedProducts} />
 			)}
-			{width >= 1366 && <DesktopSlider mostViewedProducts={mostViewedProducts} />}
+			{width >= 768 && width < 1366 && (
+				<RecentlyWatchedProductsTabletSlider mostViewedProducts={mostViewedProducts} />
+			)}
+			{width >= 1366 && (
+				<RecentlyWatchedProductsDesktopSlider mostViewedProducts={mostViewedProducts} />
+			)}
 		</article>
 	);
 };

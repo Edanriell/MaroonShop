@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import ProductsSuggestions from "widgets/products-suggestions";
+import ProductSuggestions from "widgets/product-suggestions";
 
 import Product from "./product";
 
@@ -15,7 +15,7 @@ const sections: CatalogPageSections = [
 	},
 	{
 		id: uuidv4(),
-		Section: ProductsSuggestions,
+		Section: ProductSuggestions,
 		title: "Вам также может понравиться",
 		classes: "bg-desert-storm-50",
 	},

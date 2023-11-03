@@ -7,7 +7,7 @@ import { useArrayGrouper, useScreenSize } from "shared/lib/hooks";
 
 import { Card3dFlip } from "shared/ui";
 
-import { TabletSliderProps } from "./types";
+import { RecentlyWatchedProductsTabletSliderProps } from "./types";
 
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
@@ -16,7 +16,9 @@ import styles from "./styles.module.scss";
 
 register();
 
-const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
+const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSliderProps> = ({
+	mostViewedProducts,
+}) => {
 	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
 	const mostViewedProductsGroupedBy6 = useArrayGrouper(mostViewedProducts, 6);
 
@@ -217,4 +219,4 @@ const TabletSlider: FC<TabletSliderProps> = ({ mostViewedProducts }) => {
 	);
 };
 
-export default TabletSlider;
+export default RecentlyWatchedProductsTabletSlider;

@@ -7,7 +7,7 @@ import { useScreenSize, useArrayGrouper } from "shared/lib/hooks";
 
 import { Card3dFlip } from "shared/ui";
 
-import { MobileSliderProps } from "./types";
+import { RecentlyWatchedProductsMobileSliderProps } from "./types";
 
 import arrowLeftSvg from "./assets/arrow-left.svg";
 import arrowRightSvg from "./assets/arrow-right.svg";
@@ -16,7 +16,9 @@ import styles from "./styles.module.scss";
 
 register();
 
-const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
+const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSliderProps> = ({
+	mostViewedProducts,
+}) => {
 	const { width } = useScreenSize();
 
 	const mostViewedProductsGrouped = useArrayGrouper(mostViewedProducts, 2);
@@ -224,4 +226,4 @@ const MobileSlider: FC<MobileSliderProps> = ({ mostViewedProducts }) => {
 	);
 };
 
-export default MobileSlider;
+export default RecentlyWatchedProductsMobileSlider;

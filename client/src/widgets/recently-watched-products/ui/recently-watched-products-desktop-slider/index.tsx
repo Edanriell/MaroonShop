@@ -12,11 +12,13 @@ import arrowRightSvg from "./assets/arrow-right.svg";
 
 import styles from "./styles.module.scss";
 
-import { DesktopSliderProps } from "./types";
+import { RecentlyWatchedProductsDesktopSliderProps } from "./types";
 
 register();
 
-const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
+const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSliderProps> = ({
+	mostViewedProducts,
+}) => {
 	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
@@ -181,4 +183,4 @@ const DesktopSlider: FC<DesktopSliderProps> = ({ mostViewedProducts }) => {
 	);
 };
 
-export default DesktopSlider;
+export default RecentlyWatchedProductsDesktopSlider;
