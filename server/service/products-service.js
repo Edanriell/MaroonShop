@@ -11,7 +11,7 @@ const productsDataFilePath = `${appDir}/data/products.json`;
 class ProductsService {
 	async getAllProducts() {
 		const allProducts = await ProductModel.find();
-		// console.log(allProducts);
+
 		const products = [];
 
 		if (allProducts.length === 0) {
@@ -177,6 +177,10 @@ class ProductsService {
 			.slice(0, productsCount);
 
 		return { mostViewedProducts: mostViewedProductsSortedSliced };
+	}
+
+	async getRecentlyWatchedProducts({ productsCount }) {
+		// To implement
 	}
 
 	async initializeProducts() {

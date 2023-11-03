@@ -15,11 +15,11 @@ const errorMiddleware = require("./middlewares/error-middleware");
 const PORT = process.env.PORT || 4020;
 
 // REFACTOR
-const productsRouter = require("./routes/products");
+const productsRouter = require("./routes/products"); // refactored
 const questionnaireRouter = require("./routes/questionnaire");
 const galleryRouter = require("./routes/gallery");
-const filteredProductsRouter = require("./routes/filteredProducts");
-const filteredProductByIdRouter = require("./routes/filteredProductById");
+const filteredProductsRouter = require("./routes/filteredProducts"); // refactored
+const filteredProductByIdRouter = require("./routes/filteredProductById"); // refactored
 // REFACTOR
 
 const app = express();

@@ -6,6 +6,7 @@ class ProductsController {
 	async getProducts(req, res, next) {
 		try {
 			const products = await productsService.getAllProducts();
+
 			return res.json(products);
 		} catch (err) {
 			next(err);
@@ -15,6 +16,7 @@ class ProductsController {
 	async getFilteredProductsByCategories(req, res, next) {
 		try {
 			const { mainCategory, secondaryCategory, skinTypeCategory } = req.query;
+
 			const filter = {};
 
 			if (mainCategory) {
@@ -32,6 +34,7 @@ class ProductsController {
 			}
 
 			const filteredData = await productsService.getFilteredProductsByCategories(filter);
+			
 			return res.json(filteredData);
 		} catch (err) {
 			next(err);
@@ -63,6 +66,20 @@ class ProductsController {
 			});
 
 			return res.json(mostViewedProducts);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async getRecentlyWatchedProducts(req, res, next) {
+		try {
+			const { productsCount } = req.query;
+
+			const recentlyWatchedProducts = await productsService.getRecentlyWatchedProducts({
+				productsCount,
+			});
+
+			return res.json(recentlyWatchedProducts);
 		} catch (err) {
 			next(err);
 		}

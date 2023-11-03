@@ -19,3 +19,7 @@ export type SingleProduct = {
 export type FilteredProducts = {
 	filteredProducts: Product[];
 };
+
+export type RecentlyWatchedProducts = {
+	recentlyWatchedProducts: Product[];
+};

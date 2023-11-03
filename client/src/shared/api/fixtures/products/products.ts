@@ -7,6 +7,7 @@ import {
 	Products,
 	SingleProduct,
 	FilteredProducts,
+	RecentlyWatchedProducts,
 } from "./types";
 
 export type GetFilteredProductsParams = {
@@ -20,6 +21,7 @@ const BASE_FILTER_URL = "api/products/filtered-by-categories";
 const BASE_FILTER_BY_ID_URL = "api/product/filtered-by-id";
 const BASE_BEST_SELLING_PRODUCTS_URL = "api/products/best-selling";
 const BASE_MOST_VIEWED_PRODUCTS_URL = "api/products/most-viewed";
+const BASE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/recently-watched";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
@@ -70,5 +72,15 @@ export const getMostViewedProducts = ({
 }): AxiosPromise<MostViewedProducts> => {
 	return apiInstance.get(BASE_MOST_VIEWED_PRODUCTS_URL, {
 		params: { views, productsCount },
+	});
+};
+
+export const getRecentlyWatchedProducts = ({
+	productsCount,
+}: {
+	productsCount: number;
+}): AxiosPromise<RecentlyWatchedProducts> => {
+	return apiInstance.get(BASE_RECENTLY_WATCHED_PRODUCTS_URL, {
+		params: { productsCount },
 	});
 };
