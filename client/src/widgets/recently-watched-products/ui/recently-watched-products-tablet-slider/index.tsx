@@ -17,10 +17,10 @@ import styles from "./styles.module.scss";
 register();
 
 const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSliderProps> = ({
-	mostViewedProducts,
+	recentlyWatchedProducts,
 }) => {
-	const mostViewedProductsGroupedBy4 = useArrayGrouper(mostViewedProducts, 4);
-	const mostViewedProductsGroupedBy6 = useArrayGrouper(mostViewedProducts, 6);
+	const recentlyWatchedProductsGroupedBy4 = useArrayGrouper(recentlyWatchedProducts, 4);
+	const recentlyWatchedProductsGroupedBy6 = useArrayGrouper(recentlyWatchedProducts, 6);
 
 	const { width } = useScreenSize();
 
@@ -164,7 +164,7 @@ const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSlide
 			class={styles.sliderContainer + " relative pb-[6.2rem]"}
 		>
 			{width < 1142 &&
-				mostViewedProductsGroupedBy4.map((mostViewedProductsGroup, id) => (
+				recentlyWatchedProductsGroupedBy4.map((recentlyWatchedProductsGroup, id) => (
 					<swiper-slide key={id}>
 						<div
 							className={
@@ -172,25 +172,29 @@ const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSlide
 								"gap-x-[3rem] gap-y-[3rem] justify-center min-[784px]:grid-cols-[32.4rem_32.4rem]"
 							}
 						>
-							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-								<Card3dFlip
-									key={id}
-									data={mostViewedProduct}
-									className={styles.sliderSlide}
-								>
-									<ProductCard
-										data={mostViewedProduct}
-										cardType="advanced"
+							{recentlyWatchedProductsGroup.map(
+								(recentlyWatchedProduct: any, id: number) => (
+									<Card3dFlip
+										key={id}
+										data={recentlyWatchedProduct}
 										className={styles.sliderSlide}
-										backgroundImageClassName={styles.sliderSlideBackgroundImage}
-									/>
-								</Card3dFlip>
-							))}
+									>
+										<ProductCard
+											data={recentlyWatchedProduct}
+											cardType="advanced"
+											className={styles.sliderSlide}
+											backgroundImageClassName={
+												styles.sliderSlideBackgroundImage
+											}
+										/>
+									</Card3dFlip>
+								),
+							)}
 						</div>
 					</swiper-slide>
 				))}
 			{width >= 1142 &&
-				mostViewedProductsGroupedBy6.map((mostViewedProductsGroup, id) => (
+				recentlyWatchedProductsGroupedBy6.map((recentlyWatchedProductsGroup, id) => (
 					<swiper-slide key={id}>
 						<div
 							className={
@@ -198,20 +202,24 @@ const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSlide
 								"gap-x-[3rem] gap-y-[3rem]"
 							}
 						>
-							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-								<Card3dFlip
-									key={id}
-									data={mostViewedProduct}
-									className={styles.sliderSlide}
-								>
-									<ProductCard
-										data={mostViewedProduct}
-										cardType="advanced"
+							{recentlyWatchedProductsGroup.map(
+								(recentlyWatchedProduct: any, id: number) => (
+									<Card3dFlip
+										key={id}
+										data={recentlyWatchedProduct}
 										className={styles.sliderSlide}
-										backgroundImageClassName={styles.sliderSlideBackgroundImage}
-									/>
-								</Card3dFlip>
-							))}
+									>
+										<ProductCard
+											data={recentlyWatchedProduct}
+											cardType="advanced"
+											className={styles.sliderSlide}
+											backgroundImageClassName={
+												styles.sliderSlideBackgroundImage
+											}
+										/>
+									</Card3dFlip>
+								),
+							)}
 						</div>
 					</swiper-slide>
 				))}

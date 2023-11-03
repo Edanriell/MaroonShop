@@ -521,40 +521,6 @@ export const useUserLastViewedDataOperationResultMessage = () =>
 		),
 	);
 
-// export const useProduct = (productId: number) =>
-// 	useSelector(
-// 		createSelector(
-// 			(state: RootState) => state.products.data.filteredData,
-// 			(products) => {
-// 				if (products) return products[productId];
-// 			},
-// 		),
-// 	);
-
-// export const useBestsellers = ({ maxProductsCount }: { maxProductsCount: number }) =>
-// 	useSelector(
-// 		createSelector(
-// 			(state: RootState) => state.products.data,
-// 			(products) => {
-// 				return Object.values(products)
-// 					.sort((a, b) => b.sells - a.sells)
-// 					.slice(0, maxProductsCount);
-// 			},
-// 		),
-// 	);
-
-// export const useMostViewedProducts = ({ maxProductsCount }: { maxProductsCount: number }) =>
-// 	useSelector(
-// 		createSelector(
-// 			(state: RootState) => state.products.data.mostViewedData,
-// 			(products) => {
-// 				return Object.values(products)
-// 					.sort((a, b) => b.views - a.views)
-// 					.slice(0, maxProductsCount);
-// 			},
-// 		),
-// 	);
-
 export const setFetchedData = createAction<NormalizedProducts | {}>("products/setFetchedData");
 
 export const setFilteredData = createAction<NormalizedProducts | null>("products/setFilteredData");
@@ -615,19 +581,5 @@ export const setMostViewedDataLoading = createAction<boolean>("products/setMostV
 export const setUserLastViewedDataLoading = createAction<boolean>(
 	"products/setUserLastViewedDataLoading",
 );
-
-// export const isProductsEmpty = (products: NormalizedProducts): boolean => {
-// 	return Object.keys(products).length === 0;
-// };
-
-// export const isFilteredProductsEmpty = (filteredProducts: any): boolean => {
-// 	if (!filteredProducts) return true;
-// 	return Object.keys(filteredProducts).length === 0;
-// };
-
-// export const isMostViewedProductsEmpty = (mostViewedProducts: NormalizedProducts): boolean => {
-// 	if (!mostViewedProducts) return true;
-// 	return Object.keys(mostViewedProducts).length === 0;
-// };
 
 export const reducer = productModel.reducer;

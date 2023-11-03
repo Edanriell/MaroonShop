@@ -17,11 +17,14 @@ import styles from "./styles.module.scss";
 register();
 
 const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSliderProps> = ({
-	mostViewedProducts,
+	recentlyWatchedProducts,
 }) => {
 	const { width } = useScreenSize();
 
-	const mostViewedProductsGrouped = useArrayGrouper(mostViewedProducts, 2);
+	const recentlyWatchedProductsGrouped = useArrayGrouper(
+		Object.values(recentlyWatchedProducts),
+		2,
+	);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -170,23 +173,27 @@ const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSlide
 				pagination-type="fraction"
 				class={styles.sliderContainer + " relative pb-[4.6rem]"}
 			>
-				{mostViewedProductsGrouped.map((mostViewedProductsGroup, id) => (
+				{recentlyWatchedProductsGrouped.map((recentlyWatchedProductsGroup, id) => (
 					<swiper-slide key={id}>
 						<div className="grid grid-cols-[29rem_29rem] gap-x-[3rem]">
-							{mostViewedProductsGroup.map((mostViewedProduct: any, id: number) => (
-								<Card3dFlip
-									key={id}
-									data={mostViewedProduct}
-									className={styles.sliderSlide}
-								>
-									<ProductCard
-										data={mostViewedProduct}
-										cardType="advanced"
+							{recentlyWatchedProductsGroup.map(
+								(recentlyWatchedProduct: any, id: number) => (
+									<Card3dFlip
+										key={id}
+										data={recentlyWatchedProduct}
 										className={styles.sliderSlide}
-										backgroundImageClassName={styles.sliderSlideBackgroundImage}
-									/>
-								</Card3dFlip>
-							))}
+									>
+										<ProductCard
+											data={recentlyWatchedProduct}
+											cardType="advanced"
+											className={styles.sliderSlide}
+											backgroundImageClassName={
+												styles.sliderSlideBackgroundImage
+											}
+										/>
+									</Card3dFlip>
+								),
+							)}
 						</div>
 					</swiper-slide>
 				))}
@@ -210,11 +217,11 @@ const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSlide
 			pagination-type="fraction"
 			class={styles.sliderContainer + " relative pb-[4.6rem]"}
 		>
-			{mostViewedProducts.map((mostViewedProduct, id) => (
+			{Object.values(recentlyWatchedProducts).map((recentlyWatchedProduct, id) => (
 				<swiper-slide key={id}>
-					<Card3dFlip data={mostViewedProduct} className={styles.sliderSlide}>
+					<Card3dFlip data={recentlyWatchedProduct} className={styles.sliderSlide}>
 						<ProductCard
-							data={mostViewedProduct}
+							data={recentlyWatchedProduct}
 							cardType="advanced"
 							className={styles.sliderSlide}
 							backgroundImageClassName={styles.sliderSlideBackgroundImage}

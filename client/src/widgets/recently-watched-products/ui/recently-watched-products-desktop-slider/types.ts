@@ -1,3 +1,3 @@
 export type RecentlyWatchedProductsDesktopSliderProps = {
-	mostViewedProducts: Array<import("shared/api").Product>;
+	recentlyWatchedProducts: Array<import("shared/api").Product>;
 };

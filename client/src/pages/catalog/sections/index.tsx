@@ -16,12 +16,12 @@ const sections: CatalogPageSections = [
 		title: "Каталог",
 		classes: "bg-desert-storm-50",
 	},
-	// {
-	// 	id: uuidv4(),
-	// 	Section: RecentlyWatchedProducts,
-	// 	title: "Вы недавно смотрели",
-	// 	classes: "bg-desert-storm-50",
-	// },
+	{
+		id: uuidv4(),
+		Section: RecentlyWatchedProducts,
+		title: "Вы недавно смотрели",
+		classes: "bg-desert-storm-50",
+	},
 	{
 		id: uuidv4(),
 		Section: JoinUs,

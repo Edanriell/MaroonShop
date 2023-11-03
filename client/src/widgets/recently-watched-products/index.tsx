@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { productModel } from "entities/product";
@@ -21,30 +21,27 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
-	const store = useSelector((state: productModel.RootState) => state.products);
-	const { dataLoading } = store;
+	const recentlyWatchedProducts = productModel.useRecentlyWatchedProducts();
 
-	const mostViewedProducts = productModel.useMostViewedProducts({ maxProductsCount: 20 });
+	const isDataLoading = productModel.useIsUserLastViewedDataLoading();
 
-	const isEmpty = productModel.isMostViewedProductsEmpty(mostViewedProducts);
+	const operationResultMessage = productModel.useUserLastViewedDataOperationResultMessage();
 
 	const { width } = useScreenSize();
 
 	useEffect(() => {
-		// Change to fetching recent watcher products later.
 		dispatch(productModel.getProductsAsync());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [reload]);
+	}, [reload, dispatch]);
 
 	function handleReloadButtonClick() {
 		setReload(Math.random());
 	}
 
-	if (dataLoading) {
+	if (isDataLoading) {
 		return <RecentlyWatchedProductsLoading />;
 	}
 
-	if (!dataLoading && isEmpty) {
+	if (operationResultMessage.error) {
 		return <RecentlyWatchedProductsError onReloadButtonClick={handleReloadButtonClick} />;
 	}
 
