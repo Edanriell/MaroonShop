@@ -295,6 +295,30 @@ export const productModel = createSlice({
 		builder.addCase(getMostViewedProductsAsync.rejected, (state) => {
 			state.data.mostViewedData.isLoading = false;
 		});
+
+		builder.addCase(getRecentlyWatchedProductsAsync.pending, (state) => {
+			state.data.userLastViewedData.isLoading = true;
+		});
+		builder.addCase(getRecentlyWatchedProductsAsync.fulfilled, (state, { payload }) => {
+			if ("error" in payload && payload.error === undefined) {
+				state.data.userLastViewedData.operationResultMessage.error =
+					"Не удалось загрузить последние просмотренные товары.";
+			} else if ("error" in payload && payload.error) {
+				state.data.userLastViewedData.operationResultMessage.error = payload.error;
+			} else if ("recentlyWatchedProducts" in payload && payload.recentlyWatchedProducts) {
+				state.data.userLastViewedData.operationResultMessage = {
+					error: null,
+					success: null,
+				};
+				state.data.userLastViewedData.data = normalizeProducts(
+					payload.recentlyWatchedProducts,
+				).entities.products;
+			}
+			state.data.userLastViewedData.isLoading = false;
+		});
+		builder.addCase(getRecentlyWatchedProductsAsync.rejected, (state) => {
+			state.data.userLastViewedData.isLoading = false;
+		});
 	},
 });
 
@@ -378,6 +402,21 @@ export const getMostViewedProductsAsync = createAsyncThunk(
 	},
 );
 
+export const getRecentlyWatchedProductsAsync = createAsyncThunk(
+	"products/getRecentlyWatchedProductsAsync",
+	async ({ productsCount }: { productsCount: number }) => {
+		try {
+			const response = await productsApi.products.getRecentlyWatchedProducts({
+				productsCount,
+			});
+			return { recentlyWatchedProducts: response.data.recentlyWatchedProducts };
+		} catch (error) {
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
+		}
+	},
+);
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(
@@ -407,6 +446,14 @@ export const useMostViewedProducts = () =>
 		createSelector(
 			(state: RootState) => state.products.data.mostViewedData.data,
 			(mostViewedProducts) => mostViewedProducts,
+		),
+	);
+
+export const useRecentlyWatchedProducts = () =>
+	useSelector(
+		createSelector(
+			(state: RootState) => state.products.data.userLastViewedData.data,
+			(recentlyWatchedProducts) => recentlyWatchedProducts,
 		),
 	);
 
