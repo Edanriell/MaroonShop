@@ -94,21 +94,36 @@ export const useSplitArray = (originalArray: Array<any>, splitCount: number) => 
 	return { splitArrays, splitArray };
 };
 
+// export const useArrayGrouper = (oldArray: Array<any>, groupSize: number) => {
+// 	const [groupedArray, setGroupedArray] = useState<Array<any>>([]);
+
+// 	useEffect(() => {
+// 		// Check if the oldArray and groupSize are valid before proceeding
+// 		if (Array.isArray(oldArray) && Number.isInteger(groupSize) && groupSize >= 1) {
+// 			const newArray = [];
+
+// 			for (let i = 0; i < oldArray.length; i += groupSize) {
+// 				newArray.push(oldArray.slice(i, i + groupSize));
+// 			}
+
+// 			setGroupedArray(newArray);
+// 		}
+// 	}, [oldArray, groupSize]);
+
+// 	return groupedArray;
+// };
+
 export const useArrayGrouper = (oldArray: Array<any>, groupSize: number) => {
-	const [groupedArray, setGroupedArray] = useState<Array<any>>([]);
+	if (!Array.isArray(oldArray) || !Number.isInteger(groupSize) || groupSize < 1) {
+		// Return an empty array or handle the error condition as needed
+		return [];
+	}
 
-	useEffect(() => {
-		// Check if the oldArray and groupSize are valid before proceeding
-		if (Array.isArray(oldArray) && Number.isInteger(groupSize) && groupSize >= 1) {
-			const newArray = [];
+	const groupedArray = [];
 
-			for (let i = 0; i < oldArray.length; i += groupSize) {
-				newArray.push(oldArray.slice(i, i + groupSize));
-			}
-
-			setGroupedArray(newArray);
-		}
-	}, [oldArray, groupSize]);
+	for (let i = 0; i < oldArray.length; i += groupSize) {
+		groupedArray.push(oldArray.slice(i, i + groupSize));
+	}
 
 	return groupedArray;
 };

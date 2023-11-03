@@ -57,13 +57,19 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 				{title}
 			</h2>
 			{width < 768 && (
-				<RecentlyWatchedProductsMobileSlider mostViewedProducts={mostViewedProducts} />
+				<RecentlyWatchedProductsMobileSlider
+					recentlyWatchedProducts={recentlyWatchedProducts}
+				/>
 			)}
 			{width >= 768 && width < 1366 && (
-				<RecentlyWatchedProductsTabletSlider mostViewedProducts={mostViewedProducts} />
+				<RecentlyWatchedProductsTabletSlider
+					recentlyWatchedProducts={recentlyWatchedProducts}
+				/>
 			)}
 			{width >= 1366 && (
-				<RecentlyWatchedProductsDesktopSlider mostViewedProducts={mostViewedProducts} />
+				<RecentlyWatchedProductsDesktopSlider
+					recentlyWatchedProducts={recentlyWatchedProducts}
+				/>
 			)}
 		</article>
 	);

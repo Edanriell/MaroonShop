@@ -1,3 +1,5 @@
+import { productModel } from "entities/product";
+
 export type RecentlyWatchedProductsDesktopSliderProps = {
-	recentlyWatchedProducts: Array<import("shared/api").Product>;
+	recentlyWatchedProducts: productModel.NormalizedProducts;
 };
