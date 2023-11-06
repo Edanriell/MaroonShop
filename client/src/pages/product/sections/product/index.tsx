@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { productModel } from "entities/product";
+import { sessionModel } from "entities/session";
 
 import { Accordion, Button, Radio } from "shared/ui";
 
@@ -14,6 +15,14 @@ import { ProductLoading, ProductError } from "./ui";
 import styles from "./styles.module.scss";
 
 const Product = () => {
+	// If user is not authorized we save info about product in local storage
+	// In format lastViewedProducts = [{viewDate, viewsCount, product}]
+	// we make a request to server with id we have it done "product" save info in local storage
+	// if product is not found create one if it is than we just update the product viewDate
+	// If user is authorized we get lastViewedProducts from it;s user data from DB
+	// and use it
+
+	// perfect place to increment views
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
 	const { productId } = useParams();
@@ -24,13 +33,70 @@ const Product = () => {
 
 	const [product] = Object.values(productModel.useProduct());
 
+	const isUserAuthorized = sessionModel.useIsAuthorized();
+
+	useLayoutEffect(() => {
+		if (localStorage.getItem("token")) {
+			dispatch(sessionModel.checkAuth());
+		}
+	}, [dispatch]);
+
+	useLayoutEffect(() => {
+		if (isUserAuthorized) {
+			console.log("Authorized");
+		} else {
+			if (!product) return;
+			if (!localStorage.getItem("lastViewedProducts")) {
+				const lastViewedProducts = [];
+
+				const lastViewedProduct = {
+					viewDate: Date.now(),
+					userViewsCount: 1,
+					product,
+				};
+
+				lastViewedProducts.push(lastViewedProduct);
+
+				localStorage.setItem("lastViewedProducts", JSON.stringify(lastViewedProducts));
+			} else {
+				const lastViewedProducts = JSON.parse(localStorage.getItem("lastViewedProducts")!);
+
+				const currentlyViewedProductIndex = lastViewedProducts.findIndex(
+					(lastViewedProduct: any) => lastViewedProduct.product?.id === product?.id,
+				);
+
+				if (currentlyViewedProductIndex !== -1) {
+					const currentlyViewedProduct = lastViewedProducts.find(
+						(lastViewedProduct: any) => lastViewedProduct.product?.id === product?.id,
+					);
+
+					currentlyViewedProduct.viewDate = Date.now();
+					currentlyViewedProduct.userViewsCount++;
+
+					lastViewedProducts[currentlyViewedProductIndex] = currentlyViewedProduct;
+					// console.log(currentlyViewedProduct);
+				} else {
+					const currentlyViewedProduct = {
+						viewDate: Date.now(),
+						userViewsCount: 1,
+						product,
+					};
+
+					lastViewedProducts.push(currentlyViewedProduct);
+				}
+
+				localStorage.removeItem("lastViewedProducts");
+				localStorage.setItem("lastViewedProducts", JSON.stringify(lastViewedProducts));
+
+				console.log(lastViewedProducts);
+				console.log(currentlyViewedProductIndex);
+			}
+		}
+	}, [isUserAuthorized, product]);
+
 	useEffect(() => {
 		dispatch(productModel.getProductByIdAsync(productId!));
 	}, [productId, dispatch]);
-
-	useEffect(() => {
-		console.log(operationResultMessage.error);
-	}, [operationResultMessage, product]);
 
 	const priceContainerRef = useRef(null);
 
