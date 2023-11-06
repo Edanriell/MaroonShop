@@ -41,8 +41,15 @@ const Product = () => {
 		}
 	}, [dispatch]);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (isUserAuthorized) {
+			if (!product) return;
+			dispatch(
+				productModel.updateRecentlyWatchedProducts({
+					productsCount: 14,
+					currentlyViewedProduct: product,
+				}),
+			);
 			console.log("Authorized");
 		} else {
 			if (!product) return;
@@ -74,7 +81,6 @@ const Product = () => {
 					currentlyViewedProduct.userViewsCount++;
 
 					lastViewedProducts[currentlyViewedProductIndex] = currentlyViewedProduct;
-					// console.log(currentlyViewedProduct);
 				} else {
 					const currentlyViewedProduct = {
 						viewDate: Date.now(),
@@ -92,7 +98,7 @@ const Product = () => {
 				console.log(currentlyViewedProductIndex);
 			}
 		}
-	}, [isUserAuthorized, product]);
+	}, [isUserAuthorized, product, dispatch]);
 
 	useEffect(() => {
 		dispatch(productModel.getProductByIdAsync(productId!));

@@ -179,7 +179,7 @@ class ProductsService {
 		return { mostViewedProducts: mostViewedProductsSortedSliced };
 	}
 
-	async getRecentlyWatchedProducts({ productsCount }) {
+	async updateRecentlyWatchedProducts({ productsCount, currentlyViewedProduct }) {
 		// To implement
 	}
 
