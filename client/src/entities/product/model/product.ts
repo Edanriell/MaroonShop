@@ -295,7 +295,7 @@ export const productModel = createSlice({
 		builder.addCase(getMostViewedProductsAsync.rejected, (state) => {
 			state.data.mostViewedData.isLoading = false;
 		});
-
+		// REEEEEEEEEEEEFFFFFFFFAAAAAAAAACCCCTTTTTTTTORRRRRR
 		builder.addCase(getRecentlyWatchedProductsAsync.pending, (state) => {
 			state.data.userLastViewedData.isLoading = true;
 		});
@@ -317,6 +317,30 @@ export const productModel = createSlice({
 			state.data.userLastViewedData.isLoading = false;
 		});
 		builder.addCase(getRecentlyWatchedProductsAsync.rejected, (state) => {
+			state.data.userLastViewedData.isLoading = false;
+		});
+
+		builder.addCase(updateRecentlyWatchedProductsAsync.pending, (state) => {
+			state.data.userLastViewedData.isLoading = true;
+		});
+		builder.addCase(updateRecentlyWatchedProductsAsync.fulfilled, (state, { payload }) => {
+			if ("error" in payload && payload.error === undefined) {
+				state.data.userLastViewedData.operationResultMessage.error =
+					"Не удалось загрузить последние просмотренные товары.";
+			} else if ("error" in payload && payload.error) {
+				state.data.userLastViewedData.operationResultMessage.error = payload.error;
+			} else if ("recentlyWatchedProducts" in payload && payload.recentlyWatchedProducts) {
+				state.data.userLastViewedData.operationResultMessage = {
+					error: null,
+					success: null,
+				};
+				state.data.userLastViewedData.data = normalizeProducts(
+					payload.recentlyWatchedProducts,
+				).entities.products;
+			}
+			state.data.userLastViewedData.isLoading = false;
+		});
+		builder.addCase(updateRecentlyWatchedProductsAsync.rejected, (state) => {
 			state.data.userLastViewedData.isLoading = false;
 		});
 	},
@@ -408,6 +432,28 @@ export const getRecentlyWatchedProductsAsync = createAsyncThunk(
 		try {
 			const response = await productsApi.products.getRecentlyWatchedProducts({
 				productsCount,
+			});
+			return { recentlyWatchedProducts: response.data.recentlyWatchedProducts };
+		} catch (error) {
+			const errorMessage = (error as any).response?.data?.message;
+			return { error: errorMessage };
+		}
+	},
+);
+
+export const updateRecentlyWatchedProductsAsync = createAsyncThunk(
+	"products/updateRecentlyWatchedProductsAsync",
+	async ({
+		productsCount,
+		currentlyViewedProduct,
+	}: {
+		productsCount: number;
+		currentlyViewedProduct: any;
+	}) => {
+		try {
+			const response = await productsApi.products.updateRecentlyWatchedProducts({
+				productsCount,
+				currentlyViewedProduct,
 			});
 			return { recentlyWatchedProducts: response.data.recentlyWatchedProducts };
 		} catch (error) {
