@@ -31,6 +31,7 @@ router.post("/logout", userController.logout);
 router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
+
 router.get("/products", productsController.getProducts);
 router.get("/products/filtered-by-categories", productsController.getFilteredProductsByCategories);
 router.get("/product/filtered-by-id", productsController.getProductById);
@@ -39,11 +40,10 @@ router.get("/products/most-viewed", productsController.getMostViewedProducts);
 router.get("/products/recently-watched", productsController.getRecentlyWatchedProducts);
 router.put(
 	"/products/update-recently-watched",
-	body("userId").isMongoId,
-	body("productsCount").isNumeric,
-	body("currentlyViewedProduct").isObject,
-	authMiddleware,
-	userController.updateUserData,
+	body("userId").isMongoId(),
+	body("productsCount").isNumeric(),
+	body("currentlyViewedProduct").isObject(),
+	// authMiddleware, BROKEN NEED PASS SOME ADDITIONAL DATA 
 	productsController.updateRecentlyWatchedProducts,
 );
 

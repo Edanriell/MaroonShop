@@ -330,13 +330,13 @@ export const productModel = createSlice({
 			} else if ("error" in payload && payload.error) {
 				state.data.userLastViewedData.operationResultMessage.error = payload.error;
 			} else if ("recentlyWatchedProducts" in payload && payload.recentlyWatchedProducts) {
-				state.data.userLastViewedData.operationResultMessage = {
-					error: null,
-					success: null,
-				};
-				state.data.userLastViewedData.data = normalizeProducts(
-					payload.recentlyWatchedProducts,
-				).entities.products;
+				// state.data.userLastViewedData.operationResultMessage = {
+				// 	error: null,
+				// 	success: null,
+				// };
+				// state.data.userLastViewedData.data = normalizeProducts(
+				// 	payload.recentlyWatchedProducts,
+				// ).entities.products;
 			}
 			state.data.userLastViewedData.isLoading = false;
 		});
@@ -444,17 +444,21 @@ export const getRecentlyWatchedProductsAsync = createAsyncThunk(
 export const updateRecentlyWatchedProductsAsync = createAsyncThunk(
 	"products/updateRecentlyWatchedProductsAsync",
 	async ({
+		userId,
 		productsCount,
 		currentlyViewedProduct,
 	}: {
+		userId: string;
 		productsCount: number;
 		currentlyViewedProduct: any;
 	}) => {
 		try {
 			const response = await productsApi.products.updateRecentlyWatchedProducts({
+				userId,
 				productsCount,
 				currentlyViewedProduct,
 			});
+			console.log(response.data.recentlyWatchedProducts);
 			return { recentlyWatchedProducts: response.data.recentlyWatchedProducts };
 		} catch (error) {
 			const errorMessage = (error as any).response?.data?.message;

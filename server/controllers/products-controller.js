@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator");
+
 const productsService = require("../service/products-service");
 
 const ApiError = require("../exceptions/api-error");
@@ -95,13 +97,18 @@ class ProductsController {
 
 			const { userId, productsCount, currentlyViewedProduct } = req.body;
 
+			// console.log(userId);
+			// console.log(productsCount);
+			// console.log(currentlyViewedProduct);
+
 			const recentlyWatchedProducts = await productsService.updateRecentlyWatchedProducts({
 				userId,
 				productsCount,
 				currentlyViewedProduct,
 			});
 
-			return res.json(recentlyWatchedProducts);
+			// return res.json(recentlyWatchedProducts);
+			return null;
 		} catch (err) {
 			next(err);
 		}

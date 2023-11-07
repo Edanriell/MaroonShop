@@ -33,6 +33,8 @@ const Product = () => {
 
 	const [product] = Object.values(productModel.useProduct());
 
+	const user = sessionModel.useUser();
+
 	const isUserAuthorized = sessionModel.useIsAuthorized();
 
 	useLayoutEffect(() => {
@@ -46,10 +48,12 @@ const Product = () => {
 			if (!product) return;
 			dispatch(
 				productModel.updateRecentlyWatchedProductsAsync({
+					userId: (user as any).id,
 					productsCount: 14,
 					currentlyViewedProduct: product,
 				}),
 			);
+			console.log((user as any).id);
 			console.log("Authorized");
 		} else {
 			if (!product) return;

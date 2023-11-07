@@ -2,6 +2,8 @@ const { dirname } = require("path");
 const fs = require("fs");
 
 const ProductModel = require("../models/product-model");
+const UserModel = require("../models/user-model");
+
 const ProductDto = require("../dtos/product-dto");
 const ApiError = require("../exceptions/api-error");
 
@@ -187,7 +189,7 @@ class ProductsService {
 		const user = await UserModel.findOne({ _id: userId });
 
 		if (!user) {
-			throw ApiError.BadRequest(`Пользователь с ид ${userID} не найден.`);
+			throw ApiError.BadRequest(`Пользователь с ид ${userId} не найден.`);
 		}
 
 		const currentlyViewedProductIndex = user.recentlyWatchedProducts.findIndex((product) =>
@@ -202,19 +204,19 @@ class ProductsService {
 			currentlyViewedProduct.viewDate = new Date();
 			currentlyViewedProduct.userViewsCount += 1;
 		} else {
-			const currentlyViewedProduct = {
+			const viewedProduct = {
 				viewDate: new Date(),
 				userViewsCount: 1,
 				product: currentlyViewedProduct,
 			};
 
-			user.recentlyWatchedProducts.push(currentlyViewedProduct);
+			user.recentlyWatchedProducts.push(viewedProduct);
 		}
 
 		try {
-			await user.save();
+			// await user.save();
 			console.log(user.recentlyWatchedProducts);
-			return user.recentlyWatchedProducts;
+			// return user.recentlyWatchedProducts;
 		} catch (error) {
 			throw ApiError.InternalServerError("БИМ БМИ БОМ БОМ БАБАХ.");
 		}
