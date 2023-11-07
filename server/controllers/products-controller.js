@@ -34,7 +34,7 @@ class ProductsController {
 			}
 
 			const filteredData = await productsService.getFilteredProductsByCategories(filter);
-			
+
 			return res.json(filteredData);
 		} catch (err) {
 			next(err);
@@ -77,6 +77,28 @@ class ProductsController {
 
 			const recentlyWatchedProducts = await productsService.getRecentlyWatchedProducts({
 				productsCount,
+			});
+
+			return res.json(recentlyWatchedProducts);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async updateRecentlyWatchedProducts(req, res, next) {
+		try {
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
+			}
+
+			const { userId, productsCount, currentlyViewedProduct } = req.body;
+
+			const recentlyWatchedProducts = await productsService.updateRecentlyWatchedProducts({
+				userId,
+				productsCount,
+				currentlyViewedProduct,
 			});
 
 			return res.json(recentlyWatchedProducts);

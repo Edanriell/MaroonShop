@@ -179,8 +179,45 @@ class ProductsService {
 		return { mostViewedProducts: mostViewedProductsSortedSliced };
 	}
 
-	async updateRecentlyWatchedProducts({ productsCount, currentlyViewedProduct }) {
+	async getRecentlyWatchedProducts({ productsCount, currentlyViewedProduct }) {
 		// To implement
+	}
+
+	async updateRecentlyWatchedProducts({ userId, productsCount, currentlyViewedProduct }) {
+		const user = await UserModel.findOne({ _id: userId });
+
+		if (!user) {
+			throw ApiError.BadRequest(`Пользователь с ид ${userID} не найден.`);
+		}
+
+		const currentlyViewedProductIndex = user.recentlyWatchedProducts.findIndex((product) =>
+			product.id.equals(currentlyViewedProduct.id),
+		);
+
+		console.log(currentlyViewedProductIndex);
+
+		if (currentlyViewedProductIndex !== -1) {
+			const currentlyViewedProduct =
+				user.recentlyWatchedProducts[currentlyViewedProductIndex];
+			currentlyViewedProduct.viewDate = new Date();
+			currentlyViewedProduct.userViewsCount += 1;
+		} else {
+			const currentlyViewedProduct = {
+				viewDate: new Date(),
+				userViewsCount: 1,
+				product: currentlyViewedProduct,
+			};
+
+			user.recentlyWatchedProducts.push(currentlyViewedProduct);
+		}
+
+		try {
+			await user.save();
+			console.log(user.recentlyWatchedProducts);
+			return user.recentlyWatchedProducts;
+		} catch (error) {
+			throw ApiError.InternalServerError("БИМ БМИ БОМ БОМ БАБАХ.");
+		}
 	}
 
 	async initializeProducts() {

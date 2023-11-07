@@ -15,11 +15,11 @@ const errorMiddleware = require("./middlewares/error-middleware");
 const PORT = process.env.PORT || 4020;
 
 // REFACTOR
-const productsRouter = require("./routes/products"); // refactored
+// const productsRouter = require("./routes/products"); // refactored
 const questionnaireRouter = require("./routes/questionnaire");
 const galleryRouter = require("./routes/gallery");
-const filteredProductsRouter = require("./routes/filteredProducts"); // refactored
-const filteredProductByIdRouter = require("./routes/filteredProductById"); // refactored
+// const filteredProductsRouter = require("./routes/filteredProducts"); // refactored
+// const filteredProductByIdRouter = require("./routes/filteredProductById"); // refactored
 // REFACTOR
 
 const app = express();
@@ -42,11 +42,11 @@ app.use("/images", express.static(path.join(__dirname, "public", "products-image
 app.use("/gallery-images", express.static(path.join(__dirname, "public", "gallery-images")));
 
 // REFACTOR
-app.use("/products", productsRouter); // refactored
+// app.use("/products", productsRouter); // refactored
 app.use("/questionnaire", questionnaireRouter);
 app.use("/gallery", galleryRouter);
-app.use("/products/filtered", filteredProductsRouter); // refactored
-app.use("/products", filteredProductByIdRouter); // refactored
+// app.use("/products/filtered", filteredProductsRouter); // refactored
+// app.use("/products", filteredProductByIdRouter); // refactored
 // REFACTOR
 app.use("/api", router);
 app.use(errorMiddleware);

@@ -45,7 +45,7 @@ const Product = () => {
 		if (isUserAuthorized) {
 			if (!product) return;
 			dispatch(
-				productModel.updateRecentlyWatchedProducts({
+				productModel.updateRecentlyWatchedProductsAsync({
 					productsCount: 14,
 					currentlyViewedProduct: product,
 				}),

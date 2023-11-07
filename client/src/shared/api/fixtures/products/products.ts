@@ -22,6 +22,7 @@ const BASE_FILTER_BY_ID_URL = "api/product/filtered-by-id";
 const BASE_BEST_SELLING_PRODUCTS_URL = "api/products/best-selling";
 const BASE_MOST_VIEWED_PRODUCTS_URL = "api/products/most-viewed";
 const BASE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/recently-watched";
+const BASE_UPDATE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/update-recently-watched";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
@@ -82,5 +83,21 @@ export const getRecentlyWatchedProducts = ({
 }): AxiosPromise<RecentlyWatchedProducts> => {
 	return apiInstance.get(BASE_RECENTLY_WATCHED_PRODUCTS_URL, {
 		params: { productsCount },
+	});
+};
+
+export const updateRecentlyWatchedProducts = ({
+	userId,
+	productsCount,
+	currentlyViewedProduct,
+}: {
+	userId: string;
+	productsCount: number;
+	currentlyViewedProduct: any;
+}): AxiosPromise<RecentlyWatchedProducts> => {
+	return apiInstance.put(BASE_UPDATE_RECENTLY_WATCHED_PRODUCTS_URL, {
+		userId,
+		productsCount,
+		currentlyViewedProduct,
 	});
 };
