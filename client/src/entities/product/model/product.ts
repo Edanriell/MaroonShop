@@ -110,7 +110,7 @@ export const productModel = createSlice({
 				).entities.product;
 			}
 		},
-		setUserLastWatchedData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
+		setUserRecentlyWatchedData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
 			if (JSON.stringify(payload) === "{}") {
 				state.data.userRecentlyWatchedData.data = payload;
 			} else if (Array.isArray(payload)) {
@@ -153,7 +153,7 @@ export const productModel = createSlice({
 				state.data.mostWatchedData.operationResultMessage.success = payload.success;
 			}
 		},
-		setUserLastWatchedDataOperationResultMessage: (
+		setUserRecentlyWatchedDataOperationResultMessage: (
 			state,
 			{ payload }: PayloadAction<{ error: string | null; success: string | null }>,
 		) => {
@@ -175,7 +175,7 @@ export const productModel = createSlice({
 		) => {
 			state.data.mostWatchedData.operationResultMessage = { error: null, success: null };
 		},
-		clearUserLastWatchedDataOperationResultMessage: (
+		clearUserRecentlyWatchedDataOperationResultMessage: (
 			state,
 			{ payload = null }: PayloadAction<null>,
 		) => {
@@ -193,7 +193,7 @@ export const productModel = createSlice({
 		setMostWatchedDataLoading: (state, { payload }: PayloadAction<boolean>) => {
 			state.data.mostWatchedData.isLoading = payload;
 		},
-		setUserLastWatchedDataLoading: (state, { payload }: PayloadAction<boolean>) => {
+		setUserRecentlyWatchedDataLoading: (state, { payload }: PayloadAction<boolean>) => {
 			state.data.userRecentlyWatchedData.isLoading = payload;
 		},
 	},
@@ -505,7 +505,7 @@ export const useMostWatchedProducts = () =>
 export const useRecentlyWatchedProducts = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.userLastWatchedData.data,
+			(state: RootState) => state.products.data.userRecentlyWatchedData.data,
 			(recentlyWatchedProducts) => recentlyWatchedProducts,
 		),
 	);
@@ -534,10 +534,10 @@ export const useIsMostWatchedDataLoading = () =>
 		),
 	);
 
-export const useIsUserLastWatchedDataLoading = () =>
+export const useIsUserRecentlyWatchedDataLoading = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.userLastWatchedData.isLoading,
+			(state: RootState) => state.products.data.userRecentlyWatchedData.isLoading,
 			(isDataLoading) => isDataLoading,
 		),
 	);
@@ -566,10 +566,10 @@ export const useMostWatchedDataOperationResultMessage = () =>
 		),
 	);
 
-export const useUserLastWatchedDataOperationResultMessage = () =>
+export const useUserRecentlyWatchedDataOperationResultMessage = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.userLastWatchedData.operationResultMessage,
+			(state: RootState) => state.products.data.userRecentlyWatchedData.operationResultMessage,
 			(operationResultMessage) => operationResultMessage,
 		),
 	);
@@ -582,8 +582,8 @@ export const setMostWatchedData = createAction<NormalizedProducts | null>(
 	"products/setMostWatchedData",
 );
 
-export const setUserLastWatchedData = createAction<NormalizedProducts | null>(
-	"products/setUserLastWatchedData",
+export const setUserRecentlyWatchedData = createAction<NormalizedProducts | null>(
+	"products/setUserRecentlyWatchedData",
 );
 
 export const setFetchOperationResultMessage = createAction<OperationResultMessage | null>(
@@ -602,9 +602,9 @@ export const setMostWatchedDataOperationResultMessage = createAction<OperationRe
 	"products/setMostWatchedDataOperationResultMessage",
 );
 
-export const setUserLastWatchedDataOperationResultMessage =
+export const setUserRecentlyWatchedDataOperationResultMessage =
 	createAction<OperationResultMessage | null>(
-		"products/setUserLastWatchedDataOperationResultMessage",
+		"products/setUserRecentlyWatchedDataOperationResultMessage",
 	);
 
 export const clearFetchOperationResultMessage = createAction<OperationResultMessage | null>(
@@ -620,9 +620,9 @@ export const clearMostWatchedDataOperationResultMessage =
 		"products/clearMostWatchedDataOperationResultMessage",
 	);
 
-export const clearUserLastWatchedDataOperationResultMessage =
+export const clearUserRecentlyWatchedDataOperationResultMessage =
 	createAction<OperationResultMessage | null>(
-		"products/clearUserLastWatchedDataOperationResultMessage",
+		"products/clearUserRecentlyWatchedDataOperationResultMessage",
 	);
 
 export const setFetchedDataLoading = createAction<boolean>("products/setFetchedDataLoading");
@@ -633,8 +633,8 @@ export const setMostWatchedDataLoading = createAction<boolean>(
 	"products/setMostWatchedDataLoading",
 );
 
-export const setUserLastWatchedDataLoading = createAction<boolean>(
-	"products/setUserLastWatchedDataLoading",
+export const setUserRecentlyWatchedDataLoading = createAction<boolean>(
+	"products/setUserRecentlyWatchedDataLoading",
 );
 
 export const reducer = productModel.reducer;

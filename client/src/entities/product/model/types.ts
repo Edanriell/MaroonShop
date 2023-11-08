@@ -20,7 +20,7 @@ export type RootState = {
 				operationResultMessage: OperationResultMessage;
 				isLoading: boolean;
 			};
-			userLastWatchedData: {
+			userRecentlyWatchedData: {
 				data: NormalizedProducts;
 				operationResultMessage: OperationResultMessage;
 				isLoading: boolean;

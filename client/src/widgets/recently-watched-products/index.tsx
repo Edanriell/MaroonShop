@@ -23,9 +23,9 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 
 	const recentlyWatchedProducts = productModel.useRecentlyWatchedProducts();
 
-	const isDataLoading = productModel.useIsUserLastWatchedDataLoading();
+	const isDataLoading = productModel.useIsUserRecentlyWatchedDataLoading();
 
-	const operationResultMessage = productModel.useUserLastWatchedDataOperationResultMessage();
+	const operationResultMessage = productModel.useUserRecentlyWatchedDataOperationResultMessage();
 
 	const { width } = useScreenSize();
 
@@ -45,34 +45,36 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 		return <RecentlyWatchedProductsError onReloadButtonClick={handleReloadButtonClick} />;
 	}
 
-	return (
-		<article>
-			<h2
-				className={
-					"min-w-[16rem] text-center font-raleway text-sm-28px-lh-35px font-medium " +
-					"text-blue-zodiac-950 mb-[3.2rem] md:text-md-32px md:mb-[5.1rem] " +
-					"ml-[4rem] mr-[4rem] md:max-w-none"
-				}
-			>
-				{title}
-			</h2>
-			{width < 768 && (
-				<RecentlyWatchedProductsMobileSlider
-					recentlyWatchedProducts={recentlyWatchedProducts}
-				/>
-			)}
-			{width >= 768 && width < 1366 && (
-				<RecentlyWatchedProductsTabletSlider
-					recentlyWatchedProducts={recentlyWatchedProducts}
-				/>
-			)}
-			{width >= 1366 && (
-				<RecentlyWatchedProductsDesktopSlider
-					recentlyWatchedProducts={recentlyWatchedProducts}
-				/>
-			)}
-		</article>
-	);
+	return null;
+
+	// return (
+	// 	<article>
+	// 		<h2
+	// 			className={
+	// 				"min-w-[16rem] text-center font-raleway text-sm-28px-lh-35px font-medium " +
+	// 				"text-blue-zodiac-950 mb-[3.2rem] md:text-md-32px md:mb-[5.1rem] " +
+	// 				"ml-[4rem] mr-[4rem] md:max-w-none"
+	// 			}
+	// 		>
+	// 			{title}
+	// 		</h2>
+	// 		{width < 768 && (
+	// 			<RecentlyWatchedProductsMobileSlider
+	// 				recentlyWatchedProducts={recentlyWatchedProducts}
+	// 			/>
+	// 		)}
+	// 		{width >= 768 && width < 1366 && (
+	// 			<RecentlyWatchedProductsTabletSlider
+	// 				recentlyWatchedProducts={recentlyWatchedProducts}
+	// 			/>
+	// 		)}
+	// 		{width >= 1366 && (
+	// 			<RecentlyWatchedProductsDesktopSlider
+	// 				recentlyWatchedProducts={recentlyWatchedProducts}
+	// 			/>
+	// 		)}
+	// 	</article>
+	// );
 };
 
 export default RecentlyWatchedProducts;
