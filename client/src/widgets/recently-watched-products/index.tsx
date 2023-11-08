@@ -23,9 +23,9 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 
 	const recentlyWatchedProducts = productModel.useRecentlyWatchedProducts();
 
-	const isDataLoading = productModel.useIsUserLastViewedDataLoading();
+	const isDataLoading = productModel.useIsUserLastWatchedDataLoading();
 
-	const operationResultMessage = productModel.useUserLastViewedDataOperationResultMessage();
+	const operationResultMessage = productModel.useUserLastWatchedDataOperationResultMessage();
 
 	const { width } = useScreenSize();
 

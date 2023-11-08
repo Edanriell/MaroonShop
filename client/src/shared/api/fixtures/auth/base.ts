@@ -28,7 +28,7 @@ apiInstance.interceptors.response.use(
 				});
 				localStorage.setItem("token", response.data.accessToken);
 				return apiInstance.request(originalRequest);
-			} catch (e) {
+			} catch (error) {
 				// eslint-disable-next-line no-console
 				console.error("Пользователь не авторизован.");
 			}

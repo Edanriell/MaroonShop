@@ -21,15 +21,15 @@ const ProductSuggestions: FC<ProductsSuggestionsProps> = ({ title }) => {
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
-	const mostViewedProducts = productModel.useMostViewedProducts();
+	const mostViewedProducts = productModel.useMostWatchedProducts();
 
-	const isDataLoading = productModel.useIsMostViewedDataLoading();
-	const operationResultMessage = productModel.useMostViewedDataOperationResultMessage();
+	const isDataLoading = productModel.useIsMostWatchedDataLoading();
+	const operationResultMessage = productModel.useMostWatchedDataOperationResultMessage();
 
 	const { width } = useScreenSize();
 
 	useEffect(() => {
-		dispatch(productModel.getMostViewedProductsAsync({ views: 1000, productsCount: 14 }));
+		dispatch(productModel.getMostWatchedProductsAsync({ views: 1000, productsCount: 14 }));
 	}, [reload, dispatch]);
 
 	function handleReloadButtonClick() {

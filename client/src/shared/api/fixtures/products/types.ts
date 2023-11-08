@@ -4,8 +4,8 @@ export type BestSellingProducts = {
 	bestSellingProducts: Product[];
 };
 
-export type MostViewedProducts = {
-	mostViewedProducts: Product[];
+export type MostWatchedProducts = {
+	mostWatchedProducts: Product[];
 };
 
 export type Products = {

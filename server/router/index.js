@@ -36,14 +36,18 @@ router.get("/products", productsController.getProducts);
 router.get("/products/filtered-by-categories", productsController.getFilteredProductsByCategories);
 router.get("/product/filtered-by-id", productsController.getProductById);
 router.get("/products/best-selling", productsController.getBestSellingProducts);
-router.get("/products/most-viewed", productsController.getMostViewedProducts);
-router.get("/products/recently-watched", productsController.getRecentlyWatchedProducts);
+router.get("/products/most-watched", productsController.getMostWatchedProducts);
+router.get(
+	"/products/recently-watched",
+	authMiddleware,
+	productsController.getRecentlyWatchedProducts,
+);
 router.put(
 	"/products/update-recently-watched",
 	body("userId").isMongoId(),
 	body("productsCount").isNumeric(),
-	body("currentlyViewedProduct").isObject(),
-	// authMiddleware, BROKEN NEED PASS SOME ADDITIONAL DATA 
+	body("currentlyWatchedProduct").isObject(),
+	authMiddleware,
 	productsController.updateRecentlyWatchedProducts,
 );
 

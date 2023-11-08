@@ -50,56 +50,53 @@ const Product = () => {
 				productModel.updateRecentlyWatchedProductsAsync({
 					userId: (user as any).id,
 					productsCount: 14,
-					currentlyViewedProduct: product,
+					currentlyWatchedProduct: product,
 				}),
 			);
-			// console.log((user as any).id);
-			// console.log("Authorized");
 		} else {
 			if (!product) return;
-			if (!localStorage.getItem("lastViewedProducts")) {
-				const lastViewedProducts = [];
+			if (!localStorage.getItem("lastWatchedProducts")) {
+				const lastWatchedProducts = [];
 
-				const lastViewedProduct = {
+				const lastWatchedProduct = {
 					viewDate: Date.now(),
 					userViewsCount: 1,
 					product,
 				};
 
-				lastViewedProducts.push(lastViewedProduct);
+				lastWatchedProducts.push(lastWatchedProduct);
 
-				localStorage.setItem("lastViewedProducts", JSON.stringify(lastViewedProducts));
+				localStorage.setItem("lastWatchedProducts", JSON.stringify(lastWatchedProducts));
 			} else {
-				const lastViewedProducts = JSON.parse(localStorage.getItem("lastViewedProducts")!);
-
-				const currentlyViewedProductIndex = lastViewedProducts.findIndex(
-					(lastViewedProduct: any) => lastViewedProduct.product?.id === product?.id,
+				const lastWatchedProducts = JSON.parse(
+					localStorage.getItem("lastWatchedProducts")!,
 				);
 
-				if (currentlyViewedProductIndex !== -1) {
-					const currentlyViewedProduct = lastViewedProducts.find(
-						(lastViewedProduct: any) => lastViewedProduct.product?.id === product?.id,
+				const currentlyWatchedProductIndex = lastWatchedProducts.findIndex(
+					(lastWatchedProduct: any) => lastWatchedProduct.product?.id === product?.id,
+				);
+
+				if (currentlyWatchedProductIndex !== -1) {
+					const currentlyWatchedProduct = lastWatchedProducts.find(
+						(lastWatchedProduct: any) => lastWatchedProduct.product?.id === product?.id,
 					);
 
-					currentlyViewedProduct.viewDate = Date.now();
-					currentlyViewedProduct.userViewsCount++;
+					currentlyWatchedProduct.viewDate = Date.now();
+					currentlyWatchedProduct.userViewsCount++;
 
-					lastViewedProducts[currentlyViewedProductIndex] = currentlyViewedProduct;
+					lastWatchedProducts[currentlyWatchedProductIndex] = currentlyWatchedProduct;
 				} else {
-					const currentlyViewedProduct = {
+					const currentlyWatchedProduct = {
 						viewDate: Date.now(),
 						userViewsCount: 1,
 						product,
 					};
 
-					lastViewedProducts.push(currentlyViewedProduct);
+					lastWatchedProducts.push(currentlyWatchedProduct);
 				}
 
-				localStorage.removeItem("lastViewedProducts");
-				localStorage.setItem("lastViewedProducts", JSON.stringify(lastViewedProducts));
-
-				// console.log(lastViewedProducts);
-				// console.log(currentlyViewedProductIndex);
+				localStorage.removeItem("lastWatchedProducts");
+				localStorage.setItem("lastWatchedProducts", JSON.stringify(lastWatchedProducts));
 			}
 		}
 	}, [isUserAuthorized, product, dispatch, user]);

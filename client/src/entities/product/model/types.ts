@@ -15,12 +15,12 @@ export type RootState = {
 				operationResultMessage: OperationResultMessage;
 				isLoading: boolean;
 			};
-			mostViewedData: {
+			mostWatchedData: {
 				data: NormalizedProducts;
 				operationResultMessage: OperationResultMessage;
 				isLoading: boolean;
 			};
-			userLastViewedData: {
+			userLastWatchedData: {
 				data: NormalizedProducts;
 				operationResultMessage: OperationResultMessage;
 				isLoading: boolean;

@@ -58,16 +58,16 @@ class ProductsController {
 		}
 	}
 
-	async getMostViewedProducts(req, res, next) {
+	async getMostWatchedProducts(req, res, next) {
 		try {
 			const { views, productsCount } = req.query;
 
-			const mostViewedProducts = await productsService.getMostViewedProducts({
+			const mostWatchedProducts = await productsService.getMostWatchedProducts({
 				views,
 				productsCount,
 			});
 
-			return res.json(mostViewedProducts);
+			return res.json(mostWatchedProducts);
 		} catch (err) {
 			next(err);
 		}
@@ -75,9 +75,10 @@ class ProductsController {
 
 	async getRecentlyWatchedProducts(req, res, next) {
 		try {
-			const { productsCount } = req.query;
+			const { userId, productsCount } = req.query;
 
 			const recentlyWatchedProducts = await productsService.getRecentlyWatchedProducts({
+				userId,
 				productsCount,
 			});
 
@@ -95,12 +96,12 @@ class ProductsController {
 				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
 			}
 
-			const { userId, productsCount, currentlyViewedProduct } = req.body;
+			const { userId, productsCount, currentlyWatchedProduct } = req.body;
 
 			const recentlyWatchedProducts = await productsService.updateRecentlyWatchedProducts({
 				userId,
 				productsCount,
-				currentlyViewedProduct,
+				currentlyWatchedProduct,
 			});
 
 			return res.json(recentlyWatchedProducts);

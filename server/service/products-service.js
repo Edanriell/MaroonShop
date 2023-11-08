@@ -161,62 +161,88 @@ class ProductsService {
 		return { bestSellingProducts: bestSellingProductsSortedSliced };
 	}
 
-	async getMostViewedProducts({ views, productsCount }) {
+	async getMostWatchedProducts({ views, productsCount }) {
 		const filteredProducts = await ProductModel.find({ views: { $gte: views } });
 
 		if (filteredProducts.length === 0) {
 			throw ApiError.NotFound("Не найдено не одного самого просматриваемого товара.");
 		}
 
-		const mostViewedProducts = [];
+		const mostWatchedProducts = [];
 
 		for (const product of filteredProducts) {
-			mostViewedProducts.push(new ProductDto(product));
+			mostWatchedProducts.push(new ProductDto(product));
 		}
 
-		const mostViewedProductsSortedSliced = mostViewedProducts
+		const mostWatchedProductsSortedSliced = mostWatchedProducts
 			.sort((a, b) => b.views - a.views)
 			.slice(0, productsCount);
 
-		return { mostViewedProducts: mostViewedProductsSortedSliced };
+		return { mostWatchedProducts: mostWatchedProductsSortedSliced };
 	}
 
-	async getRecentlyWatchedProducts({ productsCount, currentlyViewedProduct }) {
-		// To implement
-	}
-
-	async updateRecentlyWatchedProducts({ userId, productsCount, currentlyViewedProduct }) {
+	async getRecentlyWatchedProducts({ userId, productsCount }) {
 		const user = await UserModel.findOne({ _id: userId });
 
 		if (!user) {
 			throw ApiError.BadRequest(`Пользователь с ид ${userId} не найден.`);
 		}
 
-		const currentlyViewedProductIndex = user.recentlyWatchedProducts.findIndex((product) =>
-			product.product.equals(currentlyViewedProduct.id),
+		const recentlyWatchedProducts = userData.recentlyWatchedProducts
+			.sort((a, b) => {
+				if (a.userViewsCount !== b.userViewsCount) {
+					return b.userViewsCount - a.userViewsCount;
+				}
+				return b.viewDate - a.viewDate;
+			})
+			.slice(0, productsCount);
+
+		return { recentlyWatchedProducts };
+	}
+
+	async updateRecentlyWatchedProducts({ userId, productsCount, currentlyWatchedProduct }) {
+		const user = await UserModel.findOne({ _id: userId });
+
+		if (!user) {
+			throw ApiError.BadRequest(`Пользователь с ид ${userId} не найден.`);
+		}
+
+		const currentlyWatchedProductIndex = user.recentlyWatchedProducts.findIndex((product) =>
+			product.product.equals(currentlyWatchedProduct.id),
 		);
 
-		if (currentlyViewedProductIndex !== -1) {
-			const currentlyViewedProduct =
-				user.recentlyWatchedProducts[currentlyViewedProductIndex];
-			currentlyViewedProduct.viewDate = new Date();
-			currentlyViewedProduct.userViewsCount += 1;
+		if (currentlyWatchedProductIndex !== -1) {
+			const currentlyWatchedProduct =
+				user.recentlyWatchedProducts[currentlyWatchedProductIndex];
+			currentlyWatchedProduct.viewDate = new Date();
+			currentlyWatchedProduct.userViewsCount += 1;
 		} else {
-			const newRecentlyViewedProduct = {
+			const newRecentlyWatchedProduct = {
 				viewDate: new Date(),
 				userViewsCount: 1,
-				product: currentlyViewedProduct.id,
+				product: currentlyWatchedProduct.id,
 			};
 
-			user.recentlyWatchedProducts.push(newRecentlyViewedProduct);
+			user.recentlyWatchedProducts.push(newRecentlyWatchedProduct);
 		}
 
 		try {
 			await user.save();
 
-			const userData = await UserModel.findOne({ _id: userId }).populate('recentlyWatchedProducts.product');
-			
-			return {recentlyWatchedProducts: userData.recentlyWatchedProducts};
+			const userData = await UserModel.findOne({ _id: userId }).populate(
+				"recentlyWatchedProducts.product",
+			);
+
+			const recentlyWatchedProducts = userData.recentlyWatchedProducts
+				.sort((a, b) => {
+					if (a.userViewsCount !== b.userViewsCount) {
+						return b.userViewsCount - a.userViewsCount;
+					}
+					return b.viewDate - a.viewDate;
+				})
+				.slice(0, productsCount);
+
+			return { recentlyWatchedProducts };
 		} catch (error) {
 			throw ApiError.InternalServerError("Не удалось внести изменения в базу данных.");
 		}
