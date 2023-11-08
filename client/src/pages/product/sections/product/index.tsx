@@ -53,8 +53,8 @@ const Product = () => {
 					currentlyViewedProduct: product,
 				}),
 			);
-			console.log((user as any).id);
-			console.log("Authorized");
+			// console.log((user as any).id);
+			// console.log("Authorized");
 		} else {
 			if (!product) return;
 			if (!localStorage.getItem("lastViewedProducts")) {
@@ -98,11 +98,11 @@ const Product = () => {
 				localStorage.removeItem("lastViewedProducts");
 				localStorage.setItem("lastViewedProducts", JSON.stringify(lastViewedProducts));
 
-				console.log(lastViewedProducts);
-				console.log(currentlyViewedProductIndex);
+				// console.log(lastViewedProducts);
+				// console.log(currentlyViewedProductIndex);
 			}
 		}
-	}, [isUserAuthorized, product, dispatch]);
+	}, [isUserAuthorized, product, dispatch, user]);
 
 	useEffect(() => {
 		dispatch(productModel.getProductByIdAsync(productId!));

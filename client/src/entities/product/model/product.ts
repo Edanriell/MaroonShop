@@ -458,6 +458,7 @@ export const updateRecentlyWatchedProductsAsync = createAsyncThunk(
 				productsCount,
 				currentlyViewedProduct,
 			});
+			console.log("response");
 			console.log(response.data.recentlyWatchedProducts);
 			return { recentlyWatchedProducts: response.data.recentlyWatchedProducts };
 		} catch (error) {

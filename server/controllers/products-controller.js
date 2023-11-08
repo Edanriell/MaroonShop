@@ -97,18 +97,13 @@ class ProductsController {
 
 			const { userId, productsCount, currentlyViewedProduct } = req.body;
 
-			// console.log(userId);
-			// console.log(productsCount);
-			// console.log(currentlyViewedProduct);
-
 			const recentlyWatchedProducts = await productsService.updateRecentlyWatchedProducts({
 				userId,
 				productsCount,
 				currentlyViewedProduct,
 			});
 
-			// return res.json(recentlyWatchedProducts);
-			return null;
+			return res.json(recentlyWatchedProducts);
 		} catch (err) {
 			next(err);
 		}

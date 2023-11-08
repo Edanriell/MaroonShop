@@ -193,10 +193,8 @@ class ProductsService {
 		}
 
 		const currentlyViewedProductIndex = user.recentlyWatchedProducts.findIndex((product) =>
-			product.id.equals(currentlyViewedProduct.id),
+			product.product.equals(currentlyViewedProduct.id),
 		);
-
-		console.log(currentlyViewedProductIndex);
 
 		if (currentlyViewedProductIndex !== -1) {
 			const currentlyViewedProduct =
@@ -204,21 +202,23 @@ class ProductsService {
 			currentlyViewedProduct.viewDate = new Date();
 			currentlyViewedProduct.userViewsCount += 1;
 		} else {
-			const viewedProduct = {
+			const newRecentlyViewedProduct = {
 				viewDate: new Date(),
 				userViewsCount: 1,
-				product: currentlyViewedProduct,
+				product: currentlyViewedProduct.id,
 			};
 
-			user.recentlyWatchedProducts.push(viewedProduct);
+			user.recentlyWatchedProducts.push(newRecentlyViewedProduct);
 		}
 
 		try {
-			// await user.save();
-			console.log(user.recentlyWatchedProducts);
-			// return user.recentlyWatchedProducts;
+			await user.save();
+
+			const userData = await UserModel.findOne({ _id: userId }).populate('recentlyWatchedProducts.product');
+			
+			return {recentlyWatchedProducts: userData.recentlyWatchedProducts};
 		} catch (error) {
-			throw ApiError.InternalServerError("БИМ БМИ БОМ БОМ БАБАХ.");
+			throw ApiError.InternalServerError("Не удалось внести изменения в базу данных.");
 		}
 	}
 
