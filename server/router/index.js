@@ -50,5 +50,10 @@ router.put(
 	authMiddleware,
 	productsController.updateRecentlyWatchedProducts,
 );
+router.put(
+	"/product/update-views",
+	body("productId").isMongoId(),
+	productsController.updateProductViews,
+);
 
 module.exports = router;

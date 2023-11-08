@@ -125,6 +125,24 @@ class ProductsController {
 			next(err);
 		}
 	}
+
+	async updateProductViews(req, res, next) {
+		try {
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
+			}
+
+			const { productId } = req.body;
+
+			const updatedProduct = await productsService.updateProductViews({ productId });
+
+			return res.json(updatedProduct);
+		} catch (err) {
+			next(err);
+		}
+	}
 }
 
 module.exports = new ProductsController();

@@ -110,7 +110,10 @@ export const productModel = createSlice({
 				).entities.product;
 			}
 		},
-		setUserRecentlyWatchedData: (state, { payload }: PayloadAction<Product[] | Product | {}>) => {
+		setUserRecentlyWatchedData: (
+			state,
+			{ payload }: PayloadAction<Product[] | Product | {}>,
+		) => {
 			if (JSON.stringify(payload) === "{}") {
 				state.data.userRecentlyWatchedData.data = payload;
 			} else if (Array.isArray(payload)) {
@@ -470,6 +473,10 @@ export const updateRecentlyWatchedProductsAsync = createAsyncThunk(
 	},
 );
 
+export const updateProductViewsAsync = async ({ productId }: { productId: string }) => {
+	await productsApi.products.updateProductViews({ productId });
+};
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(
@@ -569,7 +576,8 @@ export const useMostWatchedDataOperationResultMessage = () =>
 export const useUserRecentlyWatchedDataOperationResultMessage = () =>
 	useSelector(
 		createSelector(
-			(state: RootState) => state.products.data.userRecentlyWatchedData.operationResultMessage,
+			(state: RootState) =>
+				state.products.data.userRecentlyWatchedData.operationResultMessage,
 			(operationResultMessage) => operationResultMessage,
 		),
 	);

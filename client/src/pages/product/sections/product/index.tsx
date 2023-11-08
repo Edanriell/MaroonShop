@@ -44,8 +44,8 @@ const Product = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
+		if (!product) return;
 		if (isUserAuthorized) {
-			if (!product) return;
 			dispatch(
 				productModel.updateRecentlyWatchedProductsAsync({
 					userId: (user as any).id,
@@ -54,7 +54,6 @@ const Product = () => {
 				}),
 			);
 		} else {
-			if (!product) return;
 			if (!localStorage.getItem("lastWatchedProducts")) {
 				const lastWatchedProducts = [];
 
@@ -104,6 +103,11 @@ const Product = () => {
 	useEffect(() => {
 		dispatch(productModel.getProductByIdAsync(productId!));
 	}, [productId, dispatch]);
+
+	useEffect(() => {
+		if (!product) return;
+		productModel.updateProductViewsAsync({ productId: productId! });
+	}, [product, dispatch, productId]);
 
 	const priceContainerRef = useRef(null);
 

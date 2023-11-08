@@ -248,6 +248,24 @@ class ProductsService {
 		}
 	}
 
+	async updateProductViews({ productId }) {
+		const product = await ProductModel.findOne({ _id: productId });
+
+		if (!product) {
+			throw ApiError.BadRequest(`Товар с ид ${userId} не найден.`);
+		}
+
+		product.views ++;
+
+		try {
+			await product.save();
+
+			return { product };
+		} catch (error) {
+			throw ApiError.InternalServerError("Не удалось обновить просмотры товара.");
+		}
+	}
+
 	async initializeProducts() {
 		const isDataAlreadyInitialized = await ProductModel.find();
 
