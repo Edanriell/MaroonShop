@@ -5,7 +5,7 @@ export type ProductCategories = {
 };
 
 export type Product = {
-	id: number;
+	id: string;
 	name: string;
 	description: Array<String>;
 	components: string;

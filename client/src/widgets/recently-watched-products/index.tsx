@@ -18,7 +18,8 @@ import {
 import { RecentlyWatchedProductsProps } from "./types";
 
 const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) => {
-	// any
+	// any Can be array or object
+	// Need to fix in sliders if array and if object Objec.values
 	const [recentlyWatchedProducts, setRecentlyWatchedProducts] = useState<any>([]);
 
 	const [reload, setReload] = useState<number>(Math.random());
@@ -33,9 +34,9 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 
 	const isUserAuthorized = sessionModel.useIsAuthorized();
 
-	const { width } = useScreenSize();
-
 	const recentlyWatchedProductsFromServer = productModel.useRecentlyWatchedProducts();
+
+	const { width } = useScreenSize();
 
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
@@ -59,6 +60,10 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 			}
 		}
 	}, [reload, dispatch, isUserAuthorized, user]);
+
+	// useEffect(() => {
+	// 	console.log(recentlyWatchedProductsFromServer);
+	// });
 
 	useEffect(() => {
 		if ((recentlyWatchedProductsFromServer as any).length > 0) {

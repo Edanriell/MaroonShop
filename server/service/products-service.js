@@ -201,8 +201,6 @@ class ProductsService {
 			})
 			.slice(0, productsCount);
 
-		console.log(recentlyWatchedProducts);
-
 		return { recentlyWatchedProducts };
 	}
 

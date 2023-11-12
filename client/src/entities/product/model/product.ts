@@ -17,7 +17,6 @@ export const productSchema = new schema.Entity<Product>("product");
 
 export const normalizeProduct = (data: Product) =>
 	normalize<Product, { product: NormalizedProducts }>(data, productSchema);
-
 export const normalizeProducts = (data: Product[]) =>
 	normalize<Product, { products: NormalizedProducts }>(data, [productsSchema]);
 
@@ -316,8 +315,29 @@ export const productModel = createSlice({
 					error: null,
 					success: null,
 				};
-				// console.log(payload.recentlyWatchedProducts);
-				state.data.userRecentlyWatchedData.data = payload.recentlyWatchedProducts;
+
+				const recentlyWatchedProductsCleared: Product[] =
+					payload.recentlyWatchedProducts.map((product) => {
+						const newProduct = {
+							id: (product as any).product._id,
+							category: (product as any).product.category,
+							components: (product as any).product.components,
+							description: (product as any).product.description,
+							image: (product as any).product.image,
+							name: (product as any).product.name,
+							price: (product as any).product.price,
+							quantity: (product as any).product.quantity,
+							sells: (product as any).product.sells,
+							usage: (product as any).product.usage,
+							views: (product as any).product.views,
+						};
+
+						return newProduct;
+					});
+
+				state.data.userRecentlyWatchedData.data = normalizeProducts(
+					recentlyWatchedProductsCleared,
+				).entities.products;
 			}
 			state.data.userRecentlyWatchedData.isLoading = false;
 		});
@@ -339,8 +359,29 @@ export const productModel = createSlice({
 					error: null,
 					success: null,
 				};
-				// console.log(payload.recentlyWatchedProducts);
-				state.data.userRecentlyWatchedData.data = payload.recentlyWatchedProducts;
+
+				const recentlyWatchedProductsCleared: Product[] =
+					payload.recentlyWatchedProducts.map((product) => {
+						const newProduct = {
+							id: (product as any).product._id,
+							category: (product as any).product.category,
+							components: (product as any).product.components,
+							description: (product as any).product.description,
+							image: (product as any).product.image,
+							name: (product as any).product.name,
+							price: (product as any).product.price,
+							quantity: (product as any).product.quantity,
+							sells: (product as any).product.sells,
+							usage: (product as any).product.usage,
+							views: (product as any).product.views,
+						};
+
+						return newProduct;
+					});
+
+				state.data.userRecentlyWatchedData.data = normalizeProducts(
+					recentlyWatchedProductsCleared,
+				).entities.products;
 			}
 			state.data.userRecentlyWatchedData.isLoading = false;
 		});
