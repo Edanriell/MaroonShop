@@ -5,6 +5,7 @@ import { Button } from "shared/ui";
 import { RecentlyWatchedProductsErrorProps } from "./types";
 
 const RecentlyWatchedProductsError: FC<RecentlyWatchedProductsErrorProps> = ({
+	errorMessage,
 	onReloadButtonClick,
 }) => {
 	return (
@@ -21,7 +22,7 @@ const RecentlyWatchedProductsError: FC<RecentlyWatchedProductsErrorProps> = ({
 					"font-medium text-center"
 				}
 			>
-				Не удалось загрузить товары.
+				{errorMessage}
 			</p>
 			<Button
 				text={"Обновить"}

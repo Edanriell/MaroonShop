@@ -105,6 +105,8 @@ const Product = () => {
 	}, [productId, dispatch]);
 
 	useEffect(() => {
+		// Logic with localsotrage should be decomposed into model of recently watched products
+		// Into separate function updateRecentlyWatchedProductsFromLocalStorage.
 		if (!product) return;
 		productModel.updateProductViewsAsync({ productId: productId! });
 	}, [product, dispatch, productId]);

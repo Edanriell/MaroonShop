@@ -20,11 +20,8 @@ const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSlide
 	recentlyWatchedProducts,
 }) => {
 	const { width } = useScreenSize();
-
-	const recentlyWatchedProductsGrouped = useArrayGrouper(
-		Object.values(recentlyWatchedProducts),
-		2,
-	);
+	// any
+	const recentlyWatchedProductsGrouped = useArrayGrouper(recentlyWatchedProducts as any, 2);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -180,11 +177,11 @@ const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSlide
 								(recentlyWatchedProduct: any, id: number) => (
 									<Card3dFlip
 										key={id}
-										data={recentlyWatchedProduct}
+										data={recentlyWatchedProduct.product}
 										className={styles.sliderSlide}
 									>
 										<ProductCard
-											data={recentlyWatchedProduct}
+											data={recentlyWatchedProduct.product}
 											cardType="advanced"
 											className={styles.sliderSlide}
 											backgroundImageClassName={
@@ -217,11 +214,14 @@ const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSlide
 			pagination-type="fraction"
 			class={styles.sliderContainer + " relative pb-[4.6rem]"}
 		>
-			{Object.values(recentlyWatchedProducts).map((recentlyWatchedProduct, id) => (
+			{(recentlyWatchedProducts as any).map((recentlyWatchedProduct: any, id: any) => (
 				<swiper-slide key={id}>
-					<Card3dFlip data={recentlyWatchedProduct} className={styles.sliderSlide}>
+					<Card3dFlip
+						data={recentlyWatchedProduct.product}
+						className={styles.sliderSlide}
+					>
 						<ProductCard
-							data={recentlyWatchedProduct}
+							data={recentlyWatchedProduct.product}
 							cardType="advanced"
 							className={styles.sliderSlide}
 							backgroundImageClassName={styles.sliderSlideBackgroundImage}

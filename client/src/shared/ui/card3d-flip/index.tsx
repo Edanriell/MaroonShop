@@ -35,7 +35,7 @@ const Card3dFlip: FC<Card3dFlipProps> = ({ children, data, className = "" }) => 
 					<Button
 						type={"link-internal"}
 						text={"Подробнее"}
-						linkInternal={`/product/${data.id}`}
+						linkInternal={`/product/${data.id ? data.id : (data as any)._id}`}
 						borderColor={"#122947"}
 						backgroundColor={"#122947"}
 						textColor={"#FFF"}

@@ -19,7 +19,8 @@ register();
 const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSliderProps> = ({
 	recentlyWatchedProducts,
 }) => {
-	const recentlyWatchedProductsGroupedBy4 = useArrayGrouper(recentlyWatchedProducts, 4);
+	// any
+	const recentlyWatchedProductsGroupedBy4 = useArrayGrouper(recentlyWatchedProducts as any, 4);
 
 	const sliderRef = useRef<HTMLElement | null>(null);
 
@@ -29,59 +30,59 @@ const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSli
 		const params = {
 			injectStyles: [
 				`
-                    .swiper-button-next,
-                    .swiper-button-prev {
-                        background-color: transparent;
-                        padding: 0;
-                        margin: 0;
-                        display: inline-block;
-                        position: absolute;
+	                .swiper-button-next,
+	                .swiper-button-prev {
+	                    background-color: transparent;
+	                    padding: 0;
+	                    margin: 0;
+	                    display: inline-block;
+	                    position: absolute;
 						transition: all 0.25s;
 						transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-                    }
+	                }
 
-                    .swiper-button-prev {
-                        background-image: url(${arrowLeftSvg});
-                        background-repeat: no-repeat;
-                        width: 26px;
-                        height: 12px;
-                        top: 100%;
-                        transform: translateY(-100%);
-                        left: 108.5rem;
-                        z-index: 100;
-                    }
+	                .swiper-button-prev {
+	                    background-image: url(${arrowLeftSvg});
+	                    background-repeat: no-repeat;
+	                    width: 26px;
+	                    height: 12px;
+	                    top: 100%;
+	                    transform: translateY(-100%);
+	                    left: 108.5rem;
+	                    z-index: 100;
+	                }
 
 					.swiper-button-prev:hover {
-                        transform: translateY(-100%) scale(1.1);
-                    }
+	                    transform: translateY(-100%) scale(1.1);
+	                }
 
 					.swiper-button-prev:active {
-                        transform: translateY(-100%) translateX(-4px) scale(1.1);
-                    }
+	                    transform: translateY(-100%) translateX(-4px) scale(1.1);
+	                }
 
-                    .swiper-button-next {
-                        background-image: url(${arrowRightSvg});
-                        background-repeat: no-repeat;
-                        width: 26px;
-                        height: 12px;
-                        top: 100%;
-                        transform: translateY(-100%);
-                        right: 0.8rem;
-                        z-index: 100;
-                    }
+	                .swiper-button-next {
+	                    background-image: url(${arrowRightSvg});
+	                    background-repeat: no-repeat;
+	                    width: 26px;
+	                    height: 12px;
+	                    top: 100%;
+	                    transform: translateY(-100%);
+	                    right: 0.8rem;
+	                    z-index: 100;
+	                }
 
 					.swiper-button-next:hover {
-                        transform: translateY(-100%) scale(1.1);
-                    }
+	                    transform: translateY(-100%) scale(1.1);
+	                }
 
 					.swiper-button-next:active {
-                        transform: translateY(-100%) translateX(4px) scale(1.1);
-                    }
-                    
-                    .swiper-button-next::after,
-                    .swiper-button-prev::after {
-                        content: "";
-                    }
+	                    transform: translateY(-100%) translateX(4px) scale(1.1);
+	                }
+
+	                .swiper-button-next::after,
+	                .swiper-button-prev::after {
+	                    content: "";
+	                }
 
 					.swiper-pagination {
 						font-size: 0;
@@ -93,7 +94,7 @@ const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSli
 						flex-direction: row;
 						align-items: center;
 					}
-					  
+
 					.swiper-pagination span {
 						font-size: 1.8rem;
 						font-family: MPLUS1p;
@@ -129,7 +130,7 @@ const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSli
 							right: 0.2rem;
 						}
 					}
-                `,
+	            `,
 			],
 		};
 
@@ -166,11 +167,11 @@ const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSli
 							(recentlyWatchedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
-									data={recentlyWatchedProduct}
+									data={recentlyWatchedProduct.product}
 									className={styles.sliderSlide}
 								>
 									<ProductCard
-										data={recentlyWatchedProduct}
+										data={recentlyWatchedProduct.product}
 										cardType="advanced"
 										className={styles.sliderSlide}
 										backgroundImageClassName={styles.sliderSlideBackgroundImage}

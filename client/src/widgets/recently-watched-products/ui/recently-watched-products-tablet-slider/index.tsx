@@ -19,8 +19,9 @@ register();
 const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSliderProps> = ({
 	recentlyWatchedProducts,
 }) => {
-	const recentlyWatchedProductsGroupedBy4 = useArrayGrouper(recentlyWatchedProducts, 4);
-	const recentlyWatchedProductsGroupedBy6 = useArrayGrouper(recentlyWatchedProducts, 6);
+	// any
+	const recentlyWatchedProductsGroupedBy4 = useArrayGrouper(recentlyWatchedProducts as any, 4);
+	const recentlyWatchedProductsGroupedBy6 = useArrayGrouper(recentlyWatchedProducts as any, 6);
 
 	const { width } = useScreenSize();
 
@@ -176,11 +177,11 @@ const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSlide
 								(recentlyWatchedProduct: any, id: number) => (
 									<Card3dFlip
 										key={id}
-										data={recentlyWatchedProduct}
+										data={recentlyWatchedProduct.product}
 										className={styles.sliderSlide}
 									>
 										<ProductCard
-											data={recentlyWatchedProduct}
+											data={recentlyWatchedProduct.product}
 											cardType="advanced"
 											className={styles.sliderSlide}
 											backgroundImageClassName={
@@ -206,11 +207,11 @@ const RecentlyWatchedProductsTabletSlider: FC<RecentlyWatchedProductsTabletSlide
 								(recentlyWatchedProduct: any, id: number) => (
 									<Card3dFlip
 										key={id}
-										data={recentlyWatchedProduct}
+										data={recentlyWatchedProduct.product}
 										className={styles.sliderSlide}
 									>
 										<ProductCard
-											data={recentlyWatchedProduct}
+											data={recentlyWatchedProduct.product}
 											cardType="advanced"
 											className={styles.sliderSlide}
 											backgroundImageClassName={

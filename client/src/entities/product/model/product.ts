@@ -316,9 +316,8 @@ export const productModel = createSlice({
 					error: null,
 					success: null,
 				};
-				state.data.userRecentlyWatchedData.data = normalizeProducts(
-					payload.recentlyWatchedProducts,
-				).entities.products;
+				// console.log(payload.recentlyWatchedProducts);
+				state.data.userRecentlyWatchedData.data = payload.recentlyWatchedProducts;
 			}
 			state.data.userRecentlyWatchedData.isLoading = false;
 		});
@@ -340,9 +339,8 @@ export const productModel = createSlice({
 					error: null,
 					success: null,
 				};
-				state.data.userRecentlyWatchedData.data = normalizeProducts(
-					payload.recentlyWatchedProducts,
-				).entities.products;
+				// console.log(payload.recentlyWatchedProducts);
+				state.data.userRecentlyWatchedData.data = payload.recentlyWatchedProducts;
 			}
 			state.data.userRecentlyWatchedData.isLoading = false;
 		});

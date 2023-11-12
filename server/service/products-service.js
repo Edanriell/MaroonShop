@@ -188,6 +188,10 @@ class ProductsService {
 			throw ApiError.BadRequest(`Пользователь с ид ${userId} не найден.`);
 		}
 
+		const userData = await UserModel.findOne({ _id: userId }).populate(
+			"recentlyWatchedProducts.product",
+		);
+
 		const recentlyWatchedProducts = userData.recentlyWatchedProducts
 			.sort((a, b) => {
 				if (a.userViewsCount !== b.userViewsCount) {
@@ -196,6 +200,8 @@ class ProductsService {
 				return b.viewDate - a.viewDate;
 			})
 			.slice(0, productsCount);
+
+		console.log(recentlyWatchedProducts);
 
 		return { recentlyWatchedProducts };
 	}
@@ -255,7 +261,7 @@ class ProductsService {
 			throw ApiError.BadRequest(`Товар с ид ${userId} не найден.`);
 		}
 
-		product.views ++;
+		product.views++;
 
 		try {
 			await product.save();
