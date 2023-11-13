@@ -3,7 +3,7 @@ import type { AxiosPromise } from "axios";
 import { apiInstance } from "./base";
 import type { QuestionnaireItem } from "./model";
 
-const BASE_URL = "/questionnaire";
+const BASE_URL = "api/questionnaire/send";
 
 export const postQuestionnaireItem = (
 	item: QuestionnaireItem,

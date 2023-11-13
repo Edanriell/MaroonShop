@@ -15,14 +15,7 @@ import { ProductLoading, ProductError } from "./ui";
 import styles from "./styles.module.scss";
 
 const Product = () => {
-	// If user is not authorized we save info about product in local storage
-	// In format lastViewedProducts = [{viewDate, viewsCount, product}]
-	// we make a request to server with id we have it done "product" save info in local storage
-	// if product is not found create one if it is than we just update the product viewDate
-	// If user is authorized we get lastViewedProducts from it;s user data from DB
-	// and use it
-
-	// perfect place to increment views
+	// Create model folder with logic and decompose what we can there ?
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
 	const { productId } = useParams();
@@ -105,11 +98,10 @@ const Product = () => {
 	}, [productId, dispatch]);
 
 	useEffect(() => {
-		// Logic with localsotrage should be decomposed into model of recently watched products
-		// Into separate function updateRecentlyWatchedProductsFromLocalStorage.
 		if (!product) return;
+
 		productModel.updateProductViewsAsync({ productId: productId! });
-	}, [product, dispatch, productId]);
+	}, [product, productId]);
 
 	const priceContainerRef = useRef(null);
 

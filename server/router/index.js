@@ -56,4 +56,8 @@ router.put(
 	productsController.updateProductViews,
 );
 
+// Make checks in body but first check how looks body
+// Create controller and service
+router.post("/questionnaire/send", questionnaireController.createQuestionnaireItem);
+
 module.exports = router;

@@ -7,6 +7,12 @@ const RecentlyWatchedProductSchema = new Schema({
 });
 
 const UserSchema = new Schema({
+	role: {
+		type: String,
+		default: "user",
+		enum: ["user", "admin"],
+		required: true,
+	},
 	name: { type: String, required: true },
 	surname: { type: String, required: true },
 	address: { type: String, required: true },
