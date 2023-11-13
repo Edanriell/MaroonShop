@@ -167,11 +167,11 @@ const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSli
 							(recentlyWatchedProduct: any, id: number) => (
 								<Card3dFlip
 									key={id}
-									data={recentlyWatchedProduct.product}
+									data={recentlyWatchedProduct}
 									className={styles.sliderSlide}
 								>
 									<ProductCard
-										data={recentlyWatchedProduct.product}
+										data={recentlyWatchedProduct}
 										cardType="advanced"
 										className={styles.sliderSlide}
 										backgroundImageClassName={styles.sliderSlideBackgroundImage}

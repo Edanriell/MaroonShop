@@ -5,6 +5,8 @@ import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { productModel } from "entities/product";
 import { sessionModel } from "entities/session";
 
+import { Product } from "shared/api";
+
 import { useScreenSize } from "shared/lib/hooks";
 
 import {
@@ -18,9 +20,7 @@ import {
 import { RecentlyWatchedProductsProps } from "./types";
 
 const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) => {
-	// any Can be array or object
-	// Need to fix in sliders if array and if object Objec.values
-	const [recentlyWatchedProducts, setRecentlyWatchedProducts] = useState<any>([]);
+	const [recentlyWatchedProducts, setRecentlyWatchedProducts] = useState<Product[] | []>([]);
 
 	const [reload, setReload] = useState<number>(Math.random());
 
@@ -56,18 +56,23 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 			const recentlyWatchedProductsJson = localStorage.getItem("lastWatchedProducts");
 
 			if (recentlyWatchedProductsJson) {
-				setRecentlyWatchedProducts(JSON.parse(recentlyWatchedProductsJson));
+				const clearedRecentlyWatchedProducts = JSON.parse(recentlyWatchedProductsJson)
+					.sort((a: any, b: any) => {
+						if (a.userViewsCount !== b.userViewsCount) {
+							return b.userViewsCount - a.userViewsCount;
+						}
+						return b.viewDate - a.viewDate;
+					})
+					.map((product: any) => product.product);
+
+				setRecentlyWatchedProducts(clearedRecentlyWatchedProducts);
 			}
 		}
 	}, [reload, dispatch, isUserAuthorized, user]);
 
-	// useEffect(() => {
-	// 	console.log(recentlyWatchedProductsFromServer);
-	// });
-
 	useEffect(() => {
-		if ((recentlyWatchedProductsFromServer as any).length > 0) {
-			setRecentlyWatchedProducts(recentlyWatchedProductsFromServer);
+		if (Object.values(recentlyWatchedProductsFromServer).length > 0) {
+			setRecentlyWatchedProducts(Object.values(recentlyWatchedProductsFromServer));
 		}
 	}, [recentlyWatchedProductsFromServer]);
 
