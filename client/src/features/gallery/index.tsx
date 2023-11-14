@@ -196,7 +196,7 @@ const Gallery: FC<GalleryProps> = ({ onGalleryClose, activeSlide }) => {
 				update-on-window-resize="true"
 				lazy="true"
 				zoom="true"
-				class="border-none rounded-[0.2rem] relative"
+				class="border-none relative"
 			>
 				{images.length > 0 &&
 					images.map((image) => {

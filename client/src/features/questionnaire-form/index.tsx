@@ -226,10 +226,10 @@ const QuestionnaireForm = () => {
 				)}
 			<div className={"flex flex-col gap-y-[1rem] gap-x-[1rem] min-[500px]:flex-row"}>
 				<Select
-					selectName="life-style"
-					selectId="life-style"
+					selectName="lifeStyle"
+					selectId="lifeStyle"
 					labelContent="Образ жизни"
-					labelFor="life-style"
+					labelFor="lifeStyle"
 					selectValue={state.lifeStyleSelect.value}
 					className={lifestyleSelectClasses}
 					onSelectChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -251,10 +251,10 @@ const QuestionnaireForm = () => {
 						document.getElementById("snackbars-container") as Element,
 					)}
 				<Select
-					selectName="skin-type"
-					selectId="skin-type"
+					selectName="skinType"
+					selectId="skinType"
 					labelContent="Тип кожи"
-					labelFor="skin-type"
+					labelFor="skinType"
 					selectValue={state.skinTypeSelect.value}
 					className={skintypeSelectClasses}
 					onSelectChange={(event: ChangeEvent<HTMLInputElement>) =>

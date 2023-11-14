@@ -1,0 +1,26 @@
+[
+	{
+		"imageId": 0,
+		"imageUrl": "http://localhost:4020/gallery-images/0/image.jpg"
+	},
+	{
+		"imageId": 1,
+		"imageUrl": "http://localhost:4020/gallery-images/1/image.jpg"
+	},
+	{
+		"imageId": 2,
+		"imageUrl": "http://localhost:4020/gallery-images/2/image.jpg"
+	},
+	{
+		"imageId": 3,
+		"imageUrl": "http://localhost:4020/gallery-images/3/image.jpg"
+	},
+	{
+		"imageId": 4,
+		"imageUrl": "http://localhost:4020/gallery-images/4/image.jpg"
+	},
+	{
+		"imageId": 5,
+		"imageUrl": "http://localhost:4020/gallery-images/5/image.jpg"
+	}
+]

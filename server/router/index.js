@@ -3,6 +3,9 @@ const { body } = require("express-validator");
 
 const userController = require("../controllers/user-controller");
 const productsController = require("../controllers/products-controller");
+const questionnaireController = require("../controllers/questionnaire-controller");
+const imageGalleryController = require("../controllers/image-gallery-controller");
+
 const authMiddleware = require("../middlewares/auth-middleware");
 
 const router = new Router();
@@ -56,8 +59,18 @@ router.put(
 	productsController.updateProductViews,
 );
 
-// Make checks in body but first check how looks body
-// Create controller and service
-router.post("/questionnaire/send", questionnaireController.createQuestionnaireItem);
+router.post(
+	"/questionnaire/send",
+	body("name").isString().isLength({ min: 3 }),
+	body("surname").isString().isLength({ min: 3 }),
+	body("email").isString().isLength({ min: 8 }),
+	body("age").isString().notEmpty(),
+	body("lifeStyle").isString().notEmpty(),
+	body("skinType").isString().notEmpty(),
+	body("location").isString().notEmpty(),
+	questionnaireController.createQuestionnaireItem,
+);
+
+router.get("/gallery/images", imageGalleryController.getAllImages);
 
 module.exports = router;

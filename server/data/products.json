@@ -14,9 +14,9 @@
 			"skinType": ["skin-normal"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/1/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/1/sm/productImage.jpg"
 		},
 		"price": [490, 890],
 		"quantity": ["25ml", "55ml"],
@@ -38,9 +38,9 @@
 			"skinType": ["skin-fat"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/2/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/2/sm/productImage.jpg"
 		},
 		"price": [490, 690],
 		"quantity": ["15g", "30g"],
@@ -62,9 +62,9 @@
 			"skinType": ["skin-combined"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/3/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/3/sm/productImage.jpg"
 		},
 		"price": [600],
 		"quantity": ["50ml"],
@@ -86,9 +86,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/4/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/4/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/4/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/4/sm/productImage.jpg"
 		},
 		"price": [720],
 		"quantity": ["65ml"],
@@ -110,9 +110,9 @@
 			"skinType": ["skin-normal"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/1/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/1/sm/productImage.jpg"
 		},
 		"price": [890],
 		"quantity": ["50ml"],
@@ -134,9 +134,9 @@
 			"skinType": ["skin-fat"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/2/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/2/sm/productImage.jpg"
 		},
 		"price": [490],
 		"quantity": ["30g"],
@@ -158,9 +158,9 @@
 			"skinType": ["skin-combined"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/3/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/3/sm/productImage.jpg"
 		},
 		"price": [600],
 		"quantity": ["50ml"],
@@ -182,9 +182,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/4/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/4/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/4/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/4/sm/productImage.jpg"
 		},
 		"price": [720],
 		"quantity": ["55ml"],
@@ -206,9 +206,9 @@
 			"skinType": ["skin-normal"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/1/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/1/sm/productImage.jpg"
 		},
 		"price": [890],
 		"quantity": ["45ml"],
@@ -230,9 +230,9 @@
 			"skinType": ["skin-fat"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/2/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/2/sm/productImage.jpg"
 		},
 		"price": [490],
 		"quantity": ["25g"],
@@ -254,9 +254,9 @@
 			"skinType": ["skin-combined"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/3/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/3/sm/productImage.jpg"
 		},
 		"price": [600],
 		"quantity": ["50ml"],
@@ -278,9 +278,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/4/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/4/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/4/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/4/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/4/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/4/sm/productImage.jpg"
 		},
 		"price": [720],
 		"quantity": ["75ml"],
@@ -302,9 +302,9 @@
 			"skinType": ["skin-normal"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/1/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/1/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/1/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/1/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/1/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/1/sm/productImage.jpg"
 		},
 		"price": [890],
 		"quantity": ["15g"],
@@ -326,9 +326,9 @@
 			"skinType": ["skin-fat"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/2/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/2/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/2/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/2/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/2/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/2/sm/productImage.jpg"
 		},
 		"price": [490],
 		"quantity": ["10g"],
@@ -350,9 +350,9 @@
 			"skinType": ["skin-combined"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/3/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/3/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/3/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/3/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/3/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/3/sm/productImage.jpg"
 		},
 		"price": [600],
 		"quantity": ["25ml"],
@@ -374,9 +374,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/9/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/9/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/9/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/9/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/9/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/9/sm/productImage.jpg"
 		},
 		"price": [990],
 		"quantity": ["50ml"],
@@ -398,9 +398,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/10/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/10/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/10/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/10/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/10/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/10/sm/productImage.jpg"
 		},
 		"price": [720],
 		"quantity": ["20g"],
@@ -422,9 +422,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/11/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/11/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/11/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/11/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/11/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/11/sm/productImage.jpg"
 		},
 		"price": [890],
 		"quantity": ["50ml"],
@@ -446,9 +446,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/12/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/12/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/12/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/12/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/12/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/12/sm/productImage.jpg"
 		},
 		"price": [790],
 		"quantity": ["150ml"],
@@ -470,9 +470,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/13/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/13/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/13/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/13/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/13/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/13/sm/productImage.jpg"
 		},
 		"price": [590],
 		"quantity": ["15g"],
@@ -494,9 +494,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/14/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/14/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/14/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/14/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/14/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/14/sm/productImage.jpg"
 		},
 		"price": [90],
 		"quantity": ["20g"],
@@ -518,9 +518,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/15/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/15/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/15/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/15/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/15/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/15/sm/productImage.jpg"
 		},
 		"price": [890],
 		"quantity": ["50ml"],
@@ -542,9 +542,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/16/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/16/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/16/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/16/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/16/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/16/sm/productImage.jpg"
 		},
 		"price": [490],
 		"quantity": ["100g"],
@@ -566,9 +566,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/17/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/17/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/17/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/17/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/17/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/17/sm/productImage.jpg"
 		},
 		"price": [990],
 		"quantity": ["300ml"],
@@ -590,9 +590,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/18/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/18/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/18/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/18/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/18/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/18/sm/productImage.jpg"
 		},
 		"price": [290],
 		"quantity": ["50g"],
@@ -614,9 +614,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/19/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/19/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/19/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/19/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/19/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/19/sm/productImage.jpg"
 		},
 		"price": [890],
 		"quantity": ["50ml"],
@@ -638,9 +638,9 @@
 			"skinType": ["skin-dry"]
 		},
 		"image": {
-			"lg": "http://localhost:4020/images/20/lg/productImage.jpg",
-			"md": "http://localhost:4020/images/20/md/productImage.jpg",
-			"sm": "http://localhost:4020/images/20/sm/productImage.jpg"
+			"lg": "http://localhost:4020/products-images/20/lg/productImage.jpg",
+			"md": "http://localhost:4020/products-images/20/md/productImage.jpg",
+			"sm": "http://localhost:4020/products-images/20/sm/productImage.jpg"
 		},
 		"price": [90],
 		"quantity": ["20g"],

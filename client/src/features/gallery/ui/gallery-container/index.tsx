@@ -37,7 +37,7 @@ const GalleryContainer: FC<GalleryContainerProps> = ({
 				ref={galleryRef}
 				className={
 					styles.galleryShadow +
-					" z-[50] border-none rounded-[0.2rem] max-w-[120rem] w-[90%] mr-[1.5rem] " +
+					" z-[50] border-none max-w-[120rem] w-[90%] mr-[1.5rem] " +
 					"ml-[1.5rem] mt-[1.5rem] mb-[1.5rem] bg-desert-storm-50 max-h-[80rem] " +
 					"relative h-[100vw]"
 				}

@@ -1,4 +1,5 @@
 module.exports = class UserDto {
+	role;
 	name;
 	surname;
 	address;
@@ -8,6 +9,7 @@ module.exports = class UserDto {
 	recentlyWatchedProducts;
 
 	constructor(model) {
+		this.role = model.role;
 		this.name = model.name;
 		this.surname = model.surname;
 		this.address = model.address;

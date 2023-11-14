@@ -8,23 +8,15 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const productsService = require("./service/products-service");
+const imageGalleryService = require("./service/image-gallery-service");
 
 const router = require("./router/index");
 const errorMiddleware = require("./middlewares/error-middleware");
 
 const PORT = process.env.PORT || 4020;
 
-// REFACTOR
-// const productsRouter = require("./routes/products"); // refactored
-const questionnaireRouter = require("./routes/questionnaire");
-const galleryRouter = require("./routes/gallery");
-// const filteredProductsRouter = require("./routes/filteredProducts"); // refactored
-// const filteredProductByIdRouter = require("./routes/filteredProductById"); // refactored
-// REFACTOR
-
 const app = express();
 
-// Middleware setup
 app.use(
 	helmet({
 		crossOriginResourcePolicy: false,
@@ -37,17 +29,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Static files
-app.use("/images", express.static(path.join(__dirname, "public", "products-images")));
+app.use("/products-images", express.static(path.join(__dirname, "public", "products-images")));
 app.use("/gallery-images", express.static(path.join(__dirname, "public", "gallery-images")));
 
-// REFACTOR
-// app.use("/products", productsRouter); // refactored
-app.use("/questionnaire", questionnaireRouter);
-app.use("/gallery", galleryRouter);
-// app.use("/products/filtered", filteredProductsRouter); // refactored
-// app.use("/products", filteredProductByIdRouter); // refactored
-// REFACTOR
 app.use("/api", router);
 app.use(errorMiddleware);
 
@@ -57,7 +41,10 @@ const startServer = async () => {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
+
 		productsService.initializeProducts();
+		imageGalleryService.initializeGalleryImages();
+
 		app.listen(PORT, () => {
 			console.log(`Server listening on port ${PORT}`);
 		});
