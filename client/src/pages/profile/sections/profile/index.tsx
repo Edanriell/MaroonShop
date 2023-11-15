@@ -300,7 +300,16 @@ const Profile: FC<ProfileProps> = ({ title }) => {
 							document.getElementById("snackbars-container") as Element,
 						)}
 				</div>
-				<div className={"flex flex-row items gap-x-[1rem]"}>
+				{(user as User).role === "admin" && (
+					<div className={"flex flex-row items-center mt-[2rem]"}>
+						<Button
+							type={"link-internal"}
+							text={"Управление товарами"}
+							linkInternal={`/products-management`}
+						/>
+					</div>
+				)}
+				<div className={"flex flex-row items-center gap-x-[1rem]"}>
 					<Button
 						className={"mt-[5rem] " + submitButtonClasses}
 						type={isProfileDataEditable ? "button" : "submit"}
