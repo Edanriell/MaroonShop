@@ -1,4 +1,4 @@
-import { FC, useLayoutEffect } from "react";
+import { FC, useLayoutEffect, useEffect, ChangeEvent, useState } from "react";
 // import { FC, useState, useLayoutEffect, useReducer, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,11 +7,13 @@ import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 // import classNames from "classnames";
 
 import { sessionModel } from "entities/session";
+import { productModel } from "entities/product";
 // import { userModel } from "entities/user";
 
 // import { Button, Input, Snackbar } from "shared/ui";
+import { Button } from "shared/ui";
 // import { useDebounce } from "shared/lib/hooks";
-import { User } from "shared/api";
+import { User, Product } from "shared/api";
 
 // import { reducer, initialFormState } from "./model/store";
 // import {
@@ -28,6 +30,8 @@ import { ProductsProps } from "./types";
 import "./styles.scss";
 
 const Profile: FC<ProductsProps> = ({ title }) => {
+	const [filteredProducts, setFilteredProducts] = useState<Product[] | Product | null>(null);
+
 	// const [isProfileDataEditable, setIsProfileDataEditable] = useState<boolean>(false);
 
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
@@ -37,6 +41,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 
 	const user = sessionModel.useUser();
 	const isAuthorized = sessionModel.useIsAuthorized();
+
+	const products = productModel.useProducts();
 	// const operationResultMessage = userModel.useOperationResultMessage();
 
 	useLayoutEffect(() => {
@@ -44,6 +50,26 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 			dispatch(sessionModel.checkAuth());
 		}
 	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(productModel.getProductsAsync());
+	}, [dispatch]);
+
+	const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const allProducts = Object.values(products);
+		const searchTerm = event.target.value;
+
+		if (searchTerm.trim() === "") {
+			setFilteredProducts(null);
+			return;
+		}
+
+		const filteredProducts = allProducts.filter((product) =>
+			product.name.toLowerCase().includes(searchTerm.toLowerCase()),
+		);
+
+		setFilteredProducts(filteredProducts);
+	};
 
 	// useLayoutEffect(() => {
 	// 	formDispatch(changingNameAction((user as User)?.name || ""));
@@ -354,7 +380,178 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		// 			document.getElementById("snackbars-container") as Element,
 		// 		)}
 		// </form>
-		<div>ProductsList</div>
+		<div className={"flex flex-col"}>
+			<div className={"mr-[0] ml-[auto] mb-[4rem]"}>
+				<Button
+					type={"button"}
+					text={"Добавить товар"}
+					// onClick={handleProfileEditClick}
+				/>
+			</div>
+			<div className={"mb-[4rem]"}>
+				<form>
+					<label className={"sr-only"} htmlFor="products-search">
+						Поиск товаров
+					</label>
+					<input
+						className={
+							"w-full border-bombay-400 border-solid border-[0.1rem] bg-transparent h-[4rem] " +
+							"font-raleway p-[2rem] text-sm-14px lining-nums"
+						}
+						type="text"
+						placeholder="Поиск товаров"
+						name="products-search"
+						id="products-search"
+						onChange={handleSearchTermChange}
+					/>
+				</form>
+			</div>
+			{filteredProducts && (filteredProducts as Product[]).length >= 1 && (
+				<ul className={"flex flex-col items-center gap-y-[2rem]"}>
+					{(filteredProducts as Product[]).map((product) => (
+						<li key={product.id}>
+							<article
+								className={
+									"flex flex-row items-center w-full bg-transparent " +
+									"border-bombay-400 border-solid border-[0.1rem] " +
+									"min-w-[70rem]"
+								}
+							>
+								<picture>
+									<source media="(min-width:1366px)" srcSet={product.image.lg} />
+									<source media="(min-width:768px)" srcSet={product.image.md} />
+									<source media="(min-width:320px)" srcSet={product.image.sm} />
+									<img
+										src={product.image.lg}
+										alt={product.name}
+										className={"w-[16rem] h-[16rem] object-cover"}
+									/>
+								</picture>
+								<div className={"flex flex-row items-center justify-between"}>
+									<div
+										className={
+											"flex flex-col items-center w-[20rem] gap-y-[0.5rem] ml-[4rem] mr-[4rem]"
+										}
+									>
+										<h3
+											className={
+												"font-raleway text-md-18px text-center lining-nums"
+											}
+										>
+											{product.name}
+										</h3>
+										<div
+											className={"flex flex-row items-center gap-x-[0.5rem]"}
+										>
+											<p className={"font-raleway text-sm-12px"}>id:</p>
+											<p
+												className={
+													"font-raleway text-center lining-nums text-sm-12px"
+												}
+											>
+												{product.id}
+											</p>
+										</div>
+									</div>
+									<div
+										className={
+											"flex flex-row items-center gap-x-[1rem] mr-[1rem]"
+										}
+									>
+										<Button
+											type={"button"}
+											text={"Редактировать"}
+											// onClick={handleProfileEditClick}
+										/>
+										<Button
+											type={"button"}
+											text={"Удалить"}
+											// onClick={handleProfileEditClick}
+										/>
+									</div>
+								</div>
+							</article>
+						</li>
+					))}
+				</ul>
+			)}
+			{filteredProducts && (filteredProducts as Product[]).length === 0 && (
+				<div className={"w-full"}>
+					<p className={"font-raleway text-md-18px"}>
+						По введенным критериям не найдено не одного товара.
+					</p>
+				</div>
+			)}
+			{!filteredProducts && (
+				<ul className={"flex flex-col items-center gap-y-[2rem]"}>
+					{Object.values(products).map((product) => (
+						<li key={product.id}>
+							<article
+								className={
+									"flex flex-row items-center w-full bg-transparent " +
+									"border-bombay-400 border-solid border-[0.1rem] " +
+									"min-w-[70rem]"
+								}
+							>
+								<picture>
+									<source media="(min-width:1366px)" srcSet={product.image.lg} />
+									<source media="(min-width:768px)" srcSet={product.image.md} />
+									<source media="(min-width:320px)" srcSet={product.image.sm} />
+									<img
+										src={product.image.lg}
+										alt={product.name}
+										className={"w-[16rem] h-[16rem] object-cover"}
+									/>
+								</picture>
+								<div className={"flex flex-row items-center justify-between"}>
+									<div
+										className={
+											"flex flex-col items-center w-[20rem] gap-y-[0.5rem] ml-[4rem] mr-[4rem]"
+										}
+									>
+										<h3
+											className={
+												"font-raleway text-md-18px text-center lining-nums"
+											}
+										>
+											{product.name}
+										</h3>
+										<div
+											className={"flex flex-row items-center gap-x-[0.5rem]"}
+										>
+											<p className={"font-raleway text-sm-12px"}>id:</p>
+											<p
+												className={
+													"font-raleway text-center lining-nums text-sm-12px"
+												}
+											>
+												{product.id}
+											</p>
+										</div>
+									</div>
+									<div
+										className={
+											"flex flex-row items-center gap-x-[1rem] mr-[1rem]"
+										}
+									>
+										<Button
+											type={"button"}
+											text={"Редактировать"}
+											// onClick={handleProfileEditClick}
+										/>
+										<Button
+											type={"button"}
+											text={"Удалить"}
+											// onClick={handleProfileEditClick}
+										/>
+									</div>
+								</div>
+							</article>
+						</li>
+					))}
+				</ul>
+			)}
+		</div>
 	);
 
 	return (
