@@ -2,7 +2,7 @@ import { FC, useLayoutEffect, useEffect, ChangeEvent, useState } from "react";
 // import { FC, useState, useLayoutEffect, useReducer, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { createPortal } from "react-dom";
+import { createPortal } from "react-dom";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 // import classNames from "classnames";
 
@@ -11,7 +11,7 @@ import { productModel } from "entities/product";
 // import { userModel } from "entities/user";
 
 // import { Button, Input, Snackbar } from "shared/ui";
-import { Button } from "shared/ui";
+import { Button, Modal } from "shared/ui";
 // import { useDebounce } from "shared/lib/hooks";
 import { User, Product } from "shared/api";
 
@@ -26,12 +26,15 @@ import { User, Product } from "shared/api";
 
 import { ProductsProps } from "./types";
 
-// import styles from "./styles.module.scss";
+import styles from "./styles.module.scss";
 import "./styles.scss";
 
 const Profile: FC<ProductsProps> = ({ title }) => {
 	const [filteredProducts, setFilteredProducts] = useState<Product[] | Product | null>(null);
-
+	const [showCreateNewProductModal, setShowCreateNewProductModal] = useState<boolean>(false);
+	const [showEditExistingProductModal, setEditExistingProductModal] = useState<boolean>(false);
+	const [showDeleteExistingProductModal, setDeleteExistingProductModal] =
+		useState<boolean>(false);
 	// const [isProfileDataEditable, setIsProfileDataEditable] = useState<boolean>(false);
 
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
@@ -69,6 +72,31 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		);
 
 		setFilteredProducts(filteredProducts);
+	};
+
+	const handleCreateNewProductModalOpen = () => {
+		setShowCreateNewProductModal(true);
+	};
+
+	const handleCreateNewProductModalClose = () => {
+		setShowCreateNewProductModal(false);
+	};
+
+	const handleEditExistingProductModalOpen = () => {
+		setEditExistingProductModal(true);
+		console.log(123);
+	};
+
+	const handleEditExistingProductModalClose = () => {
+		setEditExistingProductModal(false);
+	};
+
+	const handleDeleteExistingProductModalOpen = () => {
+		setDeleteExistingProductModal(true);
+	};
+
+	const handleDeleteExistingProductModalClose = () => {
+		setDeleteExistingProductModal(false);
 	};
 
 	// useLayoutEffect(() => {
@@ -385,8 +413,19 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 				<Button
 					type={"button"}
 					text={"Добавить товар"}
-					// onClick={handleProfileEditClick}
+					onClick={handleCreateNewProductModalOpen}
 				/>
+				{showCreateNewProductModal &&
+					createPortal(
+						<Modal
+							title="Добавление нового товара"
+							description=""
+							onModalClose={handleCreateNewProductModalClose}
+						>
+							<div>Content</div>
+						</Modal>,
+						document.body,
+					)}
 			</div>
 			<div className={"mb-[4rem]"}>
 				<form>
@@ -407,14 +446,19 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 				</form>
 			</div>
 			{filteredProducts && (filteredProducts as Product[]).length >= 1 && (
-				<ul className={"flex flex-col items-center gap-y-[2rem]"}>
+				<ul
+					className={
+						"flex flex-row justify-center items-center gap-[2rem] flex-wrap lg:gap-y-[2rem] " +
+						styles.cardRowContainer
+					}
+				>
 					{(filteredProducts as Product[]).map((product) => (
 						<li key={product.id}>
 							<article
 								className={
-									"flex flex-row items-center w-full bg-transparent " +
+									"flex lg:flex-row items-center w-full bg-transparent " +
 									"border-bombay-400 border-solid border-[0.1rem] " +
-									"min-w-[70rem]"
+									"lg:max-w-[90rem] flex-col gap-y-[2rem]"
 								}
 							>
 								<picture>
@@ -424,13 +468,21 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 									<img
 										src={product.image.lg}
 										alt={product.name}
-										className={"w-[16rem] h-[16rem] object-cover"}
+										className={
+											"w-[28rem] h-[24rem] lg:w-[16rem] md:w-[34.4rem] " +
+											"md:h-[28rem] lg:h-[16rem] object-cover"
+										}
 									/>
 								</picture>
-								<div className={"flex flex-row items-center justify-between"}>
+								<div
+									className={
+										"flex lg:flex-row flex-col gap-y-[2rem] items-center justify-between"
+									}
+								>
 									<div
 										className={
-											"flex flex-col items-center w-[20rem] gap-y-[0.5rem] ml-[4rem] mr-[4rem]"
+											"flex flex-col items-center lg:w-[33.8rem] lg:gap-y-[0.5rem] " +
+											"lg:ml-[4rem] lg:mr-[4rem]"
 										}
 									>
 										<h3
@@ -455,19 +507,46 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 									</div>
 									<div
 										className={
-											"flex flex-row items-center gap-x-[1rem] mr-[1rem]"
+											"flex lg:flex-row flex-col items-center " +
+											"gap-y-[2rem] lg:gap-x-[1rem] mb-[1rem] lg:mr-[1rem]"
 										}
 									>
 										<Button
 											type={"button"}
 											text={"Редактировать"}
-											// onClick={handleProfileEditClick}
+											onClick={handleEditExistingProductModalOpen}
 										/>
+										{showEditExistingProductModal &&
+											createPortal(
+												<Modal
+													title="Редактирование товара"
+													description="123"
+													onModalClose={
+														handleEditExistingProductModalClose
+													}
+												>
+													<div>Content2</div>
+												</Modal>,
+												document.body,
+											)}
 										<Button
 											type={"button"}
 											text={"Удалить"}
-											// onClick={handleProfileEditClick}
+											onClick={handleDeleteExistingProductModalOpen}
 										/>
+										{showDeleteExistingProductModal &&
+											createPortal(
+												<Modal
+													title="Удаление товара"
+													description=""
+													onModalClose={
+														handleDeleteExistingProductModalClose
+													}
+												>
+													<div>Content3</div>
+												</Modal>,
+												document.body,
+											)}
 									</div>
 								</div>
 							</article>
@@ -483,14 +562,19 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 				</div>
 			)}
 			{!filteredProducts && (
-				<ul className={"flex flex-col items-center gap-y-[2rem]"}>
+				<ul
+					className={
+						"flex flex-row justify-center items-center gap-[2rem] flex-wrap lg:gap-y-[2rem] " +
+						styles.cardRowContainer
+					}
+				>
 					{Object.values(products).map((product) => (
 						<li key={product.id}>
 							<article
 								className={
-									"flex flex-row items-center w-full bg-transparent " +
+									"flex lg:flex-row items-center w-full bg-transparent " +
 									"border-bombay-400 border-solid border-[0.1rem] " +
-									"min-w-[70rem]"
+									"lg:max-w-[90rem] flex-col gap-y-[2rem]"
 								}
 							>
 								<picture>
@@ -500,13 +584,21 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 									<img
 										src={product.image.lg}
 										alt={product.name}
-										className={"w-[16rem] h-[16rem] object-cover"}
+										className={
+											"w-[28rem] h-[24rem] lg:w-[16rem] md:w-[34.4rem] " +
+											"md:h-[28rem] lg:h-[16rem] object-cover"
+										}
 									/>
 								</picture>
-								<div className={"flex flex-row items-center justify-between"}>
+								<div
+									className={
+										"flex lg:flex-row flex-col gap-y-[2rem] items-center justify-between"
+									}
+								>
 									<div
 										className={
-											"flex flex-col items-center w-[20rem] gap-y-[0.5rem] ml-[4rem] mr-[4rem]"
+											"flex flex-col items-center lg:w-[33.8rem] lg:gap-y-[0.5rem] " +
+											"lg:ml-[4rem] lg:mr-[4rem]"
 										}
 									>
 										<h3
@@ -531,19 +623,45 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 									</div>
 									<div
 										className={
-											"flex flex-row items-center gap-x-[1rem] mr-[1rem]"
+											"flex lg:flex-row flex-col items-center " +
+											"gap-y-[2rem] lg:gap-x-[1rem] mb-[1rem] lg:mr-[1rem]"
 										}
 									>
 										<Button
 											type={"button"}
 											text={"Редактировать"}
-											// onClick={handleProfileEditClick}
+											onClick={handleCreateNewProductModalOpen}
 										/>
+										{showCreateNewProductModal &&
+											createPortal(
+												<Modal
+													key={product.id}
+													title="Редактирование товара"
+													description="123"
+													onModalClose={handleCreateNewProductModalClose}
+												>
+													<div>Content2</div>
+												</Modal>,
+												document.body,
+											)}
 										<Button
 											type={"button"}
 											text={"Удалить"}
-											// onClick={handleProfileEditClick}
+											onClick={handleDeleteExistingProductModalOpen}
 										/>
+										{showDeleteExistingProductModal &&
+											createPortal(
+												<Modal
+													title="Удаление товара"
+													description=""
+													onModalClose={
+														handleDeleteExistingProductModalClose
+													}
+												>
+													<div>Content3</div>
+												</Modal>,
+												document.body,
+											)}
 									</div>
 								</div>
 							</article>
@@ -555,7 +673,9 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	);
 
 	return (
-		<section className="flex flex-col items-center mt-[10rem] mb-[10rem]">
+		<section
+			className={"flex flex-col items-center mt-[10rem] mb-[10rem] pl-[1.5rem] pr-[1.5rem]"}
+		>
 			<h2
 				className={
 					"font-raleway font-normal text-sm-28px text-center text-blue-zodiac-950 " +
