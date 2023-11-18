@@ -84,7 +84,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 
 	const handleEditExistingProductModalOpen = () => {
 		setEditExistingProductModal(true);
-		console.log(123);
 	};
 
 	const handleEditExistingProductModalClose = () => {
@@ -516,37 +515,11 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 											text={"Редактировать"}
 											onClick={handleEditExistingProductModalOpen}
 										/>
-										{showEditExistingProductModal &&
-											createPortal(
-												<Modal
-													title="Редактирование товара"
-													description="123"
-													onModalClose={
-														handleEditExistingProductModalClose
-													}
-												>
-													<div>Content2</div>
-												</Modal>,
-												document.body,
-											)}
 										<Button
 											type={"button"}
 											text={"Удалить"}
 											onClick={handleDeleteExistingProductModalOpen}
 										/>
-										{showDeleteExistingProductModal &&
-											createPortal(
-												<Modal
-													title="Удаление товара"
-													description=""
-													onModalClose={
-														handleDeleteExistingProductModalClose
-													}
-												>
-													<div>Content3</div>
-												</Modal>,
-												document.body,
-											)}
 									</div>
 								</div>
 							</article>
@@ -630,43 +603,41 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										<Button
 											type={"button"}
 											text={"Редактировать"}
-											onClick={handleCreateNewProductModalOpen}
+											onClick={handleEditExistingProductModalOpen}
 										/>
-										{showCreateNewProductModal &&
-											createPortal(
-												<Modal
-													key={product.id}
-													title="Редактирование товара"
-													description="123"
-													onModalClose={handleCreateNewProductModalClose}
-												>
-													<div>Content2</div>
-												</Modal>,
-												document.body,
-											)}
+
 										<Button
 											type={"button"}
 											text={"Удалить"}
 											onClick={handleDeleteExistingProductModalOpen}
 										/>
-										{showDeleteExistingProductModal &&
-											createPortal(
-												<Modal
-													title="Удаление товара"
-													description=""
-													onModalClose={
-														handleDeleteExistingProductModalClose
-													}
-												>
-													<div>Content3</div>
-												</Modal>,
-												document.body,
-											)}
 									</div>
 								</div>
 							</article>
 						</li>
 					))}
+					{showEditExistingProductModal &&
+						createPortal(
+							<Modal
+								title="Редактирование товара"
+								description="123"
+								onModalClose={handleEditExistingProductModalClose}
+							>
+								<div>Content2</div>
+							</Modal>,
+							document.body,
+						)}
+					{showDeleteExistingProductModal &&
+						createPortal(
+							<Modal
+								title="Удаление товара"
+								description=""
+								onModalClose={handleDeleteExistingProductModalClose}
+							>
+								<div>Content3</div>
+							</Modal>,
+							document.body,
+						)}
 				</ul>
 			)}
 		</div>
