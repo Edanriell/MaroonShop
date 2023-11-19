@@ -1,28 +1,34 @@
-import { FC, useLayoutEffect, useEffect, ChangeEvent, useState } from "react";
+import {
+	FC,
+	useLayoutEffect,
+	useEffect,
+	ChangeEvent,
+	useState,
+	useReducer,
+	FormEvent,
+} from "react";
 // import { FC, useState, useLayoutEffect, useReducer, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createPortal } from "react-dom";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
-// import classNames from "classnames";
+import classNames from "classnames";
 
 import { sessionModel } from "entities/session";
 import { productModel } from "entities/product";
-// import { userModel } from "entities/user";
 
-// import { Button, Input, Snackbar } from "shared/ui";
-import { Button, Modal } from "shared/ui";
-// import { useDebounce } from "shared/lib/hooks";
+import { Button, Modal, Snackbar, Input } from "shared/ui";
+import { useDebounce } from "shared/lib/hooks";
 import { User, Product } from "shared/api";
 
-// import { reducer, initialFormState } from "./model/store";
-// import {
-// 	changingNameAction,
-// 	changingSurnameAction,
-// 	changingAddressAction,
-// 	changingEmailAction,
-// } from "./model/actions";
-// import { isFormValid } from "./model";
+import { reducer, initialFormState } from "./model/store";
+import {
+	changingNameAction,
+	changingSurnameAction,
+	changingAddressAction,
+	changingEmailAction,
+} from "./model/actions";
+import { isFormValid } from "./model";
 
 import { ProductsProps } from "./types";
 
@@ -35,18 +41,16 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	const [showEditExistingProductModal, setEditExistingProductModal] = useState<boolean>(false);
 	const [showDeleteExistingProductModal, setDeleteExistingProductModal] =
 		useState<boolean>(false);
-	// const [isProfileDataEditable, setIsProfileDataEditable] = useState<boolean>(false);
 
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
-	// const [state, formDispatch] = useReducer(reducer, initialFormState);
-	// const [debouncedState] = useDebounce(state, 2000);
+	const [state, formDispatch] = useReducer(reducer, initialFormState);
+	const [debouncedState] = useDebounce(state, 2000);
 
 	const user = sessionModel.useUser();
 	const isAuthorized = sessionModel.useIsAuthorized();
 
 	const products = productModel.useProducts();
-	// const operationResultMessage = userModel.useOperationResultMessage();
 
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
@@ -58,46 +62,7 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		dispatch(productModel.getProductsAsync());
 	}, [dispatch]);
 
-	const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const allProducts = Object.values(products);
-		const searchTerm = event.target.value;
-
-		if (searchTerm.trim() === "") {
-			setFilteredProducts(null);
-			return;
-		}
-
-		const filteredProducts = allProducts.filter((product) =>
-			product.name.toLowerCase().includes(searchTerm.toLowerCase()),
-		);
-
-		setFilteredProducts(filteredProducts);
-	};
-
-	const handleCreateNewProductModalOpen = () => {
-		setShowCreateNewProductModal(true);
-	};
-
-	const handleCreateNewProductModalClose = () => {
-		setShowCreateNewProductModal(false);
-	};
-
-	const handleEditExistingProductModalOpen = () => {
-		setEditExistingProductModal(true);
-	};
-
-	const handleEditExistingProductModalClose = () => {
-		setEditExistingProductModal(false);
-	};
-
-	const handleDeleteExistingProductModalOpen = () => {
-		setDeleteExistingProductModal(true);
-	};
-
-	const handleDeleteExistingProductModalClose = () => {
-		setDeleteExistingProductModal(false);
-	};
-
+	/////
 	// useLayoutEffect(() => {
 	// 	formDispatch(changingNameAction((user as User)?.name || ""));
 	// 	formDispatch(changingSurnameAction((user as User)?.surname || ""));
@@ -202,6 +167,89 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	// const submitButtonClasses = classNames({
 	// 	submitButtonInvalid: !isFormValid(state),
 	// });
+	////
+
+	const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const allProducts = Object.values(products);
+		const searchTerm = event.target.value;
+
+		if (searchTerm.trim() === "") {
+			setFilteredProducts(null);
+			return;
+		}
+
+		const filteredProducts = allProducts.filter((product) =>
+			product.name.toLowerCase().includes(searchTerm.toLowerCase()),
+		);
+
+		setFilteredProducts(filteredProducts);
+	};
+
+	const handleCreateNewProductModalOpen = () => {
+		setShowCreateNewProductModal(true);
+	};
+
+	const handleCreateNewProductModalClose = () => {
+		setShowCreateNewProductModal(false);
+	};
+
+	const handleEditExistingProductModalOpen = () => {
+		setEditExistingProductModal(true);
+	};
+
+	const handleEditExistingProductModalClose = () => {
+		setEditExistingProductModal(false);
+	};
+
+	const handleDeleteExistingProductModalOpen = () => {
+		setDeleteExistingProductModal(true);
+	};
+
+	const handleDeleteExistingProductModalClose = () => {
+		setDeleteExistingProductModal(false);
+	};
+
+	const handleCreateNewProductFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		// if ((user as User).name !== state.nameInput.value) {
+		// 	dispatch(
+		// 		userModel.updateUserData({
+		// 			id: (user as User).id,
+		// 			name: state.nameInput.value,
+		// 		}),
+		// 	);
+		// }
+
+		// if ((user as User).surname !== state.surnameInput.value) {
+		// 	dispatch(
+		// 		userModel.updateUserData({
+		// 			id: (user as User).id,
+		// 			surname: state.surnameInput.value,
+		// 		}),
+		// 	);
+		// }
+
+		// if ((user as User).address !== state.addressInput.value) {
+		// 	dispatch(
+		// 		userModel.updateUserData({
+		// 			id: (user as User).id,
+		// 			address: state.addressInput.value,
+		// 		}),
+		// 	);
+		// }
+
+		// if ((user as User).email !== state.emailInput.value) {
+		// 	dispatch(
+		// 		userModel.updateUserData({
+		// 			id: (user as User).id,
+		// 			email: state.emailInput.value,
+		// 		}),
+		// 	);
+		// }
+
+		// dispatch(userModel.clearOperationResultMessage(null));
+	};
 
 	const renderUnauthorizedUser = () => (
 		<div>
@@ -233,180 +281,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	);
 
 	const renderAuthorizedAdmin = () => (
-		// <form onSubmit={handleFormSubmit}>
-		// 	<div
-		// 		className={
-		// 			"flex flex-col items-center gap-y-[1rem] sm:w-[24rem] md:w-[32rem] lg:w-[42rem]"
-		// 		}
-		// 	>
-		// 		<Input
-		// 			type="text"
-		// 			inputId="name"
-		// 			inputName="name"
-		// 			labelContent="Имя"
-		// 			labelFor="name"
-		// 			inputValue={state.nameInput.value}
-		// 			readOnly={!isProfileDataEditable}
-		// 			onInputChange={handleNameChange}
-		// 			className={styles.input + " " + nameInputClasses}
-		// 		/>
-		// 		{debouncedState.nameInput.validLength === false &&
-		// 			createPortal(
-		// 				<Snackbar
-		// 					type={"error"}
-		// 					message={"Слишком короткое имя."}
-		// 					autoCloseDuration={"4000"}
-		// 				/>,
-		// 				document.getElementById("snackbars-container") as Element,
-		// 			)}
-		// 		{debouncedState.nameInput.validPattern === false &&
-		// 			createPortal(
-		// 				<Snackbar
-		// 					type={"error"}
-		// 					message={`Поле имя должно содержать только кириллицу или латиницу.`}
-		// 					autoCloseDuration={"4000"}
-		// 				/>,
-		// 				document.getElementById("snackbars-container") as Element,
-		// 			)}
-		// 		<Input
-		// 			type="text"
-		// 			inputId="surname"
-		// 			inputName="surname"
-		// 			labelContent="Фамилия"
-		// 			labelFor="surname"
-		// 			inputValue={state.surnameInput.value}
-		// 			readOnly={!isProfileDataEditable}
-		// 			onInputChange={handleSurnameChange}
-		// 			className={styles.input + " " + surnameInputClasses}
-		// 		/>
-		// 		{debouncedState.surnameInput.validLength === false &&
-		// 			createPortal(
-		// 				<Snackbar
-		// 					type={"error"}
-		// 					message={"Слишком короткая фамилия."}
-		// 					autoCloseDuration={"4000"}
-		// 				/>,
-		// 				document.getElementById("snackbars-container") as Element,
-		// 			)}
-		// 		{debouncedState.surnameInput.validPattern === false &&
-		// 			createPortal(
-		// 				<Snackbar
-		// 					type={"error"}
-		// 					message={`Поле фамилия должно содержать только кириллицу или латиницу.`}
-		// 					autoCloseDuration={"4000"}
-		// 				/>,
-		// 				document.getElementById("snackbars-container") as Element,
-		// 			)}
-		// 		<Input
-		// 			type="text"
-		// 			inputId="address"
-		// 			inputName="address"
-		// 			labelContent="Адрес"
-		// 			labelFor="address"
-		// 			inputValue={state.addressInput.value}
-		// 			readOnly={!isProfileDataEditable}
-		// 			onInputChange={handleAddressChange}
-		// 			className={styles.input + " " + addressInputClasses}
-		// 		/>
-		// 		{debouncedState.addressInput.validLength === false &&
-		// 			createPortal(
-		// 				<Snackbar
-		// 					type={"error"}
-		// 					message={"Слишком короткий адрес."}
-		// 					autoCloseDuration={"4000"}
-		// 				/>,
-		// 				document.getElementById("snackbars-container") as Element,
-		// 			)}
-		// 		<div
-		// 			className={
-		// 				"flex flex-col sm:w-[24rem] md:w-[32rem] lg:w-[42rem] gap-y-[0.5rem]"
-		// 			}
-		// 		>
-		// 			<Input
-		// 				type="email"
-		// 				inputId="email"
-		// 				inputName="email"
-		// 				labelContent="Адрес электронной почты"
-		// 				labelFor="email"
-		// 				inputValue={state.emailInput.value}
-		// 				readOnly={!isProfileDataEditable}
-		// 				onInputChange={handleEmailChange}
-		// 				className={styles.input + " " + emailInputClasses}
-		// 			/>
-		// 			{(user as User)?.isActivated ? (
-		// 				<p className={"font-raleway text-sm-12px ml-[0.2rem] text-green-900"}>
-		// 					Адрес электронной почты подтвержден.
-		// 				</p>
-		// 			) : (
-		// 				<p className={"font-raleway text-sm-12px ml-[0.2rem] text-red-900"}>
-		// 					Адрес электронной почты не подтвержден.
-		// 				</p>
-		// 			)}
-		// 			{debouncedState.emailInput.validLength === false &&
-		// 				createPortal(
-		// 					<Snackbar
-		// 						type={"error"}
-		// 						message={"Слишком короткий адрес электронной почты."}
-		// 						autoCloseDuration={"4000"}
-		// 					/>,
-		// 					document.getElementById("snackbars-container") as Element,
-		// 				)}
-		// 			{debouncedState.emailInput.validPattern === false &&
-		// 				createPortal(
-		// 					<Snackbar
-		// 						type={"error"}
-		// 						message={`Адрес электронной почты должен включать локальное имя
-		// 							(текст, который идет перед символом @), затем символ @ и имя домена
-		// 							(текст, который идет после символа @).`}
-		// 						autoCloseDuration={"8000"}
-		// 					/>,
-		// 					document.getElementById("snackbars-container") as Element,
-		// 				)}
-		// 		</div>
-		// 		{(user as User).role === "admin" && (
-		// 			<div className={"flex flex-row items-center mt-[2rem]"}>
-		// 				<Button
-		// 					type={"link-internal"}
-		// 					text={"Управление товарами"}
-		// 					linkInternal={`/products-management`}
-		// 				/>
-		// 			</div>
-		// 		)}
-		// 		<div className={"flex flex-row items-center gap-x-[1rem]"}>
-		// 			<Button
-		// 				className={"mt-[5rem] " + submitButtonClasses}
-		// 				type={isProfileDataEditable ? "button" : "submit"}
-		// 				text={isProfileDataEditable ? "Сохранить" : "Редактировать"}
-		// 				disabled={!isFormValid(state)}
-		// 				onClick={handleProfileEditClick}
-		// 			/>
-		// 			<Button
-		// 				className={"mt-[5rem]"}
-		// 				type="button"
-		// 				text={isProfileDataEditable ? "Отмена" : "Выйти"}
-		// 				onClick={isProfileDataEditable ? handleResetClick : handleLogoutClick}
-		// 			/>
-		// 		</div>
-		// 	</div>
-		// 	{operationResultMessage.success &&
-		// 		createPortal(
-		// 			<Snackbar
-		// 				type={"success"}
-		// 				message={operationResultMessage.success}
-		// 				autoCloseDuration={"4000"}
-		// 			/>,
-		// 			document.getElementById("snackbars-container") as Element,
-		// 		)}
-		// 	{operationResultMessage.error &&
-		// 		createPortal(
-		// 			<Snackbar
-		// 				type={"error"}
-		// 				message={operationResultMessage.error}
-		// 				autoCloseDuration={"4000"}
-		// 			/>,
-		// 			document.getElementById("snackbars-container") as Element,
-		// 		)}
-		// </form>
 		<div className={"flex flex-col"}>
 			<div className={"mr-[0] ml-[auto] mb-[4rem]"}>
 				<Button
@@ -421,7 +295,431 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 							description=""
 							onModalClose={handleCreateNewProductModalClose}
 						>
-							<div>Content</div>
+							<form onSubmit={handleCreateNewProductFormSubmit}>
+								<div className={"flex flex-col items-center gap-y-[1rem]"}>
+									<Input
+										type="text"
+										inputId="product-name"
+										inputName="product-name"
+										labelContent="Название товара"
+										labelFor="product-name"
+										// inputValue={state.productNameInput.value}
+										// onInputChange={handleProductNameChange}
+										className={styles.input}
+									/>
+									{/* {debouncedState.productNameInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое название товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productNameInput.validPattern === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле название товара должно содержать только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+									<Input
+										type="text"
+										inputId="product-components"
+										inputName="product-components"
+										labelContent="Компоненты товара"
+										labelFor="product-components"
+										// inputValue={state.productComponentsInput.value}
+										// onInputChange={handleProductComponentsChange}
+										className={styles.input}
+									/>
+									{/* {debouncedState.productComponentsInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={
+													"Слишком короткое перечесление компонентов товара."
+												}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productComponentsInput.validPattern === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле компоненты товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+									<Input
+										type="text"
+										inputId="product-description"
+										inputName="product-description"
+										labelContent="Описание товара"
+										labelFor="product-description"
+										// inputValue={state.productDescriptionInput.value}
+										// readOnly={!isProfileDataEditable}
+										// onInputChange={handleProductDescriptionChange}
+										className={styles.input}
+									/>
+									{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+									<Input
+										type="text"
+										inputId="product-usage"
+										inputName="product-usage"
+										labelContent="Использование товара"
+										labelFor="product-usage"
+										// inputValue={state.productDescriptionInput.value}
+										// readOnly={!isProfileDataEditable}
+										// onInputChange={handleProductDescriptionChange}
+										className={styles.input}
+									/>
+									{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+									<div className="flex flex-row items-center gap-x-[1rem]">
+										<Input
+											type="text"
+											inputId="product-image-small"
+											inputName="product-image-small"
+											labelContent="Картинка товара мальенкая"
+											labelFor="product-image-small"
+											// inputValue={state.productDescriptionInput.value}
+											// readOnly={!isProfileDataEditable}
+											// onInputChange={handleProductDescriptionChange}
+											className={styles.input}
+										/>
+										{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+										<Input
+											type="text"
+											inputId="product-image-medium"
+											inputName="pproduct-image-medium"
+											labelContent="Картинка товара среднаяя"
+											labelFor="product-image-medium"
+											// inputValue={state.productDescriptionInput.value}
+											// readOnly={!isProfileDataEditable}
+											// onInputChange={handleProductDescriptionChange}
+											className={styles.input}
+										/>
+										{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+										<Input
+											type="text"
+											inputId="product-image-large"
+											inputName="product-image-large"
+											labelContent="Картинка товара большая"
+											labelFor="product-image-large"
+											// inputValue={state.productDescriptionInput.value}
+											// readOnly={!isProfileDataEditable}
+											// onInputChange={handleProductDescriptionChange}
+											className={styles.input}
+										/>
+										{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+									</div>
+									<div className={"flex flex-row items center gap-x-[1rem]"}>
+										<select
+											className={
+												"border-none font-semibold " +
+												"p-0 font-raleway " +
+												"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
+												"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
+												"text-blue-zodiac-950 max-h-[5.5rem] " +
+												styles.input
+											}
+											name="main-type"
+											id="main-type"
+										>
+											<option value="body">Для тела</option>
+											<option value="face">Для лица</option>
+										</select>
+										<select
+											className={
+												"border-none font-semibold " +
+												"p-0 font-raleway " +
+												"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
+												"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
+												"text-blue-zodiac-950 max-h-[5.5rem] " +
+												styles.input
+											}
+											name="secondary-type"
+											id="secondary-type"
+										>
+											<option value="face-cream">крем для лица</option>
+											<option value="face-serum">cыворотка для лица</option>
+											<option value="face-mask">маска для лица</option>
+											<option value="face-foam">пенка для лица</option>
+											<option value="face-tonic">тоник для лица</option>
+											<option value="face-powder">минеральная пудра</option>
+											<option value="body-cream">крем для тела</option>
+											<option value="body-oil">масло для тела</option>
+											<option value="body-scrub">скраб для тела</option>
+											<option value="body-soap">мыло ручной работы</option>
+											<option value="body-bath-bomb">
+												бомбочка для ванны
+											</option>
+											<option value="body-bath-salt">соль для ванны</option>
+										</select>
+										<select
+											className={
+												"border-none font-semibold " +
+												"p-0 font-raleway " +
+												"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
+												"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
+												"text-blue-zodiac-950 max-h-[5.5rem] " +
+												styles.input
+											}
+											name="skin-type"
+											id="skin-type"
+											multiple
+										>
+											<option value="skin-dry">сухая кожа</option>
+											<option value="skin-normal">нолрмальная кожа</option>
+											<option value="skin-fat">жирная кожа</option>
+											<option value="skin-combined">
+												комбинированая кожа
+											</option>
+										</select>
+									</div>
+									<div className="flex flex-row items-center gap-x-[1rem]">
+										<Input
+											type="text"
+											inputId="product-price"
+											inputName="product-price"
+											labelContent="Цена товара"
+											labelFor="product-price"
+											// inputValue={state.productDescriptionInput.value}
+											// readOnly={!isProfileDataEditable}
+											// onInputChange={handleProductDescriptionChange}
+											className={styles.input}
+										/>
+										{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+										<Input
+											type="text"
+											inputId="product-quantity"
+											inputName="product-quantity"
+											labelContent="Количество товара"
+											labelFor="product-quantity"
+											// inputValue={state.productDescriptionInput.value}
+											// readOnly={!isProfileDataEditable}
+											// onInputChange={handleProductDescriptionChange}
+											className={styles.input}
+										/>
+										{/* {debouncedState.productDescriptionInput.validLength === false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={"Слишком короткое описание товара."}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)}
+									{debouncedState.productDescriptionInput.validPattern ===
+										false &&
+										createPortal(
+											<Snackbar
+												type={"error"}
+												message={`
+													Поле описание товара может содержать 
+													только кириллицу или латиницу.
+												`}
+												autoCloseDuration={"4000"}
+											/>,
+											document.getElementById(
+												"snackbars-container",
+											) as Element,
+										)} */}
+									</div>
+									<Button
+										className={"mt-[5rem]"}
+										type="submit"
+										text={"Создать"}
+									/>
+								</div>
+								{/* {operationResultMessage.success &&
+									createPortal(
+										<Snackbar
+											type={"success"}
+											message={operationResultMessage.success}
+											autoCloseDuration={"4000"}
+										/>,
+										document.getElementById("snackbars-container") as Element,
+									)}
+								{operationResultMessage.error &&
+									createPortal(
+										<Snackbar
+											type={"error"}
+											message={operationResultMessage.error}
+											autoCloseDuration={"4000"}
+										/>,
+										document.getElementById("snackbars-container") as Element,
+									)} */}
+							</form>
 						</Modal>,
 						document.body,
 					)}
