@@ -66,7 +66,7 @@ const Hero: FC<HeroProps> = ({ title }) => {
 					>
 						Натуральная косметика <br /> для бережного ухода за кожей
 					</p>
-					<Button type="link-internal" text="Подробнее" linkInternal="/" />
+					<Button type="link-internal" text="Подробнее" linkInternal="/catalog" />
 				</div>
 				<div
 					className={
@@ -78,13 +78,13 @@ const Hero: FC<HeroProps> = ({ title }) => {
 					<HeroCard
 						classes={"w-[40.625vw] md:w-[31.9010416vw] lg:w-[33rem]"}
 						images={card1Images}
-						link="/"
+						link="/catalog"
 						label="Уход для лица"
 					/>
 					<HeroCard
 						classes={"w-[40.625vw] md:w-[31.9010416vw] lg:w-[33rem]"}
 						images={card2Images}
-						link="/"
+						link="/catalog"
 						label="Уход для тела"
 					/>
 				</div>

@@ -43,7 +43,7 @@ const NewCollection = () => {
 						Попробуйте новую коллекцию ухаживающих средств для лица с SPF защитой
 					</p>
 					<div className={"col-start-2 col-end-3"}>
-						<Button type="link-internal" text="Подробнее" linkInternal="/" />
+						<Button type="link-internal" text="Подробнее" linkInternal="/catalog" />
 					</div>
 				</div>
 			</div>

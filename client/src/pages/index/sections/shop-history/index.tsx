@@ -24,7 +24,7 @@ const ShopHistory = () => {
 					“Мы стремимся сделать уход за кожей доступным и приятным ритуалом для всех, кто
 					хочет заботиться о себе и своем теле”
 				</blockquote>
-				<Button type="link-internal" linkInternal="/" text="Наша история" />
+				<Button type="link-internal" linkInternal="/shop-history" text="Наша история" />
 			</div>
 		</div>
 	);
