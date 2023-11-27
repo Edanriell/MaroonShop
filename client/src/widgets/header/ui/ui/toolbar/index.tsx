@@ -6,14 +6,13 @@ import { ReactComponent as AuthIcon } from "./assets/auth.svg";
 
 import { UserActions } from "./types";
 
-// TODO FIX links when will be creating corresponding pages.
 const userActions: UserActions = [
 	{
 		label: "Аутентификация",
 		Icon: AuthIcon,
 		iconWidth: "w-[1.3rem] md:w-[1.6rem]",
 		iconHeight: "h-[1.6rem] md:h-[2.1rem]",
-		url: "/",
+		url: "/profile",
 		id: uuidv4(),
 	},
 	{
@@ -21,7 +20,7 @@ const userActions: UserActions = [
 		Icon: CartIcon,
 		iconWidth: "w-[1.4rem] md:w-[1.8rem]",
 		iconHeight: "h-[1.6rem] md:h-[2.1rem]",
-		url: "/",
+		url: "/cart",
 		id: uuidv4(),
 	},
 ];

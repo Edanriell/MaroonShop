@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { FooterSecondaryNavigation } from "./types";
 
-// TODO Change urls when all necessary pages are created.
 const secondaryNavigation: FooterSecondaryNavigation = [
 	{
 		label: "Каталог",
@@ -20,7 +19,7 @@ const secondaryNavigation: FooterSecondaryNavigation = [
 			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 " +
 			"duration-500 ease-out basic-hover-underline-animation " +
 			"md:text-md-16px mr-[5.1rem] md:mr-[0rem]",
-		url: "/",
+		url: "/about-shop",
 		id: uuidv4(),
 	},
 	{
@@ -29,7 +28,7 @@ const secondaryNavigation: FooterSecondaryNavigation = [
 			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 " +
 			"duration-500 ease-out basic-hover-underline-animation " +
 			"md:text-md-16px mr-[2.1rem] md:mr-[0rem]",
-		url: "/",
+		url: "/shop-list",
 		id: uuidv4(),
 	},
 	{
@@ -38,7 +37,7 @@ const secondaryNavigation: FooterSecondaryNavigation = [
 			"font-mPlus text-sm-14px font-normal text-blue-zodiac-950 " +
 			"duration-500 ease-out basic-hover-underline-animation " +
 			"md:text-md-16px mr-[2.3rem] md:mr-[0rem]",
-		url: "/",
+		url: "/contacts",
 		id: uuidv4(),
 	},
 ];

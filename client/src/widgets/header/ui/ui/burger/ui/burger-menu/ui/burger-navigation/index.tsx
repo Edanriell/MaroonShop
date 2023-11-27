@@ -11,12 +11,12 @@ const burgerNavigation: Navigation = [
 	},
 	{
 		label: "О нас",
-		url: "/",
+		url: "/about-shop",
 		id: uuidv4(),
 	},
 	{
 		label: "Контакты",
-		url: "/",
+		url: "/contacts",
 		id: uuidv4(),
 	},
 ];
