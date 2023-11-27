@@ -11,6 +11,7 @@ const RegistrationPage = lazy(() => import("./registration/index"));
 const ProfilePage = lazy(() => import("./profile/index"));
 const ProductsManagementPage = lazy(() => import("./products-management/index"));
 const ShopHistoryPage = lazy(() => import("./shop-history/index"));
+const AboutShopPage = lazy(() => import("./about-shop/index"));
 
 const router = createBrowserRouter([
 	{
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
 		element: (
 			<Suspense fallback={<LoadingPage />}>
 				<ShopHistoryPage />
+			</Suspense>
+		),
+	},
+	{
+		path: "/about-shop",
+		element: (
+			<Suspense fallback={<LoadingPage />}>
+				<AboutShopPage />
 			</Suspense>
 		),
 	},
