@@ -9,7 +9,7 @@ const sections: AboutShopPageSections = [
 	{
 		id: uuidv4(),
 		Section: AboutShop,
-		title: "О магазинах Maroon",
+		title: "О магазине Maroon",
 		classes: "bg-desert-storm-50",
 	},
 ];
@@ -23,7 +23,7 @@ const SectionWrapper: FC<SectionWrapperProps> = ({ srTitle, children, classes })
 
 const Sections = () => (
 	<main className={"flex flex-col"}>
-		<h1 className={"sr-only"}>О магазинах Maroon</h1>
+		<h1 className={"sr-only"}>О магазине Maroon</h1>
 		{sections.map(({ id, Section, srOnlyTitle, title, classes }) => (
 			<SectionWrapper key={id} srTitle={srOnlyTitle} classes={classes}>
 				<Section title={title} />

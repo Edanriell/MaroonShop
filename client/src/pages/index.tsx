@@ -86,6 +86,14 @@ const router = createBrowserRouter([
 			</Suspense>
 		),
 	},
+	{
+		path: "*",
+		element: (
+			<Suspense fallback={<LoadingPage />}>
+				<AboutShopPage />
+			</Suspense>
+		),
+	},
 ]);
 
 const Routing = () => <RouterProvider router={router} />;
