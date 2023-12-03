@@ -6,7 +6,7 @@ import { SocialLinks } from "shared/ui";
 
 import { ContactsProps } from "./types";
 
-const Contacts: FC<ContactsProps> = ({ title }) => {
+const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coordinates }) => {
 	return (
 		<div
 			className={

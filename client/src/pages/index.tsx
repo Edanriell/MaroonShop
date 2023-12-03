@@ -12,6 +12,7 @@ const ProfilePage = lazy(() => import("./profile/index"));
 const ProductsManagementPage = lazy(() => import("./products-management/index"));
 const ShopHistoryPage = lazy(() => import("./shop-history/index"));
 const AboutShopPage = lazy(() => import("./about-shop/index"));
+const ShopListPage = lazy(() => import("./shop-list/index"));
 const NotFoundPage = lazy(() => import("./not-found/index"));
 
 const router = createBrowserRouter([
@@ -84,6 +85,14 @@ const router = createBrowserRouter([
 		element: (
 			<Suspense fallback={<LoadingPage />}>
 				<AboutShopPage />
+			</Suspense>
+		),
+	},
+	{
+		path: "/shop-list",
+		element: (
+			<Suspense fallback={<LoadingPage />}>
+				<ShopListPage />
 			</Suspense>
 		),
 	},
