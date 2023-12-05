@@ -46,7 +46,7 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 										"lg:mb-[0.7rem]"
 									}
 								>
-									Адрес /
+									Адрес 
 								</dt>
 								<dd
 									className={
