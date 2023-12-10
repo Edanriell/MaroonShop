@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
 import mapboxgl from "mapbox-gl";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import { CustomMarkers } from "./types";
+import { CustomMarkers, MapProps } from "./types";
 
 import { ReactComponent as MapMarker } from "./assets/map-marker.svg";
 import mapSm from "./assets/map-sm.jpg";
@@ -12,27 +12,27 @@ import mapLg from "./assets/map-lg.jpg";
 
 import "./styles.scss";
 
-const customMarkers: CustomMarkers = {
-	markers: [
-		{
-			type: "Marker",
-			geometry: {
-				type: "Point",
-				coordinates: [18.06324, 59.334591],
-			},
-			properties: {
-				title: "Maroon",
-				description: "Shop",
-			},
-		},
-	],
-};
-
-const Map = () => {
+const Map: FC<MapProps> = ({ coordinates = [18.06324, 59.334591] }) => {
 	const mapContainer = useRef(null);
 
 	const mapApiKey = process.env.REACT_APP_MAP_API_KEY ?? "";
 	mapboxgl.accessToken = mapApiKey;
+
+	const customMarkers: CustomMarkers = {
+		markers: [
+			{
+				type: "Marker",
+				geometry: {
+					type: "Point",
+					coordinates: coordinates,
+				},
+				properties: {
+					title: "Maroon",
+					description: "Shop",
+				},
+			},
+		],
+	};
 
 	useEffect(() => {
 		if (!mapContainer.current) return;
@@ -41,7 +41,7 @@ const Map = () => {
 			const map = new mapboxgl.Map({
 				container: mapContainer.current,
 				style: "mapbox://styles/mapbox/light-v11",
-				center: [18.06324, 59.334591],
+				center: coordinates,
 				zoom: 6,
 			});
 

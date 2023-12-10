@@ -11,3 +11,7 @@ export type CustomMarkers = {
 		};
 	}>;
 };
+
+export type MapProps = {
+	coordinates?: [number, number];
+};

@@ -6,7 +6,28 @@ import { SocialLinks } from "shared/ui";
 
 import { ContactsProps } from "./types";
 
-const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coordinates }) => {
+const Contacts: FC<ContactsProps> = ({
+	title,
+	contactsProperties = {
+		street: "ул. Большая Конюшенная, 19",
+		city: "Санкт-Петербург",
+		phoneNumber: "+7 (923) 888-90-60",
+		phoneNumberHref: "tel:+79238889060",
+		emailAddress: "info@maroon.ru",
+		emailAddressHref: "mailto:info@maroon.ru",
+		coordinates: [18.06324, 59.334591],
+	},
+}) => {
+	const {
+		street,
+		city,
+		phoneNumber,
+		phoneNumberHref,
+		emailAddress,
+		emailAddressHref,
+		coordinates,
+	} = contactsProperties;
+
 	return (
 		<div
 			className={
@@ -31,7 +52,7 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 						className={
 							"font-medium font-raleway text-sm-28px-lh-35px text-left " +
 							"mb-[2.1rem] text-blue-zodiac-950 md:text-md-32px-lh-42px " +
-							"md:mb-[2.3rem]"
+							"md:mb-[2.3rem] max-w-[25.571rem]"
 						}
 					>
 						{title}
@@ -46,7 +67,7 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 										"lg:mb-[0.7rem]"
 									}
 								>
-									Адресccc
+									Адрес
 								</dt>
 								<dd
 									className={
@@ -54,7 +75,7 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 										"text-blue-zodiac-950 md:text-md-18px"
 									}
 								>
-									Санкт-Петербург,
+									{city},
 								</dd>
 								<dd
 									className={
@@ -62,7 +83,7 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 										"text-blue-zodiac-950 md:text-md-18px"
 									}
 								>
-									ул. Большая Конюшенная, 19
+									{street}
 								</dd>
 							</div>
 							<div
@@ -85,7 +106,7 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 										"text-blue-zodiac-950 md:text-md-18px hover:text-blue-zodiac-800"
 									}
 								>
-									<a href="tel:+79238889060">+7 (923) 888-90-60</a>
+									<a href={phoneNumberHref}>{phoneNumber}</a>
 								</dd>
 							</div>
 							<div
@@ -108,14 +129,14 @@ const Contacts: FC<ContactsProps> = ({ title, street, city, number, email, coord
 										"text-blue-zodiac-950 md:text-md-18px hover:text-blue-zodiac-800"
 									}
 								>
-									<a href="mailto:info@maroon.ru">info@maroon.ru</a>
+									<a href={emailAddressHref}>{emailAddress}</a>
 								</dd>
 							</div>
 						</dl>
 					</address>
 					<SocialLinks className={"flex flex-row items-center gap-x-[3rem]"} />
 				</div>
-				<Map />
+				<Map coordinates={coordinates} />
 			</div>
 		</div>
 	);

@@ -1,8 +1,15 @@
 export type ContactsProps = {
 	title: string;
-	city?: string;
+	contactsProperties?: ContactsSectionProperties;
+};
+
+type ContactsSectionProperties = {
+	title: string;
 	street?: string;
-	number?: string;
-	email?: string;
-	coordinates?: Array<number>;
+	city?: string;
+	phoneNumber?: string;
+	phoneNumberHref?: string;
+	emailAddress?: string;
+	emailAddressHref?: string;
+	coordinates?: [number, number];
 };
