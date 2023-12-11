@@ -442,18 +442,25 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												"snackbars-container",
 											) as Element,
 										)} */}
-									<div className="flex flex-row items-center gap-x-[1rem]">
-										<Input
-											type="text"
-											inputId="product-image-small"
-											inputName="product-image-small"
-											labelContent="Картинка товара мальенкая"
-											labelFor="product-image-small"
-											// inputValue={state.productDescriptionInput.value}
-											// readOnly={!isProfileDataEditable}
-											// onInputChange={handleProductDescriptionChange}
-											className={styles.input}
-										/>
+									<div
+										className={
+											"flex flex-row items-center justify-center gap-x-[1rem] " +
+											"gap-y-[1rem] flex-wrap w-full"
+										}
+									>
+										<div className="w-full max-w-[17.332rem]">
+											<Input
+												type="text"
+												inputId="product-image-small"
+												inputName="product-image-small"
+												labelContent="Картинка мальенкая"
+												labelFor="product-image-small"
+												// inputValue={state.productDescriptionInput.value}
+												// readOnly={!isProfileDataEditable}
+												// onInputChange={handleProductDescriptionChange}
+												className={styles.input}
+											/>
+										</div>
 										{/* {debouncedState.productDescriptionInput.validLength === false &&
 										createPortal(
 											<Snackbar
@@ -480,17 +487,20 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												"snackbars-container",
 											) as Element,
 										)} */}
-										<Input
-											type="text"
-											inputId="product-image-medium"
-											inputName="pproduct-image-medium"
-											labelContent="Картинка товара среднаяя"
-											labelFor="product-image-medium"
-											// inputValue={state.productDescriptionInput.value}
-											// readOnly={!isProfileDataEditable}
-											// onInputChange={handleProductDescriptionChange}
-											className={styles.input}
-										/>
+										<div className="w-full max-w-[17.332rem]">
+											<Input
+												type="text"
+												inputId="product-image-medium"
+												inputName="pproduct-image-medium"
+												labelContent="Картинка среднаяя"
+												labelFor="product-image-medium"
+												// inputValue={state.productDescriptionInput.value}
+												// readOnly={!isProfileDataEditable}
+												// onInputChange={handleProductDescriptionChange}
+												className={styles.input}
+											/>
+										</div>
+
 										{/* {debouncedState.productDescriptionInput.validLength === false &&
 										createPortal(
 											<Snackbar
@@ -517,17 +527,20 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												"snackbars-container",
 											) as Element,
 										)} */}
-										<Input
-											type="text"
-											inputId="product-image-large"
-											inputName="product-image-large"
-											labelContent="Картинка товара большая"
-											labelFor="product-image-large"
-											// inputValue={state.productDescriptionInput.value}
-											// readOnly={!isProfileDataEditable}
-											// onInputChange={handleProductDescriptionChange}
-											className={styles.input}
-										/>
+										<div className="w-full max-w-[17.332rem]">
+											<Input
+												type="text"
+												inputId="product-image-large"
+												inputName="product-image-large"
+												labelContent="Картинка большая"
+												labelFor="product-image-large"
+												// inputValue={state.productDescriptionInput.value}
+												// readOnly={!isProfileDataEditable}
+												// onInputChange={handleProductDescriptionChange}
+												className={styles.input}
+											/>
+										</div>
+
 										{/* {debouncedState.productDescriptionInput.validLength === false &&
 										createPortal(
 											<Snackbar
@@ -555,82 +568,125 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 											) as Element,
 										)} */}
 									</div>
-									<div className={"flex flex-row items center gap-x-[1rem]"}>
-										<select
+									<div
+										className={
+											"flex flex-row justify-center gap-x-[1rem] gap-y-[1rem] flex-wrap w-full"
+										}
+									>
+										<div
 											className={
-												"border-none font-semibold " +
-												"p-0 font-raleway " +
-												"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
-												"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
-												"text-blue-zodiac-950 max-h-[5.5rem] " +
-												styles.input
+												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem]"
 											}
-											name="main-type"
-											id="main-type"
 										>
-											<option value="body">Для тела</option>
-											<option value="face">Для лица</option>
-										</select>
-										<select
+											<select
+												className={
+													"border-none font-semibold " +
+													"p-0 font-raleway " +
+													"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
+													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
+													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
+													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
+													styles.inputHeightFixed
+												}
+												name="main-type"
+												id="main-type"
+											>
+												<option value="body">Для тела</option>
+												<option value="face">Для лица</option>
+											</select>
+										</div>
+										<div
 											className={
-												"border-none font-semibold " +
-												"p-0 font-raleway " +
-												"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
-												"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
-												"text-blue-zodiac-950 max-h-[5.5rem] " +
-												styles.input
+												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem] "
 											}
-											name="secondary-type"
-											id="secondary-type"
 										>
-											<option value="face-cream">крем для лица</option>
-											<option value="face-serum">cыворотка для лица</option>
-											<option value="face-mask">маска для лица</option>
-											<option value="face-foam">пенка для лица</option>
-											<option value="face-tonic">тоник для лица</option>
-											<option value="face-powder">минеральная пудра</option>
-											<option value="body-cream">крем для тела</option>
-											<option value="body-oil">масло для тела</option>
-											<option value="body-scrub">скраб для тела</option>
-											<option value="body-soap">мыло ручной работы</option>
-											<option value="body-bath-bomb">
-												бомбочка для ванны
-											</option>
-											<option value="body-bath-salt">соль для ванны</option>
-										</select>
-										<select
+											<select
+												className={
+													"border-none font-semibold " +
+													"p-0 font-raleway " +
+													"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
+													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
+													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
+													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
+													styles.inputHeightFixed
+												}
+												name="secondary-type"
+												id="secondary-type"
+											>
+												<option value="face-cream">крем для лица</option>
+												<option value="face-serum">
+													cыворотка для лица
+												</option>
+												<option value="face-mask">маска для лица</option>
+												<option value="face-foam">пенка для лица</option>
+												<option value="face-tonic">тоник для лица</option>
+												<option value="face-powder">
+													минеральная пудра
+												</option>
+												<option value="body-cream">крем для тела</option>
+												<option value="body-oil">масло для тела</option>
+												<option value="body-scrub">скраб для тела</option>
+												<option value="body-soap">
+													мыло ручной работы
+												</option>
+												<option value="body-bath-bomb">
+													бомбочка для ванны
+												</option>
+												<option value="body-bath-salt">
+													соль для ванны
+												</option>
+											</select>
+										</div>
+										<div
 											className={
-												"border-none font-semibold " +
-												"p-0 font-raleway " +
-												"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
-												"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
-												"text-blue-zodiac-950 max-h-[5.5rem] " +
-												styles.input
+												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem] flex"
 											}
-											name="skin-type"
-											id="skin-type"
-											multiple
 										>
-											<option value="skin-dry">сухая кожа</option>
-											<option value="skin-normal">нолрмальная кожа</option>
-											<option value="skin-fat">жирная кожа</option>
-											<option value="skin-combined">
-												комбинированая кожа
-											</option>
-										</select>
+											<select
+												className={
+													"border-none font-semibold " +
+													"p-0 font-raleway " +
+													"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
+													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
+													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
+													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
+													styles.inputHeightFixed
+												}
+												name="skin-type"
+												id="skin-type"
+												multiple
+											>
+												<option value="skin-dry">сухая кожа</option>
+												<option value="skin-normal">
+													нолрмальная кожа
+												</option>
+												<option value="skin-fat">жирная кожа</option>
+												<option value="skin-combined">
+													комбинированая кожа
+												</option>
+											</select>
+										</div>
 									</div>
-									<div className="flex flex-row items-center gap-x-[1rem]">
-										<Input
-											type="text"
-											inputId="product-price"
-											inputName="product-price"
-											labelContent="Цена товара"
-											labelFor="product-price"
-											// inputValue={state.productDescriptionInput.value}
-											// readOnly={!isProfileDataEditable}
-											// onInputChange={handleProductDescriptionChange}
-											className={styles.input}
-										/>
+									<div
+										className={
+											"flex flex-row items-center justify-center " +
+											"gap-x-[1rem] gap-y-[1rem] flex-wrap w-full"
+										}
+									>
+										<div className={"w-full max-w-[26.5rem]"}>
+											<Input
+												type="text"
+												inputId="product-price"
+												inputName="product-price"
+												labelContent="Цена товара"
+												labelFor="product-price"
+												// inputValue={state.productDescriptionInput.value}
+												// readOnly={!isProfileDataEditable}
+												// onInputChange={handleProductDescriptionChange}
+												className={styles.input}
+											/>
+										</div>
+
 										{/* {debouncedState.productDescriptionInput.validLength === false &&
 										createPortal(
 											<Snackbar
@@ -657,17 +713,20 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												"snackbars-container",
 											) as Element,
 										)} */}
-										<Input
-											type="text"
-											inputId="product-quantity"
-											inputName="product-quantity"
-											labelContent="Количество товара"
-											labelFor="product-quantity"
-											// inputValue={state.productDescriptionInput.value}
-											// readOnly={!isProfileDataEditable}
-											// onInputChange={handleProductDescriptionChange}
-											className={styles.input}
-										/>
+										<div className={"w-full max-w-[26.5rem]"}>
+											<Input
+												type="text"
+												inputId="product-quantity"
+												inputName="product-quantity"
+												labelContent="Количество товара"
+												labelFor="product-quantity"
+												// inputValue={state.productDescriptionInput.value}
+												// readOnly={!isProfileDataEditable}
+												// onInputChange={handleProductDescriptionChange}
+												className={styles.input}
+											/>
+										</div>
+
 										{/* {debouncedState.productDescriptionInput.validLength === false &&
 										createPortal(
 											<Snackbar

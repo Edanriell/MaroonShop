@@ -10,6 +10,19 @@
 	}
 }
 
+.inputHeightFixed {
+	height: 5.5rem !important;
+	background-color: #eeeef0 !important;
+
+	&:hover {
+		background-color: #dddee0 !important;
+	}
+
+	&:focus {
+		background-color: #dddee0 !important;
+	}
+}
+
 .cardRowContainer {
 	width: 28rem;
 }
