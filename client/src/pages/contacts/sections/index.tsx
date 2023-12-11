@@ -1,14 +1,14 @@
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import ShopHistory from "./shop-history";
+import ShopContacts from "./shop-contacts";
 
 import { ContactsPageSections, SectionWrapperProps } from "./types";
 
 const sections: ContactsPageSections = [
 	{
 		id: uuidv4(),
-		Section: ShopHistory,
+		Section: ShopContacts,
 		title: "Контакты Maroon",
 		classes: "bg-desert-storm-50",
 	},
