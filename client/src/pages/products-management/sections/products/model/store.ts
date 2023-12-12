@@ -181,7 +181,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productPriceInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 4),
-					validPattern: checkInputPattern(action.value, RegExp("^s*[d+(?:,d+)*]s*$")),
+					validPattern: checkInputPattern(action.value, RegExp("[d+(?:,d+)*]|d+")),
 				},
 			};
 		case CHANGEDPRODUCTQUANTITY:
@@ -190,7 +190,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productQuantityInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 4),
-					validPattern: checkInputPattern(action.value, RegExp("^s*[d+(?:,d+)*]s*$")),
+					validPattern: checkInputPattern(action.value, RegExp("[d+(?:,d+)*]|d+")),
 				},
 			};
 		default:

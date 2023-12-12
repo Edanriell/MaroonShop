@@ -113,7 +113,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		formDispatch(changingProductSecondaryTypeAction(event.target.value));
 	};
 
-	const handleProductSkinTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+	const handleProductSkinTypeChange = (event: any) => {
+		console.log(event.target.value);
 		formDispatch(changingProductSkinTypeAction(event.target.value));
 	};
 
@@ -686,6 +687,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem] flex"
 											}
 										>
+											{/* Here we need an array of values for value prop*/}
+											{/* Problems with regex */}
 											<select
 												className={
 													"border-none font-semibold " +
@@ -700,8 +703,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												}
 												name="skin-type"
 												id="skin-type"
-												onChange={handleProductSkinTypeChange}
-												value={state.skinTypeSelect.value}
+												onClick={handleProductSkinTypeChange}
+												// value={state.skinTypeSelect.value}
 												multiple
 											>
 												<option value="skin-dry">Сухая кожа</option>
