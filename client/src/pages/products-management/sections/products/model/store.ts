@@ -1,25 +1,76 @@
-import { CHANGEDNAME, CHANGEDSURNAME, CHANGEDADDRESS, CHANGEDEMAIL } from "./actions";
+import {
+	CHANGEDPRODUCTNAME,
+	CHANGEDPRODUCTCOMPONENTS,
+	CHANGEDPRODUCTDESCRIPTION,
+	CHANGEDPRODUCTUSAGE,
+	CHANGEDPRODUCTIMAGESMALL,
+	CHANGEDPRODUCTIMAGEMEDIUM,
+	CHANGEDPRODUCTIMAGELARGE,
+	CHANGEDPRODUCTMAINTYPE,
+	CHANGEDPRODUCTSECONDARYTYPE,
+	CHANGEDPRODUCTSKINTYPE,
+	CHANGEDPRODUCTPRICE,
+	CHANGEDPRODUCTQUANTITY,
+} from "./actions";
 
 import { FormState, FormActions } from "./types";
 
-import { checkInputLength, checkInputPattern } from "./index";
+import { checkInputLength, checkInputPattern, checkSelectOption } from "./index";
 
 export const initialFormState: FormState = {
-	nameInput: {
+	productNameInput: {
 		value: "",
 		validLength: null,
 		validPattern: null,
 	},
-	surnameInput: {
+	productComponentsInput: {
 		value: "",
 		validLength: null,
 		validPattern: null,
 	},
-	addressInput: {
+	productDescriptionInput: {
 		value: "",
 		validLength: null,
+		validPattern: null,
 	},
-	emailInput: {
+	productUsageInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	productImageSmallInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	productImageMediumInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	productImageLargeInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	mainTypeSelect: {
+		value: "",
+		validOption: null,
+	},
+	secondaryTypeSelect: {
+		value: "",
+		validOption: null,
+	},
+	skinTypeSelect: {
+		value: "",
+		validOption: null,
+	},
+	productPriceInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
+	},
+	productQuantityInput: {
 		value: "",
 		validLength: null,
 		validPattern: null,
@@ -28,43 +79,118 @@ export const initialFormState: FormState = {
 
 export const reducer = (state: FormState, action: FormActions) => {
 	switch (action.type) {
-		case CHANGEDNAME:
+		case CHANGEDPRODUCTNAME:
 			return {
 				...state,
-				nameInput: {
+				productNameInput: {
 					value: action.value,
-					validLength: checkInputLength(action.value, 2),
+					validLength: checkInputLength(action.value, 4),
 					validPattern: checkInputPattern(action.value, /^[a-zа-яё\s]+$/iu),
 				},
 			};
-		case CHANGEDSURNAME:
+		case CHANGEDPRODUCTCOMPONENTS:
 			return {
 				...state,
-				surnameInput: {
+				productComponentsInput: {
 					value: action.value,
-					validLength: checkInputLength(action.value, 2),
-					validPattern: checkInputPattern(action.value, /^[a-zа-яё\s]+$/iu),
+					validLength: checkInputLength(action.value, 16),
+					validPattern: checkInputPattern(action.value, /^[a-zа-яё,\s.]+$/iu),
 				},
 			};
-		case CHANGEDADDRESS:
+		case CHANGEDPRODUCTDESCRIPTION:
 			return {
 				...state,
-				addressInput: {
+				productDescriptionInput: {
 					value: action.value,
-					validLength: checkInputLength(action.value, 12),
+					validLength: checkInputLength(action.value, 32),
+					validPattern: checkInputPattern(action.value, /^[a-zа-яё,\s.]+$/iu),
 				},
 			};
-		case CHANGEDEMAIL:
+		case CHANGEDPRODUCTUSAGE:
 			return {
 				...state,
-				emailInput: {
+				productUsageInput: {
 					value: action.value,
-					validLength: checkInputLength(action.value, 6),
+					validLength: checkInputLength(action.value, 24),
+					validPattern: checkInputPattern(action.value, /^[a-zа-яё,\s.]+$/iu),
+				},
+			};
+		case CHANGEDPRODUCTIMAGESMALL:
+			return {
+				...state,
+				productImageSmallInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 8),
 					validPattern: checkInputPattern(
 						action.value,
-						// eslint-disable-next-line max-len
-						/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g,
+						/^https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?$/i,
 					),
+				},
+			};
+		case CHANGEDPRODUCTIMAGEMEDIUM:
+			return {
+				...state,
+				productImageMediumInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 8),
+					validPattern: checkInputPattern(
+						action.value,
+						/^https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?$/i,
+					),
+				},
+			};
+		case CHANGEDPRODUCTIMAGELARGE:
+			return {
+				...state,
+				productImageLargeInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 8),
+					validPattern: checkInputPattern(
+						action.value,
+						/^https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?$/i,
+					),
+				},
+			};
+		case CHANGEDPRODUCTMAINTYPE:
+			return {
+				...state,
+				mainTypeSelect: {
+					value: action.value,
+					validOption: checkSelectOption(action.value),
+				},
+			};
+		case CHANGEDPRODUCTSECONDARYTYPE:
+			return {
+				...state,
+				secondaryTypeSelect: {
+					value: action.value,
+					validOption: checkSelectOption(action.value),
+				},
+			};
+		case CHANGEDPRODUCTSKINTYPE:
+			return {
+				...state,
+				skinTypeSelect: {
+					value: action.value,
+					validOption: checkSelectOption(action.value),
+				},
+			};
+		case CHANGEDPRODUCTPRICE:
+			return {
+				...state,
+				productPriceInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 4),
+					validPattern: checkInputPattern(action.value, RegExp("^s*[d+(?:,d+)*]s*$")),
+				},
+			};
+		case CHANGEDPRODUCTQUANTITY:
+			return {
+				...state,
+				productQuantityInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 4),
+					validPattern: checkInputPattern(action.value, RegExp("^s*[d+(?:,d+)*]s*$")),
 				},
 			};
 		default:

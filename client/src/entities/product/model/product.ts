@@ -516,6 +516,10 @@ export const updateProductViewsAsync = async ({ productId }: { productId: string
 	await productsApi.products.updateProductViews({ productId });
 };
 
+export const createNewProductAsync = async () => {
+	await productsApi.products.createNewProduct();
+};
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(

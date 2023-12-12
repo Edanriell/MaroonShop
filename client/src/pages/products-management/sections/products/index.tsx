@@ -613,27 +613,27 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												name="secondary-type"
 												id="secondary-type"
 											>
-												<option value="face-cream">крем для лица</option>
+												<option value="face-cream">Крем для лица</option>
 												<option value="face-serum">
-													cыворотка для лица
+													Сыворотка для лица
 												</option>
-												<option value="face-mask">маска для лица</option>
-												<option value="face-foam">пенка для лица</option>
-												<option value="face-tonic">тоник для лица</option>
+												<option value="face-mask">Маска для лица</option>
+												<option value="face-foam">Пенка для лица</option>
+												<option value="face-tonic">Тоник для лица</option>
 												<option value="face-powder">
-													минеральная пудра
+													Минеральная пудра
 												</option>
-												<option value="body-cream">крем для тела</option>
-												<option value="body-oil">масло для тела</option>
-												<option value="body-scrub">скраб для тела</option>
+												<option value="body-cream">Крем для тела</option>
+												<option value="body-oil">Масло для тела</option>
+												<option value="body-scrub">Скраб для тела</option>
 												<option value="body-soap">
-													мыло ручной работы
+													Мыло ручной работы
 												</option>
 												<option value="body-bath-bomb">
-													бомбочка для ванны
+													Бомбочка для ванны
 												</option>
 												<option value="body-bath-salt">
-													соль для ванны
+													Соль для ванны
 												</option>
 											</select>
 										</div>
@@ -656,13 +656,13 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												id="skin-type"
 												multiple
 											>
-												<option value="skin-dry">сухая кожа</option>
+												<option value="skin-dry">Сухая кожа</option>
 												<option value="skin-normal">
-													нолрмальная кожа
+													Нолрмальная кожа
 												</option>
-												<option value="skin-fat">жирная кожа</option>
+												<option value="skin-fat">Жирная кожа</option>
 												<option value="skin-combined">
-													комбинированая кожа
+													Комбинированая кожа
 												</option>
 											</select>
 										</div>

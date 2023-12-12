@@ -1,8 +1,16 @@
 import {
-	changingNameAction,
-	changingSurnameAction,
-	changingAddressAction,
-	changingEmailAction,
+	changingProductNameAction,
+	changingProductComponentsAction,
+	changingProductsDescriptionAction,
+	changingProductUsageAction,
+	changingProductImageSmallAction,
+	changingProductImageMediumAction,
+	changingProductImageLargeAction,
+	changingProductMainTypeAction,
+	changingProductSecondaryTypeAction,
+	changingProductSkinTypeAction,
+	changingProductPriceAction,
+	changingProductQuantityAction,
 } from "./actions";
 
 export type FormInput = {
@@ -11,20 +19,36 @@ export type FormInput = {
 	validPattern: null | boolean;
 };
 
-export type FormInputSimplified = {
+export type FormSelect = {
 	value: "" | string;
-	validLength: null | boolean;
+	validOption: null | boolean;
 };
 
 export type FormState = {
-	nameInput: FormInput;
-	surnameInput: FormInput;
-	addressInput: FormInputSimplified;
-	emailInput: FormInput;
+	productNameInput: FormInput;
+	productComponentsInput: FormInput;
+	productDescriptionInput: FormInput;
+	productUsageInput: FormInput;
+	productImageSmallInput: FormInput;
+	productImageMediumInput: FormInput;
+	productImageLargeInput: FormInput;
+	mainTypeSelect: FormSelect;
+	secondaryTypeSelect: FormSelect;
+	skinTypeSelect: FormSelect;
+	productPriceInput: FormInput;
+	productQuantityInput: FormInput;
 };
 
 export type FormActions =
-	| ReturnType<typeof changingNameAction>
-	| ReturnType<typeof changingSurnameAction>
-	| ReturnType<typeof changingAddressAction>
-	| ReturnType<typeof changingEmailAction>;
+	| ReturnType<typeof changingProductNameAction>
+	| ReturnType<typeof changingProductComponentsAction>
+	| ReturnType<typeof changingProductsDescriptionAction>
+	| ReturnType<typeof changingProductUsageAction>
+	| ReturnType<typeof changingProductImageSmallAction>
+	| ReturnType<typeof changingProductImageMediumAction>
+	| ReturnType<typeof changingProductImageLargeAction>
+	| ReturnType<typeof changingProductMainTypeAction>
+	| ReturnType<typeof changingProductSecondaryTypeAction>
+	| ReturnType<typeof changingProductSkinTypeAction>
+	| ReturnType<typeof changingProductPriceAction>
+	| ReturnType<typeof changingProductQuantityAction>;
