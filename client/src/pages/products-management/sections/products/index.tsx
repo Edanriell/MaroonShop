@@ -7,7 +7,7 @@ import {
 	useReducer,
 	FormEvent,
 } from "react";
-// import { FC, useState, useLayoutEffect, useReducer, ChangeEvent, FormEvent } from "react";
+
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createPortal } from "react-dom";
@@ -23,10 +23,18 @@ import { User, Product } from "shared/api";
 
 import { reducer, initialFormState } from "./model/store";
 import {
-	changingNameAction,
-	changingSurnameAction,
-	changingAddressAction,
-	changingEmailAction,
+	changingProductNameAction,
+	changingProductComponentsAction,
+	changingProductsDescriptionAction,
+	changingProductUsageAction,
+	changingProductImageSmallAction,
+	changingProductImageMediumAction,
+	changingProductImageLargeAction,
+	changingProductMainTypeAction,
+	changingProductSecondaryTypeAction,
+	changingProductSkinTypeAction,
+	changingProductPriceAction,
+	changingProductQuantityAction,
 } from "./model/actions";
 import { isFormValid } from "./model";
 
@@ -62,7 +70,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		dispatch(productModel.getProductsAsync());
 	}, [dispatch]);
 
-	/////
 	// useLayoutEffect(() => {
 	// 	formDispatch(changingNameAction((user as User)?.name || ""));
 	// 	formDispatch(changingSurnameAction((user as User)?.surname || ""));
@@ -70,104 +77,119 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	// 	formDispatch(changingEmailAction((user as User)?.email || ""));
 	// }, [operationResultMessage.error, user]);
 
-	// const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-	// 	formDispatch(changingNameAction(event.target.value));
-	// };
+	const handleProductNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductNameAction(event.target.value));
+	};
 
-	// const handleSurnameChange = (event: ChangeEvent<HTMLInputElement>) => {
-	// 	formDispatch(changingSurnameAction(event.target.value));
-	// };
+	const handleProductComponentsChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductComponentsAction(event.target.value));
+	};
 
-	// const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
-	// 	formDispatch(changingAddressAction(event.target.value));
-	// };
+	const handleProductDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductsDescriptionAction(event.target.value));
+	};
 
-	// const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-	// 	formDispatch(changingEmailAction(event.target.value));
-	// };
+	const handleProductUsageChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductUsageAction(event.target.value));
+	};
 
-	// const handleLogoutClick = () => {
-	// 	dispatch(sessionModel.logout());
-	// };
+	const handleProductImageSmallChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductImageSmallAction(event.target.value));
+	};
 
-	// const handleResetClick = () => {
-	// 	setIsProfileDataEditable(!isProfileDataEditable);
+	const handleProductImageMediumChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductImageMediumAction(event.target.value));
+	};
 
-	// 	formDispatch(changingNameAction((user as User)?.name || ""));
-	// 	formDispatch(changingSurnameAction((user as User)?.surname || ""));
-	// 	formDispatch(changingAddressAction((user as User)?.address || ""));
-	// 	formDispatch(changingEmailAction((user as User)?.email || ""));
-	// };
+	const handleProductImageLargeChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductImageLargeAction(event.target.value));
+	};
 
-	// const handleProfileEditClick = () => {
-	// 	setIsProfileDataEditable(!isProfileDataEditable);
-	// };
+	const handleProductMainTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		formDispatch(changingProductMainTypeAction(event.target.value));
+	};
 
-	// const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-	// 	event.preventDefault();
+	const handleProductSecondaryTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		formDispatch(changingProductSecondaryTypeAction(event.target.value));
+	};
 
-	// 	if ((user as User).name !== state.nameInput.value) {
-	// 		dispatch(
-	// 			userModel.updateUserData({
-	// 				id: (user as User).id,
-	// 				name: state.nameInput.value,
-	// 			}),
-	// 		);
-	// 	}
+	const handleProductSkinTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		formDispatch(changingProductSkinTypeAction(event.target.value));
+	};
 
-	// 	if ((user as User).surname !== state.surnameInput.value) {
-	// 		dispatch(
-	// 			userModel.updateUserData({
-	// 				id: (user as User).id,
-	// 				surname: state.surnameInput.value,
-	// 			}),
-	// 		);
-	// 	}
+	const handleProductPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductPriceAction(event.target.value));
+	};
 
-	// 	if ((user as User).address !== state.addressInput.value) {
-	// 		dispatch(
-	// 			userModel.updateUserData({
-	// 				id: (user as User).id,
-	// 				address: state.addressInput.value,
-	// 			}),
-	// 		);
-	// 	}
+	const handleProductQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
+		formDispatch(changingProductQuantityAction(event.target.value));
+	};
 
-	// 	if ((user as User).email !== state.emailInput.value) {
-	// 		dispatch(
-	// 			userModel.updateUserData({
-	// 				id: (user as User).id,
-	// 				email: state.emailInput.value,
-	// 			}),
-	// 		);
-	// 	}
+	const productNameInputClasses = classNames({
+		inputInvalid:
+			state.productNameInput.validLength === false ||
+			state.productNameInput.validPattern === false,
+	});
 
-	// 	dispatch(userModel.clearOperationResultMessage(null));
-	// };
+	const productComponentsInputClasses = classNames({
+		inputInvalid:
+			state.productComponentsInput.validLength === false ||
+			state.productComponentsInput.validPattern === false,
+	});
 
-	// const nameInputClasses = classNames({
-	// 	inputInvalid:
-	// 		state.nameInput.validLength === false || state.nameInput.validPattern === false,
-	// });
+	const productDescriptionInputClasses = classNames({
+		inputInvalid:
+			state.productDescriptionInput.validLength === false ||
+			state.productDescriptionInput.validPattern === false,
+	});
 
-	// const surnameInputClasses = classNames({
-	// 	inputInvalid:
-	// 		state.surnameInput.validLength === false || state.surnameInput.validPattern === false,
-	// });
+	const productUsageInputClasses = classNames({
+		inputInvalid:
+			state.productUsageInput.validLength === false ||
+			state.productUsageInput.validPattern === false,
+	});
 
-	// const addressInputClasses = classNames({
-	// 	inputInvalid: state.addressInput.validLength === false,
-	// });
+	const productImageSmallInputClasses = classNames({
+		inputInvalid:
+			state.productImageSmallInput.validLength === false ||
+			state.productImageSmallInput.validPattern === false,
+	});
 
-	// const emailInputClasses = classNames({
-	// 	inputInvalid:
-	// 		state.emailInput.validLength === false || state.emailInput.validPattern === false,
-	// });
+	const productImageMediumInputClasses = classNames({
+		inputInvalid:
+			state.productImageMediumInput.validLength === false ||
+			state.productImageMediumInput.validPattern === false,
+	});
 
-	// const submitButtonClasses = classNames({
-	// 	submitButtonInvalid: !isFormValid(state),
-	// });
-	////
+	const productImageLargeInputClasses = classNames({
+		inputInvalid:
+			state.productImageLargeInput.validLength === false ||
+			state.productImageLargeInput.validPattern === false,
+	});
+
+	const mainTypeSelectClasses = classNames({
+		inputInvalid: state.mainTypeSelect.validOption === false,
+	});
+
+	const secondaryTypeSelectClasses = classNames({
+		inputInvalid: state.secondaryTypeSelect.validOption === false,
+	});
+
+	const skinTypeSelectClasses = classNames({
+		inputInvalid: state.skinTypeSelect.validOption === false,
+	});
+
+	const productPriceInputClasses = classNames({
+		inputInvalid:
+			state.productPriceInput.validLength === false ||
+			state.productPriceInput.validPattern === false,
+	});
+
+	const productQuantityInputClasses = classNames({
+		inputInvalid:
+			state.productQuantityInput.validLength === false ||
+			state.productQuantityInput.validPattern === false,
+	});
 
 	const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const allProducts = Object.values(products);
@@ -212,41 +234,7 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	const handleCreateNewProductFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		// if ((user as User).name !== state.nameInput.value) {
-		// 	dispatch(
-		// 		userModel.updateUserData({
-		// 			id: (user as User).id,
-		// 			name: state.nameInput.value,
-		// 		}),
-		// 	);
-		// }
-
-		// if ((user as User).surname !== state.surnameInput.value) {
-		// 	dispatch(
-		// 		userModel.updateUserData({
-		// 			id: (user as User).id,
-		// 			surname: state.surnameInput.value,
-		// 		}),
-		// 	);
-		// }
-
-		// if ((user as User).address !== state.addressInput.value) {
-		// 	dispatch(
-		// 		userModel.updateUserData({
-		// 			id: (user as User).id,
-		// 			address: state.addressInput.value,
-		// 		}),
-		// 	);
-		// }
-
-		// if ((user as User).email !== state.emailInput.value) {
-		// 	dispatch(
-		// 		userModel.updateUserData({
-		// 			id: (user as User).id,
-		// 			email: state.emailInput.value,
-		// 		}),
-		// 	);
-		// }
+		dispatch(productModel.createNewProductAsync());
 
 		// dispatch(userModel.clearOperationResultMessage(null));
 	};
@@ -303,11 +291,11 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										inputName="product-name"
 										labelContent="Название товара"
 										labelFor="product-name"
-										// inputValue={state.productNameInput.value}
-										// onInputChange={handleProductNameChange}
-										className={styles.input}
+										inputValue={state.productNameInput.value}
+										onInputChange={handleProductNameChange}
+										className={styles.input + " " + productNameInputClasses}
 									/>
-									{/* {debouncedState.productNameInput.validLength === false &&
+									{debouncedState.productNameInput.validLength === false &&
 										createPortal(
 											<Snackbar
 												type={"error"}
@@ -330,18 +318,20 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 											document.getElementById(
 												"snackbars-container",
 											) as Element,
-										)} */}
+										)}
 									<Input
 										type="text"
 										inputId="product-components"
 										inputName="product-components"
 										labelContent="Компоненты товара"
 										labelFor="product-components"
-										// inputValue={state.productComponentsInput.value}
-										// onInputChange={handleProductComponentsChange}
-										className={styles.input}
+										inputValue={state.productComponentsInput.value}
+										onInputChange={handleProductComponentsChange}
+										className={
+											styles.input + " " + productComponentsInputClasses
+										}
 									/>
-									{/* {debouncedState.productComponentsInput.validLength === false &&
+									{debouncedState.productComponentsInput.validLength === false &&
 										createPortal(
 											<Snackbar
 												type={"error"}
@@ -360,26 +350,29 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												type={"error"}
 												message={`
 													Поле компоненты товара может содержать 
-													только кириллицу или латиницу.
+													только кириллицу или латиницу. Компоненты 
+													перечисляются через запятую.
 												`}
 												autoCloseDuration={"4000"}
 											/>,
 											document.getElementById(
 												"snackbars-container",
 											) as Element,
-										)} */}
+										)}
 									<Input
 										type="text"
 										inputId="product-description"
 										inputName="product-description"
 										labelContent="Описание товара"
 										labelFor="product-description"
-										// inputValue={state.productDescriptionInput.value}
+										inputValue={state.productDescriptionInput.value}
 										// readOnly={!isProfileDataEditable}
-										// onInputChange={handleProductDescriptionChange}
-										className={styles.input}
+										onInputChange={handleProductDescriptionChange}
+										className={
+											styles.input + " " + productDescriptionInputClasses
+										}
 									/>
-									{/* {debouncedState.productDescriptionInput.validLength === false &&
+									{debouncedState.productDescriptionInput.validLength === false &&
 										createPortal(
 											<Snackbar
 												type={"error"}
@@ -397,51 +390,52 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												type={"error"}
 												message={`
 													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+													только кириллицу или латиницу, точку и запятую.
 												`}
 												autoCloseDuration={"4000"}
 											/>,
 											document.getElementById(
 												"snackbars-container",
 											) as Element,
-										)} */}
+										)}
 									<Input
 										type="text"
 										inputId="product-usage"
 										inputName="product-usage"
 										labelContent="Использование товара"
 										labelFor="product-usage"
-										// inputValue={state.productDescriptionInput.value}
+										inputValue={state.productUsageInput.value}
 										// readOnly={!isProfileDataEditable}
-										// onInputChange={handleProductDescriptionChange}
-										className={styles.input}
+										onInputChange={handleProductUsageChange}
+										className={styles.input + " " + productUsageInputClasses}
 									/>
-									{/* {debouncedState.productDescriptionInput.validLength === false &&
+									{debouncedState.productUsageInput.validLength === false &&
 										createPortal(
 											<Snackbar
 												type={"error"}
-												message={"Слишком короткое описание товара."}
+												message={
+													"Слишком короткое описание способа приминение товара."
+												}
 												autoCloseDuration={"4000"}
 											/>,
 											document.getElementById(
 												"snackbars-container",
 											) as Element,
 										)}
-									{debouncedState.productDescriptionInput.validPattern ===
-										false &&
+									{debouncedState.productUsageInput.validPattern === false &&
 										createPortal(
 											<Snackbar
 												type={"error"}
 												message={`
-													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+													Поле способ применение товара может содержать 
+													только кириллицу или латиницу, точку и запятую.
 												`}
 												autoCloseDuration={"4000"}
 											/>,
 											document.getElementById(
 												"snackbars-container",
 											) as Element,
-										)} */}
+										)}
 									<div
 										className={
 											"flex flex-row items-center justify-center gap-x-[1rem] " +
@@ -455,38 +449,44 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												inputName="product-image-small"
 												labelContent="Картинка мальенкая"
 												labelFor="product-image-small"
-												// inputValue={state.productDescriptionInput.value}
+												inputValue={state.productImageSmallInput.value}
 												// readOnly={!isProfileDataEditable}
-												// onInputChange={handleProductDescriptionChange}
-												className={styles.input}
+												onInputChange={handleProductImageSmallChange}
+												className={
+													styles.input +
+													" " +
+													productImageSmallInputClasses
+												}
 											/>
 										</div>
-										{/* {debouncedState.productDescriptionInput.validLength === false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={"Слишком короткое описание товара."}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)}
-									{debouncedState.productDescriptionInput.validPattern ===
-										false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={`
-													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+										{debouncedState.productImageSmallInput.validLength ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={
+														"Слишком короткая ссылка на картинку товара."
+													}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
+										{debouncedState.productImageSmallInput.validPattern ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Указанна неверная ссылка.
 												`}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)} */}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 										<div className="w-full max-w-[17.332rem]">
 											<Input
 												type="text"
@@ -494,39 +494,44 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												inputName="pproduct-image-medium"
 												labelContent="Картинка среднаяя"
 												labelFor="product-image-medium"
-												// inputValue={state.productDescriptionInput.value}
+												inputValue={state.productImageMediumInput.value}
 												// readOnly={!isProfileDataEditable}
-												// onInputChange={handleProductDescriptionChange}
-												className={styles.input}
+												onInputChange={handleProductImageMediumChange}
+												className={
+													styles.input +
+													" " +
+													productImageMediumInputClasses
+												}
 											/>
 										</div>
-
-										{/* {debouncedState.productDescriptionInput.validLength === false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={"Слишком короткое описание товара."}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)}
-									{debouncedState.productDescriptionInput.validPattern ===
-										false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={`
-													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+										{debouncedState.productImageMediumInput.validLength ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={
+														"Слишком короткая ссылка на картинку товара."
+													}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
+										{debouncedState.productImageMediumInput.validPattern ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Указанна неверная ссылка.
 												`}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)} */}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 										<div className="w-full max-w-[17.332rem]">
 											<Input
 												type="text"
@@ -534,39 +539,44 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												inputName="product-image-large"
 												labelContent="Картинка большая"
 												labelFor="product-image-large"
-												// inputValue={state.productDescriptionInput.value}
+												inputValue={state.productImageLargeInput.value}
 												// readOnly={!isProfileDataEditable}
-												// onInputChange={handleProductDescriptionChange}
-												className={styles.input}
+												onInputChange={handleProductImageLargeChange}
+												className={
+													styles.input +
+													" " +
+													productImageLargeInputClasses
+												}
 											/>
 										</div>
-
-										{/* {debouncedState.productDescriptionInput.validLength === false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={"Слишком короткое описание товара."}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)}
-									{debouncedState.productDescriptionInput.validPattern ===
-										false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={`
-													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+										{debouncedState.productImageLargeInput.validLength ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={
+														"Слишком короткая ссылка на картинку товара."
+													}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
+										{debouncedState.productImageLargeInput.validPattern ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Указанна неверная ссылка.
 												`}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)} */}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 									</div>
 									<div
 										className={
@@ -586,15 +596,32 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
 													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
 													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
-													styles.inputHeightFixed
+													styles.inputHeightFixed +
+													" " +
+													mainTypeSelectClasses
 												}
 												name="main-type"
 												id="main-type"
+												onChange={handleProductMainTypeChange}
+												value={state.mainTypeSelect.value}
 											>
 												<option value="body">Для тела</option>
 												<option value="face">Для лица</option>
 											</select>
 										</div>
+										{debouncedState.mainTypeSelect.validOption === false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Не выбран основной тип товара.
+												`}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 										<div
 											className={
 												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem] "
@@ -608,10 +635,14 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
 													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
 													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
-													styles.inputHeightFixed
+													styles.inputHeightFixed +
+													" " +
+													secondaryTypeSelectClasses
 												}
 												name="secondary-type"
 												id="secondary-type"
+												onChange={handleProductSecondaryTypeChange}
+												value={state.secondaryTypeSelect.value}
 											>
 												<option value="face-cream">Крем для лица</option>
 												<option value="face-serum">
@@ -637,6 +668,19 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												</option>
 											</select>
 										</div>
+										{debouncedState.secondaryTypeSelect.validOption === false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Не выбран подтип товара.
+												`}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 										<div
 											className={
 												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem] flex"
@@ -650,10 +694,14 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
 													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
 													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
-													styles.inputHeightFixed
+													styles.inputHeightFixed +
+													" " +
+													skinTypeSelectClasses
 												}
 												name="skin-type"
 												id="skin-type"
+												onChange={handleProductSkinTypeChange}
+												value={state.skinTypeSelect.value}
 												multiple
 											>
 												<option value="skin-dry">Сухая кожа</option>
@@ -666,6 +714,19 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												</option>
 											</select>
 										</div>
+										{debouncedState.skinTypeSelect.validOption === false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Не выбран тип кожи.
+												`}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 									</div>
 									<div
 										className={
@@ -680,39 +741,38 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												inputName="product-price"
 												labelContent="Цена товара"
 												labelFor="product-price"
-												// inputValue={state.productDescriptionInput.value}
+												inputValue={state.productPriceInput.value}
 												// readOnly={!isProfileDataEditable}
-												// onInputChange={handleProductDescriptionChange}
-												className={styles.input}
+												onInputChange={handleProductPriceChange}
+												className={
+													styles.input + " " + productPriceInputClasses
+												}
 											/>
 										</div>
-
-										{/* {debouncedState.productDescriptionInput.validLength === false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={"Слишком короткое описание товара."}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)}
-									{debouncedState.productDescriptionInput.validPattern ===
-										false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={`
-													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+										{debouncedState.productPriceInput.validLength === false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={"Цена товара слишком короткая."}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
+										{debouncedState.productPriceInput.validPattern === false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Цена товара должна быть указанна в формате [цена-1], [цена-2].
 												`}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)} */}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 										<div className={"w-full max-w-[26.5rem]"}>
 											<Input
 												type="text"
@@ -720,44 +780,49 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												inputName="product-quantity"
 												labelContent="Количество товара"
 												labelFor="product-quantity"
-												// inputValue={state.productDescriptionInput.value}
+												inputValue={state.productQuantityInput.value}
 												// readOnly={!isProfileDataEditable}
-												// onInputChange={handleProductDescriptionChange}
-												className={styles.input}
+												onInputChange={handleProductQuantityChange}
+												className={
+													styles.input + " " + productQuantityInputClasses
+												}
 											/>
 										</div>
-
-										{/* {debouncedState.productDescriptionInput.validLength === false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={"Слишком короткое описание товара."}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)}
-									{debouncedState.productDescriptionInput.validPattern ===
-										false &&
-										createPortal(
-											<Snackbar
-												type={"error"}
-												message={`
-													Поле описание товара может содержать 
-													только кириллицу или латиницу.
+										{debouncedState.productQuantityInput.validLength ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={
+														"Указанно слишком короткое количество товара."
+													}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
+										{debouncedState.productQuantityInput.validPattern ===
+											false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={`
+													Количество товара должно быть указанно в 
+													формате [количество-1],[количество-2].
 												`}
-												autoCloseDuration={"4000"}
-											/>,
-											document.getElementById(
-												"snackbars-container",
-											) as Element,
-										)} */}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
 									</div>
 									<Button
 										className={"mt-[5rem]"}
 										type="submit"
 										text={"Создать"}
+										disabled={!isFormValid(state)}
 									/>
 								</div>
 								{/* {operationResultMessage.success &&
