@@ -49,6 +49,7 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	const [showEditExistingProductModal, setEditExistingProductModal] = useState<boolean>(false);
 	const [showDeleteExistingProductModal, setDeleteExistingProductModal] =
 		useState<boolean>(false);
+	const [skinType, setSkinType] = useState<Array<string>>([]);
 
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
@@ -113,8 +114,10 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		formDispatch(changingProductSecondaryTypeAction(event.target.value));
 	};
 
-	const handleProductSkinTypeChange = (event: any) => {
+	const handleProductSkinTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
 		console.log(event.target.value);
+		console.log(state.skinTypeSelect.value);
+		// const handleSkintypeChange = () => {};
 		formDispatch(changingProductSkinTypeAction(event.target.value));
 	};
 
@@ -703,8 +706,9 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												}
 												name="skin-type"
 												id="skin-type"
-												onClick={handleProductSkinTypeChange}
-												// value={state.skinTypeSelect.value}
+												onChange={handleProductSkinTypeChange}
+												value={state.skinTypeSelect.value}
+												// value={["skin-dry", "skin-fat"]}
 												multiple
 											>
 												<option value="skin-dry">Сухая кожа</option>

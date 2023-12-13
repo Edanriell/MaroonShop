@@ -20,7 +20,7 @@ export type FormInput = {
 };
 
 export type FormSelect = {
-	value: "" | string;
+	value: "" | string | Array<string>;
 	validOption: null | boolean;
 };
 

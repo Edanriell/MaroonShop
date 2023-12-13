@@ -62,7 +62,7 @@ export const initialFormState: FormState = {
 		validOption: null,
 	},
 	skinTypeSelect: {
-		value: "",
+		value: [],
 		validOption: null,
 	},
 	productPriceInput: {
@@ -168,10 +168,21 @@ export const reducer = (state: FormState, action: FormActions) => {
 				},
 			};
 		case CHANGEDPRODUCTSKINTYPE:
+			if (state.skinTypeSelect.value.includes(action.value)) {
+				return {
+					...state,
+					skinTypeSelect: {
+						value: state.skinTypeSelect.value.slice(
+							state.skinTypeSelect.value.indexOf(action.value),
+						),
+						validOption: checkSelectOption(action.value),
+					},
+				};
+			}
 			return {
 				...state,
 				skinTypeSelect: {
-					value: action.value,
+					value: (state.skinTypeSelect.value as Array<string>).push(action.value),
 					validOption: checkSelectOption(action.value),
 				},
 			};
@@ -181,7 +192,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productPriceInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 4),
-					validPattern: checkInputPattern(action.value, RegExp("[d+(?:,d+)*]|d+")),
+					validPattern: checkInputPattern(action.value, RegExp("[0-9]+]")),
 				},
 			};
 		case CHANGEDPRODUCTQUANTITY:
@@ -190,7 +201,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productQuantityInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 4),
-					validPattern: checkInputPattern(action.value, RegExp("[d+(?:,d+)*]|d+")),
+					validPattern: checkInputPattern(action.value, RegExp("[d+(?:,d+)*]")),
 				},
 			};
 		default:
