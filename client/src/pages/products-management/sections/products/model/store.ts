@@ -61,9 +61,10 @@ export const initialFormState: FormState = {
 		value: "",
 		validOption: null,
 	},
-	skinTypeSelect: {
-		value: [],
-		validOption: null,
+	skinTypeInput: {
+		value: "",
+		validLength: null,
+		validPattern: null,
 	},
 	productPriceInput: {
 		value: "",
@@ -168,22 +169,18 @@ export const reducer = (state: FormState, action: FormActions) => {
 				},
 			};
 		case CHANGEDPRODUCTSKINTYPE:
-			if (state.skinTypeSelect.value.includes(action.value)) {
-				return {
-					...state,
-					skinTypeSelect: {
-						value: state.skinTypeSelect.value.slice(
-							state.skinTypeSelect.value.indexOf(action.value),
-						),
-						validOption: checkSelectOption(action.value),
-					},
-				};
-			}
 			return {
 				...state,
-				skinTypeSelect: {
-					value: (state.skinTypeSelect.value as Array<string>).push(action.value),
-					validOption: checkSelectOption(action.value),
+				skinTypeInput: {
+					value: action.value,
+					validLength: checkInputLength(action.value, 2),
+					validPattern: checkInputPattern(
+						action.value,
+						RegExp(
+							// eslint-disable-next-line max-len
+							"^(Сухая кожа|Нормальная кожа|Жирная кожа|Комбинированная кожа)(, Сухая кожа|, Нормальная кожа|, Жирная кожа|, Комбинированная кожа)*$",
+						),
+					),
 				},
 			};
 		case CHANGEDPRODUCTPRICE:
@@ -191,8 +188,8 @@ export const reducer = (state: FormState, action: FormActions) => {
 				...state,
 				productPriceInput: {
 					value: action.value,
-					validLength: checkInputLength(action.value, 4),
-					validPattern: checkInputPattern(action.value, RegExp("[0-9]+]")),
+					validLength: checkInputLength(action.value, 2),
+					validPattern: checkInputPattern(action.value, RegExp("^[0-9]+(?:,[0-9]+)*$")),
 				},
 			};
 		case CHANGEDPRODUCTQUANTITY:
@@ -200,8 +197,8 @@ export const reducer = (state: FormState, action: FormActions) => {
 				...state,
 				productQuantityInput: {
 					value: action.value,
-					validLength: checkInputLength(action.value, 4),
-					validPattern: checkInputPattern(action.value, RegExp("[d+(?:,d+)*]")),
+					validLength: checkInputLength(action.value, 2),
+					validPattern: checkInputPattern(action.value, RegExp("^[0-9]+(?:,[0-9]+)*$")),
 				},
 			};
 		default:

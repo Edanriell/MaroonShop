@@ -49,7 +49,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	const [showEditExistingProductModal, setEditExistingProductModal] = useState<boolean>(false);
 	const [showDeleteExistingProductModal, setDeleteExistingProductModal] =
 		useState<boolean>(false);
-	const [skinType, setSkinType] = useState<Array<string>>([]);
 
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
@@ -115,9 +114,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	};
 
 	const handleProductSkinTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-		console.log(event.target.value);
-		console.log(state.skinTypeSelect.value);
-		// const handleSkintypeChange = () => {};
 		formDispatch(changingProductSkinTypeAction(event.target.value));
 	};
 
@@ -180,7 +176,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	});
 
 	const skinTypeSelectClasses = classNames({
-		inputInvalid: state.skinTypeSelect.validOption === false,
+		inputInvalid:
+			state.skinTypeInput.validLength === false || state.skinTypeInput.validPattern === false,
 	});
 
 	const productPriceInputClasses = classNames({
@@ -193,6 +190,10 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		inputInvalid:
 			state.productQuantityInput.validLength === false ||
 			state.productQuantityInput.validPattern === false,
+	});
+
+	const submitButtonClasses = classNames({
+		"button-disabled": !isFormValid(state),
 	});
 
 	const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -370,7 +371,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										labelContent="Описание товара"
 										labelFor="product-description"
 										inputValue={state.productDescriptionInput.value}
-										// readOnly={!isProfileDataEditable}
 										onInputChange={handleProductDescriptionChange}
 										className={
 											styles.input + " " + productDescriptionInputClasses
@@ -409,7 +409,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										labelContent="Использование товара"
 										labelFor="product-usage"
 										inputValue={state.productUsageInput.value}
-										// readOnly={!isProfileDataEditable}
 										onInputChange={handleProductUsageChange}
 										className={styles.input + " " + productUsageInputClasses}
 									/>
@@ -454,7 +453,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												labelContent="Картинка мальенкая"
 												labelFor="product-image-small"
 												inputValue={state.productImageSmallInput.value}
-												// readOnly={!isProfileDataEditable}
 												onInputChange={handleProductImageSmallChange}
 												className={
 													styles.input +
@@ -499,7 +497,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												labelContent="Картинка среднаяя"
 												labelFor="product-image-medium"
 												inputValue={state.productImageMediumInput.value}
-												// readOnly={!isProfileDataEditable}
 												onInputChange={handleProductImageMediumChange}
 												className={
 													styles.input +
@@ -544,7 +541,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												labelContent="Картинка большая"
 												labelFor="product-image-large"
 												inputValue={state.productImageLargeInput.value}
-												// readOnly={!isProfileDataEditable}
 												onInputChange={handleProductImageLargeChange}
 												className={
 													styles.input +
@@ -690,43 +686,37 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												"w-full max-w-[17.332rem] max-h-[5.5rem] h-[5.5rem] flex"
 											}
 										>
-											{/* Here we need an array of values for value prop*/}
-											{/* Problems with regex */}
-											<select
+											<Input
+												type="text"
+												inputId="skin-type"
+												inputName="skin-type"
+												labelContent="Тип кожи"
+												labelFor="skin-type"
+												inputValue={state.skinTypeInput.value}
+												onInputChange={handleProductSkinTypeChange}
 												className={
-													"border-none font-semibold " +
-													"p-0 font-raleway " +
-													"bg-athens-gray-50 text-sm-14px duration-500 ease-out " +
-													"hover:bg-athens-gray-100 focus:bg-athens-gray-100 " +
-													"text-blue-zodiac-950 max-h-[5.5rem] pl-[1rem] " +
-													"pr-[1rem] pt-[1rem] pb-[1rem] max-w-[17.332rem] w-full " +
-													styles.inputHeightFixed +
-													" " +
-													skinTypeSelectClasses
+													styles.input + " " + skinTypeSelectClasses
 												}
-												name="skin-type"
-												id="skin-type"
-												onChange={handleProductSkinTypeChange}
-												value={state.skinTypeSelect.value}
-												// value={["skin-dry", "skin-fat"]}
-												multiple
-											>
-												<option value="skin-dry">Сухая кожа</option>
-												<option value="skin-normal">
-													Нолрмальная кожа
-												</option>
-												<option value="skin-fat">Жирная кожа</option>
-												<option value="skin-combined">
-													Комбинированая кожа
-												</option>
-											</select>
+											/>
 										</div>
-										{debouncedState.skinTypeSelect.validOption === false &&
+										{debouncedState.skinTypeInput.validLength === false &&
+											createPortal(
+												<Snackbar
+													type={"error"}
+													message={"Указан слишком короткий тип кожи."}
+													autoCloseDuration={"4000"}
+												/>,
+												document.getElementById(
+													"snackbars-container",
+												) as Element,
+											)}
+										{debouncedState.skinTypeInput.validPattern === false &&
 											createPortal(
 												<Snackbar
 													type={"error"}
 													message={`
-													Не выбран тип кожи.
+													Типом кожи может быть только "Сухая кожа | Нормальная кожа | 
+													Жирная кожа | Комбинированная кожа".
 												`}
 													autoCloseDuration={"4000"}
 												/>,
@@ -749,7 +739,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												labelContent="Цена товара"
 												labelFor="product-price"
 												inputValue={state.productPriceInput.value}
-												// readOnly={!isProfileDataEditable}
 												onInputChange={handleProductPriceChange}
 												className={
 													styles.input + " " + productPriceInputClasses
@@ -772,7 +761,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												<Snackbar
 													type={"error"}
 													message={`
-													Цена товара должна быть указанна в формате [цена-1], [цена-2].
+													Цена товара должна быть указанна в формате[цена-1, цена-2. 
+													Числа должны быть целыми.
 												`}
 													autoCloseDuration={"4000"}
 												/>,
@@ -788,7 +778,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 												labelContent="Количество товара"
 												labelFor="product-quantity"
 												inputValue={state.productQuantityInput.value}
-												// readOnly={!isProfileDataEditable}
 												onInputChange={handleProductQuantityChange}
 												className={
 													styles.input + " " + productQuantityInputClasses
@@ -816,7 +805,8 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 													type={"error"}
 													message={`
 													Количество товара должно быть указанно в 
-													формате [количество-1],[количество-2].
+													формате количество-1,количество-2. 
+													Числа должны быть целыми.
 												`}
 													autoCloseDuration={"4000"}
 												/>,
@@ -826,7 +816,7 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 											)}
 									</div>
 									<Button
-										className={"mt-[5rem]"}
+										className={submitButtonClasses + " mt-[5rem]"}
 										type="submit"
 										text={"Создать"}
 										disabled={!isFormValid(state)}

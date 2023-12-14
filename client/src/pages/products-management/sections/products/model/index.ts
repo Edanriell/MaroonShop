@@ -23,7 +23,7 @@ export const isFormValid = (formState: FormState): boolean => {
 		productImageLargeInput,
 		mainTypeSelect,
 		secondaryTypeSelect,
-		skinTypeSelect,
+		skinTypeInput,
 		productPriceInput,
 		productQuantityInput,
 	} = formState;
@@ -38,7 +38,7 @@ export const isFormValid = (formState: FormState): boolean => {
 		isInputValid(productImageLargeInput) &&
 		isSelectValid(mainTypeSelect) &&
 		isSelectValid(secondaryTypeSelect) &&
-		isSelectValid(skinTypeSelect) &&
+		isInputValid(skinTypeInput) &&
 		isInputValid(productPriceInput) &&
 		isInputValid(productQuantityInput)
 	);

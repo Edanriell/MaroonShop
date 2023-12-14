@@ -20,7 +20,7 @@ export type FormInput = {
 };
 
 export type FormSelect = {
-	value: "" | string | Array<string>;
+	value: "" | string;
 	validOption: null | boolean;
 };
 
@@ -34,7 +34,7 @@ export type FormState = {
 	productImageLargeInput: FormInput;
 	mainTypeSelect: FormSelect;
 	secondaryTypeSelect: FormSelect;
-	skinTypeSelect: FormSelect;
+	skinTypeInput: FormInput;
 	productPriceInput: FormInput;
 	productQuantityInput: FormInput;
 };
