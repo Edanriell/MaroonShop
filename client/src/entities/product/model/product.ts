@@ -516,8 +516,47 @@ export const updateProductViewsAsync = async ({ productId }: { productId: string
 	await productsApi.products.updateProductViews({ productId });
 };
 
-export const createNewProductAsync = async () => {
-	await productsApi.products.createNewProduct();
+export const createNewProductAsync = async ({
+	productName,
+	productComponents,
+	productDescription,
+	productUsage,
+	productImageSmall,
+	productImageMedium,
+	productImageLarge,
+	mainType,
+	secondaryType,
+	skinType,
+	productPrice,
+	productQuantity,
+}: {
+	productName: string;
+	productComponents: string;
+	productDescription: string;
+	productUsage: string;
+	productImageSmall: string;
+	productImageMedium: string;
+	productImageLarge: string;
+	mainType: string;
+	secondaryType: string;
+	skinType: string;
+	productPrice: string;
+	productQuantity: string;
+}) => {
+	await productsApi.products.createNewProduct({
+		productName,
+		productComponents,
+		productDescription,
+		productUsage,
+		productImageSmall,
+		productImageMedium,
+		productImageLarge,
+		mainType,
+		secondaryType,
+		skinType,
+		productPrice,
+		productQuantity,
+	});
 };
 
 export const useProducts = () =>

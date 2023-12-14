@@ -239,7 +239,20 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	const handleCreateNewProductFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		dispatch(productModel.createNewProductAsync());
+		productModel.createNewProductAsync({
+			productName: state.productNameInput.value,
+			productComponents: state.productComponentsInput.value,
+			productDescription: state.productDescriptionInput.value,
+			productUsage: state.productUsageInput.value,
+			productImageSmall: state.productImageSmallInput.value,
+			productImageMedium: state.productImageMediumInput.value,
+			productImageLarge: state.productImageLargeInput.value,
+			mainType: state.mainTypeSelect.value,
+			secondaryType: state.secondaryTypeSelect.value,
+			skinType: state.skinTypeInput.value,
+			productPrice: state.productPriceInput.value,
+			productQuantity: state.productQuantityInput.value,
+		});
 
 		// dispatch(userModel.clearOperationResultMessage(null));
 	};
@@ -819,6 +832,9 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										className={submitButtonClasses + " mt-[5rem]"}
 										type="submit"
 										text={"Создать"}
+										borderColor={"#122947"}
+										backgroundColor={"#122947"}
+										textColor={"#FFF"}
 										disabled={!isFormValid(state)}
 									/>
 								</div>

@@ -26,6 +26,7 @@ const BASE_MOST_WATCHED_PRODUCTS_URL = "api/products/most-watched";
 const BASE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/recently-watched";
 const BASE_UPDATE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/update-recently-watched";
 const BASE_UPDATE_PRODUCT_VIEWS_URL = "api/product/update-views";
+const BASE_CREATE_NEW_PRODUCT_URL = "api/product/create-new";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
@@ -110,5 +111,48 @@ export const updateRecentlyWatchedProducts = ({
 export const updateProductViews = ({ productId }: { productId: string }): AxiosPromise<Product> => {
 	return apiInstance.put(BASE_UPDATE_PRODUCT_VIEWS_URL, {
 		productId,
+	});
+};
+
+export const createNewProduct = ({
+	productName,
+	productComponents,
+	productDescription,
+	productUsage,
+	productImageSmall,
+	productImageMedium,
+	productImageLarge,
+	mainType,
+	secondaryType,
+	skinType,
+	productPrice,
+	productQuantity,
+}: {
+	productName: string;
+	productComponents: string;
+	productDescription: string;
+	productUsage: string;
+	productImageSmall: string;
+	productImageMedium: string;
+	productImageLarge: string;
+	mainType: string;
+	secondaryType: string;
+	skinType: string;
+	productPrice: string;
+	productQuantity: string;
+}): AxiosPromise<Product> => {
+	return apiInstance.post(BASE_CREATE_NEW_PRODUCT_URL, {
+		productName,
+		productComponents,
+		productDescription,
+		productUsage,
+		productImageSmall,
+		productImageMedium,
+		productImageLarge,
+		mainType,
+		secondaryType,
+		skinType,
+		productPrice,
+		productQuantity,
 	});
 };
