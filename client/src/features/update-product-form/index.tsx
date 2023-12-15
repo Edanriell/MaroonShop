@@ -156,6 +156,7 @@ const UpdateProductForm: FC<UpdateProductFormProps> = ({ selectedProduct }) => {
 		event.preventDefault();
 
 		productModel.updateExistingProductDataAsync({
+			productId: selectedProduct.id,
 			productName: state.productNameInput.value,
 			productComponents: state.productComponentsInput.value,
 			productDescription: state.productDescriptionInput.value,

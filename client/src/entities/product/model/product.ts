@@ -570,6 +570,7 @@ export const deleteExistingProductAsync = async ({
 };
 
 export const updateExistingProductDataAsync = async ({
+	productId,
 	productName,
 	productComponents,
 	productDescription,
@@ -583,6 +584,7 @@ export const updateExistingProductDataAsync = async ({
 	productPrice,
 	productQuantity,
 }: {
+	productId: string;
 	productName: string;
 	productComponents: string;
 	productDescription: string;
@@ -597,6 +599,7 @@ export const updateExistingProductDataAsync = async ({
 	productQuantity: string;
 }) => {
 	await productsApi.products.updateExistingProductData({
+		productId,
 		productName,
 		productComponents,
 		productDescription,

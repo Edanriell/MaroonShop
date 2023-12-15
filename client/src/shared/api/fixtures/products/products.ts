@@ -28,6 +28,7 @@ const BASE_UPDATE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/update-recently-
 const BASE_UPDATE_PRODUCT_VIEWS_URL = "api/product/update-views";
 const BASE_CREATE_NEW_PRODUCT_URL = "api/product/create-new";
 const BASE_DELETE_EXISTING_PRODUCT_URL = "api/product/delete-existing";
+const BASE_UPDATE_EXISTING_PRODUCT_DATA_URL = "api/product/update-existing-data";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
@@ -170,5 +171,51 @@ export const deleteExistingProduct = ({
 			productName,
 			productId,
 		},
+	});
+};
+
+export const updateExistingProductData = ({
+	productId,
+	productName,
+	productComponents,
+	productDescription,
+	productUsage,
+	productImageSmall,
+	productImageMedium,
+	productImageLarge,
+	mainType,
+	secondaryType,
+	skinType,
+	productPrice,
+	productQuantity,
+}: {
+	productId: string;
+	productName: string;
+	productComponents: string;
+	productDescription: string;
+	productUsage: string;
+	productImageSmall: string;
+	productImageMedium: string;
+	productImageLarge: string;
+	mainType: string;
+	secondaryType: string;
+	skinType: string;
+	productPrice: string;
+	productQuantity: string;
+}): AxiosPromise<Product> => {
+	return apiInstance.put(BASE_UPDATE_EXISTING_PRODUCT_DATA_URL, {
+		productId,
+		productName,
+		productComponents,
+		productDescription,
+		productUsage,
+		productImageSmall,
+		productImageMedium,
+		productImageLarge,
+		mainType,
+		secondaryType,
+		skinType,
+		productPrice,
+		productQuantity,
 	});
 };
