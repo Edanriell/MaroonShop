@@ -1,12 +1,12 @@
 ## Technology stack
 
 - **UI**: `react`, `classnames`, `tailwindcss`, `sass`
-- **Data model**: `redux`
+- **Animations**: `gsap`
+- **Data model**: `@reduxjs/toolkit`
 - **Lang**: `typescript`
-- **Data fetching**: `react-query`
+- **Data fetching**: `axios`
 - **Routing**: `react-router`
 - **Lint**: `eslint`, `prettier`, `stylelint`
-- **Deployment**: `netlify`
 - **Architecture**: `feature-sliced`
 
 <div align="center">
