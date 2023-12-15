@@ -122,10 +122,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productImageSmallInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 8),
-					validPattern: checkInputPattern(
-						action.value,
-						/^https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?$/i,
-					),
+					validPattern: checkInputPattern(action.value, RegExp("^https?://")),
 				},
 			};
 		case CHANGEDPRODUCTIMAGEMEDIUM:
@@ -134,10 +131,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productImageMediumInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 8),
-					validPattern: checkInputPattern(
-						action.value,
-						/^https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?$/i,
-					),
+					validPattern: checkInputPattern(action.value, RegExp("^https?://")),
 				},
 			};
 		case CHANGEDPRODUCTIMAGELARGE:
@@ -146,10 +140,7 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productImageLargeInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 8),
-					validPattern: checkInputPattern(
-						action.value,
-						/^https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?$/i,
-					),
+					validPattern: checkInputPattern(action.value, RegExp("^https?://")),
 				},
 			};
 		case CHANGEDPRODUCTMAINTYPE:
@@ -198,7 +189,10 @@ export const reducer = (state: FormState, action: FormActions) => {
 				productQuantityInput: {
 					value: action.value,
 					validLength: checkInputLength(action.value, 2),
-					validPattern: checkInputPattern(action.value, RegExp("^[0-9]+(?:,[0-9]+)*$")),
+					validPattern: checkInputPattern(
+						action.value,
+						RegExp("^[0-9]+(g|ml)(?:,[0-9]+(g|ml))*$"),
+					),
 				},
 			};
 		default:

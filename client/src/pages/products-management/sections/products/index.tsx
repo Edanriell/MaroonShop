@@ -75,7 +75,12 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		setShowCreateNewProductModal(false);
 	};
 
-	const handleEditExistingProductModalOpen = () => {
+	const handleEditExistingProductModalOpen = ({
+		selectedProduct,
+	}: {
+		selectedProduct: Product;
+	}) => {
+		setCurrentlySelectedProduct(selectedProduct);
 		setEditExistingProductModal(true);
 	};
 
@@ -232,7 +237,11 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										<Button
 											type={"button"}
 											text={"Редактировать"}
-											onClick={handleEditExistingProductModalOpen}
+											onClick={() =>
+												handleEditExistingProductModalOpen({
+													selectedProduct: product,
+												})
+											}
 										/>
 										<Button
 											type={"button"}
@@ -326,7 +335,11 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										<Button
 											type={"button"}
 											text={"Редактировать"}
-											onClick={handleEditExistingProductModalOpen}
+											onClick={() =>
+												handleEditExistingProductModalOpen({
+													selectedProduct: product,
+												})
+											}
 										/>
 
 										<Button
@@ -347,10 +360,10 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 						createPortal(
 							<Modal
 								title="Редактирование данных товара"
-								description="123"
+								description=""
 								onModalClose={handleEditExistingProductModalClose}
 							>
-								<UpdateProductForm />
+								<UpdateProductForm selectedProduct={currentlySelectedProduct!} />
 							</Modal>,
 							document.body,
 						)}

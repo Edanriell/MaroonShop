@@ -569,6 +569,49 @@ export const deleteExistingProductAsync = async ({
 	await productsApi.products.deleteExistingProduct({ productId, productName });
 };
 
+export const updateExistingProductDataAsync = async ({
+	productName,
+	productComponents,
+	productDescription,
+	productUsage,
+	productImageSmall,
+	productImageMedium,
+	productImageLarge,
+	mainType,
+	secondaryType,
+	skinType,
+	productPrice,
+	productQuantity,
+}: {
+	productName: string;
+	productComponents: string;
+	productDescription: string;
+	productUsage: string;
+	productImageSmall: string;
+	productImageMedium: string;
+	productImageLarge: string;
+	mainType: string;
+	secondaryType: string;
+	skinType: string;
+	productPrice: string;
+	productQuantity: string;
+}) => {
+	await productsApi.products.updateExistingProductData({
+		productName,
+		productComponents,
+		productDescription,
+		productUsage,
+		productImageSmall,
+		productImageMedium,
+		productImageLarge,
+		mainType,
+		secondaryType,
+		skinType,
+		productPrice,
+		productQuantity,
+	});
+};
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(

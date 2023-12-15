@@ -1,7 +1,7 @@
 export type ProductCategories = {
-	"main": string;
-	"secondary": string;
-	"skin-type": Array<string>;
+	main: string;
+	secondary: string;
+	skinType: Array<string>;
 };
 
 export type Product = {

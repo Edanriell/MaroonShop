@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useReducer, FormEvent } from "react";
+import { FC, ChangeEvent, useReducer, FormEvent, useLayoutEffect } from "react";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
 
@@ -24,10 +24,12 @@ import {
 } from "./model/actions";
 import { isFormValid } from "./model";
 
+import { UpdateProductFormProps } from "./types";
+
 import styles from "./styles.module.scss";
 import "./styles.scss";
 
-const UpdateProductForm: FC = () => {
+const UpdateProductForm: FC<UpdateProductFormProps> = ({ selectedProduct }) => {
 	const [state, formDispatch] = useReducer(reducer, initialFormState);
 	const [debouncedState] = useDebounce(state, 2000);
 
@@ -153,7 +155,7 @@ const UpdateProductForm: FC = () => {
 	const handleCreateNewProductFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		productModel.createNewProductAsync({
+		productModel.updateExistingProductDataAsync({
 			productName: state.productNameInput.value,
 			productComponents: state.productComponentsInput.value,
 			productDescription: state.productDescriptionInput.value,
@@ -170,6 +172,36 @@ const UpdateProductForm: FC = () => {
 
 		// dispatch(userModel.clearOperationResultMessage(null));
 	};
+
+	useLayoutEffect(() => {
+		const normalizedSkinType = [];
+
+		for (const skin of selectedProduct.category.skinType) {
+			if (skin === "skin-dry") {
+				normalizedSkinType.push("Сухая кожа");
+			} else if (skin === "skin-normal") {
+				normalizedSkinType.push("Нормальная кожа");
+			} else if (skin === "skin-fat") {
+				normalizedSkinType.push("Жирная кожа");
+			} else if (skin === "skin-combined") {
+				normalizedSkinType.push("Комбинированная кожа");
+			}
+		}
+
+		formDispatch(changingProductNameAction(selectedProduct.name));
+		formDispatch(changingProductComponentsAction(selectedProduct.components));
+		formDispatch(changingProductsDescriptionAction(selectedProduct.description.join()));
+		formDispatch(changingProductUsageAction(selectedProduct.usage));
+		formDispatch(changingProductImageSmallAction(selectedProduct.image.sm));
+		formDispatch(changingProductImageMediumAction(selectedProduct.image.md));
+		formDispatch(changingProductImageLargeAction(selectedProduct.image.lg));
+		formDispatch(changingProductMainTypeAction(selectedProduct.category.main));
+		formDispatch(changingProductSecondaryTypeAction(selectedProduct.category.secondary));
+		formDispatch(changingProductSkinTypeAction(normalizedSkinType.join()));
+		formDispatch(changingProductPriceAction(selectedProduct.price.join()));
+		formDispatch(changingProductQuantityAction(selectedProduct.quantity.join()));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<form onSubmit={handleCreateNewProductFormSubmit}>
@@ -582,8 +614,7 @@ const UpdateProductForm: FC = () => {
 								type={"error"}
 								message={`
                         Количество товара должно быть указанно в 
-                        формате количество-1,количество-2. 
-                        Числа должны быть целыми.
+                        формате цело число[g | ml], например 500g, 1000ml.
                     `}
 								autoCloseDuration={"4000"}
 							/>,
@@ -593,7 +624,7 @@ const UpdateProductForm: FC = () => {
 				<Button
 					className={submitButtonClasses + " mt-[5rem]"}
 					type="submit"
-					text={"Создать"}
+					text={"Сохранить"}
 					borderColor={"#122947"}
 					backgroundColor={"#122947"}
 					textColor={"#FFF"}

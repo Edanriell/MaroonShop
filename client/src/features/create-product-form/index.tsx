@@ -581,10 +581,9 @@ const CreateProductForm: FC = () => {
 							<Snackbar
 								type={"error"}
 								message={`
-                        Количество товара должно быть указанно в 
-                        формате количество-1,количество-2. 
-                        Числа должны быть целыми.
-                    `}
+									Количество товара должно быть указанно в 
+									формате цело число[g | ml], например 500g, 1000ml.
+                    			`}
 								autoCloseDuration={"4000"}
 							/>,
 							document.getElementById("snackbars-container") as Element,
