@@ -44,13 +44,6 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		dispatch(productModel.getProductsAsync());
 	}, [dispatch]);
 
-	// useLayoutEffect(() => {
-	// 	formDispatch(changingNameAction((user as User)?.name || ""));
-	// 	formDispatch(changingSurnameAction((user as User)?.surname || ""));
-	// 	formDispatch(changingAddressAction((user as User)?.address || ""));
-	// 	formDispatch(changingEmailAction((user as User)?.email || ""));
-	// }, [operationResultMessage.error, user]);
-
 	const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const allProducts = Object.values(products);
 		const searchTerm = event.target.value;

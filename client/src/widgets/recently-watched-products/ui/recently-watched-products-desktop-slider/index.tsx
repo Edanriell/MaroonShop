@@ -19,7 +19,6 @@ register();
 const RecentlyWatchedProductsDesktopSlider: FC<RecentlyWatchedProductsDesktopSliderProps> = ({
 	recentlyWatchedProducts,
 }) => {
-	// any
 	const recentlyWatchedProductsGroupedBy4 = useArrayGrouper(recentlyWatchedProducts as any, 4);
 
 	const sliderRef = useRef<HTMLElement | null>(null);

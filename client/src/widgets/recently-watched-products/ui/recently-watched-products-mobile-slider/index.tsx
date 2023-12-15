@@ -20,7 +20,7 @@ const RecentlyWatchedProductsMobileSlider: FC<RecentlyWatchedProductsMobileSlide
 	recentlyWatchedProducts,
 }) => {
 	const { width } = useScreenSize();
-	// any
+
 	const recentlyWatchedProductsGrouped = useArrayGrouper(recentlyWatchedProducts as any, 2);
 
 	const sliderRef = useRef<HTMLElement | null>(null);

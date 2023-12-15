@@ -20,7 +20,6 @@ import {
 import { RecentlyWatchedProductsProps } from "./types";
 
 const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) => {
-	// Problem here if NO PRODUCTS
 	const [recentlyWatchedProducts, setRecentlyWatchedProducts] = useState<Product[] | []>([]);
 
 	const [reload, setReload] = useState<number>(Math.random());
@@ -72,7 +71,7 @@ const RecentlyWatchedProducts: FC<RecentlyWatchedProductsProps> = ({ title }) =>
 	}, [reload, dispatch, isUserAuthorized, user]);
 
 	useEffect(() => {
-		if (Object.values(recentlyWatchedProductsFromServer).length > 0) {
+		if (recentlyWatchedProductsFromServer) {
 			setRecentlyWatchedProducts(Object.values(recentlyWatchedProductsFromServer));
 		}
 	}, [recentlyWatchedProductsFromServer]);
