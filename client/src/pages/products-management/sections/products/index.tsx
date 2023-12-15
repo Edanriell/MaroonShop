@@ -25,6 +25,7 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 	const [showEditExistingProductModal, setEditExistingProductModal] = useState<boolean>(false);
 	const [showDeleteExistingProductModal, setDeleteExistingProductModal] =
 		useState<boolean>(false);
+	const [currentlySelectedProduct, setCurrentlySelectedProduct] = useState<Product | null>(null);
 
 	const dispatch: ThunkDispatch<any, null, AnyAction> = useDispatch();
 
@@ -82,7 +83,12 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 		setEditExistingProductModal(false);
 	};
 
-	const handleDeleteExistingProductModalOpen = () => {
+	const handleDeleteExistingProductModalOpen = ({
+		selectedProduct,
+	}: {
+		selectedProduct: Product;
+	}) => {
+		setCurrentlySelectedProduct(selectedProduct);
 		setDeleteExistingProductModal(true);
 	};
 
@@ -231,7 +237,11 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										<Button
 											type={"button"}
 											text={"Удалить"}
-											onClick={handleDeleteExistingProductModalOpen}
+											onClick={() =>
+												handleDeleteExistingProductModalOpen({
+													selectedProduct: product,
+												})
+											}
 										/>
 									</div>
 								</div>
@@ -322,7 +332,11 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 										<Button
 											type={"button"}
 											text={"Удалить"}
-											onClick={handleDeleteExistingProductModalOpen}
+											onClick={() =>
+												handleDeleteExistingProductModalOpen({
+													selectedProduct: product,
+												})
+											}
 										/>
 									</div>
 								</div>
@@ -332,22 +346,22 @@ const Profile: FC<ProductsProps> = ({ title }) => {
 					{showEditExistingProductModal &&
 						createPortal(
 							<Modal
-								title="Редактирование товара"
+								title="Редактирование данных товара"
 								description="123"
 								onModalClose={handleEditExistingProductModalClose}
 							>
-								<div>Content2</div>
+								<UpdateProductForm />
 							</Modal>,
 							document.body,
 						)}
 					{showDeleteExistingProductModal &&
 						createPortal(
 							<Modal
-								title="Удаление товара"
+								title="Подтвердите удаление товара"
 								description=""
 								onModalClose={handleDeleteExistingProductModalClose}
 							>
-								<div>Content3</div>
+								<DeleteProductForm selectedProduct={currentlySelectedProduct!} />
 							</Modal>,
 							document.body,
 						)}

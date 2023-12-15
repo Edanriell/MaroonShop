@@ -559,6 +559,10 @@ export const createNewProductAsync = async ({
 	});
 };
 
+export const deleteExistingProductAsync = async ({ productId }: { productId: string }) => {
+	await productsApi.products.deleteExistingProduct({ productId });
+};
+
 export const useProducts = () =>
 	useSelector(
 		createSelector(
