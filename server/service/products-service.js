@@ -32,18 +32,34 @@ class ProductsService {
 		description,
 		components,
 		usage,
-		category,
-		image,
+		imageSmall,
+		imageMedium,
+		imageLarge,
+		mainType,
+		secondaryType,
+		skinType,
 		price,
 		quantity,
-		views,
-		sells,
+		views = 0,
+		sells = 0,
 	}) {
 		const product = await ProductModel.findOne({ name });
 
 		if (product) {
 			throw ApiError.BadRequest(`Товар с именем ${name} уже существует.`);
 		}
+
+		const image = {
+			sm: imageSmall,
+			md: imageMedium,
+			lg: imageLarge,
+		};
+
+		const category = {
+			main: mainType,
+			secondary: secondaryType,
+			skinType: skinType,
+		};
 
 		const newProduct = await ProductModel.create({
 			name,
@@ -65,14 +81,35 @@ class ProductsService {
 		};
 	}
 
-	async updateProductData(updatedProductData) {
-		const { id, name } = updatedProductData;
-
-		const isNameRegistered = !!(await ProductModel.findOne({ name }));
-
-		if (isNameRegistered) {
-			throw ApiError.BadRequest(`Имя ${name} уже зарегистрировано.`);
-		}
+	async updateExistingProductData({
+		id,
+		name,
+		description,
+		components,
+		usage,
+		imageSmall,
+		imageMedium,
+		imageLarge,
+		mainType,
+		secondaryType,
+		skinType,
+		price,
+		quantity,
+	}) {
+		const updatedProductData = {
+			name,
+			description,
+			components,
+			usage,
+			imageSmall,
+			imageMedium,
+			imageLarge,
+			mainType,
+			secondaryType,
+			skinType,
+			price,
+			quantity,
+		};
 
 		const updatedProduct = await ProductModel.findOneAndUpdate(
 			{ _id: id },
@@ -91,9 +128,17 @@ class ProductsService {
 		};
 	}
 
-	async deleteProduct(productId) {
+	async deleteExistingProduct({ name, id }) {
 		try {
-			const deletedProduct = await ProductModel.findOneAndDelete({ _id: productId });
+			const product = await ProductModel.findOne({ _id: id });
+
+			if (!product) {
+				throw ApiError.NotFound(`Товар с id: ${id} не найден.`);
+			} else if (product.name !== name) {
+				throw ApiError.NotFound("Указанно неверное имя товара.");
+			}
+
+			const deletedProduct = await ProductModel.findOneAndDelete({ _id: id });
 
 			if (!deletedProduct) {
 				throw ApiError.NotFound("Товар который вы хотите удалить не найден.");

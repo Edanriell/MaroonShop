@@ -143,6 +143,153 @@ class ProductsController {
 			next(err);
 		}
 	}
+
+	async createNewProduct(req, res, next) {
+		try {
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
+			}
+
+			const {
+				productName,
+				productComponents,
+				productDescription,
+				productUsage,
+				productImageSmall,
+				productImageMedium,
+				productImageLarge,
+				mainType,
+				secondaryType,
+				skinType,
+				productPrice,
+				productQuantity,
+			} = req.body;
+
+			const normalizedProductPrice = productPrice.trim().split(",");
+			const normalizedProductQuantity = productQuantity.trim().split(",");
+			const skins = skinType
+				.trim()
+				.split(",")
+				.map((skin) => skin.toLowerCase());
+
+			const normalizedSkinType = [];
+
+			for (const skin of skins) {
+				if (skin === "сухая кожа") {
+					normalizedSkinType.push("skin-dry");
+				} else if (skin === "нормальная кожа") {
+					normalizedSkinType.push("skin-normal");
+				} else if (skin === "жирная кожа") {
+					normalizedSkinType.push("skin-fat");
+				} else if (skin === "комбинированная кожа") {
+					normalizedSkinType.push("skin-combined");
+				}
+			}
+
+			const newProduct = await productsService.createNewProduct({
+				name: productName,
+				components: productComponents,
+				description: productDescription,
+				usage: productUsage,
+				imageSmall: productImageSmall,
+				imageMedium: productImageMedium,
+				imageLarge: productImageLarge,
+				mainType,
+				secondaryType,
+				skinType: normalizedSkinType,
+				price: normalizedProductPrice,
+				quantity: normalizedProductQuantity,
+			});
+
+			return res.json(newProduct);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async deleteExistingProduct(req, res, next) {
+		try {
+			const { productName, productId } = req.query;
+
+			const deletedProduct = await productsService.deleteExistingProduct({
+				name: productName,
+				id: productId,
+			});
+
+			return res.json(deletedProduct);
+		} catch (err) {
+			next(err);
+		}
+	}
+
+	async updateExistingProductData(req, res, next) {
+		try {
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty()) {
+				return next(ApiError.BadRequest("Ошибка при валидации.", errors.array()));
+			}
+
+			const {
+				productId,
+				productName,
+				productComponents,
+				productDescription,
+				productUsage,
+				productImageSmall,
+				productImageMedium,
+				productImageLarge,
+				mainType,
+				secondaryType,
+				skinType,
+				productPrice,
+				productQuantity,
+			} = req.body;
+
+			const normalizedProductPrice = productPrice.trim().split(",");
+			const normalizedProductQuantity = productQuantity.trim().split(",");
+			const skins = skinType
+				.trim()
+				.split(",")
+				.map((skin) => skin.toLowerCase());
+
+			const normalizedSkinType = [];
+
+			for (const skin of skins) {
+				if (skin === "сухая кожа") {
+					normalizedSkinType.push("skin-dry");
+				} else if (skin === "нормальная кожа") {
+					normalizedSkinType.push("skin-normal");
+				} else if (skin === "жирная кожа") {
+					normalizedSkinType.push("skin-fat");
+				} else if (skin === "комбинированная кожа") {
+					normalizedSkinType.push("skin-combined");
+				}
+			}
+
+			const updatedProduct = await productsService.updateExistingProductData({
+				id: productId,
+				name: productName,
+				components: productComponents,
+				description: productDescription,
+				usage: productUsage,
+				imageSmall: productImageSmall,
+				imageMedium: productImageMedium,
+				imageLarge: productImageLarge,
+				mainType,
+				secondaryType,
+				skinType: normalizedSkinType,
+				price: normalizedProductPrice,
+				quantity: normalizedProductQuantity,
+			});
+
+			return res.json(updatedProduct);
+		} catch (err) {
+			next(err);
+		}
+	}
 }
 
 module.exports = new ProductsController();

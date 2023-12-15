@@ -58,6 +58,40 @@ router.put(
 	body("productId").isMongoId(),
 	productsController.updateProductViews,
 );
+router.post(
+	"/product/create-new",
+	body("productName").isString(),
+	body("productComponents").isString(),
+	body("productDescription").isString(),
+	body("productImageSmall").isString(),
+	body("productImageMedium").isString(),
+	body("productImageLarge").isString(),
+	body("mainType").isString(),
+	body("secondaryType").isString(),
+	body("skinType").isString(),
+	body("productPrice").isString(),
+	body("productQuantity").isString(),
+	authMiddleware,
+	productsController.createNewProduct,
+);
+router.delete("/product/delete-existing", authMiddleware, productsController.deleteExistingProduct);
+router.put(
+	"/product/update-existing-data",
+	body("productId").isString(),
+	body("productName").isString(),
+	body("productComponents").isString(),
+	body("productDescription").isString(),
+	body("productImageSmall").isString(),
+	body("productImageMedium").isString(),
+	body("productImageLarge").isString(),
+	body("mainType").isString(),
+	body("secondaryType").isString(),
+	body("skinType").isString(),
+	body("productPrice").isString(),
+	body("productQuantity").isString(),
+	authMiddleware,
+	productsController.updateExistingProductData,
+);
 
 router.post(
 	"/questionnaire/send",
