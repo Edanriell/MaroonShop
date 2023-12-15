@@ -115,7 +115,7 @@ export const useProductsFromCart = () =>
 	useSelector(
 		createSelector(
 			(state: RootState) => state.user.cart,
-			(product: Product[]) => product,
+			(products: Product[]) => products,
 		),
 	);
 
@@ -129,11 +129,11 @@ export const useOperationResultMessage = () =>
 
 export const updatedData = createAction<string | null>("user/updateData");
 
-export const addProductToCart = createAction<string | null>("user/addProductToCart");
+export const addProductToCart = createAction<Product>("user/addProductToCart");
 
-export const removeProductFromCart = createAction<string | null>("user/removeProductFromCart");
+export const removeProductFromCart = createAction<Product>("user/removeProductFromCart");
 
-export const clearCart = createAction<string | null>("user/clearCart");
+export const clearCart = createAction("user/clearCart");
 
 export const setOperationResultMessage = createAction<OperationResultMessage | null>(
 	"user/setOperationResultMessage",

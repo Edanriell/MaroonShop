@@ -1,9 +1,10 @@
-import { useEffect, useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { productModel } from "entities/product";
+import { userModel } from "entities/user";
 import { sessionModel } from "entities/session";
 
 import { Accordion, Button, Radio } from "shared/ui";
@@ -15,7 +16,8 @@ import { ProductLoading, ProductError } from "./ui";
 import styles from "./styles.module.scss";
 
 const Product = () => {
-	// Create model folder with logic and decompose what we can there ?
+	const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
+
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
 	const { productId } = useParams();
@@ -29,6 +31,23 @@ const Product = () => {
 	const user = sessionModel.useUser();
 
 	const isUserAuthorized = sessionModel.useIsAuthorized();
+
+	const priceContainerRef = useRef(null);
+
+	const currentProductsPlacedInCart = userModel.useProductsFromCart();
+
+	useEffect(() => {
+		if (
+			currentProductsPlacedInCart.find(
+				(productInCart: any) => productInCart.id === product.id,
+			)
+		) {
+			setIsProductInCart(true);
+		} else {
+			setIsProductInCart(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentProductsPlacedInCart]);
 
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
@@ -103,7 +122,13 @@ const Product = () => {
 		productModel.updateProductViewsAsync({ productId: productId! });
 	}, [product, productId]);
 
-	const priceContainerRef = useRef(null);
+	const handleProductClick = () => {
+		if (!isProductInCart) {
+			dispatch(userModel.addProductToCart(product));
+		} else {
+			dispatch(userModel.removeProductFromCart(product));
+		}
+	};
 
 	if (isDataLoading) {
 		return <ProductLoading />;
@@ -245,7 +270,12 @@ const Product = () => {
 								>
 									<div className={"w-[5.99rem] md:w-[6.91rem]"}></div>
 								</div>
-								<Button text={"Добавить в корзину"} />
+								<Button
+									onClick={handleProductClick}
+									text={
+										isProductInCart ? "Убрать из корзины" : "Добавить в корзину"
+									}
+								/>
 							</div>
 						</form>
 					</footer>
