@@ -27,6 +27,7 @@ const BASE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/recently-watched";
 const BASE_UPDATE_RECENTLY_WATCHED_PRODUCTS_URL = "api/products/update-recently-watched";
 const BASE_UPDATE_PRODUCT_VIEWS_URL = "api/product/update-views";
 const BASE_CREATE_NEW_PRODUCT_URL = "api/product/create-new";
+const BASE_DELETE_EXISTING_PRODUCT_URL = "api/product/delete-existing";
 
 export const getProducts = (): AxiosPromise<Products> => {
 	return apiInstance.get(BASE_URL);
@@ -154,5 +155,20 @@ export const createNewProduct = ({
 		skinType,
 		productPrice,
 		productQuantity,
+	});
+};
+
+export const deleteExistingProduct = ({
+	productName,
+	productId,
+}: {
+	productName: string;
+	productId: string;
+}): AxiosPromise<Product> => {
+	return apiInstance.delete(BASE_DELETE_EXISTING_PRODUCT_URL, {
+		params: {
+			productName,
+			productId,
+		},
 	});
 };

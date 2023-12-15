@@ -39,7 +39,10 @@ const DeleteProductForm: FC<DeleteProductFormProps> = ({ selectedProduct }) => {
 	const handleCreateNewProductFormSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		productModel.deleteExistingProductAsync({ productId: selectedProduct.id });
+		productModel.deleteExistingProductAsync({
+			productId: selectedProduct.id,
+			productName: state.productNameInput.value,
+		});
 
 		// dispatch(userModel.clearOperationResultMessage(null));
 	};
