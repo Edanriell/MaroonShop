@@ -1,15 +1,21 @@
 import { FC } from "react";
 
+import Cart from "features/cart";
+
+import { userModel } from "entities/user";
+
+import { ReactComponent as CartImage } from "./assets/empty-cart.svg";
+
 import { ProductsCartProps } from "./types";
 
-// Cart Feature
+const ProductsCart: FC<ProductsCartProps> = ({ title }) => {
+	const productsInCart = userModel.useProductsFromCart();
 
-const ShopContacts: FC<ProductsCartProps> = ({ title }) => {
 	return (
 		<div
 			className={
 				"pl-[1.5rem] pr-[1.5rem] md:pr-[4.5rem] md:pl-[4.5rem] relative " +
-				"pt-[10vh] pb-[20vh]"
+				"pt-[30vh] pb-[30vh]"
 			}
 		>
 			<div
@@ -29,10 +35,24 @@ const ShopContacts: FC<ProductsCartProps> = ({ title }) => {
 					>
 						{title}
 					</h2>
+					{productsInCart.length === 0 && (
+						<div className={"flex flex-col items-center"}>
+							<p
+								className={
+									"font-mPlus font-normal text-sm-18px text-center text-blue-zodiac-950 " +
+									"mb-[4rem]"
+								}
+							>
+								В корзине пока пусто.
+							</p>
+							<CartImage width={"68rem"} />
+						</div>
+					)}
+					{productsInCart.length >= 1 && <Cart />}
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default ShopContacts;
+export default ProductsCart;

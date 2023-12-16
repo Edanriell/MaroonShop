@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useReducer, FormEvent, useLayoutEffect } from "react";
+import { FC, ChangeEvent, useReducer, FormEvent } from "react";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
 
@@ -43,8 +43,6 @@ const DeleteProductForm: FC<DeleteProductFormProps> = ({ selectedProduct }) => {
 			productId: selectedProduct.id,
 			productName: state.productNameInput.value,
 		});
-
-		// dispatch(userModel.clearOperationResultMessage(null));
 	};
 
 	return (
@@ -93,24 +91,6 @@ const DeleteProductForm: FC<DeleteProductFormProps> = ({ selectedProduct }) => {
 					}
 				/>
 			</div>
-			{/* {operationResultMessage.success &&
-        createPortal(
-            <Snackbar
-                type={"success"}
-                message={operationResultMessage.success}
-                autoCloseDuration={"4000"}
-            />,
-            document.getElementById("snackbars-container") as Element,
-        )}
-    {operationResultMessage.error &&
-        createPortal(
-            <Snackbar
-                type={"error"}
-                message={operationResultMessage.error}
-                autoCloseDuration={"4000"}
-            />,
-            document.getElementById("snackbars-container") as Element,
-        )} */}
 		</form>
 	);
 };

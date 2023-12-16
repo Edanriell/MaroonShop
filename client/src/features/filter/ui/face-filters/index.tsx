@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import { Accordion, Checkbox } from "shared/ui";
-
 import { useScreenSize } from "shared/lib/hooks";
 
 import { FaceFiltersProps } from "./types";

@@ -8,7 +8,6 @@ import { userModel } from "entities/user";
 import { sessionModel } from "entities/session";
 
 import { Accordion, Button, Radio } from "shared/ui";
-
 import { getProductType } from "shared/lib/functions";
 
 import { ProductLoading, ProductError } from "./ui";
@@ -37,6 +36,8 @@ const Product = () => {
 	const currentProductsPlacedInCart = userModel.useProductsFromCart();
 
 	useEffect(() => {
+		if (!product) return;
+
 		if (
 			currentProductsPlacedInCart.find(
 				(productInCart: any) => productInCart.id === product.id,

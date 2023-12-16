@@ -1,5 +1,6 @@
-import { MutableRefObject } from "react";
+/* eslint-disable no-unused-vars */
 
+import { MutableRefObject } from "react";
 import { gsap } from "gsap";
 
 import { Filters } from "../types";

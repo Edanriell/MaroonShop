@@ -4,7 +4,6 @@ import { register } from "swiper/element/bundle";
 import { ProductCard } from "entities/product";
 
 import { useScreenSize, useArrayGrouper } from "shared/lib/hooks";
-
 import { Card3dFlip } from "shared/ui";
 
 import { ProductSuggestionsMobileSliderProps } from "./types";

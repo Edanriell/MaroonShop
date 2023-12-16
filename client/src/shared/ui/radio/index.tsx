@@ -55,10 +55,6 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
 	}, [inputLabelRefs, selectedValue, price]);
 
 	function updateDisplayedPrice(event: ChangeEvent<HTMLInputElement>) {
-		// Here i used a declarative approach to solve the problem.
-		// Unfortunately i was forced to use refs here, because refs
-		// are not causing any additional unnecessary rerenders, in this case if
-		// any additional rerenders appear, they will crash gsap animations (circle and label).
 		if (!priceContainerRef) return;
 
 		const RubleSvg = `

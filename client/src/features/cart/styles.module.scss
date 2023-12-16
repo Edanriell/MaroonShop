@@ -1,0 +1,52 @@
+.input {
+	background-color: #eeeef0 !important;
+
+	&:hover {
+		background-color: #dddee0 !important;
+	}
+
+	&:focus {
+		background-color: #dddee0 !important;
+	}
+}
+
+.inputHeightFixed {
+	height: 5.5rem !important;
+	background-color: #eeeef0 !important;
+
+	&:hover {
+		background-color: #dddee0 !important;
+	}
+
+	&:focus {
+		background-color: #dddee0 !important;
+	}
+}
+
+.cardRowContainer {
+	width: 28rem;
+}
+
+@media only screen and (min-width: 640px) {
+	.cardRowContainer {
+		width: 58.4rem;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.cardRowContainer {
+		width: 71.2rem;
+	}
+}
+
+@media only screen and (min-width: 1115px) {
+	.cardRowContainer {
+		width: 107.8rem;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	.cardRowContainer {
+		width: 90rem;
+	}
+}

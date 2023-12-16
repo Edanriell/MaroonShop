@@ -170,8 +170,6 @@ const UpdateProductForm: FC<UpdateProductFormProps> = ({ selectedProduct }) => {
 			productPrice: state.productPriceInput.value,
 			productQuantity: state.productQuantityInput.value,
 		});
-
-		// dispatch(userModel.clearOperationResultMessage(null));
 	};
 
 	useLayoutEffect(() => {
@@ -632,24 +630,6 @@ const UpdateProductForm: FC<UpdateProductFormProps> = ({ selectedProduct }) => {
 					disabled={!isFormValid(state)}
 				/>
 			</div>
-			{/* {operationResultMessage.success &&
-        createPortal(
-            <Snackbar
-                type={"success"}
-                message={operationResultMessage.success}
-                autoCloseDuration={"4000"}
-            />,
-            document.getElementById("snackbars-container") as Element,
-        )}
-    {operationResultMessage.error &&
-        createPortal(
-            <Snackbar
-                type={"error"}
-                message={operationResultMessage.error}
-                autoCloseDuration={"4000"}
-            />,
-            document.getElementById("snackbars-container") as Element,
-        )} */}
 		</form>
 	);
 };
