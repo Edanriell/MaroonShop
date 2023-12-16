@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import { productModel } from "entities/product";
-
 import { Button } from "shared/ui";
 
 import {
@@ -25,7 +24,6 @@ import {
 	hideOpenFilterButton,
 	displayCloseFilterButton,
 	hideCloseFilterButton,
-	FilterCategory,
 } from "./model";
 
 import { FilterProps, Filters } from "./types";
@@ -108,7 +106,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				addSelectedFilter({
 					prevFilters,
 					selectedFilter,
-					category: FilterCategory["secondary-category"],
+					category: "secondary-category" as any,
 				}),
 			);
 		} else {
@@ -116,7 +114,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				removeUnselectedFilter({
 					prevFilters,
 					selectedFilter,
-					category: FilterCategory["secondary-category"],
+					category: "secondary-category" as any,
 				}),
 			);
 		}
@@ -128,7 +126,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				addSelectedFilter({
 					prevFilters,
 					selectedFilter,
-					category: FilterCategory["skin-type-category"],
+					category: "skin-type-category" as any,
 				}),
 			);
 		} else {
@@ -136,7 +134,7 @@ const Filter: FC<FilterProps> = ({ className }) => {
 				removeUnselectedFilter({
 					prevFilters,
 					selectedFilter,
-					category: FilterCategory["skin-type-category"],
+					category: "skin-type-category" as any,
 				}),
 			);
 		}

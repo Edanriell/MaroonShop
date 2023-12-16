@@ -1,22 +1,23 @@
-/* eslint-disable no-unused-vars */
-
 import { MutableRefObject } from "react";
+
 import { gsap } from "gsap";
 
 import { Filters } from "../types";
 
-export enum FilterCategory {
-	"main-category" = "main-category",
-	"secondary-category" = "secondary-category",
-	"skin-type-category" = "skin-type-category",
-}
+const filterCategories = {
+	main: "main-category",
+	secondary: "secondary-category",
+	skinType: "skin-type-category",
+} as const;
+
+type FilterCategoryType = keyof typeof filterCategories;
 
 class FiltersInitializer {
 	private initialFilters: Filters = {
 		filters: {
-			[FilterCategory["main-category"]]: null,
-			[FilterCategory["secondary-category"]]: null,
-			[FilterCategory["skin-type-category"]]: null,
+			[filterCategories.main]: null,
+			[filterCategories.secondary]: null,
+			[filterCategories.skinType]: null,
 		},
 	};
 
@@ -24,7 +25,7 @@ class FiltersInitializer {
 		return { ...this.initialFilters };
 	}
 
-	public addFilter(category: FilterCategory): void {
+	public addFilter(category: FilterCategoryType): void {
 		if (this.initialFilters.filters[category]) return;
 		this.initialFilters.filters[category] = null;
 	}
@@ -40,7 +41,7 @@ export function addSelectedFilter({
 }: {
 	prevFilters: Filters;
 	selectedFilter: string;
-	category: FilterCategory;
+	category: FilterCategoryType;
 }) {
 	const updatedFilters = { ...prevFilters.filters };
 
@@ -65,7 +66,7 @@ export function removeUnselectedFilter({
 }: {
 	prevFilters: Filters;
 	selectedFilter: string;
-	category: FilterCategory;
+	category: FilterCategoryType;
 }) {
 	const updatedFilters = { ...prevFilters.filters };
 
@@ -84,7 +85,6 @@ export function removeUnselectedFilter({
 		filters: updatedFilters,
 	};
 }
-
 export const displayFilter = (filterRef: MutableRefObject<HTMLFormElement | null>): void => {
 	gsap.fromTo(
 		filterRef.current,
