@@ -6,6 +6,8 @@ import { userModel } from "entities/user";
 import { Button } from "shared/ui";
 import { Product } from "shared/api";
 
+import { ReactComponent as RubleIcon } from "./assets/ruble.svg";
+
 import styles from "./styles.module.scss";
 import "./styles.scss";
 
@@ -13,6 +15,13 @@ const Cart: FC = () => {
 	const dispatch = useDispatch();
 
 	const products = userModel.useProductsFromCart();
+
+	const totalPrice = products.reduce((acc, product: any) => {
+		if (product.userSelected && typeof product.userSelected.price === "number") {
+			acc += product.userSelected.price;
+		}
+		return acc;
+	}, 0);
 
 	const handleRemoveProductFromCartClick = ({ product }: { product: Product }) => {
 		dispatch(userModel.removeProductFromCart(product));
@@ -61,11 +70,18 @@ const Cart: FC = () => {
 								>
 									<h3
 										className={
-											"font-raleway text-md-18px text-center lining-nums"
+											"font-raleway text-md-18px text-center lining-nums text-blue-zodiac-950"
 										}
 									>
 										{product.name}
 									</h3>
+									<p
+										className={
+											"font-mPlus text-sm-14px-lh-20px lining-nums text-blue-zodiac-950"
+										}
+									>
+										{(product as any).userSelected.quantity}
+									</p>
 								</div>
 								<div
 									className={
@@ -88,14 +104,26 @@ const Cart: FC = () => {
 					</li>
 				))}
 			</ul>
-			<Button
-				className={"mt-[5rem]"}
-				type="submit"
-				text={"Оформить заказ"}
-				borderColor={"#122947"}
-				backgroundColor={"#122947"}
-				textColor={"#FFF"}
-			/>
+			<div className={"flex flex-row items-center gap-x-[10rem] mt-[5rem]"}>
+				<Button
+					type="submit"
+					text={"Оформить заказ"}
+					borderColor={"#122947"}
+					backgroundColor={"#122947"}
+					textColor={"#FFF"}
+				/>
+				<div className={"flex flex-row items-center"}>
+					<p className={"font-raleway lining-nums text-sm-16px-lh-23px mr-[0.25rem]"}>
+						Полная сумма к оплате:{" "}
+						<strong
+							className={"font-raleway lining-nums text-sm-16px-lh-23px ml-[0.5rem]"}
+						>
+							{totalPrice}
+						</strong>
+					</p>
+					<RubleIcon width={"1.2rem"} height={"1.2rem"} />
+				</div>
+			</div>
 		</div>
 	);
 };

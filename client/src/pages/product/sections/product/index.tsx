@@ -7,14 +7,19 @@ import { productModel } from "entities/product";
 import { userModel } from "entities/user";
 import { sessionModel } from "entities/session";
 
+import { Product as ProductType } from "shared/api";
 import { Accordion, Button, Radio } from "shared/ui";
 import { getProductType } from "shared/lib/functions";
 
 import { ProductLoading, ProductError } from "./ui";
 
+import { ProductAndQuantity, initialProductAndQuantity } from "./types";
+
 import styles from "./styles.module.scss";
 
 const Product = () => {
+	const [userSelectedPriceAndQuantity, setUserSelectedPriceAndQuantity] =
+		useState<ProductAndQuantity>(initialProductAndQuantity);
 	const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
@@ -125,7 +130,8 @@ const Product = () => {
 
 	const handleProductClick = () => {
 		if (!isProductInCart) {
-			dispatch(userModel.addProductToCart(product));
+			const modifiedProduct = { ...product, ...userSelectedPriceAndQuantity };
+			dispatch(userModel.addProductToCart(modifiedProduct as unknown as ProductType));
 		} else {
 			dispatch(userModel.removeProductFromCart(product));
 		}
@@ -256,6 +262,7 @@ const Product = () => {
 									data={[product.quantity, product.price]}
 									name={"Объем"}
 									priceContainerRef={priceContainerRef}
+									onQuantityAndPriceSelect={setUserSelectedPriceAndQuantity}
 								/>
 							</fieldset>
 							<div
@@ -271,6 +278,7 @@ const Product = () => {
 								>
 									<div className={"w-[5.99rem] md:w-[6.91rem]"}></div>
 								</div>
+								Button must be locked until whe choose quantity
 								<Button
 									onClick={handleProductClick}
 									text={

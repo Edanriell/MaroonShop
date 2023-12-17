@@ -6,8 +6,9 @@ import { RadioProps } from "./types";
 
 import styles from "./styles.module.scss";
 
-const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
-	const [selectedValue, setSelectedValue] = useState<number>();
+const Radio: FC<RadioProps> = ({ name, data, priceContainerRef, onQuantityAndPriceSelect }) => {
+	const [productQuantity, setProductQuantity] = useState<string>("");
+	const [selectedValue, setSelectedValue] = useState<number>(0);
 	const [previousSelectedValue, setPreviousSelectedValue] = useState<number>();
 
 	const inputCircleRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -78,10 +79,20 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
 		(priceContainerRef.current as HTMLDivElement).innerHTML = `${priceElement} ${RubleSvg}`;
 	}
 
-	function handleRadioSelect(event: ChangeEvent<HTMLInputElement>) {
+	function handleRadioSelect(event: ChangeEvent<HTMLInputElement>, quantity: string) {
 		setSelectedValue(+event.target.value);
+		setProductQuantity(quantity);
 		updateDisplayedPrice(event);
 	}
+
+	useEffect(() => {
+		if (selectedValue >= 1 && productQuantity.length >= 1) {
+			onQuantityAndPriceSelect({
+				userSelected: { price: selectedValue, quantity: productQuantity },
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedValue, productQuantity]);
 
 	return (
 		<div className={"flex flex-row gap-x-[1.5rem] flex-wrap gap-y-[1.5rem]"}>
@@ -98,7 +109,7 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef }) => {
 					</label>
 					<div className={"relative flex flex-row cursor-pointer"}>
 						<input
-							onChange={handleRadioSelect}
+							onChange={(event) => handleRadioSelect(event, quantityValue)}
 							className={styles.input}
 							type="radio"
 							name={name}
