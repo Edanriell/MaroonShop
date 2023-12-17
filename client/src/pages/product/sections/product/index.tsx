@@ -61,6 +61,32 @@ const Product: FC = () => {
 			),
 	});
 
+	function createPrice(currentSelectedProduct: any, isPriceInvisible: boolean) {
+		const RubleSvg = `
+		<svg class="${styles.rubleSvg} ${
+			isPriceInvisible ? "invisible" : ""
+		}" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M2.12195 17V13.7619H0V12.2143H2.12195V10.0952H0V8.28571H2.12195V0H6.70732C8.8374
+			0 10.4146 0.420635 11.439 1.26191C12.4797 2.10317 13 3.3254 13 4.92857C13 6.54762 12.439
+			7.81746 11.3171 8.7381C10.1951 9.64286 8.54471 10.0952 6.36585
+			10.0952H4.31707V12.2143H8.34146V13.7619H4.31707V17H2.12195ZM4.31707 8.28571H6.04878C7.52845 8.28571
+			8.6748 8.04762 9.4878 7.57143C10.3171 7.09524 10.7317 6.2381 10.7317 5C10.7317 3.92064 10.3902
+			3.11905 9.70732 2.59524C9.02439 2.07143 7.95935 1.80952 6.51219 1.80952H4.31707V8.28571Z"
+			fill="#122947"/>
+		</svg>
+	`;
+
+		const priceElement = `
+		<b class="font-mPlus font-medium text-sm-22px text-blue-zodiac-950 md:text-md-26px ${
+			isPriceInvisible ? "invisible" : ""
+		}">
+			${isPriceInvisible ? "000" : (currentSelectedProduct as any)?.userSelected.price}
+		</b>
+	`;
+
+		(priceContainerRef.current as any).innerHTML = `${priceElement} ${RubleSvg}`;
+	}
+
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
 			dispatch(sessionModel.checkAuth());
@@ -82,6 +108,25 @@ const Product: FC = () => {
 			setIsProductInCart(false);
 		}
 	}, [currentProductsPlacedInCart, product]);
+
+	useEffect(() => {
+		if (!product) return;
+
+		if (
+			userSelectedPriceAndQuantity.userSelected.quantity === "" &&
+			userSelectedPriceAndQuantity.userSelected.price === 0
+		) {
+			const currentSelectedProduct = currentProductsPlacedInCart.find(
+				(productInCart: any) => productInCart?.id === product?.id,
+			);
+
+			if (!currentSelectedProduct) {
+				createPrice(currentSelectedProduct, true);
+			} else {
+				createPrice(currentSelectedProduct, false);
+			}
+		}
+	}, [currentProductsPlacedInCart, product, userSelectedPriceAndQuantity]);
 
 	useEffect(() => {
 		if (!product) return;
