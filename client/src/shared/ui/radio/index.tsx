@@ -6,9 +6,15 @@ import { RadioProps } from "./types";
 
 import styles from "./styles.module.scss";
 
-const Radio: FC<RadioProps> = ({ name, data, priceContainerRef, onQuantityAndPriceSelect }) => {
+const Radio: FC<RadioProps> = ({
+	name,
+	data,
+	priceContainerRef,
+	onQuantityAndPriceSelect,
+	currentlySelectedProductPrice,
+}) => {
 	const [productQuantity, setProductQuantity] = useState<string>("");
-	const [selectedValue, setSelectedValue] = useState<number>(0);
+	const [selectedValue, setSelectedValue] = useState<number | undefined>(0);
 	const [previousSelectedValue, setPreviousSelectedValue] = useState<number>();
 
 	const inputCircleRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -20,6 +26,10 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef, onQuantityAndPri
 		inputCircleRefs.current = data.map(() => null);
 		inputLabelRefs.current = data.map(() => null);
 	};
+
+	useEffect(() => {
+		setSelectedValue(currentlySelectedProductPrice);
+	}, [currentlySelectedProductPrice]);
 
 	useEffect(() => {
 		generateRefs();
@@ -86,7 +96,7 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef, onQuantityAndPri
 	}
 
 	useEffect(() => {
-		if (selectedValue >= 1 && productQuantity.length >= 1) {
+		if (selectedValue! >= 1 && productQuantity.length >= 1) {
 			onQuantityAndPriceSelect({
 				userSelected: { price: selectedValue, quantity: productQuantity },
 			});
@@ -115,6 +125,10 @@ const Radio: FC<RadioProps> = ({ name, data, priceContainerRef, onQuantityAndPri
 							name={name}
 							value={price[index]}
 							id={quantityValue}
+							disabled={
+								!!currentlySelectedProductPrice &&
+								currentlySelectedProductPrice !== price[index]
+							}
 							checked={selectedValue === price[index]}
 						/>
 						<div

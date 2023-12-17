@@ -1,7 +1,8 @@
-import { useEffect, useRef, useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useLayoutEffect, useState, FC } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
+import classNames from "classnames";
 
 import { productModel } from "entities/product";
 import { userModel } from "entities/user";
@@ -16,11 +17,15 @@ import { ProductLoading, ProductError } from "./ui";
 import { ProductAndQuantity, initialProductAndQuantity } from "./types";
 
 import styles from "./styles.module.scss";
+import "./styles.scss";
 
-const Product = () => {
+const Product: FC = () => {
 	const [userSelectedPriceAndQuantity, setUserSelectedPriceAndQuantity] =
 		useState<ProductAndQuantity>(initialProductAndQuantity);
 	const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
+	const [currentlySelectedProductPrice, setCurrentlySelectedProductPrice] = useState<
+		number | undefined
+	>();
 
 	const dispatch: ThunkDispatch<productModel.RootState, null, AnyAction> = useDispatch();
 
@@ -40,26 +45,43 @@ const Product = () => {
 
 	const currentProductsPlacedInCart = userModel.useProductsFromCart();
 
-	useEffect(() => {
-		if (!product) return;
+	const isAddToCartButtonDisabled =
+		userSelectedPriceAndQuantity.userSelected.quantity === "" &&
+		userSelectedPriceAndQuantity.userSelected.price === 0 &&
+		!currentProductsPlacedInCart.find(
+			(productInCart: any) => productInCart?.id === product?.id,
+		);
 
-		if (
-			currentProductsPlacedInCart.find(
-				(productInCart: any) => productInCart.id === product.id,
-			)
-		) {
-			setIsProductInCart(true);
-		} else {
-			setIsProductInCart(false);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentProductsPlacedInCart]);
+	const addToCartButtonClasses = classNames({
+		addToCartButtonDisabled:
+			userSelectedPriceAndQuantity.userSelected.quantity === "" &&
+			userSelectedPriceAndQuantity.userSelected.price === 0 &&
+			!currentProductsPlacedInCart.find(
+				(productInCart: any) => productInCart?.id === product?.id,
+			),
+	});
 
 	useLayoutEffect(() => {
 		if (localStorage.getItem("token")) {
 			dispatch(sessionModel.checkAuth());
 		}
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (!product) return;
+
+		const currentSelectedProduct = currentProductsPlacedInCart.find(
+			(productInCart: any) => productInCart.id === product.id,
+		);
+
+		if (currentSelectedProduct) {
+			setCurrentlySelectedProductPrice((currentSelectedProduct as any).userSelected.price);
+			setIsProductInCart(true);
+		} else {
+			setCurrentlySelectedProductPrice(undefined);
+			setIsProductInCart(false);
+		}
+	}, [currentProductsPlacedInCart, product]);
 
 	useEffect(() => {
 		if (!product) return;
@@ -133,6 +155,9 @@ const Product = () => {
 			const modifiedProduct = { ...product, ...userSelectedPriceAndQuantity };
 			dispatch(userModel.addProductToCart(modifiedProduct as unknown as ProductType));
 		} else {
+			setUserSelectedPriceAndQuantity({
+				userSelected: { price: 0, quantity: "" },
+			});
 			dispatch(userModel.removeProductFromCart(product));
 		}
 	};
@@ -263,6 +288,7 @@ const Product = () => {
 									name={"Объем"}
 									priceContainerRef={priceContainerRef}
 									onQuantityAndPriceSelect={setUserSelectedPriceAndQuantity}
+									currentlySelectedProductPrice={currentlySelectedProductPrice}
 								/>
 							</fieldset>
 							<div
@@ -278,12 +304,13 @@ const Product = () => {
 								>
 									<div className={"w-[5.99rem] md:w-[6.91rem]"}></div>
 								</div>
-								Button must be locked until whe choose quantity
 								<Button
 									onClick={handleProductClick}
 									text={
 										isProductInCart ? "Убрать из корзины" : "Добавить в корзину"
 									}
+									className={addToCartButtonClasses}
+									disabled={isAddToCartButtonDisabled}
 								/>
 							</div>
 						</form>

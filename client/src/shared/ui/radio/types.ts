@@ -5,4 +5,5 @@ export type RadioProps = {
 	data: Array<any>;
 	priceContainerRef?: MutableRefObject<HTMLDivElement | null>;
 	onQuantityAndPriceSelect: Dispatch<SetStateAction<any>>;
+	currentlySelectedProductPrice: number | undefined;
 };
